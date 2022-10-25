@@ -8,15 +8,20 @@ public class Task2 {
         System.out.println("Enter a some integers (sample: \"integer + space + integer..\") and press Enter:");
         String st = sc.nextLine();
         Solution solution = new Solution();
-        if (solution.numberOfInt(st) == 0) {
-            System.out.println("There are no positive integers among the data");
-        }
-        if (solution.numberOfInt(st) > 0) {
-            System.out.println("The count of positive integers is " + solution.numberOfInt(st));
+        try {
+            int count = solution.parseArgsAndGetCountValue(st);
+            if (count > 0) {
+                System.out.println("The count of positive integers is " + count);
+            } else {
+                System.out.println("There are no positive integers among the data");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid input. Check the entered data");
         }
     }
+
     static class Solution {
-        public int numberOfInt(String s) {
+        public int parseArgsAndGetCountValue(String s) {
             int count = 0;
             try {
                 String[] sts = s.split(" ");
@@ -26,8 +31,7 @@ public class Task2 {
                     }
                 }
             } catch (Exception e) {
-                System.out.println("Invalid input. Check the entered data");
-                return -1;
+                throw new IllegalArgumentException();
             }
             return count;
         }
