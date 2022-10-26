@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Task2 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter a some integers (sample: \"integer + space + integer..\") and press Enter:");
+        System.out.println("Enter a some integers (pattern: \"integer + space + integer..\") and press Enter:");
         String st = sc.nextLine();
         Solution solution = new Solution();
         try {
