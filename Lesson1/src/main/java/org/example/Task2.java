@@ -1,34 +1,47 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class Task2 implements NumberOfPositiveNumbers_able {
+public class Task2 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter a some integers (pattern: \"integer + space + integer..\") and press Enter:");
-        String st = sc.nextLine();
-        Task2 task2 = new Task2();
-        int count = task2.parseArgsAndGetCountValue(st);
+        String stringValue = sc.nextLine();
+        NumberAware calculation = new PositiveNumbers();
+        countInfo(calculation.getPositiveNumbers(stringValue));
+    }
+
+    public static void countInfo(int count) {
         if (count > 0) {
             System.out.println("The count of positive integers is " + count);
         } else {
             System.out.println("There are no positive integers among the data");
         }
     }
+
 }
 
-interface NumberOfPositiveNumbers_able {
-    default int parseArgsAndGetCountValue(String s) {
-        int count = 0;
-        String[] sts = s.replace(",", ".").split(" ");
-        for (String res : sts) {
+interface NumberAware {
+    int getPositiveNumbers(String enteredCharacters);
+}
+
+class PositiveNumbers implements NumberAware {
+    @Override
+    public int getPositiveNumbers(String enteredCharacters) {
+        double currentStringValue = 0;
+        List<Double> positiveValueList = new ArrayList<>();
+        String[] processedEnteredCharacters = enteredCharacters.replace(",", ".").split(" ");
+        for (String element : processedEnteredCharacters) {
             try {
-                if (Double.parseDouble(res) > 0) {
-                    count++;
-                }
+                currentStringValue = Double.parseDouble(element);
             } catch (Exception e) {
             }
+            if (currentStringValue > 0) {
+                positiveValueList.add(currentStringValue);
+            }
         }
-        return count;
+        return positiveValueList.size();
     }
 }
