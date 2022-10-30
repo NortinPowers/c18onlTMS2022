@@ -1,14 +1,19 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class Task2 implements NumberAware {
+public class Task2 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter a some integers (pattern: \"integer + space + integer..\") and press Enter:");
         String stringValue = sc.nextLine();
-        NumberAware task2 = new Task2();
-        int count = task2.getPositiveNumbers(stringValue);
+        NumberAware calculation = new PositiveNumbers();
+        countInfo(calculation.getPositiveNumbers(stringValue));
+    }
+
+    public static void countInfo(int count) {
         if (count > 0) {
             System.out.println("The count of positive integers is " + count);
         } else {
@@ -16,22 +21,27 @@ public class Task2 implements NumberAware {
         }
     }
 
-    @Override
-    public int getPositiveNumbers(String charactersEntered) {
-        int count = 0;
-        String[] processedEnteredCharacters = charactersEntered.replace(",", ".").split(" ");
-        for (String element : processedEnteredCharacters) {
-            try {
-                if (Double.parseDouble(element) > 0) {
-                    count++;
-                }
-            } catch (Exception e) {
-            }
-        }
-        return count;
-    }
 }
 
 interface NumberAware {
-    int getPositiveNumbers(String charactersEntered);
+    int getPositiveNumbers(String enteredCharacters);
+}
+
+class PositiveNumbers implements NumberAware {
+    @Override
+    public int getPositiveNumbers(String enteredCharacters) {
+        double currentStringValue = 0;
+        List<Double> positiveValueList = new ArrayList<>();
+        String[] processedEnteredCharacters = enteredCharacters.replace(",", ".").split(" ");
+        for (String element : processedEnteredCharacters) {
+            try {
+                currentStringValue = Double.parseDouble(element);
+            } catch (Exception e) {
+            }
+            if (currentStringValue > 0) {
+                positiveValueList.add(currentStringValue);
+            }
+        }
+        return positiveValueList.size();
+    }
 }
