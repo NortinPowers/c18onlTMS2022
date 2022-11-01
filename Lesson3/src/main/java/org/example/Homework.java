@@ -57,7 +57,7 @@ public class Homework {
     public static double average(int[] array) {
         double sumArrayElements = 0;
         for (int element : array) {
-            sumArrayElements = sumArrayElements + element;
+            sumArrayElements += element;
         }
         return sumArrayElements / array.length;
     }
