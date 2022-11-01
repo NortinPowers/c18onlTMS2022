@@ -55,6 +55,9 @@ public class Homework {
      * Метод должен return 3.0
      */
     public static double average(int[] array) {
+        if (array.length == 0) {
+            return 0.0;
+        }
         double sumArrayElements = 0;
         for (int element : array) {
             sumArrayElements += element;
@@ -66,8 +69,8 @@ public class Homework {
      * Метод должен вернуть максимальый элемент массива. Пример: array = {1,2,10,3} метод возвращает 10
      **/
     public static int max(int[] array) {
-        Arrays.sort(array);
         if (array.length > 0) {
+            Arrays.sort(array);
             return array[array.length - 1];
         } else {
             throw new ArrayIndexOutOfBoundsException("Array is empty");
