@@ -9,6 +9,7 @@ public class HomeworkTest extends TestCase {
         Assert.assertEquals(300, Homework.sum(100, 200));
         Assert.assertEquals(-1, Homework.sum(Integer.MAX_VALUE, 1));
         Assert.assertEquals(-1, Homework.sum(Integer.MAX_VALUE, Integer.MAX_VALUE));
+        Assert.assertEquals(Integer.MAX_VALUE, Homework.sum(Integer.MAX_VALUE - 1, 1));
     }
 
     public void testMaxElement() {
