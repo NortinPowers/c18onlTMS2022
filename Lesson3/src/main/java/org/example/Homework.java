@@ -1,6 +1,5 @@
 package org.example;
 
-import java.math.BigInteger;
 import java.util.Arrays;
 
 public class Homework {
@@ -19,12 +18,16 @@ public class Homework {
      * 2. Дополнительно: сделать проверку если сумма a и b больше чем максимальное значение int то вернуть -1
      **/
     public static int sum(int a, int b) {
-        BigInteger aValue = new BigInteger(String.valueOf(a));
+        /*BigInteger aValue = new BigInteger(String.valueOf(a));
         BigInteger result = aValue.add(BigInteger.valueOf(b));
         if (result.compareTo(new BigInteger(String.valueOf(Integer.MAX_VALUE))) > 0) {
             return -1;
         }
-        return result.intValue();
+        return result.intValue();*/
+        if ((long) a + (long) b > Integer.MAX_VALUE) {
+            return -1;
+        }
+        return a + b;
     }
 
     /**
