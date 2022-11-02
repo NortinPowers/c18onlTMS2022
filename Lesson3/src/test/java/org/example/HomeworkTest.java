@@ -9,6 +9,7 @@ public class HomeworkTest extends TestCase {
         Assert.assertEquals(300, Homework.sum(100, 200));
         Assert.assertEquals(-1, Homework.sum(Integer.MAX_VALUE, 1));
         Assert.assertEquals(-1, Homework.sum(Integer.MAX_VALUE, Integer.MAX_VALUE));
+        Assert.assertEquals(Integer.MAX_VALUE, Homework.sum(Integer.MAX_VALUE - 1, 1));
     }
 
     public void testMaxElement() {
@@ -20,6 +21,7 @@ public class HomeworkTest extends TestCase {
     public void testAverageArrayValue() {
         Assert.assertEquals(3.0, Homework.average(new int[]{1, 2, 3, 4, 5}), 0.0);
         Assert.assertEquals(1.0, Homework.average(new int[]{0, -2, 3, -1, 5}), 0.0);
+        Assert.assertEquals(0.0, Homework.average(new int[]{}), 0.0);
     }
 
     public void testMaxArrayElement() {
@@ -28,7 +30,6 @@ public class HomeworkTest extends TestCase {
                 Homework.max(new int[]{})
         );
         Assert.assertEquals(100, Homework.max(new int[]{1, 2, 3, 4, 5, 100, 99}));
-
     }
 
     public void testCalculateHypotenuse() {

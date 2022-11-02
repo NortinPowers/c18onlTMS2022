@@ -1,6 +1,5 @@
 package org.example;
 
-import java.math.BigInteger;
 import java.util.Arrays;
 
 public class Homework {
@@ -19,12 +18,22 @@ public class Homework {
      * 2. Дополнительно: сделать проверку если сумма a и b больше чем максимальное значение int то вернуть -1
      **/
     public static int sum(int a, int b) {
-        BigInteger aValue = new BigInteger(String.valueOf(a));
+//        var1
+        /*BigInteger aValue = new BigInteger(String.valueOf(a));
         BigInteger result = aValue.add(BigInteger.valueOf(b));
         if (result.compareTo(new BigInteger(String.valueOf(Integer.MAX_VALUE))) > 0) {
             return -1;
         }
-        return result.intValue();
+        return result.intValue();*/
+//        var2
+        /*if ((long) a + (long) b > Integer.MAX_VALUE) {
+            return -1;
+        }*/
+//        var 3
+        if (Integer.MAX_VALUE - a < b) {
+            return -1;
+        }
+        return a + b;
     }
 
     /**
@@ -55,6 +64,9 @@ public class Homework {
      * Метод должен return 3.0
      */
     public static double average(int[] array) {
+        if (array.length == 0) {
+            return 0.0;
+        }
         double sumArrayElements = 0;
         for (int element : array) {
             sumArrayElements += element;
@@ -66,8 +78,8 @@ public class Homework {
      * Метод должен вернуть максимальый элемент массива. Пример: array = {1,2,10,3} метод возвращает 10
      **/
     public static int max(int[] array) {
-        Arrays.sort(array);
         if (array.length > 0) {
+            Arrays.sort(array);
             return array[array.length - 1];
         } else {
             throw new ArrayIndexOutOfBoundsException("Array is empty");
