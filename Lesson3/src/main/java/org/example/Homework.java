@@ -1,5 +1,6 @@
 package org.example;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 
 public class Homework {
@@ -15,22 +16,32 @@ public class Homework {
 
     /**
      * 1. Метод должен вернуть сумму двух чисел a и b
+     * <p>
+     * <div style = "color:red">
      * 2. Дополнительно: сделать проверку если сумма a и b больше чем максимальное значение int то вернуть -1
+     * <p>
+     *
+     * @param a целочисленное значение
+     * @param b целочисленное значение
      **/
     public static int sum(int a, int b) {
-//        var1
-        /*BigInteger aValue = new BigInteger(String.valueOf(a));
+        if (Integer.MAX_VALUE - a < b) {
+            return -1;
+        }
+        return a + b;
+    }
+
+    public static int sumSecond(int a, int b) {
+        BigInteger aValue = new BigInteger(String.valueOf(a));
         BigInteger result = aValue.add(BigInteger.valueOf(b));
         if (result.compareTo(new BigInteger(String.valueOf(Integer.MAX_VALUE))) > 0) {
             return -1;
         }
-        return result.intValue();*/
-//        var2
-        /*if ((long) a + (long) b > Integer.MAX_VALUE) {
-            return -1;
-        }*/
-//        var 3
-        if (Integer.MAX_VALUE - a < b) {
+        return result.intValue();
+    }
+
+    public static int sumThird(int a, int b) {
+        if ((long) a + (long) b > Integer.MAX_VALUE) {
             return -1;
         }
         return a + b;
@@ -45,6 +56,7 @@ public class Homework {
      * b = 5
      * <p>
      * Метод должен вернуть 5
+     * <p>
      * Example2:
      * a = 10,
      * b = 10
@@ -57,32 +69,39 @@ public class Homework {
 
     /**
      * Метод должен вернуть среднее значение из массива чисел
-     * (необходимо сумму всех элеменов массива разделить на длину массива)
+     * (необходимо сумму всех элементов массива разделить на длину массива)
      * <p>
      * Example:
      * array = {1,2,3,4,5}
      * Метод должен return 3.0
      */
     public static double average(int[] array) {
-        if (array.length == 0) {
-            return 0.0;
+        if (array != null) {
+            if (array.length == 0) {
+                return 0.0;
+            }
+            double sumArrayElements = 0;
+            for (int element : array) {
+                sumArrayElements += element;
+            }
+            return sumArrayElements / array.length;
+        } else {
+            throw new NullPointerException("The array is not initialized");
         }
-        double sumArrayElements = 0;
-        for (int element : array) {
-            sumArrayElements += element;
-        }
-        return sumArrayElements / array.length;
+
     }
 
     /**
-     * Метод должен вернуть максимальый элемент массива. Пример: array = {1,2,10,3} метод возвращает 10
+     * Метод должен вернуть максимальный элемент массива.
+     * <p>
+     * Пример: array = {1,2,10,3} метод возвращает 10
      **/
     public static int max(int[] array) {
-        if (array.length > 0) {
+        if (array != null && array.length > 0) {
             Arrays.sort(array);
             return array[array.length - 1];
         } else {
-            throw new ArrayIndexOutOfBoundsException("Array is empty");
+            throw new ArrayIndexOutOfBoundsException("The array is empty or not initialized");
         }
     }
 
