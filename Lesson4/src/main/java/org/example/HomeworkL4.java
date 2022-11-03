@@ -10,6 +10,8 @@ public class HomeworkL4 {
         parityCheck();
         System.out.println("Task 3:");
         absMinValue();
+        System.out.println("Task 4:");
+        workTimeInfo();
     }
 
     /**
@@ -111,6 +113,21 @@ public class HomeworkL4 {
             throw new NullPointerException();
         }
     }
+
+    public static void workTimeInfo() {
+        int taskCurrentTime = (int) (Math.random() * 28800);
+        System.out.println("Current time is " + taskCurrentTime);
+        System.out.println("Times for Petrov is " + taskCurrentTime);
+        System.out.printf("Times for Employee - remained %d full hours", (int) (8 - getTimeHourly(taskCurrentTime)));
+    }
+
+    /**
+     * The method return the number of hours
+     */
+    public static double getTimeHourly(int currentTime) {
+        return (28800.0 - currentTime) / 3600;
+    }
+
 }
 
 /**
