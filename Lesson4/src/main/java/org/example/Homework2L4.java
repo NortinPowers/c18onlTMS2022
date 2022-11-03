@@ -1,6 +1,6 @@
 package org.example;
 
-public class Homework2 {
+public class Homework2L4 {
 
     public static void main(String[] args) {
         //Некоторые тесты для проверки задач. Можно также написать свои тесты.
