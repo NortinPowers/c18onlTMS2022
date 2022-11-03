@@ -10,7 +10,6 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>homework</groupId>
-    <artifactId>Lesson2</artifactId>
+    <artifactId>Lesson4</artifactId>
 
 </project>

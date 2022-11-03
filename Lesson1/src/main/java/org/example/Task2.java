@@ -30,13 +30,14 @@ interface NumberAware {
 class PositiveNumbers implements NumberAware {
     @Override
     public int getPositiveNumbers(String enteredCharacters) {
-        double currentStringValue = 0;
+        double currentStringValue;
         List<Double> positiveValueList = new ArrayList<>();
         String[] processedEnteredCharacters = enteredCharacters.replace(",", ".").split(" ");
         for (String element : processedEnteredCharacters) {
             try {
                 currentStringValue = Double.parseDouble(element);
             } catch (Exception e) {
+                currentStringValue = 0;
             }
             if (currentStringValue > 0) {
                 positiveValueList.add(currentStringValue);

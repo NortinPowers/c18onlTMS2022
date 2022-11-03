@@ -12,6 +12,20 @@ public class HomeworkTest extends TestCase {
         Assert.assertEquals(Integer.MAX_VALUE, Homework.sum(Integer.MAX_VALUE - 1, 1));
     }
 
+    public void testSumSecond() {
+        Assert.assertEquals(300, Homework.sumSecond(100, 200));
+        Assert.assertEquals(-1, Homework.sumSecond(Integer.MAX_VALUE, 1));
+        Assert.assertEquals(-1, Homework.sumSecond(Integer.MAX_VALUE, Integer.MAX_VALUE));
+        Assert.assertEquals(Integer.MAX_VALUE, Homework.sumSecond(Integer.MAX_VALUE - 1, 1));
+    }
+
+    public void testSumThird() {
+        Assert.assertEquals(300, Homework.sumThird(100, 200));
+        Assert.assertEquals(-1, Homework.sumThird(Integer.MAX_VALUE, 1));
+        Assert.assertEquals(-1, Homework.sumThird(Integer.MAX_VALUE, Integer.MAX_VALUE));
+        Assert.assertEquals(Integer.MAX_VALUE, Homework.sumThird(Integer.MAX_VALUE - 1, 1));
+    }
+
     public void testMaxElement() {
         Assert.assertEquals(5, Homework.max(4, 5));
         Assert.assertEquals(10, Homework.max(10, 10));
@@ -22,6 +36,9 @@ public class HomeworkTest extends TestCase {
         Assert.assertEquals(3.0, Homework.average(new int[]{1, 2, 3, 4, 5}), 0.0);
         Assert.assertEquals(1.0, Homework.average(new int[]{0, -2, 3, -1, 5}), 0.0);
         Assert.assertEquals(0.0, Homework.average(new int[]{}), 0.0);
+        Assert.assertThrows(NullPointerException.class, () ->
+                Homework.average(null)
+        );
     }
 
     public void testMaxArrayElement() {
@@ -30,6 +47,9 @@ public class HomeworkTest extends TestCase {
                 Homework.max(new int[]{})
         );
         Assert.assertEquals(100, Homework.max(new int[]{1, 2, 3, 4, 5, 100, 99}));
+        Assert.assertThrows(ArrayIndexOutOfBoundsException.class, () ->
+                Homework.max(null)
+        );
     }
 
     public void testCalculateHypotenuse() {
