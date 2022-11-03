@@ -4,11 +4,11 @@ import java.util.*;
 
 public class HomeworkL4 {
     public static void main(String[] args) {
-        System.out.println("Problem 1:");
+        System.out.println("Task 1:");
         System.out.println("Alphabet " + getAlphabet());
-        System.out.println("Problem 2:");
+        System.out.println("Task 2:");
         parityCheck();
-        System.out.println("Problem 3:");
+        System.out.println("Task 3:");
         absMinValue();
     }
 
