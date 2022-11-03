@@ -62,7 +62,7 @@ public class HomeworkL4 {
         String stringValue = scanner.nextLine();
         ValueReceivable comparator = new MinAbsResultValue();
         try {
-            if (isAbsMinValueProblemCondition(comparator.getAbsValue(stringValue))) {
+            if (isAbsMinValueTaskCondition(comparator.getAbsValue(stringValue))) {
                 System.out.println(getMinValue(comparator.getAbsValue(stringValue)));
             } else {
                 System.out.println("Comparison method canceled");
@@ -75,14 +75,14 @@ public class HomeworkL4 {
     /**
      * The method allows the absMinValue method you to compare any number of numbers
      */
-    public static boolean isAbsMinValueProblemCondition(List<Double> valuesList) {
+    public static boolean isAbsMinValueTaskCondition(List<Double> valuesList) {
         if (valuesList.size() > 0) {
             if (valuesList.size() != 3) {
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("""
                         The number of numbers being compared is not equal to 3\s
                         if you want to continue the comparison, enter Y\s
-                        otherwise, enter N""");
+                        otherwise, enter any key""");
                 String stringValue = scanner.nextLine();
                 return isAgree(stringValue);
             }
@@ -138,7 +138,9 @@ class ParityResultValue implements ParityDeterminable {
 }
 
 /**
- * The interface declaring the ability to get the minimum value
+ * The interface declaring the ability
+ * <p>
+ * to get list of abs value
  */
 interface ValueReceivable {
     List<Double> getAbsValue(String enteredCharacters);
@@ -162,6 +164,5 @@ class MinAbsResultValue implements ValueReceivable {
         }
         return doubleValueList;
     }
-
 
 }
