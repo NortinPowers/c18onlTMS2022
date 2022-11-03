@@ -6,12 +6,15 @@ public class HomeworkL4 {
     public static void main(String[] args) {
         System.out.println("Task 1:");
         System.out.println("Alphabet " + getAlphabet());
+        System.out.println("Alphabet " + getAlphabetSecond());
         System.out.println("Task 2:");
         parityCheck();
         System.out.println("Task 3:");
         absMinValue();
         System.out.println("Task 4:");
         workTimeInfo();
+        System.out.println("Task 5:");
+        typeConversionInfo();
     }
 
     /**
@@ -25,6 +28,20 @@ public class HomeworkL4 {
         char[] alphabetArray = new char[26];
         for (int i = 0; i < 26; i++) {
             alphabetArray[i] = (char) (i + symbol);
+        }
+        return Arrays.toString(alphabetArray);
+    }
+
+    /**
+     * The method returns all the letters
+     * <p>
+     * of the English alphabet
+     */
+    public static String getAlphabetSecond() {
+        char symbolCount = 'Z' - 'A' + 1;
+        char[] alphabetArray = new char[symbolCount];
+        for (int i = 0; i < symbolCount; i++) {
+            alphabetArray[i] = (char) (i + 'A');
         }
         return Arrays.toString(alphabetArray);
     }
@@ -128,6 +145,21 @@ public class HomeworkL4 {
         return (28800.0 - currentTime) / 3600;
     }
 
+    /**
+     * The method return type conversion table
+     */
+    public static void typeConversionInfo() {
+        System.out.println("              byte\tshort\tchar\tint \tlong\tfloat\tdouble\tboolean\n" +
+                "    byte       т      ня      я      ня      ня       ня      ня       х\n" +
+                "    short      я       т      я      ня      ня       ня      ня       х\n" +
+                "    char       я       я      т      ня      ня       ня      ня       х\n" +
+                "    int        я       я      я       т      ня       ня      ня       х\n" +
+                "    long       я       я      я       я       т       ня      ня       х\n" +
+                "    float      я       я      я       я       я        т      ня       х\n" +
+                "    double     я       я      я       я       я        я       т       х\n" +
+                "    boolean    х       х      х       х       х        х       х       т");
+
+    }
 }
 
 /**
@@ -181,5 +213,4 @@ class MinAbsResultValue implements ValueReceivable {
         }
         return doubleValueList;
     }
-
 }

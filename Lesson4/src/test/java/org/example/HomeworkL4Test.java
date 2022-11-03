@@ -35,4 +35,10 @@ class HomeworkL4Test {
         Assertions.assertEquals(1.0, HomeworkL4.getMinValue(test2), 0.0);
         Assertions.assertThrows(NullPointerException.class, () -> HomeworkL4.getMinValue(null));
     }
+
+    @Test
+    void getAlphabetSecondTest() {
+        Assertions.assertEquals("[A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z]", HomeworkL4.getAlphabet());
+
+    }
 }
