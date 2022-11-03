@@ -8,9 +8,9 @@ class ParityResultValueTest {
     @Test
     void getParityValueTest() {
         ParityResultValue testObject = new ParityResultValue();
-        Assertions.assertFalse(testObject.getParityValue("5"));
-        Assertions.assertTrue(testObject.getParityValue("4"));
-        Assertions.assertThrows(IllegalArgumentException.class, () -> testObject.getParityValue(""));
-        Assertions.assertThrows(IllegalArgumentException.class, () -> testObject.getParityValue("s"));
+        Assertions.assertFalse(testObject.isParityValue("5"));
+        Assertions.assertTrue(testObject.isParityValue("4"));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> testObject.isParityValue(""));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> testObject.isParityValue("s"));
     }
 }
