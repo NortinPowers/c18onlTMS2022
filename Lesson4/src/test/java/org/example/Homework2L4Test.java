@@ -28,15 +28,33 @@ class Homework2L4Test {
     }
 
     @Test
-    void operation() {
+    void operationTest() {
         Assertions.assertEquals(2, Homework2L4.operation(1));
         Assertions.assertEquals(-4, Homework2L4.operation(-2));
         Assertions.assertEquals(10, Homework2L4.operation(0));
     }
 
     @Test
-    void calculateCountOfOddElementsInMatrix() {
+    void calculateCountOfOddElementsInMatrixTest() {
         Assertions.assertEquals(2, Homework2L4.calculateCountOfOddElementsInMatrix(new int[]{-1, 0, 3, 4}));
         Assertions.assertEquals(0, Homework2L4.calculateCountOfOddElementsInMatrix(new int[]{}));
+    }
+
+    @Test
+    void getPostfixTest() {
+        Assertions.assertEquals("", Homework2L4.getPostfix(1));
+        Assertions.assertEquals("а", Homework2L4.getPostfix(2));
+        Assertions.assertEquals("а", Homework2L4.getPostfix(3));
+        Assertions.assertEquals("а", Homework2L4.getPostfix(4));
+        Assertions.assertEquals("ов", Homework2L4.getPostfix(5));
+        Assertions.assertEquals("ов", Homework2L4.getPostfix(15));
+    }
+
+    @Test
+    void processingModifyCountTest() {
+        Assertions.assertEquals(11, Homework2L4.processingModifyCount(111));
+        Assertions.assertEquals(11, Homework2L4.processingModifyCount(-111));
+        Assertions.assertEquals(19, Homework2L4.processingModifyCount(319));
+        Assertions.assertEquals(1, Homework2L4.processingModifyCount(1121));
     }
 }

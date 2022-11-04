@@ -7,12 +7,12 @@ public class Homework2L4 {
 
     public static void main(String[] args) {
         //Некоторые тесты для проверки задач. Можно также написать свои тесты.
-        printArray();
+//        printArray();
 //        System.out.println(operation(1));
 //        System.out.println(operation(0));
 //        System.out.println(calculateCountOfOddElementsInMatrix(new int[]{1, 2, 3, 4, 5, 6}));
-//        countDevs(103);
-//        countDevs(11);
+        countDevs(103);
+        countDevs(11);
 //        foobar(6);
 //        foobar(10);
 //        foobar(15);
@@ -121,7 +121,43 @@ public class Homework2L4 {
      * @param count - количество программистов
      */
     public static void countDevs(int count) {
-        // тут пишем логику
+        int modifyCount = processingModifyCount(count);
+        String postfix;
+        postfix = getPostfix(modifyCount);
+        System.out.println(count + " программист" + postfix);
+    }
+
+    /**
+     * The method generates the necessary postfix
+     */
+    public static String getPostfix(int count) {
+        String postfix = "";
+        switch (count) {
+            case 1:
+                break;
+            case 2, 3, 4:
+                postfix = "а";
+                break;
+            default:
+                postfix = "ов";
+                break;
+        }
+        return postfix;
+    }
+
+    /**
+     * The method processes a given count of programmers to provide the method getPostfix
+     */
+    public static int processingModifyCount(int count) {
+        count = Math.abs(count);
+        while (count > 100) {
+            count -= 100;
+        }
+        if (count > 20) {
+            return (count % 10);
+        } else {
+            return count;
+        }
     }
 
     /**
