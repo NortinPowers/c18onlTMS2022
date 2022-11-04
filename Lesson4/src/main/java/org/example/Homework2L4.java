@@ -1,31 +1,80 @@
 package org.example;
 
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class Homework2L4 {
 
     public static void main(String[] args) {
         //Некоторые тесты для проверки задач. Можно также написать свои тесты.
         printArray();
-        System.out.println(operation(1));
-        System.out.println(operation(0));
-        System.out.println(calculateCountOfOddElementsInMatrix(new int[]{1, 2, 3, 4, 5, 6}));
-        countDevs(103);
-        countDevs(11);
-        foobar(6);
-        foobar(10);
-        foobar(15);
-        printPrimeNumbers();
+//        System.out.println(operation(1));
+//        System.out.println(operation(0));
+//        System.out.println(calculateCountOfOddElementsInMatrix(new int[]{1, 2, 3, 4, 5, 6}));
+//        countDevs(103);
+//        countDevs(11);
+//        foobar(6);
+//        foobar(10);
+//        foobar(15);
+//        printPrimeNumbers();
     }
 
     /**
      * Необходимо прочитать с консоли значение числа типа int,
-     * сделать проверку что если пользователь ввел не положительное число,
+     * сделать проверку, что если пользователь ввел не положительное число,
      * то вывести ошибку и отправить пользователя вводить заново новое число!
      * далее создать одномерный массив типа int размера прочитанного с консоли
      * далее заполнить массив случайными значениями
      * далее вывести массив на консоль
      */
     private static void printArray() {
-        // тут пишем логику
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter positive integer");
+        int enteredInt = 0;
+        try {
+            enteredInt = parserInt(scanner);
+        } catch (Exception e) {
+            System.out.println("Error input (" + e.getMessage() + ")");
+        }
+        extracted(enteredInt);
+    }
+
+    /**
+     * The method extract value and repeat printArray if necessary
+     */
+    private static void extracted(int enteredInt) {
+        if (isPositive(enteredInt)) {
+            int[] intsArray = getIntsArray(enteredInt);
+            System.out.println(Arrays.toString(intsArray));
+        } else {
+            System.out.println("You need to enter a positive integer\nRepeat the input");
+            printArray();
+        }
+    }
+
+    /**
+     * The method checks whether the number is positive
+     */
+    public static boolean isPositive(int value) {
+        return value > 0;
+    }
+
+    /**
+     * A method that converts a string value to an int
+     */
+    public static int parserInt(Scanner scanner) {
+        return scanner.nextInt();
+    }
+
+    /**
+     * The method creates an array of the required length
+     */
+    public static int[] getIntsArray(int enteredInt) {
+        int[] intsArray = new int[enteredInt];
+        for (int i = 0; i < intsArray.length; i++) {
+            intsArray[i] = (int) (Math.random() * 11);
+        }
+        return intsArray;
     }
 
     /**
@@ -36,6 +85,7 @@ public class Homework2L4 {
      * вернуть number после выполнения операций
      */
     public static int operation(int number) {
+
         // тут пишем логику
         return 0;
     }
