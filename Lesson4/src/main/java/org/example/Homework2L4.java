@@ -34,7 +34,7 @@ public class Homework2L4 {
         System.out.println("Enter positive integer");
         int enteredInt = 0;
         try {
-            enteredInt = parserInt(scanner);
+            enteredInt = getParserInt(scanner);
         } catch (Exception e) {
             System.out.println("Error input (" + e.getMessage() + ")");
         }
@@ -62,9 +62,9 @@ public class Homework2L4 {
     }
 
     /**
-     * A method that converts a string value to an int
+     * A method returns the entered integer value
      */
-    public static int parserInt(Scanner scanner) {
+    public static int getParserInt(Scanner scanner) {
         return scanner.nextInt();
     }
 

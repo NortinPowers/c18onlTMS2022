@@ -17,8 +17,8 @@ class Homework2L4Test {
 
     @Test
     void parserIntTest() {
-        Assertions.assertEquals(5, Homework2L4.parserInt(new Scanner("5")));
-        Assertions.assertThrows(Exception.class, () -> Homework2L4.parserInt(new Scanner("")));
+        Assertions.assertEquals(5, Homework2L4.getParserInt(new Scanner("5")));
+        Assertions.assertThrows(Exception.class, () -> Homework2L4.getParserInt(new Scanner("")));
     }
 
     @Test
