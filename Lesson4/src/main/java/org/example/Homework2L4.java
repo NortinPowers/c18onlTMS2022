@@ -13,9 +13,9 @@ public class Homework2L4 {
 //        System.out.println(calculateCountOfOddElementsInMatrix(new int[]{1, 2, 3, 4, 5, 6}));
         countDevs(103);
         countDevs(11);
-//        foobar(6);
-//        foobar(10);
-//        foobar(15);
+        foobar(6);
+        foobar(10);
+        foobar(15);
 //        printPrimeNumbers();
     }
 
@@ -167,7 +167,18 @@ public class Homework2L4 {
      * - если остаток от деления на 3 и 5 равен нулю 0 ,то вывести "foobar" (example of number - 15)
      */
     public static void foobar(int number) {
-        // тут пишем логику
+        int result3Dividing = number % 3;
+        int result5Dividing = number % 5;
+        if (result3Dividing == 0 && result5Dividing == 0) {
+            System.out.println("foobar");
+        } else {
+            if (result3Dividing == 0) {
+                System.out.println("foo");
+            }
+            if (result5Dividing == 0) {
+                System.out.println("bar");
+            }
+        }
     }
 
     /**
