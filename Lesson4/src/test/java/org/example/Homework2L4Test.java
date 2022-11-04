@@ -57,4 +57,11 @@ class Homework2L4Test {
         Assertions.assertEquals(19, Homework2L4.processingModifyCount(319));
         Assertions.assertEquals(1, Homework2L4.processingModifyCount(1121));
     }
+
+    @Test
+    void isPrimeNumber() {
+        Assertions.assertTrue(Homework2L4.isPrimeNumber(851));
+        Assertions.assertTrue(Homework2L4.isPrimeNumber(19));
+        Assertions.assertFalse(Homework2L4.isPrimeNumber(4));
+    }
 }

@@ -1,22 +1,24 @@
 package org.example;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Homework2L4 {
 
     public static void main(String[] args) {
         //Некоторые тесты для проверки задач. Можно также написать свои тесты.
-//        printArray();
-//        System.out.println(operation(1));
-//        System.out.println(operation(0));
-//        System.out.println(calculateCountOfOddElementsInMatrix(new int[]{1, 2, 3, 4, 5, 6}));
+        printArray();
+        System.out.println(operation(1));
+        System.out.println(operation(0));
+        System.out.println(calculateCountOfOddElementsInMatrix(new int[]{1, 2, 3, 4, 5, 6}));
         countDevs(103);
         countDevs(11);
         foobar(6);
         foobar(10);
         foobar(15);
-//        printPrimeNumbers();
+        printPrimeNumbers();
     }
 
     /**
@@ -184,9 +186,28 @@ public class Homework2L4 {
     /**
      * Задача со звездочкой!
      * Метод должен печатать все простые числа <1000
-     * что такое просто число (https://www.webmath.ru/poleznoe/formules_18_5.php)
+     * подробнее о просты числах (<a href="https://www.webmath.ru/poleznoe/formules_18_5.php">...</a>)
      */
     public static void printPrimeNumbers() {
-        // тут пишем логику
+        List<Integer> primeNumberList = new ArrayList<>();
+        for (int i = 2; i < 1000; i++) {
+            if (isPrimeNumber(i)) {
+                primeNumberList.add(i);
+            }
+        }
+        System.out.println(primeNumberList);
+    }
+
+    /**
+     * The method checks whether an integer is a prime number
+     */
+    public static boolean isPrimeNumber(int i) {
+        switch (i) {
+            case 2, 3, 5, 7:
+                return true;
+            default:
+                break;
+        }
+        return i % 2 != 0 && i % 3 != 0 && i % 5 != 0 && i % 7 != 0;
     }
 }
