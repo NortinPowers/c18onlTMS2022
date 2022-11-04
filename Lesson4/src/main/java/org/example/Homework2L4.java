@@ -56,20 +56,13 @@ public class Homework2L4 {
      * The method extract value and repeat printArray() if necessary
      */
     private static void extracted(int enteredInt) {
-        if (isPositive(enteredInt)) {
+        if (enteredInt > 0) {
             int[] intsArray = getIntsArray(enteredInt);
             System.out.println(Arrays.toString(intsArray));
         } else {
             System.out.println("You need to enter a positive integer\nRepeat the input");
             printArray();
         }
-    }
-
-    /**
-     * The method checks whether the number is positive
-     */
-    public static boolean isPositive(int value) {
-        return value > 0;
     }
 
     /**

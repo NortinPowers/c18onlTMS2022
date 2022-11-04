@@ -9,13 +9,6 @@ class Homework2L4Test {
 
 
     @Test
-    void isPositiveTest() {
-        Assertions.assertTrue(Homework2L4.isPositive(2));
-        Assertions.assertFalse(Homework2L4.isPositive(0));
-    }
-
-
-    @Test
     void parserIntTest() {
         Assertions.assertEquals(5, Homework2L4.getParserInt(new Scanner("5")));
         Assertions.assertThrows(Exception.class, () -> Homework2L4.getParserInt(new Scanner("")));
@@ -42,12 +35,12 @@ class Homework2L4Test {
 
     @Test
     void getPostfixTest() {
-        Assertions.assertEquals("", Homework2L4.getPostfix(1));
-        Assertions.assertEquals("а", Homework2L4.getPostfix(2));
-        Assertions.assertEquals("а", Homework2L4.getPostfix(3));
-        Assertions.assertEquals("а", Homework2L4.getPostfix(4));
-        Assertions.assertEquals("ов", Homework2L4.getPostfix(5));
-        Assertions.assertEquals("ов", Homework2L4.getPostfix(15));
+        Assertions.assertEquals("т", Homework2L4.getPostfix(1));
+        Assertions.assertEquals("та", Homework2L4.getPostfix(2));
+        Assertions.assertEquals("та", Homework2L4.getPostfix(3));
+        Assertions.assertEquals("та", Homework2L4.getPostfix(4));
+        Assertions.assertEquals("тов", Homework2L4.getPostfix(5));
+        Assertions.assertEquals("тов", Homework2L4.getPostfix(15));
     }
 
     @Test
