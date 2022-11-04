@@ -26,4 +26,11 @@ class Homework2L4Test {
         Assertions.assertEquals(new int[3].length, Homework2L4.getIntsArray(3).length);
         Assertions.assertThrows(Exception.class, () -> Homework2L4.getIntsArray(-1));
     }
+
+    @Test
+    void operation() {
+        Assertions.assertEquals(2, Homework2L4.operation(1));
+        Assertions.assertEquals(-4, Homework2L4.operation(-2));
+        Assertions.assertEquals(10, Homework2L4.operation(0));
+    }
 }

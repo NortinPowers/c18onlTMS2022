@@ -40,7 +40,7 @@ public class Homework2L4 {
     }
 
     /**
-     * The method extract value and repeat printArray if necessary
+     * The method extract value and repeat printArray() if necessary
      */
     private static void extracted(int enteredInt) {
         if (isPositive(enteredInt)) {
@@ -81,13 +81,19 @@ public class Homework2L4 {
      * Метод должен выполнять некоторую операцию с int "number" в зависимости от некоторых условий:
      * - if number положительное число, то необходимо number увеличить на 1
      * - if number отрицательное - уменьшить на 2
-     * - if number равно 0 , то замените значение number на 10
+     * - if number равно 0, то замените значение number на 10
      * вернуть number после выполнения операций
      */
     public static int operation(int number) {
-
-        // тут пишем логику
-        return 0;
+        if (number > 0) {
+            return ++number;
+        } else {
+            if (number < 0) {
+                return number - 2;
+            } else {
+                return 10;
+            }
+        }
     }
 
     /**
