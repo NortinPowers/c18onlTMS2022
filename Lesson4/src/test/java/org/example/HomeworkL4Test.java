@@ -10,13 +10,8 @@ class HomeworkL4Test {
 
     @Test
     void getAlphabetTest() {
-        Assertions.assertEquals("[A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z]", HomeworkL4.getAlphabet());
-    }
-
-    @Test
-    void isAbsMinValueTaskConditionTest() {
-        Assertions.assertTrue(HomeworkL4.isAbsMinValueTaskCondition(List.of(2.0, 3.0, 5.2)));
-        Assertions.assertThrows(NullPointerException.class, () -> HomeworkL4.isAbsMinValueTaskCondition(null));
+        Assertions.assertEquals("[A, B, C, D, E, F, G, H, I, J, K, L, M, N, " +
+                "O, P, Q, R, S, T, U, V, W, X, Y, Z]", HomeworkL4.getAlphabet());
     }
 
     @Test
@@ -38,7 +33,13 @@ class HomeworkL4Test {
 
     @Test
     void getAlphabetSecondTest() {
-        Assertions.assertEquals("[A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z]", HomeworkL4.getAlphabet());
+        Assertions.assertEquals("[A, B, C, D, E, F, G, H, I, J, K, L, M," +
+                " N, O, P, Q, R, S, T, U, V, W, X, Y, Z]", HomeworkL4.getAlphabet());
+    }
 
+    @Test
+    void getAlphabetThird() {
+        Assertions.assertEquals("[A, B, C, D, E, F, G, H, I, J, K, L, M, N," +
+                " O, P, Q, R, S, T, U, V, W, X, Y, Z]", HomeworkL4.getAlphabet());
     }
 }
