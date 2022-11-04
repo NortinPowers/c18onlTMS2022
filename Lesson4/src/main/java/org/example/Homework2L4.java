@@ -32,13 +32,24 @@ public class Homework2L4 {
     private static void printArray() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter positive integer");
-        int enteredInt = 0;
-        try {
-            enteredInt = getParserInt(scanner);
-        } catch (Exception e) {
-            System.out.println("Error input (" + e.getMessage() + ")");
-        }
+        int enteredInt = getParserInt(scanner);
         extracted(enteredInt);
+    }
+
+    /**
+     * A method returns the entered integer value
+     */
+    public static int getParserInt(Scanner scanner) {
+        int enteredInt = 0;
+        do {
+            if (scanner.hasNextInt()) {
+                enteredInt = scanner.nextInt();
+            } else {
+                System.out.println("You need to enter a positive integer\nRepeat the input");
+                scanner.next();
+            }
+        } while (enteredInt <= 0);
+        return enteredInt;
     }
 
     /**
@@ -62,13 +73,6 @@ public class Homework2L4 {
     }
 
     /**
-     * A method returns the entered integer value
-     */
-    public static int getParserInt(Scanner scanner) {
-        return scanner.nextInt();
-    }
-
-    /**
      * The method creates an array of the required length
      */
     public static int[] getIntsArray(int enteredInt) {
@@ -89,12 +93,10 @@ public class Homework2L4 {
     public static int operation(int number) {
         if (number > 0) {
             return ++number;
+        } else if (number < 0) {
+            return number - 2;
         } else {
-            if (number < 0) {
-                return number - 2;
-            } else {
-                return 10;
-            }
+            return 10;
         }
     }
 
@@ -124,27 +126,19 @@ public class Homework2L4 {
      */
     public static void countDevs(int count) {
         int modifyCount = processingModifyCount(count);
-        String postfix;
-        postfix = getPostfix(modifyCount);
-        System.out.println(count + " программист" + postfix);
+        String postfix = getPostfix(modifyCount);
+        System.out.println(count + " программис" + postfix);
     }
 
     /**
      * The method generates the necessary postfix
      */
     public static String getPostfix(int count) {
-        String postfix = "";
-        switch (count) {
-            case 1:
-                break;
-            case 2, 3, 4:
-                postfix = "а";
-                break;
-            default:
-                postfix = "ов";
-                break;
-        }
-        return postfix;
+        return switch (count) {
+            case 1 -> "т";
+            case 2, 3, 4 -> "та";
+            default -> "тов";
+        };
     }
 
     /**
@@ -176,8 +170,7 @@ public class Homework2L4 {
         } else {
             if (result3Dividing == 0) {
                 System.out.println("foo");
-            }
-            if (result5Dividing == 0) {
+            } else if (result5Dividing == 0) {
                 System.out.println("bar");
             }
         }
@@ -203,11 +196,12 @@ public class Homework2L4 {
      */
     public static boolean isPrimeNumber(int i) {
         switch (i) {
-            case 2, 3, 5, 7:
+            case 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31:
                 return true;
             default:
                 break;
         }
-        return i % 2 != 0 && i % 3 != 0 && i % 5 != 0 && i % 7 != 0;
+        return i % 2 != 0 && i % 3 != 0 && i % 5 != 0 && i % 7 != 0 && i % 11 != 0 && i % 13 != 0
+                && i % 17 != 0 && i % 19 != 0 && i % 23 != 0 && i % 29 != 0 && i % 31 != 0;
     }
 }
