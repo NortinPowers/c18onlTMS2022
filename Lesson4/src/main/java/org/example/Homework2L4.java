@@ -102,8 +102,13 @@ public class Homework2L4 {
      * в котором это значение распечатается на консоль.
      */
     public static int calculateCountOfOddElementsInMatrix(int[] ints) {
-        // тут пишем логику
-        return 0;
+        int countOdd = 0;
+        for (int anInt : ints) {
+            if (anInt % 2 != 0) {
+                countOdd++;
+            }
+        }
+        return countOdd;
     }
 
     /**
