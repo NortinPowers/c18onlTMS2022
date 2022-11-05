@@ -52,11 +52,11 @@ class Homework2L4Test {
     }
 
     @Test
-    void isPrimeNumber() {
-        Assertions.assertTrue(Homework2L4.isPrimeNumber(853));
-        Assertions.assertTrue(Homework2L4.isPrimeNumber(19));
-        Assertions.assertFalse(Homework2L4.isPrimeNumber(4));
-        Assertions.assertFalse(Homework2L4.isPrimeNumber(11 * 19));
-        Assertions.assertFalse(Homework2L4.isPrimeNumber(11 * 11));
+    void isPrimeTest() {
+        Assertions.assertTrue(Homework2L4.isPrime(853));
+        Assertions.assertTrue(Homework2L4.isPrime(19));
+        Assertions.assertFalse(Homework2L4.isPrime(4));
+        Assertions.assertFalse(Homework2L4.isPrime(11 * 19));
+        Assertions.assertFalse(Homework2L4.isPrime(11 * 11));
     }
 }
