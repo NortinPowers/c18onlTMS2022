@@ -1,7 +1,6 @@
 package org.example;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -31,17 +30,17 @@ public class Homework2L4 {
      */
     private static void printArray() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter positive integer");
         int enteredInt = getParserInt(scanner);
-        extracted(enteredInt);
+        getIntsArray(enteredInt);
     }
 
     /**
-     * A method returns the entered integer value
+     * A method returns an integer from the console if it is positive
      */
     public static int getParserInt(Scanner scanner) {
-        int enteredInt = 0;
+        int enteredInt = -1;
         do {
+            enteredIntInfo(enteredInt);
             if (scanner.hasNextInt()) {
                 enteredInt = scanner.nextInt();
             } else {
@@ -53,15 +52,13 @@ public class Homework2L4 {
     }
 
     /**
-     * The method extract value and repeat printArray() if necessary
+     * The method provides information about the requirements for the entered number
      */
-    private static void extracted(int enteredInt) {
-        if (enteredInt > 0) {
-            int[] intsArray = getIntsArray(enteredInt);
-            System.out.println(Arrays.toString(intsArray));
+    private static void enteredIntInfo(int enteredInt) {
+        if (enteredInt < 0) {
+            System.out.println("Enter positive integer");
         } else {
-            System.out.println("You need to enter a positive integer\nRepeat the input");
-            printArray();
+            System.out.println("A positive number is a number greater than 0\nRepeat the input");
         }
     }
 
@@ -140,7 +137,7 @@ public class Homework2L4 {
     public static int processingModifyCount(int count) {
         count = Math.abs(count);
         while (count > 100) {
-            count -= 100;
+            count = count % 100;
         }
         if (count > 20) {
             return (count % 10);
