@@ -58,7 +58,7 @@ public class HomeworkL4 {
      */
     public static String getAlphabetThird() {
         char[] alphabetArray = new char['Z' - 'A' + 1];
-        for (char i = 'A'; i < 'Z' + 1; i++) {
+        for (char i = 'A'; i <= 'Z'; i++) {
             alphabetArray[i - 'A'] = i;
         }
         return Arrays.toString(alphabetArray);
