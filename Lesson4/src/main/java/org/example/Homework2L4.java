@@ -31,17 +31,17 @@ public class Homework2L4 {
      */
     private static void printArray() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter positive integer");
         int enteredInt = getParserInt(scanner);
-        extracted(enteredInt);
+        System.out.println(Arrays.toString(getIntsArray(enteredInt)));
     }
 
     /**
-     * A method returns the entered integer value
+     * A method returns an integer from the console if it is positive
      */
     public static int getParserInt(Scanner scanner) {
-        int enteredInt = 0;
+        int enteredInt = -1;
         do {
+            enteredIntInfo(enteredInt);
             if (scanner.hasNextInt()) {
                 enteredInt = scanner.nextInt();
             } else {
@@ -53,15 +53,13 @@ public class Homework2L4 {
     }
 
     /**
-     * The method extract value and repeat printArray() if necessary
+     * The method provides information about the requirements for the entered number
      */
-    private static void extracted(int enteredInt) {
-        if (enteredInt > 0) {
-            int[] intsArray = getIntsArray(enteredInt);
-            System.out.println(Arrays.toString(intsArray));
+    private static void enteredIntInfo(int enteredInt) {
+        if (enteredInt < 0) {
+            System.out.println("Enter positive integer");
         } else {
-            System.out.println("You need to enter a positive integer\nRepeat the input");
-            printArray();
+            System.out.println("A positive number is a number greater than 0\nRepeat the input");
         }
     }
 
@@ -140,7 +138,7 @@ public class Homework2L4 {
     public static int processingModifyCount(int count) {
         count = Math.abs(count);
         while (count > 100) {
-            count -= 100;
+            count = count % 100;
         }
         if (count > 20) {
             return (count % 10);
@@ -175,26 +173,37 @@ public class Homework2L4 {
      * подробнее о просты числах (<a href="https://www.webmath.ru/poleznoe/formules_18_5.php">...</a>)
      */
     public static void printPrimeNumbers() {
-        List<Integer> primeNumberList = new ArrayList<>();
-        for (int i = 2; i < 1000; i++) {
-            if (isPrimeNumber(i)) {
-                primeNumberList.add(i);
+        int range = 1000;
+        int testInt = 2;
+        List<Integer> intList = getPrimeNumbers(range, testInt);
+        System.out.println(intList);
+    }
+
+    /**
+     * The method return list of PrimeNumbers
+     */
+    public static List<Integer> getPrimeNumbers(int range, int testInt) {
+        List<Integer> intList = new ArrayList<>();
+        while (testInt < range) {
+            if (isPrime(testInt)) {
+                intList.add(testInt);
             }
+            testInt++;
         }
-        System.out.println(primeNumberList);
+        return intList;
     }
 
     /**
      * The method checks whether an integer is a prime number
      */
-    public static boolean isPrimeNumber(int i) {
-        switch (i) {
-            case 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31:
-                return true;
-            default:
+    public static boolean isPrime(int testInt) {
+        boolean prime = true;
+        for (int i = 2; i < testInt - 1; i++) {
+            if (testInt % i == 0) {
+                prime = false;
                 break;
+            }
         }
-        return i % 2 != 0 && i % 3 != 0 && i % 5 != 0 && i % 7 != 0 && i % 11 != 0 && i % 13 != 0
-                && i % 17 != 0 && i % 19 != 0 && i % 23 != 0 && i % 29 != 0 && i % 31 != 0;
+        return prime;
     }
 }
