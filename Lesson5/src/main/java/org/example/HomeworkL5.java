@@ -19,7 +19,7 @@ public class HomeworkL5 {
 //        triangleDrawing("b");
 //        triangleDrawing("c");
 //        triangleDrawing("d");
-//        triangleDrawing("e");
+        triangleDrawing("e");
 //        oddArray();
 //        maxArrayLastElementIndex();
 //        arrayElementChange();
@@ -314,7 +314,7 @@ public class HomeworkL5 {
 
     private static boolean hasRealization(String method) {
         if (!method.equals("a") && !method.equals("b") && !method.equals("c") && !method.equals("d")) {
-            System.out.println("no such method was found\n‾\\_O_/‾");
+            System.out.println("no such method was found\n       ‾\\_O_/‾");
             return true;
         }
         return false;
