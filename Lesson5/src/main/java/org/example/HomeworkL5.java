@@ -22,7 +22,8 @@ public class HomeworkL5 {
 //        triangleDrawing("e");
 //        oddArray();
 //        maxArrayLastElementIndex();
-        arrayElementChange();
+//        arrayElementChange();
+        arrayMaxElementIndexChange();
     }
 
     //        Задачи:
@@ -427,7 +428,20 @@ public class HomeworkL5 {
         System.out.println(Arrays.toString(array));
     }
 
-//        10) Найти максимальный элемент в массиве {4,5,0,23,77,0,8,9,101,2} и поменять его местами с нулевым элементом
+    //        10) Найти максимальный элемент в массиве {4,5,0,23,77,0,8,9,101,2} и поменять его местами с нулевым элементом
+    public static void arrayMaxElementIndexChange() {
+        int[] array = {4, 5, 0, 23, 77, 0, 8, 9, 101, 2};
+        System.out.println(Arrays.toString(array));
+        swapMaxElementIndex(array);
+        System.out.println(Arrays.toString(array));
+    }
+
+    private static void swapMaxElementIndex(int[] array) {
+        int temp = array[0];
+        int[] requiredInts = getRequiredInts(array);
+        array[0] = requiredInts[0];
+        array[requiredInts[1]] = temp;
+    }
 
 //        11) Проверить, различны ли все элементы массива, если не различны то вывести элемент повторяющийся
 //        Пример: {0,3,46,3,2,1,2}
