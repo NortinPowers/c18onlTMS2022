@@ -1,9 +1,11 @@
 package org.example;
 
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class HomeworkL5 {
+    static Random random = new Random();
 
     public static void main(String[] args) {
 //        dayInfo();
@@ -18,7 +20,8 @@ public class HomeworkL5 {
 //        triangleDrawing("c");
 //        triangleDrawing("d");
 //        triangleDrawing("e");
-        oddArray();
+//        oddArray();
+        maxArrayLastElementIndex();
     }
 
     //        Задачи:
@@ -374,6 +377,36 @@ public class HomeworkL5 {
 //        8) Создайте массив из int[] mass = new int[12]; Рандомно заполните его значениями от 0 до 15.
 //        Определите какой элемент является в этом массиве максимальным и сообщите индекс его последнего вхождения в массив.
 //        Пример: {3,4,5,62,7,8,4,-5,7,62,5,1} Максимальный элемент 62, индекс его последнего вхождения в массив = 10
+
+    public static void maxArrayLastElementIndex() {
+        int[] mass = new int[12];
+        arrayFills(mass);
+        int[] requiredInts = getRequiredInts(mass);
+        System.out.println("The maximum element is " + requiredInts[0] + ", the index of its last " +
+                "appearance in the array = " + requiredInts[1]);
+    }
+
+    private static int[] getRequiredInts(int[] mass) {
+        int[] result = new int[2];
+        int tempMax = mass[mass.length - 1];
+        int tempMaxIndex = 0;
+        for (int i = mass.length - 2; i > -1; i--) {
+            if (mass[i] > tempMax) {
+                tempMax = mass[i];
+                tempMaxIndex = i;
+            }
+        }
+        result[0] = tempMax;
+        result[1] = tempMaxIndex;
+        return result;
+    }
+
+    private static void arrayFills(int[] mass) {
+        for (int i = 0; i < mass.length; i++) {
+            mass[i] = random.nextInt(16);
+        }
+        System.out.println("Created array: " + Arrays.toString(mass));
+    }
 
 //        9) Создайте массив размера 20, заполните его случайными целыми чиселами из отрезка от 0 до 20.
 //        Выведите массив на экран в строку. Замените каждый элемент с нечётным индексом на ноль.
