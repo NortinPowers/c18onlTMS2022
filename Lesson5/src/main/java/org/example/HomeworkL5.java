@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class HomeworkL5 {
@@ -12,11 +13,12 @@ public class HomeworkL5 {
 //        intPositiveInfo();
 //        zodiac();
 //        System.out.println(ancientMultiplication(2, -3));
-        triangleDrawing("a");
-        triangleDrawing("b");
-        triangleDrawing("c");
-        triangleDrawing("d");
-        triangleDrawing("e");
+//        triangleDrawing("a");
+//        triangleDrawing("b");
+//        triangleDrawing("c");
+//        triangleDrawing("d");
+//        triangleDrawing("e");
+        oddArray();
     }
 
     //        Задачи:
@@ -335,6 +337,39 @@ public class HomeworkL5 {
 
 //        7) Создайте массив из всех нечётных чисел от 1 до 100, выведите его на экран в строку,
 //        а затем этот же массив выведите на экран тоже в строку, но в обратном порядке (99 97 95 93 ... 7 5 3 1).
+
+    public static void oddArray() {
+        int[] array = new int[100];
+        int index = getIndex(array);
+        int[] oddArray = new int[index];
+        System.arraycopy(array, 0, oddArray, 0, oddArray.length);
+        System.out.println(Arrays.toString(oddArray));
+        positionOverride(oddArray);
+        System.out.println(Arrays.toString(oddArray));
+    }
+
+    private static void positionOverride(int[] oddArray) {
+        int intermediate;
+        for (int i = 0, j = oddArray.length - 1; i <= j; i++, j--) {
+            intermediate = oddArray[i];
+            oddArray[i] = oddArray[j];
+            oddArray[j] = intermediate;
+        }
+    }
+
+    private static int getIndex(int[] array) {
+        int index = 0;
+        int element = 0;
+        do {
+            if (element % 2 != 0) {
+                array[index] = element;
+                index++;
+            }
+            element++;
+        } while (element < 100);
+        return index;
+    }
+
 
 //        8) Создайте массив из int[] mass = new int[12]; Рандомно заполните его значениями от 0 до 15.
 //        Определите какой элемент является в этом массиве максимальным и сообщите индекс его последнего вхождения в массив.
