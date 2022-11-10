@@ -10,7 +10,7 @@ public class HomeworkL5 {
 //        calculateSumOfDiagonalElements();
 //        printMatrix();
 //        intPositiveInfo();
-        zodiac();
+//        zodiac();
 //        System.out.println(ancientMultiplication(2, -3));
         triangleDrawing("a");
         triangleDrawing("b");
@@ -274,48 +274,43 @@ public class HomeworkL5 {
 //            * *        * *
 //              *        *
     public static void triangleDrawing(String method) {
-        if (!method.equals("a") && !method.equals("b") && !method.equals("c") && !method.equals("d")) {
-            System.out.println("no such method was found\n‾\\_O_/‾");
-            return;
-        }
+        if (hasRealization(method)) return;
         String[][] asterisks = new String[4][4];
+        arrayFills(method, asterisks);
+        arrayPrints(asterisks);
+    }
+
+    private static void arrayPrints(String[][] asterisks) {
+        for (String[] array : asterisks) {
+            System.out.println(toString(array));
+        }
+    }
+
+    private static void arrayFills(String method, String[][] asterisks) {
+        boolean condition = true;
         for (int i = 0; i < asterisks.length; i++) {
             for (int j = 0; j < asterisks.length; j++) {
-                if (method == "a") {
-                    if (j < asterisks.length - 1 - i) {
-                        asterisks[i][j] = " ";
-                    } else {
-                        asterisks[i][j] = "*";
-                    }
+                switch (method) {
+                    case "a" -> condition = j < asterisks.length - 1 - i;
+                    case "b" -> condition = j > i;
+                    case "c" -> condition = j < i;
+                    case "d" -> condition = j > asterisks.length - 1 - i;
                 }
-                if (method == "b") {
-                    if (j > i) {
-                        asterisks[i][j] = " ";
-                    } else {
-                        asterisks[i][j] = "*";
-                    }
-                }
-                if (method == "c") {
-                    if (j > i) {
-                        asterisks[i][j] = " ";
-                    } else {
-                        asterisks[i][j] = "*";
-                    }
-                }
-                if (method == "d") {
-                    if (j > i) {
-                        asterisks[i][j] = " ";
-                    } else {
-                        asterisks[i][j] = "*";
-                    }
+                if (condition) {
+                    asterisks[i][j] = " ";
+                } else {
+                    asterisks[i][j] = "*";
                 }
             }
         }
-        System.out.println(toString(asterisks[0]));
-        System.out.println(toString(asterisks[1]));
-        System.out.println(toString(asterisks[2]));
-        System.out.println(toString(asterisks[3]));
+    }
 
+    private static boolean hasRealization(String method) {
+        if (!method.equals("a") && !method.equals("b") && !method.equals("c") && !method.equals("d")) {
+            System.out.println("no such method was found\n‾\\_O_/‾");
+            return true;
+        }
+        return false;
     }
 
     public static String toString(String[] a) {
