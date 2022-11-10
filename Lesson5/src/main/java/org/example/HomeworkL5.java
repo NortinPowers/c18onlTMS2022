@@ -21,7 +21,8 @@ public class HomeworkL5 {
 //        triangleDrawing("d");
 //        triangleDrawing("e");
 //        oddArray();
-        maxArrayLastElementIndex();
+//        maxArrayLastElementIndex();
+        arrayElementChange();
     }
 
     //        Задачи:
@@ -380,13 +381,13 @@ public class HomeworkL5 {
 
     public static void maxArrayLastElementIndex() {
         int[] mass = new int[12];
-        arrayFills(mass);
+        arrayFills(mass, 16);
         int[] requiredInts = getRequiredInts(mass);
         System.out.println("The maximum element is " + requiredInts[0] + ", the index of its last " +
                 "appearance in the array = " + requiredInts[1]);
     }
 
-    private static int[] getRequiredInts(int[] mass) {
+    public static int[] getRequiredInts(int[] mass) {
         int[] result = new int[2];
         int tempMax = mass[mass.length - 1];
         int tempMaxIndex = 0;
@@ -401,16 +402,30 @@ public class HomeworkL5 {
         return result;
     }
 
-    private static void arrayFills(int[] mass) {
+    public static void arrayFills(int[] mass, int count) {
         for (int i = 0; i < mass.length; i++) {
-            mass[i] = random.nextInt(16);
+            mass[i] = random.nextInt(count);
         }
         System.out.println("Created array: " + Arrays.toString(mass));
     }
 
-//        9) Создайте массив размера 20, заполните его случайными целыми чиселами из отрезка от 0 до 20.
+//        9) Создайте массив размера 20, заполните его случайными целыми числами из отрезка от 0 до 20.
 //        Выведите массив на экран в строку. Замените каждый элемент с нечётным индексом на ноль.
 //        Снова выведете массив на экран на отдельной строке.
+
+    public static void arrayElementChange() {
+        int[] array = new int[20];
+        arrayFills(array, 21);
+        oddIndexElementChange(array);
+
+    }
+
+    private static void oddIndexElementChange(int[] array) {
+        for (int i = 1; i < array.length; i += 2) {
+            array[i] = 0;
+        }
+        System.out.println(Arrays.toString(array));
+    }
 
 //        10) Найти максимальный элемент в массиве {4,5,0,23,77,0,8,9,101,2} и поменять его местами с нулевым элементом
 
