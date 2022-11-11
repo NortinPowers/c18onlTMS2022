@@ -9,27 +9,27 @@ public class HomeworkL5 {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-//        dayInfo();
-//        amoebasQuantityInfo();
-//        calculateSumOfDiagonalElements();
-//        printMatrix();
-//        intPositiveInfo();
-//        zodiac();
-//        System.out.println(ancientMultiplication(2, -3));
-//        triangleDrawing("a");
-//        triangleDrawing("b");
-//        triangleDrawing("c");
-//        triangleDrawing("d");
-//        triangleDrawing("e");
-//        oddArray();
-//        maxArrayLastElementIndex();
-//        arrayElementChange();
-//        arrayMaxElementIndexChange();
-//        arrayComparison(new int[]{0, 3, 46, 3, 2, 1, 2});
-//        arrayComparison(new int[]{0, 34, 46, 31, 20, 1, 28});
-//        transposeMatrix();
-//        calculateSumOfDiagonalElements();
-//        printMatrix();
+        dayInfo();
+        amoebasQuantityInfo();
+        calculateSumOfDiagonalElements();
+        printMatrix();
+        intPositiveInfo();
+        zodiac();
+        System.out.println(ancientMultiplication(2, -3));
+        triangleDrawing("a");
+        triangleDrawing("b");
+        triangleDrawing("c");
+        triangleDrawing("d");
+        triangleDrawing("e");
+        oddArray();
+        maxArrayLastElementIndex();
+        arrayElementChange();
+        arrayMaxElementIndexChange();
+        arrayComparison(new int[]{0, 3, 46, 3, 2, 1, 2});
+        arrayComparison(new int[]{0, 34, 46, 31, 20, 1, 28});
+        transposeMatrix();
+        calculateSumOfDiagonalElements();
+        printMatrix();
         maxSumThreeElementsMatrixString();
     }
 
@@ -168,7 +168,7 @@ public class HomeworkL5 {
      * The method returns the bit depth of a number (but easier realization)
      */
     public static int getDigitCountSecond(int value) {
-        return String.valueOf(value).length();
+        return String.valueOf(Math.abs(value)).length();
     }
 
 //      4) Дано 2 числа, день и месяц рождения. Написать программу, которая определяет знак зодиака человека.
@@ -311,7 +311,7 @@ public class HomeworkL5 {
 //            * *        * *
 //              *        *
     public static void triangleDrawing(String method) {
-        if (hasRealization(method)) return;
+        if (hasNoRealization(method)) return;
         String[][] asterisks = new String[4][4];
         arrayFills(method, asterisks);
         arrayPrints(asterisks);
@@ -351,7 +351,7 @@ public class HomeworkL5 {
     /**
      * The method for checking acceptable task conditions
      */
-    private static boolean hasRealization(String method) {
+    public static boolean hasNoRealization(String method) {
         if (!method.equals("a") && !method.equals("b") && !method.equals("c") && !method.equals("d")) {
             System.out.println("no such method was found\n       ‾\\_O_/‾");
             return true;
@@ -407,10 +407,7 @@ public class HomeworkL5 {
         }
     }
 
-    /**
-     * The method fills the array with odd numbers from 0 to 100
-     */
-    private static int getIndex(int[] array) {
+    public static int getIndex(int[] array) {
         int index = 0;
         int element = 0;
         do {
@@ -426,7 +423,7 @@ public class HomeworkL5 {
 
 //        8) Создайте массив из int[] mass = new int[12]; Рандомно заполните его значениями от 0 до 15.
 //        Определите какой элемент является в этом массиве максимальным и сообщите индекс его последнего вхождения в массив.
-//        Пример: {3,4,5,62,7,8,4,-5,7,62,5,1} Максимальный элемент 62, индекс его последнего вхождения в массив = 10
+//        Пример: {3,4,5,62,7,8,4,-5,7,62,5,1} Максимальный элемент 62, индекс его последнего вхождения в массив = 9
 
     public static void maxArrayLastElementIndex() {
         int[] mass = new int[12];
@@ -438,7 +435,7 @@ public class HomeworkL5 {
     }
 
     /**
-     * The method determines the values and the last index of the maximum element of the array
+     * The method return array with the value and the last index of the maximum element of the array
      */
     public static int[] getRequiredInts(int[] mass) {
         int[] result = new int[2];
@@ -558,7 +555,7 @@ public class HomeworkL5 {
     /**
      * The method return the matrix with random values in a given range
      */
-    private static int[][] getFilledMatrix(int size, int valueRange) {
+    public static int[][] getFilledMatrix(int size, int valueRange) {
         int[][] matrix = new int[size][size];
         filling(matrix, valueRange);
         return matrix;
@@ -662,7 +659,7 @@ public class HomeworkL5 {
     /**
      * The returns the sum of the matrix elements diagonally
      */
-    private static int getDiagonalMatrixSum(int[][] matrix) {
+    public static int getDiagonalMatrixSum(int[][] matrix) {
         int sum = 0;
         for (int i = 0; i < matrix.length; i++) {
             sum += matrix[i][i];
