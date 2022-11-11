@@ -27,7 +27,8 @@ public class HomeworkL5 {
 //        arrayMaxElementIndexChange();
 //        arrayComparison(new int[]{0, 3, 46, 3, 2, 1, 2});
 //        arrayComparison(new int[]{0, 34, 46, 31, 20, 1, 28});
-        transposeMatrix();
+//        transposeMatrix();
+        calculateSumOfDiagonalElements();
     }
 
     //        Задачи:
@@ -491,19 +492,24 @@ public class HomeworkL5 {
     public static void transposeMatrix() {
 //        Scanner scanner = new Scanner(System.in);
         int enteredInt = getParserInteger(scanner);
-        int[][] matrix = getMatrix(enteredInt);
+        int[][] matrix = getFilledMatrix(enteredInt, 51);
         arrayPrints(matrix);
         System.out.println("--some magic--");
         transpose(matrix);
         arrayPrints(matrix);
     }
 
-    private static int[][] getMatrix(int enteredInt) {
-        int[][] matrix = new int[enteredInt][enteredInt];
-        for (int[] array : matrix) {
-            arrayFills(array, 51);
-        }
+    private static int[][] getFilledMatrix(int size, int valueRange) {
+        int[][] matrix = new int[size][size];
+        filling(matrix, valueRange);
         return matrix;
+
+    }
+
+    private static void filling(int[][] matrix, int valueRange) {
+        for (int[] array : matrix) {
+            arrayFills(array, valueRange);
+        }
     }
 
     private static void transpose(int[][] matrix) {
@@ -570,13 +576,25 @@ public class HomeworkL5 {
         }
     }
 
+//    task13
+
     /**
      * заполнить рандомно 2-х мерный массив и посчитать сумму элементов на диагонали
      */
     public static void calculateSumOfDiagonalElements() {
-        //пишем логику и выводим результат используя System.out.println
+        int[][] matrix = getFilledMatrix(random.nextInt(11), random.nextInt(101) - 50);
+        int sum = getDiagonalMatrixSum(matrix);
+        arrayPrints(matrix);
+        System.out.println(sum);
     }
 
+    private static int getDiagonalMatrixSum(int[][] matrix) {
+        int sum = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            sum += matrix[i][i];
+        }
+        return sum;
+    }
 
     /**
      * Шаги по реализации:
