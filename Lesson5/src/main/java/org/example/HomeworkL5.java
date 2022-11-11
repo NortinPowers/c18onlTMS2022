@@ -14,7 +14,7 @@ public class HomeworkL5 {
 //        calculateSumOfDiagonalElements();
 //        printMatrix();
 //        intPositiveInfo();
-//      zodiac();
+//        zodiac();
 //        System.out.println(ancientMultiplication(2, -3));
 //        triangleDrawing("a");
 //        triangleDrawing("b");
@@ -29,7 +29,8 @@ public class HomeworkL5 {
 //        arrayComparison(new int[]{0, 34, 46, 31, 20, 1, 28});
 //        transposeMatrix();
 //        calculateSumOfDiagonalElements();
-        printMatrix();
+//        printMatrix();
+        maxSumThreeElementsMatrixString();
     }
 
     //        Задачи:
@@ -598,6 +599,7 @@ public class HomeworkL5 {
     }
 
     //task14
+
     /**
      * Шаги по реализации:
      * - Прочитать два int из консоли
@@ -682,14 +684,35 @@ public class HomeworkL5 {
         }
     }
 
-//    Доп задача!
-//    Создать матрицу размера 10 на 10 и заполнить ее случайными целочислеными значениями (тип int) из диапазона от 0 до 10000.
-//    Найти максимум среди сумм трех соседних элементов в строке. Для найденной тройки с максимальной суммой выведите значение суммы и индексы(i,j) первого элемента тройки.
+    //    task15
+    //    Доп задача! 
+//    Создать матрицу размера 10 на 10 и заполнить ее случайными целочисленными значениями (тип int)
+//    из диапазона от 0 до 10000.
+//    Найти максимум среди сумм трех соседних элементов в строке.
+//    Для найденной тройки с максимальной суммой выведите значение суммы и индексы(i,j) первого элемента тройки.
 //    Пример:
 //            *Для простоты пример показан на одномерном массиве размера 10
 //            [1, 456, 1025, 65, 954, 2789, 4, 8742, 1040, 3254] Тройка с максимальной суммой:  [2789, 4, 8742]
 //    Вывод в консоль:
 //            11535 (0,5)
-//            *Пояснение. Первое число - сумма тройки  [2789, 4, 8742]. Числа в скобках это 0 строка и 5 столбец - индекс первого элемента тройки, то есть индекс числа 2789.
-
+//            *Пояснение. Первое число - сумма тройки  [2789, 4, 8742].
+//            Числа в скобках это 0 строка и 5 столбец - индекс первого элемента тройки, то есть индекс числа 2789.
+    public static void maxSumThreeElementsMatrixString() {
+        int[][] matrix = getFilledMatrix(10, random.nextInt(10001));
+        arrayPrints(matrix);
+        int maxSum = matrix[0][0] + matrix[0][1] + matrix[0][2];
+        int tempSum;
+        int[] maxSumIndex = new int[2];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length - 3; j++) {
+                tempSum = matrix[i][j] + matrix[i][j + 1] + matrix[i][j + 2];
+                if (maxSum < tempSum) {
+                    maxSum = tempSum;
+                    maxSumIndex[0] = i;
+                    maxSumIndex[1] = j;
+                }
+            }
+        }
+        System.out.println("Max sum = " + maxSum + " " + "( i: " + maxSumIndex[0] + " j: " + maxSumIndex[1] + " )");
+    }
 }
