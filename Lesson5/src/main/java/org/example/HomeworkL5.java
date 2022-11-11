@@ -19,11 +19,13 @@ public class HomeworkL5 {
 //        triangleDrawing("b");
 //        triangleDrawing("c");
 //        triangleDrawing("d");
-        triangleDrawing("e");
+//        triangleDrawing("e");
 //        oddArray();
 //        maxArrayLastElementIndex();
 //        arrayElementChange();
-        arrayMaxElementIndexChange();
+//        arrayMaxElementIndexChange();
+        arrayComparison(new int[]{0, 3, 46, 3, 2, 1, 2});
+//        arrayComparison(new int[]{0, 34, 46, 31, 20, 1, 28});
     }
 
     //        Задачи:
@@ -448,6 +450,36 @@ public class HomeworkL5 {
 //        Массив имеет повторяющиеся элементы 3, 2
 //        Пример: {0,34,46,31,20,1,28}
 //        Массив не имеет повторяющихся элементов
+
+    public static void arrayComparison(int[] array) {
+        int[] similarity = new int[array.length];
+        int similarityIndex = getSimilarityIndex(array, similarity);
+        displaysIdenticalElements(similarity, similarityIndex);
+
+    }
+
+    public static int getSimilarityIndex(int[] array, int[] similarity) {
+        int similarityIndex = 0;
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[i] == array[j]) {
+                    similarity[similarityIndex] = array[i];
+                    similarityIndex++;
+                }
+            }
+        }
+        return similarityIndex;
+    }
+
+    public static void displaysIdenticalElements(int[] similarity, int similarityIndex) {
+        if (similarityIndex > 0) {
+            int[] similar = new int[similarityIndex];
+            System.arraycopy(similarity, 0, similar, 0, similar.length);
+            System.out.println(Arrays.toString(similar));
+        } else {
+            System.out.println("There are no identical elements in the array");
+        }
+    }
 
 //        12) Создаём квадратную матрицу, размер вводим с клавиатуры.
 //        Заполняем случайными числами в диапазоне от 0 до 50. И выводим на консоль(в виде матрицы).
