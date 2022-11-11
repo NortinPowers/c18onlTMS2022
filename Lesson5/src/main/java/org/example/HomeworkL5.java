@@ -14,7 +14,7 @@ public class HomeworkL5 {
 //        calculateSumOfDiagonalElements();
 //        printMatrix();
 //        intPositiveInfo();
-//        zodiac();
+//      zodiac();
 //        System.out.println(ancientMultiplication(2, -3));
 //        triangleDrawing("a");
 //        triangleDrawing("b");
@@ -28,7 +28,8 @@ public class HomeworkL5 {
 //        arrayComparison(new int[]{0, 3, 46, 3, 2, 1, 2});
 //        arrayComparison(new int[]{0, 34, 46, 31, 20, 1, 28});
 //        transposeMatrix();
-        calculateSumOfDiagonalElements();
+//        calculateSumOfDiagonalElements();
+        printMatrix();
     }
 
     //        Задачи:
@@ -222,7 +223,7 @@ public class HomeworkL5 {
         int[] dateValue = new int[2];
         String[] processedEnteredCharacters;
         do {
-            processedEnteredCharacters = scanner.nextLine().replace(".", ",").split(",");
+            processedEnteredCharacters = scanner.nextLine().split("\\.");
             try {
                 dateValue[0] = Integer.parseInt(processedEnteredCharacters[0]);
                 dateValue[1] = Integer.parseInt(processedEnteredCharacters[1]);
@@ -582,7 +583,7 @@ public class HomeworkL5 {
      * заполнить рандомно 2-х мерный массив и посчитать сумму элементов на диагонали
      */
     public static void calculateSumOfDiagonalElements() {
-        int[][] matrix = getFilledMatrix(random.nextInt(11), random.nextInt(101) - 50);
+        int[][] matrix = getFilledMatrix(random.nextInt(10) + 1, random.nextInt(51));
         int sum = getDiagonalMatrixSum(matrix);
         arrayPrints(matrix);
         System.out.println(sum);
@@ -596,6 +597,7 @@ public class HomeworkL5 {
         return sum;
     }
 
+    //task14
     /**
      * Шаги по реализации:
      * - Прочитать два int из консоли
@@ -619,7 +621,65 @@ public class HomeworkL5 {
      * Обратите внимание, что 21% 3 == 0 и 21% 7 = 0, но выводить надо не +-, а +
      */
     public static void printMatrix() {
-        // тут пишем логику
+        System.out.println("Enter the size of the two-dimensional array in the format \"INTEGER INTEGER\" ");
+        int[] formatValue = getTwoEnteredIntsArray(scanner);
+        int[][] matrix = new int[formatValue[0]][formatValue[1]];
+        filling(matrix, random.nextInt(101));
+        System.out.println();
+        arrayPrints(matrix);
+        System.out.println();
+        arrayTaskConditionPrint(matrix);
+    }
+
+    private static void arrayTaskConditionPrint(int[][] matrix) {
+        String displayedElement;
+        int arrayElement;
+        for (int[] array : matrix) {
+            for (int j = 0; j < array.length; j++) {
+                if (j > 0 || j < array.length - 1) {
+                    System.out.print(" ");
+                }
+                arrayElement = array[j];
+                if (arrayElement % 3 == 0) {
+                    displayedElement = "+";
+                } else if (arrayElement % 7 == 0) {
+                    displayedElement = "-";
+                } else {
+                    displayedElement = "*";
+                }
+                System.out.print(displayedElement);
+            }
+            System.out.println();
+        }
+    }
+
+    public static int[] getTwoEnteredIntsArray(Scanner scanner) {
+        int[] intValue = new int[2];
+        String[] processedEnteredCharacters;
+        do {
+            processedEnteredCharacters = scanner.nextLine().split(" ");
+            try {
+                intValue[0] = Integer.parseInt(processedEnteredCharacters[0]);
+                intValue[1] = Integer.parseInt(processedEnteredCharacters[1]);
+                validationCheck(intValue);
+            } catch (Exception e) {
+                errorMessage();
+            }
+        }
+        while (intValue[0] <= 0 || intValue[1] <= 0);
+        return intValue;
+    }
+
+    public static void errorMessage() {
+        System.out.println("Repeat the input according to the format \"INTEGER INTEGER\"");
+    }
+
+    public static void validationCheck(int[] intValue) {
+        if (intValue[0] < 1 || intValue[1] < 1) {
+            intValue[0] = 0;
+            intValue[1] = 0;
+            errorMessage();
+        }
     }
 
 //    Доп задача!
