@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class HomeworkL5 {
     static Random random = new Random();
+    static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
 //        dayInfo();
@@ -24,8 +25,9 @@ public class HomeworkL5 {
 //        maxArrayLastElementIndex();
 //        arrayElementChange();
 //        arrayMaxElementIndexChange();
-        arrayComparison(new int[]{0, 3, 46, 3, 2, 1, 2});
+//        arrayComparison(new int[]{0, 3, 46, 3, 2, 1, 2});
 //        arrayComparison(new int[]{0, 34, 46, 31, 20, 1, 28});
+        transposeMatrix();
     }
 
     //        Задачи:
@@ -53,7 +55,6 @@ public class HomeworkL5 {
     //         2) Одноклеточная амеба каждые 3 часа делится на 2 клетки. Определить,
 //         сколько амеб будет через 3, 6, 9, 12,..., 24 часа
     public static void amoebasQuantityInfo() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println(giveAmoebasQuantity(getParserInt(scanner)));
     }
 
@@ -101,7 +102,6 @@ public class HomeworkL5 {
 //        Например, "Введите число:" -> 5
 //        "5 - это положительное число, количество цифр = 1"
     public static void intPositiveInfo() {
-        Scanner scanner = new Scanner(System.in);
         int value = getInputIntValue(scanner);
         String qualifier = getStringQualifier(value);
         int digitCount = getDigitCount(value);
@@ -157,12 +157,10 @@ public class HomeworkL5 {
     }
 
 //      4) Дано 2 числа, день и месяц рождения. Написать программу, которая определяет знак зодиака человека.
-//      many lions have become into cancer
-//      https://spaceplace.nasa.gov/constellations/en/
+//      Many lions have become cancer -> https://spaceplace.nasa.gov/constellations/en/
 
     public static void zodiac() {
         System.out.println("Enter the day and month of birth in the format dd.mm");
-        Scanner scanner = new Scanner(System.in);
         int[] dateValue = getIntsDateArray(scanner);
         String zodiacSign = getStringZodiacSign(dateValue);
         System.out.println("A person was born under the sign " + zodiacSign);
@@ -385,6 +383,7 @@ public class HomeworkL5 {
     public static void maxArrayLastElementIndex() {
         int[] mass = new int[12];
         arrayFills(mass, 16);
+        System.out.println("Created array: " + Arrays.toString(mass));
         int[] requiredInts = getRequiredInts(mass);
         System.out.println("The maximum element is " + requiredInts[0] + ", the index of its last " +
                 "appearance in the array = " + requiredInts[1]);
@@ -409,7 +408,6 @@ public class HomeworkL5 {
         for (int i = 0; i < mass.length; i++) {
             mass[i] = random.nextInt(count);
         }
-        System.out.println("Created array: " + Arrays.toString(mass));
     }
 
 //        9) Создайте массив размера 20, заполните его случайными целыми числами из отрезка от 0 до 20.
@@ -490,6 +488,87 @@ public class HomeworkL5 {
 //          3 3 4 5      3 8 4 6
 //          1 5 6 7      4 9 5 7
 
+    public static void transposeMatrix() {
+//        Scanner scanner = new Scanner(System.in);
+        int enteredInt = getParserInteger(scanner);
+        int[][] matrix = getMatrix(enteredInt);
+        arrayPrints(matrix);
+        System.out.println("--some magic--");
+        transpose(matrix);
+        arrayPrints(matrix);
+    }
+
+    private static int[][] getMatrix(int enteredInt) {
+        int[][] matrix = new int[enteredInt][enteredInt];
+        for (int[] array : matrix) {
+            arrayFills(array, 51);
+        }
+        return matrix;
+    }
+
+    private static void transpose(int[][] matrix) {
+        int temp;
+        int i = 0;
+        while (i < matrix.length - 1) {
+            for (int j = i; j < matrix.length; j++) {
+                temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+            i++;
+        }
+    }
+
+    private static void arrayPrints(int[][] matrix) {
+        for (int[] array : matrix) {
+            System.out.println(toString(array));
+        }
+    }
+
+    public static String toString(int[] a) {
+        if (a == null)
+            return "null";
+        int iMax = a.length - 1;
+        if (iMax == -1)
+            return "";
+        StringBuilder b = new StringBuilder();
+        b.append(' ');
+        for (int i = 0; ; i++) {
+            b.append(a[i]);
+            if (i == iMax)
+                return b.append(' ').toString();
+            b.append("  ");
+        }
+
+    }
+
+    /**
+     * A method returns an integer from the console if it is positive
+     */
+    public static int getParserInteger(Scanner scanner) {
+        int enteredInt = -1;
+        do {
+            entIntInfo(enteredInt);
+            if (scanner.hasNextInt()) {
+                enteredInt = scanner.nextInt();
+            } else {
+                System.out.println("To build a matrix, you need to enter a positive integer\nRepeat the input");
+                scanner.next();
+            }
+        } while (enteredInt <= 0);
+        return enteredInt;
+    }
+
+    /**
+     * The method provides information about the requirements for the entered number
+     */
+    private static void entIntInfo(int enteredInt) {
+        if (enteredInt < 0) {
+            System.out.println("Enter the size of the matrix (the required number is greater than 0)");
+        } else {
+            System.out.println("For a matrix of size 0, this method is useless 0\nRepeat the input");
+        }
+    }
 
     /**
      * заполнить рандомно 2-х мерный массив и посчитать сумму элементов на диагонали
