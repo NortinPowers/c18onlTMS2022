@@ -43,6 +43,9 @@ public class HomeworkL5 {
         showDayName(day);
     }
 
+    /**
+     * The method returns the day of the week depending on the number entered
+     */
     private static void showDayName(int day) {
         switch (day) {
             case 1 -> System.out.println("Monday");
@@ -62,7 +65,7 @@ public class HomeworkL5 {
     }
 
     /**
-     * A method returns an integer from the console if equal to 0 or greater
+     * The method returns an integer from the console if equal to 0 or greater
      */
     public static int getParserInt(Scanner scanner) {
         int enteredInt = -1;
@@ -89,7 +92,7 @@ public class HomeworkL5 {
     }
 
     /**
-     * the method returns the number of amoebas after a given number of observation hours
+     * The method returns the number of amoebas after a given number of observation hours
      */
     public static int giveAmoebasQuantity(int hour) {
         if (hour < 0) {
@@ -109,11 +112,11 @@ public class HomeworkL5 {
         String qualifier = getStringQualifier(value);
         int digitCount = getDigitCount(value);
         System.out.println("The entered number " + value + " is " + qualifier + ", it contains " + digitCount + " digit");
-//        int digitCount1 = getDigitCountSecond(value);
-//        System.out.println(".. it contains " + digitCount1 + " digit");
-
     }
 
+    /**
+     * The method returns an integer from the console
+     */
     public static int getInputIntValue(Scanner scanner) {
         int value;
         System.out.println("Input integer");
@@ -129,6 +132,9 @@ public class HomeworkL5 {
         return value;
     }
 
+    /**
+     * The method returns the characteristic of a number
+     */
     public static String getStringQualifier(int value) {
         String qualifier;
         if (value == 0) {
@@ -141,6 +147,9 @@ public class HomeworkL5 {
         return qualifier;
     }
 
+    /**
+     * The method returns the bit depth of a number
+     */
     public static int getDigitCount(int value) {
         int digitCount = 0;
         if (value == 0) {
@@ -155,6 +164,9 @@ public class HomeworkL5 {
         return digitCount;
     }
 
+    /**
+     * The method returns the bit depth of a number (but easier realization)
+     */
     public static int getDigitCountSecond(int value) {
         return String.valueOf(value).length();
     }
@@ -169,6 +181,9 @@ public class HomeworkL5 {
         System.out.println("A person was born under the sign " + zodiacSign);
     }
 
+    /**
+     * The method returns the zodiac sign by date
+     */
     public static String getStringZodiacSign(int[] dateValue) {
         String zodiacSign = "";
         switch (dateValue[1]) {
@@ -220,6 +235,9 @@ public class HomeworkL5 {
         return zodiacSign;
     }
 
+    /**
+     * The method returns the date value from the console
+     */
     public static int[] getIntsDateArray(Scanner scanner) {
         int[] dateValue = new int[2];
         String[] processedEnteredCharacters;
@@ -237,6 +255,9 @@ public class HomeworkL5 {
         return dateValue;
     }
 
+    /**
+     * The method verifies the date
+     */
     public static void dateValidationCheck(int[] dateValue) {
         if (dateValue[0] < 1 || dateValue[0] > 31 || dateValue[1] < 1 || dateValue[1] > 12) {
             dateValue[0] = 0;
@@ -245,6 +266,9 @@ public class HomeworkL5 {
         }
     }
 
+    /**
+     * The method shows a message if an error was made when entering the date
+     */
     public static void errorInputMessage() {
         System.out.println("Repeat the input according to the format dd.mm");
     }
@@ -259,6 +283,9 @@ public class HomeworkL5 {
         return getMultiplicationResult(a, b);
     }
 
+    /**
+     * The method performs multiplication of numbers without using multiplication of numbers
+     */
     public static int getMultiplicationResult(int a, int b) {
         if (b < 0) {
             a = -a;
@@ -290,12 +317,18 @@ public class HomeworkL5 {
         arrayPrints(asterisks);
     }
 
+    /**
+     * The method applies toString to a two-dimensional String array
+     */
     private static void arrayPrints(String[][] asterisks) {
         for (String[] array : asterisks) {
             System.out.println(toString(array));
         }
     }
 
+    /**
+     * The method fills the array according to the condition of the task
+     */
     private static void arrayFills(String method, String[][] asterisks) {
         boolean condition = true;
         for (int i = 0; i < asterisks.length; i++) {
@@ -315,6 +348,9 @@ public class HomeworkL5 {
         }
     }
 
+    /**
+     * The method for checking acceptable task conditions
+     */
     private static boolean hasRealization(String method) {
         if (!method.equals("a") && !method.equals("b") && !method.equals("c") && !method.equals("d")) {
             System.out.println("no such method was found\n       ‾\\_O_/‾");
@@ -323,6 +359,9 @@ public class HomeworkL5 {
         return false;
     }
 
+    /**
+     * The convenient method toString
+     */
     public static String toString(String[] a) {
         if (a == null)
             return "null";
@@ -356,6 +395,9 @@ public class HomeworkL5 {
         System.out.println(Arrays.toString(oddArray));
     }
 
+    /**
+     * The method sorts the array elements from the last to the first
+     */
     private static void positionOverride(int[] oddArray) {
         int intermediate;
         for (int i = 0, j = oddArray.length - 1; i <= j; i++, j--) {
@@ -365,6 +407,9 @@ public class HomeworkL5 {
         }
     }
 
+    /**
+     * The method fills the array with odd numbers from 0 to 100
+     */
     private static int getIndex(int[] array) {
         int index = 0;
         int element = 0;
@@ -392,6 +437,9 @@ public class HomeworkL5 {
                 "appearance in the array = " + requiredInts[1]);
     }
 
+    /**
+     * The method determines the values and the last index of the maximum element of the array
+     */
     public static int[] getRequiredInts(int[] mass) {
         int[] result = new int[2];
         int tempMax = mass[mass.length - 1];
@@ -407,6 +455,9 @@ public class HomeworkL5 {
         return result;
     }
 
+    /**
+     * The method fills the array with random values in a given range
+     */
     public static void arrayFills(int[] mass, int count) {
         for (int i = 0; i < mass.length; i++) {
             mass[i] = random.nextInt(count);
@@ -439,6 +490,9 @@ public class HomeworkL5 {
         System.out.println(Arrays.toString(array));
     }
 
+    /**
+     * The method swaps the maximum and zero elements of the array in places
+     */
     private static void swapMaxElementIndex(int[] array) {
         int temp = array[0];
         int[] requiredInts = getRequiredInts(array);
@@ -501,6 +555,9 @@ public class HomeworkL5 {
         arrayPrints(matrix);
     }
 
+    /**
+     * The method return the matrix with random values in a given range
+     */
     private static int[][] getFilledMatrix(int size, int valueRange) {
         int[][] matrix = new int[size][size];
         filling(matrix, valueRange);
@@ -508,12 +565,18 @@ public class HomeworkL5 {
 
     }
 
+    /**
+     * The method fills the matrix with random values in a given range
+     */
     private static void filling(int[][] matrix, int valueRange) {
         for (int[] array : matrix) {
             arrayFills(array, valueRange);
         }
     }
 
+    /**
+     * The method transpose the matrix
+     */
     private static void transpose(int[][] matrix) {
         int temp;
         int i = 0;
@@ -527,12 +590,18 @@ public class HomeworkL5 {
         }
     }
 
+    /**
+     * The method applies toString to a two-dimensional Integer array
+     */
     private static void arrayPrints(int[][] matrix) {
         for (int[] array : matrix) {
             System.out.println(toString(array));
         }
     }
 
+    /**
+     * The convenient method toString
+     */
     public static String toString(int[] a) {
         if (a == null)
             return "null";
@@ -590,6 +659,9 @@ public class HomeworkL5 {
         System.out.println(sum);
     }
 
+    /**
+     * The returns the sum of the matrix elements diagonally
+     */
     private static int getDiagonalMatrixSum(int[][] matrix) {
         int sum = 0;
         for (int i = 0; i < matrix.length; i++) {
@@ -685,7 +757,7 @@ public class HomeworkL5 {
     }
 
     //    task15
-    //    Доп задача! 
+    //    Доп задача!
 //    Создать матрицу размера 10 на 10 и заполнить ее случайными целочисленными значениями (тип int)
 //    из диапазона от 0 до 10000.
 //    Найти максимум среди сумм трех соседних элементов в строке.
