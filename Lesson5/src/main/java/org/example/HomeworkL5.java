@@ -9,28 +9,28 @@ public class HomeworkL5 {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-//        giveDayInfo();
-//        giveAmoebasQuantityInfo();
-//        calculateSumOfDiagonalElements();
-//        printMatrix();
-//        giveIntPositiveInfo();
+        giveDayInfo();
+        giveAmoebasQuantityInfo();
+        calculateSumOfDiagonalElements();
+        printMatrix();
+        giveIntPositiveInfo();
         giveZodiacSign();
-//        System.out.println(performAncientMultiplication(2, -3));
-//        realizeTriangleDrawing("a");
-//        realizeTriangleDrawing("b");
-//        realizeTriangleDrawing("c");
-//        realizeTriangleDrawing("d");
-//        realizeTriangleDrawing("e");
-//        printOddArray();
-//        giveMaxArrayLastElementIndex();
-//        changeArrayElement();
-//        changeArrayMaxElementIndex();
-//        comparisonArray(new int[]{0, 3, 46, 3, 2, 1, 2});
-//        comparisonArray(new int[]{0, 34, 46, 31, 20, 1, 28});
-//        doTransposeMatrix();
-//        calculateSumOfDiagonalElements();
-//        printMatrix();
-//        giveMaxSumThreeElementsMatrixString();
+        System.out.println(performAncientMultiplication(2, -3));
+        realizeTriangleDrawing("a");
+        realizeTriangleDrawing("b");
+        realizeTriangleDrawing("c");
+        realizeTriangleDrawing("d");
+        realizeTriangleDrawing("e");
+        printOddArray();
+        giveMaxArrayLastElementIndex();
+        changeArrayElement();
+        changeArrayMaxElementIndex();
+        comparisonArray(new int[]{0, 3, 46, 3, 2, 1, 2});
+        comparisonArray(new int[]{0, 34, 46, 31, 20, 1, 28});
+        doTransposeMatrix();
+        calculateSumOfDiagonalElements();
+        printMatrix();
+        giveMaxSumThreeElementsMatrixString();
     }
 
     //        Задачи:
@@ -293,6 +293,11 @@ public class HomeworkL5 {
      * The method performs multiplication of numbers without using multiplication of numbers
      */
     public static int getMultiplicationResult(int a, int b) {
+        if (Math.abs(a) < Math.abs(b)) {
+            int temp = a;
+            a = b;
+            b = temp;
+        }
         if (b < 0) {
             a = -a;
         }
