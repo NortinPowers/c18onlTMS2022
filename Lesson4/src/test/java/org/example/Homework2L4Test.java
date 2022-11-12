@@ -59,4 +59,5 @@ class Homework2L4Test {
         Assertions.assertFalse(Homework2L4.isPrime(11 * 19));
         Assertions.assertFalse(Homework2L4.isPrime(11 * 11));
     }
+
 }
