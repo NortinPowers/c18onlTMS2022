@@ -65,10 +65,10 @@ class HomeworkL5Test {
 
     @Test
     void ancientMultiplication() {
-        Assertions.assertEquals(40, HomeworkL5.ancientMultiplication(20, 2));
-        Assertions.assertEquals(-2, HomeworkL5.ancientMultiplication(-1, 2));
-        Assertions.assertEquals(0, HomeworkL5.ancientMultiplication(20, 0));
-        Assertions.assertEquals(-5, HomeworkL5.ancientMultiplication(5, -1));
+        Assertions.assertEquals(40, HomeworkL5.performAncientMultiplication(20, 2));
+        Assertions.assertEquals(-2, HomeworkL5.performAncientMultiplication(-1, 2));
+        Assertions.assertEquals(0, HomeworkL5.performAncientMultiplication(20, 0));
+        Assertions.assertEquals(-5, HomeworkL5.performAncientMultiplication(5, -1));
     }
 
     @Test
@@ -91,8 +91,8 @@ class HomeworkL5Test {
 
     @Test
     void testToString() {
-        Assertions.assertEquals(" *  * ", HomeworkL5.toString(new String[]{"*", "*"}));
-        Assertions.assertEquals(" 2  2 ", HomeworkL5.toString(new int[]{2, 2}));
+        Assertions.assertEquals(" *  * ", HomeworkL5.convertsToString(new String[]{"*", "*"}));
+        Assertions.assertEquals(" 2  2 ", HomeworkL5.convertsToString(new int[]{2, 2}));
     }
 
     @Test
