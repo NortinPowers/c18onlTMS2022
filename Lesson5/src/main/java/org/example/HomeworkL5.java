@@ -266,8 +266,8 @@ public class HomeworkL5 {
     /**
      * The method shows a message if an error was made when entering the date
      */
-    public static void giveErrorInputMessage(String exception) {
-        System.out.println("Repeat the input according to the format dd.mm" + " (" + exception + ")");
+    public static void giveErrorInputMessage(String exceptionMessage) {
+        System.out.println("Repeat the input according to the format dd.mm" + " (" + exceptionMessage + ")");
     }
 
 //        5) Напишите реализацию метода sum(int a, int b), вычисляющий a*b, не пользуясь операцией
@@ -737,22 +737,22 @@ public class HomeworkL5 {
                 intValue[1] = Integer.parseInt(processedEnteredCharacters[1]);
                 validationCheck(intValue);
             } catch (Exception e) {
-                giveErrorMessage();
+                giveErrorMessage(e.getMessage());
             }
         }
         while (intValue[0] <= 0 || intValue[1] <= 0);
         return intValue;
     }
 
-    public static void giveErrorMessage() {
-        System.out.println("Repeat the input according to the format \"INTEGER INTEGER\"");
+    public static void giveErrorMessage(String errorMessage) {
+        System.out.println("Repeat the input according to the format \"INTEGER INTEGER\"" + "(" + errorMessage + ")");
     }
 
     public static void validationCheck(int[] intValue) {
         if (intValue[0] < 1 || intValue[1] < 1) {
             intValue[0] = 0;
             intValue[1] = 0;
-            giveErrorMessage();
+            giveErrorMessage("Invalid array size");
         }
     }
 
