@@ -9,7 +9,7 @@ public class HomeworkL5 {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        giveDayInfo();
+       /* giveDayInfo();
         giveAmoebasQuantityInfo();
         calculateSumOfDiagonalElements();
         printMatrix();
@@ -26,11 +26,11 @@ public class HomeworkL5 {
         changeArrayElement();
         changeArrayMaxElementIndex();
         comparisonArray(new int[]{0, 3, 46, 3, 2, 1, 2});
-        comparisonArray(new int[]{0, 34, 46, 31, 20, 1, 28});
+        comparisonArray(new int[]{0, 34, 46, 31, 20, 1, 28});*/
         doTransposeMatrix();
-        calculateSumOfDiagonalElements();
+    /*    calculateSumOfDiagonalElements();
         printMatrix();
-        giveMaxSumThreeElementsMatrixString();
+        giveMaxSumThreeElementsMatrixString();*/
     }
 
     //        Задачи:
@@ -556,7 +556,6 @@ public class HomeworkL5 {
 //          1 5 6 7      4 9 5 7
 
     public static void doTransposeMatrix() {
-//        Scanner scanner = new Scanner(System.in);
         int enteredInt = getParserInteger(scanner);
         int[][] matrix = getFilledMatrix(enteredInt, 51);
         printsArray(matrix);
@@ -589,14 +588,12 @@ public class HomeworkL5 {
      */
     private static void doTranspose(int[][] matrix) {
         int temp;
-        int i = 0;
-        while (i < matrix.length - 1) {
-            for (int j = i; j < matrix.length; j++) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = i + 1; j < matrix.length; j++) {
                 temp = matrix[i][j];
                 matrix[i][j] = matrix[j][i];
                 matrix[j][i] = temp;
             }
-            i++;
         }
     }
 
