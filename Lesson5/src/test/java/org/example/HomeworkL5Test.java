@@ -117,4 +117,11 @@ class HomeworkL5Test {
         Assertions.assertEquals(5, HomeworkL5.getDiagonalMatrixSum(new int[][]{{1, 0, 3}, {1, 3, 3}, {1, 0, 1}}));
         Assertions.assertEquals(0, HomeworkL5.getDiagonalMatrixSum(new int[][]{{0, 2}, {1, 0}}));
     }
+
+    @Test
+    void isDateValidTest() {
+        Assertions.assertTrue(HomeworkL5.isDateValid(new int[]{31, 1}));
+        Assertions.assertTrue(HomeworkL5.isDateValid(new int[]{12, 5}));
+        Assertions.assertFalse(HomeworkL5.isDateValid(new int[]{30, 0}));
+    }
 }

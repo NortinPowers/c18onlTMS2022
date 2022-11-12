@@ -9,28 +9,28 @@ public class HomeworkL5 {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        giveDayInfo();
-        giveAmoebasQuantityInfo();
-        calculateSumOfDiagonalElements();
-        printMatrix();
-        giveIntPositiveInfo();
+//        giveDayInfo();
+//        giveAmoebasQuantityInfo();
+//        calculateSumOfDiagonalElements();
+//        printMatrix();
+//        giveIntPositiveInfo();
         giveZodiacSign();
-        System.out.println(performAncientMultiplication(2, -3));
-        realizeTriangleDrawing("a");
-        realizeTriangleDrawing("b");
-        realizeTriangleDrawing("c");
-        realizeTriangleDrawing("d");
-        realizeTriangleDrawing("e");
-        printOddArray();
-        giveMaxArrayLastElementIndex();
-        changeArrayElement();
-        changeArrayMaxElementIndex();
-        comparisonArray(new int[]{0, 3, 46, 3, 2, 1, 2});
-        comparisonArray(new int[]{0, 34, 46, 31, 20, 1, 28});
-        doTransposeMatrix();
-        calculateSumOfDiagonalElements();
-        printMatrix();
-        giveMaxSumThreeElementsMatrixString();
+//        System.out.println(performAncientMultiplication(2, -3));
+//        realizeTriangleDrawing("a");
+//        realizeTriangleDrawing("b");
+//        realizeTriangleDrawing("c");
+//        realizeTriangleDrawing("d");
+//        realizeTriangleDrawing("e");
+//        printOddArray();
+//        giveMaxArrayLastElementIndex();
+//        changeArrayElement();
+//        changeArrayMaxElementIndex();
+//        comparisonArray(new int[]{0, 3, 46, 3, 2, 1, 2});
+//        comparisonArray(new int[]{0, 34, 46, 31, 20, 1, 28});
+//        doTransposeMatrix();
+//        calculateSumOfDiagonalElements();
+//        printMatrix();
+//        giveMaxSumThreeElementsMatrixString();
     }
 
     //        Задачи:
@@ -185,48 +185,50 @@ public class HomeworkL5 {
      */
     public static String getStringZodiacSign(int[] dateValue) {
         String zodiacSign = "";
-        switch (dateValue[1]) {
+        int day = dateValue[0];
+        int mounts = dateValue[1];
+        switch (mounts) {
             case 1:
-                zodiacSign = dateValue[0] < 20 ? "Sagittarius" : "Capricorn";
+                zodiacSign = day < 20 ? "Sagittarius" : "Capricorn";
                 break;
             case 2:
-                zodiacSign = dateValue[0] < 16 ? "Capricorn" : "Aquarius";
+                zodiacSign = day < 16 ? "Capricorn" : "Aquarius";
                 break;
             case 3:
-                zodiacSign = dateValue[0] < 11 ? "Aquarius" : "Pisces";
+                zodiacSign = day < 11 ? "Aquarius" : "Pisces";
                 break;
             case 4:
-                zodiacSign = dateValue[0] < 18 ? "Pisces" : "Aries";
+                zodiacSign = day < 18 ? "Pisces" : "Aries";
                 break;
             case 5:
-                zodiacSign = dateValue[0] < 13 ? "Aries" : "Taurus";
+                zodiacSign = day < 13 ? "Aries" : "Taurus";
                 break;
             case 6:
-                zodiacSign = dateValue[0] < 21 ? "Taurus" : "Gemini";
+                zodiacSign = day < 21 ? "Taurus" : "Gemini";
                 break;
             case 7:
-                zodiacSign = dateValue[0] < 20 ? "Gemini" : "Cancer";
+                zodiacSign = day < 20 ? "Gemini" : "Cancer";
                 break;
             case 8:
-                zodiacSign = dateValue[0] < 10 ? "Cancer" : "Leo";
+                zodiacSign = day < 10 ? "Cancer" : "Leo";
                 break;
             case 9:
-                zodiacSign = dateValue[0] < 16 ? "Leo" : "Virgo";
+                zodiacSign = day < 16 ? "Leo" : "Virgo";
                 break;
             case 10:
-                zodiacSign = dateValue[0] < 30 ? "Virgo" : "Libra";
+                zodiacSign = day < 30 ? "Virgo" : "Libra";
                 break;
             case 11:
-                if (dateValue[0] < 23) {
+                if (day < 23) {
                     zodiacSign = "Libra";
-                } else if (dateValue[0] < 29) {
+                } else if (day < 29) {
                     zodiacSign = "Scorpio";
                 } else {
                     zodiacSign = "Ophiuchus";
                 }
                 break;
             case 12:
-                zodiacSign = dateValue[0] < 17 ? "Ophiuchus" : "Sagittarius";
+                zodiacSign = day < 17 ? "Ophiuchus" : "Sagittarius";
                 break;
             default:
                 break;
@@ -244,7 +246,11 @@ public class HomeworkL5 {
             try {
                 dateValue[0] = Integer.parseInt(processedEnteredCharacters[0]);
                 dateValue[1] = Integer.parseInt(processedEnteredCharacters[1]);
-                checkDateValidation(dateValue);
+                if (!isDateValid(dateValue)) {
+                    dateValue[0] = 0;
+                    dateValue[1] = 0;
+                    giveErrorInputMessage("Invalid date");
+                }
             } catch (Exception e) {
                 giveErrorInputMessage(e.getMessage());
             }
@@ -255,12 +261,15 @@ public class HomeworkL5 {
     /**
      * The method verifies the date
      */
-    public static void checkDateValidation(int[] dateValue) {
-        if (dateValue[0] < 1 || dateValue[0] > 31 || dateValue[1] < 1 || dateValue[1] > 12) {
-            dateValue[0] = 0;
-            dateValue[1] = 0;
-            giveErrorInputMessage("Impossible date");
-        }
+    public static boolean isDateValid(int[] dateValue) {
+        int day = dateValue[0];
+        int mounts = dateValue[1];
+        return switch (mounts) {
+            case 1, 3, 5, 7, 8, 10, 12 -> day >= 1 && day <= 31;
+            case 4, 6, 9, 11 -> day >= 1 && day <= 30;
+            case 2 -> day >= 1 && day <= 29;
+            default -> false;
+        };
     }
 
     /**
