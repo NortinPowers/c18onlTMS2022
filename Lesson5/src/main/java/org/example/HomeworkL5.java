@@ -442,7 +442,7 @@ public class HomeworkL5 {
         int[] mass = new int[12];
         fillsArray(mass, 16);
         System.out.println("Created array: " + Arrays.toString(mass));
-        int[] requiredInts = getRequiredInts(mass);
+        int[] requiredInts = getArrayLastMaxElementValueIndex(mass);
         System.out.println("The maximum element is " + requiredInts[0] + ", the index of its last " +
                 "appearance in the array = " + requiredInts[1]);
     }
@@ -450,12 +450,12 @@ public class HomeworkL5 {
     /**
      * The method return array with the value and the last index of the maximum element of the array
      */
-    public static int[] getRequiredInts(int[] mass) {
+    public static int[] getArrayLastMaxElementValueIndex(int[] mass) {
         int[] result = new int[2];
-        int tempMax = mass[mass.length - 1];
+        int tempMax = mass[0];
         int tempMaxIndex = 0;
-        for (int i = mass.length - 2; i > -1; i--) {
-            if (mass[i] > tempMax) {
+        for (int i = 1; i < mass.length; i++) {
+            if (mass[i] >= tempMax) {
                 tempMax = mass[i];
                 tempMaxIndex = i;
             }
@@ -505,7 +505,7 @@ public class HomeworkL5 {
      */
     private static void swapMaxElementIndex(int[] array) {
         int temp = array[0];
-        int[] requiredInts = getRequiredInts(array);
+        int[] requiredInts = getArrayLastMaxElementValueIndex(array);
         array[0] = requiredInts[0];
         array[requiredInts[1]] = temp;
     }

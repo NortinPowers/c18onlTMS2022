@@ -97,8 +97,8 @@ class HomeworkL5Test {
 
     @Test
     void getRequiredInts() {
-        Assertions.assertArrayEquals(new int[]{5, 4}, HomeworkL5.getRequiredInts(new int[]{5, 4, 3, 2, 5, 3}));
-        Assertions.assertArrayEquals(new int[]{62, 9}, HomeworkL5.getRequiredInts(new int[]{3, 4, 5, 62, 7, 8, 4, -5, 7, 62, 5, 1}));
+        Assertions.assertArrayEquals(new int[]{5, 4}, HomeworkL5.getArrayLastMaxElementValueIndex(new int[]{5, 4, 3, 2, 5, 3}));
+        Assertions.assertArrayEquals(new int[]{62, 9}, HomeworkL5.getArrayLastMaxElementValueIndex(new int[]{3, 4, 5, 62, 7, 8, 4, -5, 7, 62, 5, 1}));
     }
 
     @Test
