@@ -3,6 +3,7 @@ package org.example;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 class HomeworkL5Test {
@@ -92,7 +93,7 @@ class HomeworkL5Test {
     @Test
     void convertsToString() {
         Assertions.assertEquals(" *  * ", HomeworkL5.convertsToString(new String[]{"*", "*"}));
-        Assertions.assertEquals(" 2  2 ", HomeworkL5.convertsToString(new int[]{2, 2}));
+        Assertions.assertEquals(" 2  2 ", HomeworkL5.convertsToString(Arrays.stream(new int[]{2, 2}).boxed().toArray(Integer[]::new)));
     }
 
     @Test

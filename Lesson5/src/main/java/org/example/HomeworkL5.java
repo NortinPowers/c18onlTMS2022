@@ -39,7 +39,7 @@ public class HomeworkL5 {
 //        Если число равно 1, выводим на консоль “Понедельник”, 2 –”Вторник” и так далее.
 //        Если 6 или 7 – “Выходной”.
     public static void giveDayInfo() {
-        int day = random.nextInt(6) + 1;
+        int day = random.nextInt(7) + 1;
         showDayName(day);
     }
 
@@ -372,7 +372,7 @@ public class HomeworkL5 {
     /**
      * The convenient method toString
      */
-    public static String convertsToString(String[] a) {
+    public static String convertsToStringString(String[] a) {
         if (a == null) {
             return "null";
         }
@@ -594,14 +594,15 @@ public class HomeworkL5 {
      */
     private static void printsArray(int[][] matrix) {
         for (int[] array : matrix) {
-            System.out.println(convertsToString(array));
+            Integer[] what = Arrays.stream(array).boxed().toArray(Integer[]::new);
+            System.out.println(convertsToString(what));
         }
     }
 
     /**
      * The convenient method toString
      */
-    public static String convertsToString(int[] a) {
+    public static String convertsToStringInt(int[] a) {
         if (a == null) {
             return "null";
         }
@@ -787,5 +788,27 @@ public class HomeworkL5 {
             }
         }
         System.out.println("Max sum = " + maxSum + " " + "( i: " + maxSumIndex[0] + " j: " + maxSumIndex[1] + " )");
+    }
+
+    /**
+     * The convenient method toString
+     */
+    public static String convertsToString(Object[] a) {
+        if (a == null) {
+            return "null";
+        }
+        int iMax = a.length - 1;
+        if (iMax == -1) {
+            return "";
+        }
+        StringBuilder b = new StringBuilder();
+        b.append(' ');
+        for (int i = 0; ; i++) {
+            b.append(a[i]);
+            if (i == iMax) {
+                return b.append(' ').toString();
+            }
+            b.append("  ");
+        }
     }
 }
