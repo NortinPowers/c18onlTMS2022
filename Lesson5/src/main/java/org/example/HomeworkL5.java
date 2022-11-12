@@ -239,18 +239,16 @@ public class HomeworkL5 {
      */
     public static int[] getIntsDateArray(Scanner scanner) {
         int[] dateValue = new int[2];
-        String[] processedEnteredCharacters;
         do {
-            processedEnteredCharacters = scanner.nextLine().split("\\.");
+            String[] processedEnteredCharacters = scanner.nextLine().split("\\.");
             try {
                 dateValue[0] = Integer.parseInt(processedEnteredCharacters[0]);
                 dateValue[1] = Integer.parseInt(processedEnteredCharacters[1]);
                 checkDateValidation(dateValue);
             } catch (Exception e) {
-                giveErrorInputMessage();
+                giveErrorInputMessage(e.getMessage());
             }
-        }
-        while (dateValue[0] == 0 || dateValue[1] == 0);
+        } while (dateValue[0] == 0 || dateValue[1] == 0);
         return dateValue;
     }
 
@@ -261,15 +259,15 @@ public class HomeworkL5 {
         if (dateValue[0] < 1 || dateValue[0] > 31 || dateValue[1] < 1 || dateValue[1] > 12) {
             dateValue[0] = 0;
             dateValue[1] = 0;
-            giveErrorInputMessage();
+            giveErrorInputMessage("Impossible date");
         }
     }
 
     /**
      * The method shows a message if an error was made when entering the date
      */
-    public static void giveErrorInputMessage() {
-        System.out.println("Repeat the input according to the format dd.mm");
+    public static void giveErrorInputMessage(String exception) {
+        System.out.println("Repeat the input according to the format dd.mm" + " (" + exception + ")");
     }
 
 //        5) Напишите реализацию метода sum(int a, int b), вычисляющий a*b, не пользуясь операцией
