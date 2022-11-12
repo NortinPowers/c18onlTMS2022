@@ -322,10 +322,13 @@ public class HomeworkL5 {
 //            * *        * *
 //              *        *
     public static void realizeTriangleDrawing(String method) {
-        if (hasNoRealization(method)) return;
-        String[][] asterisks = new String[4][4];
-        fillsArray(method, asterisks);
-        printsArray(asterisks);
+        if (hasNoRealization(method)) {
+            String[][] asterisks = new String[4][4];
+            fillsArray(method, asterisks);
+            printsArray(asterisks);
+        } else {
+            System.out.println("No such method was found\n       ‾\\_O_/‾");
+        }
     }
 
     /**
@@ -363,11 +366,7 @@ public class HomeworkL5 {
      * The method for checking acceptable task conditions
      */
     public static boolean hasNoRealization(String method) {
-        if (!method.equals("a") && !method.equals("b") && !method.equals("c") && !method.equals("d")) {
-            System.out.println("no such method was found\n       ‾\\_O_/‾");
-            return true;
-        }
-        return false;
+        return method.equals("a") || method.equals("b") || method.equals("c") || method.equals("d");
     }
 
     /**

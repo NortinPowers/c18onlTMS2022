@@ -81,12 +81,12 @@ class HomeworkL5Test {
 
     @Test
     void hasNoRealization() {
-        Assertions.assertFalse(HomeworkL5.hasNoRealization("a"));
-        Assertions.assertFalse(HomeworkL5.hasNoRealization("b"));
-        Assertions.assertFalse(HomeworkL5.hasNoRealization("c"));
-        Assertions.assertFalse(HomeworkL5.hasNoRealization("d"));
-        Assertions.assertTrue(HomeworkL5.hasNoRealization("y"));
-        Assertions.assertTrue(HomeworkL5.hasNoRealization(""));
+        Assertions.assertTrue(HomeworkL5.hasNoRealization("a"));
+        Assertions.assertTrue(HomeworkL5.hasNoRealization("b"));
+        Assertions.assertTrue(HomeworkL5.hasNoRealization("c"));
+        Assertions.assertTrue(HomeworkL5.hasNoRealization("d"));
+        Assertions.assertFalse(HomeworkL5.hasNoRealization("y"));
+        Assertions.assertFalse(HomeworkL5.hasNoRealization(""));
     }
 
     @Test
