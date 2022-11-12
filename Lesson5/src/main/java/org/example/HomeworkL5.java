@@ -9,7 +9,7 @@ public class HomeworkL5 {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-       /* giveDayInfo();
+        giveDayInfo();
         giveAmoebasQuantityInfo();
         calculateSumOfDiagonalElements();
         printMatrix();
@@ -26,11 +26,11 @@ public class HomeworkL5 {
         changeArrayElement();
         changeArrayMaxElementIndex();
         comparisonArray(new int[]{0, 3, 46, 3, 2, 1, 2});
-        comparisonArray(new int[]{0, 34, 46, 31, 20, 1, 28});*/
+        comparisonArray(new int[]{0, 34, 46, 31, 20, 1, 28});
         doTransposeMatrix();
-    /*    calculateSumOfDiagonalElements();
+        calculateSumOfDiagonalElements();
         printMatrix();
-        giveMaxSumThreeElementsMatrixString();*/
+        giveMaxSumThreeElementsMatrixString();
     }
 
     //        Задачи:
@@ -376,12 +376,10 @@ public class HomeworkL5 {
         if (a == null) {
             return "null";
         }
-
         int iMax = a.length - 1;
         if (iMax == -1) {
             return "";
         }
-
         StringBuilder b = new StringBuilder();
         b.append(' ');
         for (int i = 0; ; i++) {
@@ -391,9 +389,7 @@ public class HomeworkL5 {
             }
             b.append("  ");
         }
-
     }
-
 
 //        7) Создайте массив из всех нечётных чисел от 1 до 100, выведите его на экран в строку,
 //        а затем этот же массив выведите на экран тоже в строку, но в обратном порядке (99 97 95 93 ... 7 5 3 1).
@@ -432,7 +428,6 @@ public class HomeworkL5 {
         } while (element < 100);
         return index;
     }
-
 
 //        8) Создайте массив из int[] mass = new int[12]; Рандомно заполните его значениями от 0 до 15.
 //        Определите какой элемент является в этом массиве максимальным и сообщите индекс его последнего вхождения в массив.
@@ -482,7 +477,6 @@ public class HomeworkL5 {
         int[] array = new int[20];
         fillsArray(array, 21);
         chandeOddIndexElementChange(array);
-
     }
 
     private static void chandeOddIndexElementChange(int[] array) {
@@ -520,7 +514,6 @@ public class HomeworkL5 {
         int[] similarity = new int[array.length];
         int similarityIndex = getSimilarityIndex(array, similarity);
         displaysIdenticalElements(similarity, similarityIndex);
-
     }
 
     public static int getSimilarityIndex(int[] array, int[] similarity) {
@@ -571,7 +564,6 @@ public class HomeworkL5 {
         int[][] matrix = new int[size][size];
         doFilling(matrix, valueRange);
         return matrix;
-
     }
 
     /**
@@ -626,7 +618,6 @@ public class HomeworkL5 {
             }
             b.append("  ");
         }
-
     }
 
     /**
