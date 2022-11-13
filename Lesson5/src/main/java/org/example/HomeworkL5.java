@@ -336,7 +336,7 @@ public class HomeworkL5 {
      */
     private static void printsArray(String[][] asterisks) {
         for (String[] array : asterisks) {
-            System.out.println(convertsToString(array));
+            System.out.println(Utils.convertsToString(array));
         }
     }
 
@@ -367,28 +367,6 @@ public class HomeworkL5 {
      */
     public static boolean hasNoRealization(String method) {
         return method.equals("a") || method.equals("b") || method.equals("c") || method.equals("d");
-    }
-
-    /**
-     * The convenient method toString
-     */
-    public static String convertsToStringString(String[] a) {
-        if (a == null) {
-            return "null";
-        }
-        int iMax = a.length - 1;
-        if (iMax == -1) {
-            return "";
-        }
-        StringBuilder b = new StringBuilder();
-        b.append(' ');
-        for (int i = 0; ; i++) {
-            b.append(a[i]);
-            if (i == iMax) {
-                return b.append(' ').toString();
-            }
-            b.append("  ");
-        }
     }
 
 //        7) Создайте массив из всех нечётных чисел от 1 до 100, выведите его на экран в строку,
@@ -595,29 +573,8 @@ public class HomeworkL5 {
     private static void printsArray(int[][] matrix) {
         for (int[] array : matrix) {
             Integer[] what = Arrays.stream(array).boxed().toArray(Integer[]::new);
-            System.out.println(convertsToString(what));
-        }
-    }
-
-    /**
-     * The convenient method toString
-     */
-    public static String convertsToStringInt(int[] a) {
-        if (a == null) {
-            return "null";
-        }
-        int iMax = a.length - 1;
-        if (iMax == -1) {
-            return "";
-        }
-        StringBuilder b = new StringBuilder();
-        b.append(' ');
-        for (int i = 0; ; i++) {
-            b.append(a[i]);
-            if (i == iMax) {
-                return b.append(' ').toString();
-            }
-            b.append("  ");
+            //System.out.println(convertsToString(what));
+            System.out.println(Utils.convertsToString(what));
         }
     }
 
@@ -790,25 +747,4 @@ public class HomeworkL5 {
         System.out.println("Max sum = " + maxSum + " " + "( i: " + maxSumIndex[0] + " j: " + maxSumIndex[1] + " )");
     }
 
-    /**
-     * The convenient method toString
-     */
-    public static String convertsToString(Object[] a) {
-        if (a == null) {
-            return "null";
-        }
-        int iMax = a.length - 1;
-        if (iMax == -1) {
-            return "";
-        }
-        StringBuilder b = new StringBuilder();
-        b.append(' ');
-        for (int i = 0; ; i++) {
-            b.append(a[i]);
-            if (i == iMax) {
-                return b.append(' ').toString();
-            }
-            b.append("  ");
-        }
-    }
 }

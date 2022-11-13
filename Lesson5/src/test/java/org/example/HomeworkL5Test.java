@@ -92,8 +92,8 @@ class HomeworkL5Test {
 
     @Test
     void convertsToString() {
-        Assertions.assertEquals(" *  * ", HomeworkL5.convertsToString(new String[]{"*", "*"}));
-        Assertions.assertEquals(" 2  2 ", HomeworkL5.convertsToString(Arrays.stream(new int[]{2, 2}).boxed().toArray(Integer[]::new)));
+        Assertions.assertEquals(" *  * ", Utils.convertsToString(new String[]{"*", "*"}));
+        Assertions.assertEquals(" 2  2 ", Utils.convertsToString(Arrays.stream(new int[]{2, 2}).boxed().toArray(Integer[]::new)));
     }
 
     @Test
