@@ -572,9 +572,8 @@ public class HomeworkL5 {
      */
     private static void printsArray(int[][] matrix) {
         for (int[] array : matrix) {
-            Integer[] what = Arrays.stream(array).boxed().toArray(Integer[]::new);
-            //System.out.println(convertsToString(what));
-            System.out.println(Utils.convertsToString(what));
+            Integer[] arrayReferenceType = Arrays.stream(array).boxed().toArray(Integer[]::new);
+            System.out.println(Utils.convertsToString(arrayReferenceType));
         }
     }
 
