@@ -3,6 +3,7 @@ package org.example;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 class HomeworkL5Test {
@@ -64,11 +65,11 @@ class HomeworkL5Test {
     }
 
     @Test
-    void ancientMultiplication() {
-        Assertions.assertEquals(40, HomeworkL5.ancientMultiplication(20, 2));
-        Assertions.assertEquals(-2, HomeworkL5.ancientMultiplication(-1, 2));
-        Assertions.assertEquals(0, HomeworkL5.ancientMultiplication(20, 0));
-        Assertions.assertEquals(-5, HomeworkL5.ancientMultiplication(5, -1));
+    void performAncientMultiplication() {
+        Assertions.assertEquals(40, HomeworkL5.performAncientMultiplication(20, 2));
+        Assertions.assertEquals(-2, HomeworkL5.performAncientMultiplication(-1, 2));
+        Assertions.assertEquals(0, HomeworkL5.performAncientMultiplication(20, 0));
+        Assertions.assertEquals(-5, HomeworkL5.performAncientMultiplication(5, -1));
     }
 
     @Test
@@ -81,24 +82,24 @@ class HomeworkL5Test {
 
     @Test
     void hasNoRealization() {
-        Assertions.assertFalse(HomeworkL5.hasNoRealization("a"));
-        Assertions.assertFalse(HomeworkL5.hasNoRealization("b"));
-        Assertions.assertFalse(HomeworkL5.hasNoRealization("c"));
-        Assertions.assertFalse(HomeworkL5.hasNoRealization("d"));
-        Assertions.assertTrue(HomeworkL5.hasNoRealization("y"));
-        Assertions.assertTrue(HomeworkL5.hasNoRealization(""));
+        Assertions.assertTrue(HomeworkL5.hasNoRealization("a"));
+        Assertions.assertTrue(HomeworkL5.hasNoRealization("b"));
+        Assertions.assertTrue(HomeworkL5.hasNoRealization("c"));
+        Assertions.assertTrue(HomeworkL5.hasNoRealization("d"));
+        Assertions.assertFalse(HomeworkL5.hasNoRealization("y"));
+        Assertions.assertFalse(HomeworkL5.hasNoRealization(""));
     }
 
     @Test
-    void testToString() {
-        Assertions.assertEquals(" *  * ", HomeworkL5.toString(new String[]{"*", "*"}));
-        Assertions.assertEquals(" 2  2 ", HomeworkL5.toString(new int[]{2, 2}));
+    void convertsToString() {
+        Assertions.assertEquals(" *  * ", HomeworkL5.convertsToString(new String[]{"*", "*"}));
+        Assertions.assertEquals(" 2  2 ", HomeworkL5.convertsToString(Arrays.stream(new int[]{2, 2}).boxed().toArray(Integer[]::new)));
     }
 
     @Test
     void getRequiredInts() {
-        Assertions.assertArrayEquals(new int[]{5, 4}, HomeworkL5.getRequiredInts(new int[]{5, 4, 3, 2, 5, 3}));
-        Assertions.assertArrayEquals(new int[]{62, 9}, HomeworkL5.getRequiredInts(new int[]{3, 4, 5, 62, 7, 8, 4, -5, 7, 62, 5, 1}));
+        Assertions.assertArrayEquals(new int[]{5, 4}, HomeworkL5.getArrayLastMaxElementValueIndex(new int[]{5, 4, 3, 2, 5, 3}));
+        Assertions.assertArrayEquals(new int[]{62, 9}, HomeworkL5.getArrayLastMaxElementValueIndex(new int[]{3, 4, 5, 62, 7, 8, 4, -5, 7, 62, 5, 1}));
     }
 
     @Test
@@ -116,5 +117,12 @@ class HomeworkL5Test {
     void getDiagonalMatrixSum() {
         Assertions.assertEquals(5, HomeworkL5.getDiagonalMatrixSum(new int[][]{{1, 0, 3}, {1, 3, 3}, {1, 0, 1}}));
         Assertions.assertEquals(0, HomeworkL5.getDiagonalMatrixSum(new int[][]{{0, 2}, {1, 0}}));
+    }
+
+    @Test
+    void isDateValidTest() {
+        Assertions.assertTrue(HomeworkL5.isDateValid(new int[]{31, 1}));
+        Assertions.assertTrue(HomeworkL5.isDateValid(new int[]{12, 5}));
+        Assertions.assertFalse(HomeworkL5.isDateValid(new int[]{30, 0}));
     }
 }
