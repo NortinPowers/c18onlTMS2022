@@ -20,6 +20,10 @@ public class Computer {
         return computer.fullWorkCycle;
     }
 
+    public static boolean isComputerStillWorking(Computer computer) {
+        return computer.fullWorkCycle > 0;
+    }
+
     public static void getComputerInfo(Computer computer) {
         System.out.println("Details of this computer:\n Processor: " + computer.processor + "\n RAM: " + computer.ram
                 + "\n Hard drive: " + computer.hardDrive + "\n Resource of full working cycles: " + computer.fullWorkCycle);
