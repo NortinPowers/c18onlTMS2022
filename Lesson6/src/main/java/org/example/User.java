@@ -19,11 +19,11 @@ public class User {
         System.out.println(getFullName(user) + " (sex: " + user.sex + " age: " + user.age + ")");
     }
 
-    public User(String name) {
+    private User(String name) {
         this.name = name;
     }
 
-    public User(String name, String surname) {
+    private User(String name, String surname) {
         this(name);
         this.surname = surname;
     }
