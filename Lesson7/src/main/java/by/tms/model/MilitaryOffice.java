@@ -1,5 +1,7 @@
 package by.tms.model;
 
+import by.tms.utils.Constants;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class MilitaryOffice {
         List<Person> sufferersList = new LinkedList<>();
         for (int i = 0; i < personRegistry.getPeople().size(); i++) {
             Person person = personRegistry.getPeople().get(i);
-            if (person.getAge() > 17 && person.getAge() < 27 && person.getSex().equals("men")) {
+            if (person.getAge() > 17 && person.getAge() < 27 && person.getGender().equals(Constants.MEN)) {
                 sufferersList.add(person);
             }
         }
@@ -41,7 +43,7 @@ public class MilitaryOffice {
         List<Person> sufferersFromMinskList = getSufferersName();
         for (int i = 0; i < getSufferersName().size(); i++) {
             Person person = getSufferersName().get(i);
-            if (!person.getAddress().getCity().equals("Minsk")) {
+            if (!person.getAddress().getCity().equals("Minsk") || !person.getAddress().getCity().equals("minsk")) {
                 sufferersFromMinskList.remove(person);
             }
         }
@@ -69,7 +71,7 @@ public class MilitaryOffice {
         List<Person> sufferersAmongAleksandrs = getSufferersName();
         for (int i = 0; i < getSufferersName().size(); i++) {
             Person person = getSufferersName().get(i);
-            if (!person.getName().equals("Aleksandr")) {
+            if (!person.getName().equals("Aleksandr") || !person.getName().equals("aleksandr")) {
                 sufferersAmongAleksandrs.remove(person);
             }
         }
