@@ -9,6 +9,10 @@ public class Computer {
     private String hardDrive;
     private int fullWorkCycle;
 
+    public void setFullWorkCycle(int fullWorkCycle) {
+        this.fullWorkCycle = fullWorkCycle;
+    }
+
     public Computer(String processor, String ram, String hardDrive, int fullWorkCycle) {
         this.processor = processor;
         this.ram = ram;
