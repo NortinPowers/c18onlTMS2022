@@ -17,6 +17,7 @@
         <module>Lesson6</module>
         <module>Lesson7</module>
         <module>tictactoe</module>
+        <module>Lesson8</module>
     </modules>
 
     <properties>
