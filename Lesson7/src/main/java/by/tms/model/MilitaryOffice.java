@@ -11,6 +11,9 @@ public class MilitaryOffice {
         this.personRegistry = personRegistry;
     }
 
+    /**
+     * Method returns List of recruits according to the conditions
+     */
     public List<Person> getSufferersName() {
         List<Person> sufferersList = new LinkedList<>();
         for (int i = 0; i < personRegistry.getPeople().size(); i++) {
@@ -22,12 +25,18 @@ public class MilitaryOffice {
         return sufferersList;
     }
 
+    /**
+     * Method outputs information about conscripts from the list
+     */
     public void getPeopleInfo(List<Person> personList) {
         for (Person person : personList) {
             System.out.println(person);
         }
     }
 
+    /**
+     * Method returns List of recruits from Minsk
+     */
     public List<Person> getSufferersNameFromMinsk() {
         List<Person> sufferersFromMinskList = getSufferersName();
         for (int i = 0; i < getSufferersName().size(); i++) {
@@ -39,6 +48,9 @@ public class MilitaryOffice {
         return sufferersFromMinskList;
     }
 
+    /**
+     * Method returns List of recruits older than 25 and younger than 28
+     */
     public List<Person> getElderlySufferersName() {
         List<Person> sufferersElderlyList = getSufferersName();
         for (int i = 0; i < getSufferersName().size(); i++) {
@@ -50,6 +62,9 @@ public class MilitaryOffice {
         return sufferersElderlyList;
     }
 
+    /**
+     * Method returns List of recruits with the name Alexander
+     */
     public List<Person> getSufferersAmongAleksandrs() {
         List<Person> sufferersAmongAleksandrs = getSufferersName();
         for (int i = 0; i < getSufferersName().size(); i++) {
@@ -60,6 +75,5 @@ public class MilitaryOffice {
         }
         return sufferersAmongAleksandrs;
     }
-
 
 }
