@@ -1,29 +1,29 @@
 package org.example;
 
 public class User {
-    String name;
-    String surname;
-    int age;
-    String sex;
+    private String name;
+    private String surname;
+    private int age;
+    private String sex;
 
-    public static String getFullName(User user) {
-        return "User full name is " + user.name + " " + user.surname;
+    public String getFullName() {
+        return "User full name is " + this.name + " " + this.surname;
     }
 
     @Deprecated
-    public static int IncreaseAge(User user) {
-        return ++user.age;
+    public int IncreaseAge() {
+        return ++this.age;
     }
 
-    public static void getUserInfo(User user) {
-        System.out.println(getFullName(user) + " (sex: " + user.sex + " age: " + user.age + ")");
+    public String getUserInfo() {
+        return getFullName() + " (sex: " + this.sex + " age: " + this.age + ")";
     }
 
-    private User(String name) {
+    public User(String name) {
         this.name = name;
     }
 
-    private User(String name, String surname) {
+    public User(String name, String surname) {
         this(name);
         this.surname = surname;
     }
@@ -35,5 +35,15 @@ public class User {
         this(name, surname);
         this.age = age;
         this.sex = sex;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", age=" + age +
+                ", sex='" + sex + '\'' +
+                '}';
     }
 }
