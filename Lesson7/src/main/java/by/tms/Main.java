@@ -6,6 +6,8 @@ import by.tms.model.Person;
 import by.tms.model.PersonRegistry;
 import by.tms.utils.Constants;
 
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         PersonRegistry personRegistry = new PersonRegistry();
@@ -23,7 +25,7 @@ public class Main {
 
         MilitaryOffice militaryOffice = new MilitaryOffice(personRegistry);
 
-        if (militaryOffice.getSufferersName().size() != 0) {
+        if (isNotEmptyPersonList(militaryOffice.getSufferersName())) {
             System.out.println("Suitable for military service:");
             militaryOffice.getPeopleInfo(militaryOffice.getSufferersName());
         } else {
@@ -32,7 +34,7 @@ public class Main {
 
         System.out.println();
 
-        if (militaryOffice.getSufferersNameFromMinsk().size() != 0) {
+        if (isNotEmptyPersonList(militaryOffice.getSufferersNameFromMinsk())) {
             System.out.println("Suitable for military service from Minsk:");
             militaryOffice.getPeopleInfo(militaryOffice.getSufferersNameFromMinsk());
         } else {
@@ -41,7 +43,7 @@ public class Main {
 
         System.out.println();
 
-        if (militaryOffice.getElderlySufferersName().size() != 0) {
+        if (isNotEmptyPersonList(militaryOffice.getElderlySufferersName())) {
             System.out.println("Suitable for military service at the age of 25 to 28 years:");
             militaryOffice.getPeopleInfo(militaryOffice.getElderlySufferersName());
         } else {
@@ -50,11 +52,18 @@ public class Main {
 
         System.out.println();
 
-        if (militaryOffice.getSufferersAmongAleksandrs().size() != 0) {
+        if (isNotEmptyPersonList(militaryOffice.getSufferersAmongAleksandrs())) {
             System.out.println("Aleksandrs suitable for military service :");
             militaryOffice.getPeopleInfo(militaryOffice.getSufferersAmongAleksandrs());
         } else {
             System.out.println("There are no Aleksandrs suitable for military service.");
         }
+    }
+
+    /**
+     * Method returns TRUE if the list is not empty
+     */
+    public static boolean isNotEmptyPersonList(List<Person> list) {
+        return list.size() > 0;
     }
 }
