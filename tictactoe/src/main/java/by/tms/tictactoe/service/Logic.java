@@ -20,7 +20,6 @@ public class Logic {
                 return true;
             }
         }
-        //реализовать логику по проверке, что 3 крестика в одной строке или столбце или по диагонали
         if (table[0][0].hasMarkX() && table[1][1].hasMarkX() && table[2][2].hasMarkX()) {
             return true;
         } else {
@@ -44,7 +43,6 @@ public class Logic {
         } else {
             return table[0][2].hasMarkO() && table[1][1].hasMarkO() && table[2][0].hasMarkO();
         }
-        //реализовать логику по проверке, что 3 нолика в одной строке или столбце или по диагонали
     }
 
     /**

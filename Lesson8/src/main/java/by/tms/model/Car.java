@@ -65,6 +65,7 @@ public class Car {
         if (started) {
             System.out.println("the car is going");
             kilometerCounter += 20;
+//            fuelTank.getFuelLimit() -= 10;
         } else {
             System.out.println("the car is not started");
         }

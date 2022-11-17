@@ -1,4 +1,4 @@
-package org.example;
+package by.tms;
 
 public class User {
     private String name;
