@@ -734,7 +734,7 @@ public class HomeworkL5 {
         int tempSum;
         int[] maxSumIndex = new int[2];
         for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix.length - 3; j++) {
+            for (int j = 0; j < matrix.length - 2; j++) {
                 tempSum = matrix[i][j] + matrix[i][j + 1] + matrix[i][j + 2];
                 if (maxSum < tempSum) {
                     maxSum = tempSum;

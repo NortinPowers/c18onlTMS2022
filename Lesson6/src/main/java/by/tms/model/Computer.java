@@ -4,10 +4,14 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Computer {
-    String processor;
-    String ram;
-    String hardDrive;
-    int fullWorkCycle;
+    private String processor;
+    private String ram;
+    private String hardDrive;
+    private int fullWorkCycle;
+
+    public void setFullWorkCycle(int fullWorkCycle) {
+        this.fullWorkCycle = fullWorkCycle;
+    }
 
     public Computer(String processor, String ram, String hardDrive, int fullWorkCycle) {
         this.processor = processor;
@@ -16,40 +20,40 @@ public class Computer {
         this.fullWorkCycle = fullWorkCycle;
     }
 
-    public static int getFullWorkCycle(Computer computer) {
-        return computer.fullWorkCycle;
+    public boolean isComputerStillWorking() {
+        return this.fullWorkCycle > 0;
     }
 
-    public static boolean isComputerStillWorking(Computer computer) {
-        return computer.fullWorkCycle > 0;
+    public int getFullWorkCycle() {
+        return this.fullWorkCycle;
     }
 
-    public static void getComputerInfo(Computer computer) {
-        System.out.println("Details of this computer:\n Processor: " + computer.processor + "\n RAM: " + computer.ram
-                + "\n Hard drive: " + computer.hardDrive + "\n Resource of full working cycles: " + computer.fullWorkCycle);
+    public String getComputerInfo() {
+        return "Details of this computer:\n Processor: " + this.processor + "\n RAM: " + this.ram
+                + "\n Hard drive: " + this.hardDrive + "\n Resource of full working cycles: " + this.fullWorkCycle;
     }
 
-    public static void on(Computer computer) {
-        if (computer.fullWorkCycle > 0) {
-            givesIncorrectInputInfo();
+    public String on() {
+        if (this.fullWorkCycle > 0) {
+            System.out.println(givesIncorrectInputInfo());
             int value = getEnteredValue();
             if (checkFailure(value)) {
-                System.out.println("Computer turn off");
+                return "Computer turn off";
             } else {
-                System.out.println("Computer burns down");
-                computer.fullWorkCycle = 0;
+                this.fullWorkCycle = 0;
+                return "Computer burns down";
             }
         } else {
-            System.out.println("Computer burned down");
+            return "Computer burned down";
         }
     }
 
-    public static boolean checkFailure(int value) {
+    public boolean checkFailure(int value) {
         Random random = new Random();
         return value == random.nextInt(2);
     }
 
-    public static int getEnteredValue() {
+    public int getEnteredValue() {
         Scanner scanner = new Scanner(System.in);
         int value = -1;
         do {
@@ -68,20 +72,20 @@ public class Computer {
         return value;
     }
 
-    public static boolean getValidationEnteredValue(int entValue) {
+    public boolean getValidationEnteredValue(int entValue) {
         return entValue == 0 || entValue == 1;
     }
 
-    public static void givesIncorrectInputInfo() {
-        System.out.println("Attention! Enter 0 or 1");
+    public String givesIncorrectInputInfo() {
+        return "Attention! Enter 0 or 1";
     }
 
-    public static void off(Computer computer) {
-        if (computer.fullWorkCycle > 0) {
-            System.out.println("Computer shuts down");
-            computer.fullWorkCycle--;
+    public String off() {
+        if (this.fullWorkCycle > 0) {
+            this.fullWorkCycle--;
+            return "Computer shuts down";
         } else {
-            System.out.println("Computer burned down");
+            return "Computer burned down";
         }
     }
 }
