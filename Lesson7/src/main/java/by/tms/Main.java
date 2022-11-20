@@ -24,7 +24,7 @@ public class Main {
         personRegistry.getPeople().add(new Person("Alex", 26, Constants.MEN, new Address("Belarus", "Minsk")));
         personRegistry.getPeople().add(new Person("Aleksandra", 21, Constants.WOMEN, new Address("Belarus", "Minsk")));
 
-//        personRegistry.getPeople().add(person.createNewPerson());
+        personRegistry.getPeople().add(person.createNewPerson());
 
         MilitaryOffice militaryOffice = new MilitaryOffice(personRegistry);
 
