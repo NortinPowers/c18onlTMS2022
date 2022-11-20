@@ -1,31 +1,20 @@
 package by.tms.model;
 
-  /*
- Напишите структуру классов и продемонстрируйте работу
- - Машина имеет двигатель, бензобак (реализуйте класс для каждой сущности).
- - Чтобы поехать, машину необходимо завести, т.е. включить двигатель.
- - Реализуйте методы включения машины, который в свою очередь включает её двигатель.
- - Реализуйте метод езды на машине (например просто печатаем на консоль, что машина поехала)
- - Если машина не заведена, ехать она не может.
- - Машину можно заглушить.
- - После каждой поездки считаем, что машина прошла фиксированное расстояние.
- - Реализовать возможность посмотреть, какое расстояние машина прошла за все время.
- - Чтобы создать машину обязательно нужно иметь двигатель и бензобак.
- - Марка машины, год выпуска, пройденное расстояние - не обязательны при создании машины и могут быть выставлены потом.
- (не обязательно задавать в конструкторе)
- - После создания поменять двигатель машине нельзя.
- - Чтобы машина завелась, у неё должно быть топливо в бензобаке, если топлива нет, машина не может завестись.
- - Машину можно дозаправить, можно проверить сколько топлива осталось.
- - Реализуйте пару полей для двигателя и бензобака, например: тип двигателя, общий объем бензобака,
- сколько бензина сейчас и т.д.
-     */
-
 public class Car {
-    private Engine engine;
-    private FuelTank fuelTank;
+    private final Engine engine;
+    private final FuelTank fuelTank;
     private boolean started;
     private String brand;
     private int productionYear;
+    private int kilometerCounter;
+
+    public Engine getEngine() {
+        return engine;
+    }
+
+    public FuelTank getFuelTank() {
+        return fuelTank;
+    }
 
     public int getProductionYear() {
         return productionYear;
@@ -52,30 +41,45 @@ public class Car {
         this.fuelTank = fuelTank;
     }
 
-    private int kilometerCounter;
-
     public boolean startCar() {
         if (fuelTank.getFuelLimit() > 0) {
+            engine.startEngine();
             started = true;
+        } else {
+            System.out.println("The car didn't start. Fill it with fuel");
         }
         return started;
     }
 
     public void goingCar() {
         if (started) {
-            System.out.println("the car is going");
+            System.out.println("The car is going");
             kilometerCounter += 20;
-//            fuelTank.getFuelLimit() -= 10;
+            if (fuelTank.getFuelLimit() >= 10) {
+                fuelTank.setFuelLimit(fuelTank.getFuelLimit() - 10);
+            } else {
+                fuelTank.setFuelLimit(0);
+                System.out.println("Fuel ran out before the end of the trip");
+            }
         } else {
-            System.out.println("the car is not started");
+            System.out.println("The car is not started");
         }
-
     }
 
     public boolean stopCar() {
+        engine.stopEngine();
         started = false;
         return started;
     }
 
-
+    @Override
+    public String toString() {
+        return "Car { " +
+                engine +
+                ", " + fuelTank +
+                ", brand: '" + brand + '\'' +
+                ", production year: " + productionYear +
+                ", kilometer counter: " + kilometerCounter +
+                " miles }";
+    }
 }

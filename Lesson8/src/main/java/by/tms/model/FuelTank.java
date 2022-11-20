@@ -2,7 +2,7 @@ package by.tms.model;
 
 public class FuelTank {
     private int fuelLimit;
-    private int fuelTankLimit;
+    private final int fuelTankLimit;
 
     public int getFuelLimit() {
         return fuelLimit;
@@ -13,12 +13,23 @@ public class FuelTank {
     }
 
     public int refuelingFuel(int fuelVolume) {
-        int fuelLevel = this.fuelLimit += fuelVolume;
-        if (fuelLevel > fuelTankLimit) {
-            System.out.println("some of the fuel did not fit into the fuel tank");
-            return fuelTankLimit;
-        } else {
-            return this.fuelLimit += fuelVolume;
+        fuelLimit += fuelVolume;
+        if (fuelVolume > fuelTankLimit - fuelLimit) {
+            System.out.println("Some of the fuel did not fit into the fuel tank");
+            fuelLimit = fuelTankLimit;
         }
+        return fuelLimit;
+    }
+
+    public FuelTank(int fuelTankLimit) {
+        this.fuelTankLimit = fuelTankLimit;
+    }
+
+    @Override
+    public String toString() {
+        return "Fuel Tank {" +
+                "fuel limit: " + fuelLimit +
+                " (fuel tank limit: " + fuelTankLimit +
+                ")}";
     }
 }

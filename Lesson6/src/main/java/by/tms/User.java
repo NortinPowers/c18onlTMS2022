@@ -11,7 +11,7 @@ public class User {
     }
 
     @Deprecated
-    public int IncreaseAge() {
+    public int increaseAge() {
         return ++this.age;
     }
 
