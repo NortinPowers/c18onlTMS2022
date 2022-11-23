@@ -24,7 +24,7 @@ public class MainFlower {
         Bouquet bouquetFive = flowerMarket.getBouquet(ROSE, ASTER, PEONY);
         System.out.println(bouquetFive);
         System.out.println("Bouquet cost is " + bouquetFive.calculatePrice());
-        System.out.println("Total flowers sold " + Flower.getFloverCount());
+        System.out.println("Total flowers sold " + Flower.getFlowerCount());
     }
 }
 
