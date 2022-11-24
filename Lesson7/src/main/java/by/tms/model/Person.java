@@ -57,7 +57,7 @@ public class Person {
         return "Person{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
-                ", sex='" + gender + '\'' +
+                ", gender='" + gender + '\'' +
                 ", address=" + address +
                 '}';
     }
@@ -82,6 +82,7 @@ public class Person {
         String country = scanner.next();
         System.out.println("enter the person's city of residence");
         String city = scanner.next();
+        scanner.close();
         return new Person(name, age, gender, new Address(country, city));
     }
 

@@ -41,14 +41,13 @@ public class Car {
         this.fuelTank = fuelTank;
     }
 
-    public boolean startCar() {
+    public void startCar() {
         if (fuelTank.getFuelLimit() > 0) {
             engine.startEngine();
             started = true;
         } else {
             System.out.println("The car didn't start. Fill it with fuel");
         }
-        return started;
     }
 
     public void goingCar() {
@@ -66,10 +65,9 @@ public class Car {
         }
     }
 
-    public boolean stopCar() {
+    public void stopCar() {
         engine.stopEngine();
         started = false;
-        return started;
     }
 
     @Override

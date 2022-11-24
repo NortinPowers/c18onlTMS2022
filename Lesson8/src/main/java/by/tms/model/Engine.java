@@ -5,12 +5,12 @@ public class Engine {
     private final String engineType;
     private boolean started;
 
-    public boolean startEngine() {
-        return started = true;
+    public void startEngine() {
+        started = true;
     }
 
-    public boolean stopEngine() {
-        return started = false;
+    public void stopEngine() {
+        started = false;
     }
 
     public Engine(String engineType) {

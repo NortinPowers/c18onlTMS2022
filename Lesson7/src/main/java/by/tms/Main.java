@@ -8,20 +8,22 @@ import by.tms.utils.Constants;
 
 import java.util.List;
 
+import static by.tms.utils.Constants.MEN;
+
 public class Main {
     public static void main(String[] args) {
         PersonRegistry personRegistry = new PersonRegistry();
         Person person = new Person();
 
-        personRegistry.getPeople().add(new Person("Ivan", 18, Constants.MEN, new Address("Belarus", "Minsk")));
-        personRegistry.getPeople().add(new Person("Sam", 22, Constants.MEN, new Address("Belarus", "Grodno")));
-        personRegistry.getPeople().add(new Person("Jack", 27, Constants.MEN, new Address("Belarus", "Grodno")));
-        personRegistry.getPeople().add(new Person("Tom", 25, Constants.MEN, new Address("Belarus", "Minsk")));
+        personRegistry.getPeople().add(new Person("Ivan", 18, MEN, new Address("Belarus", "Minsk")));
+        personRegistry.getPeople().add(new Person("Sam", 22, MEN, new Address("Belarus", "Grodno")));
+        personRegistry.getPeople().add(new Person("Jack", 27, MEN, new Address("Belarus", "Grodno")));
+        personRegistry.getPeople().add(new Person("Tom", 25, MEN, new Address("Belarus", "Minsk")));
         personRegistry.getPeople().add(new Person("Liza", 18, Constants.WOMEN, new Address("Belarus", "Minsk")));
-        personRegistry.getPeople().add(new Person("Petr", 17, Constants.MEN, new Address("Belarus", "Minsk")));
-        personRegistry.getPeople().add(new Person("Aleksandr", 19, Constants.MEN, new Address("Belarus", "Minsk")));
-        personRegistry.getPeople().add(new Person("Fedor", 28, Constants.MEN, new Address("Belarus", "Minsk")));
-        personRegistry.getPeople().add(new Person("Alex", 26, Constants.MEN, new Address("Belarus", "Minsk")));
+        personRegistry.getPeople().add(new Person("Petr", 17, MEN, new Address("Belarus", "Minsk")));
+        personRegistry.getPeople().add(new Person("Aleksandr", 19, MEN, new Address("Belarus", "Minsk")));
+        personRegistry.getPeople().add(new Person("Fedor", 28, MEN, new Address("Belarus", "Minsk")));
+        personRegistry.getPeople().add(new Person("Alex", 26, MEN, new Address("Belarus", "Minsk")));
         personRegistry.getPeople().add(new Person("Aleksandra", 21, Constants.WOMEN, new Address("Belarus", "Minsk")));
 
         personRegistry.getPeople().add(person.createNewPerson());
