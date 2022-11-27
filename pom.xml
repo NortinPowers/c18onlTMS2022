@@ -19,6 +19,7 @@
         <module>tictactoe</module>
         <module>Lesson8</module>
         <module>Lesson9</module>
+        <module>Lesson8Addon</module>
     </modules>
 
     <properties>
