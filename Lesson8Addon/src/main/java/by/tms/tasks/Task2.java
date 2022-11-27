@@ -1,9 +1,6 @@
 package by.tms.tasks;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -19,13 +16,10 @@ import static by.tms.utils.ScannerType.getInputIntValueAccordingConditions;
 Пусть будет возможность создавать массив произвольного размера.
 Пусть размер массива вводится с консоли.
  */
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Task2 {
-    private int arrayLength = getInputIntValueAccordingConditions(new Scanner(System.in), 1, 100);
+    private final int arrayLength = getInputIntValueAccordingConditions(new Scanner(System.in), 1, 100);
     @Getter
-    private int[] underTestArray = fillingArrayNumbersFromRange(createSpecifiedLengthArray(arrayLength), -20, 20);
+    private final int[] underTestArray = fillingArrayNumbersFromRange(createSpecifiedLengthArray(arrayLength), -20, 20);
 
     /**
      * The method sorts an integer array
