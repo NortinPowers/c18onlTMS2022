@@ -2,6 +2,7 @@ package by.tms;
 
 import by.tms.tasks.Task0;
 import by.tms.tasks.Task1;
+import by.tms.tasks.Task2;
 
 import java.util.Arrays;
 
@@ -15,5 +16,9 @@ public class Lesson8AddonMain {
         Task1 task1 = new Task1();
         System.out.println(Arrays.toString(task1.getUnderTestArray()));
         System.out.println(Arrays.toString(task1.replaceDesiredValue(task1.getUnderTestArray(), task1.getDesiredValue())));
+        System.out.println("Task 2");
+        Task2 task2 = new Task2();
+        System.out.println(Arrays.toString(task2.getUnderTestArray()));
+        task2.getMaxMinAverageInfoOfArray(task2.getUnderTestArray());
     }
 }

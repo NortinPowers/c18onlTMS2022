@@ -53,8 +53,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${mavenCompalePlugin.version}</version>
                 <configuration>
-                    <source>12</source>
-                    <target>12</target>
+                    <source>19</source>
+                    <target>19</target>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
