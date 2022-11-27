@@ -110,4 +110,38 @@ public final class ArraysHelper {
                 "\nthe minimum value of the array is " + getMinArrayValue(array) +
                 "\nthe average value of the array is " + getAverageArrayValue(array));
     }
+
+    /**
+     * The method returns a comparison of the arithmetic mean values of the elements of two arrays
+     */
+    public static void getComparisonAverageOfTwoArrays(int[] firstArray, int[] secondArray) {
+        double firstArrayAverage = getAverageArrayValue(firstArray);
+        double secondArrayAverage = getAverageArrayValue(secondArray);
+        String[] arrayNumber = {"first", "second"};
+        String greaterValue;
+        String lowerValue;
+        if (firstArrayAverage > secondArrayAverage) {
+            greaterValue = arrayNumber[0];
+            lowerValue = arrayNumber[1];
+        } else if (secondArrayAverage > firstArrayAverage) {
+            greaterValue = arrayNumber[1];
+            lowerValue = arrayNumber[0];
+        } else {
+            greaterValue = arrayNumber[0];
+            lowerValue = arrayNumber[0];
+        }
+        getInfoAboutTwoArrayAverageValue(greaterValue, lowerValue);
+    }
+
+    /**
+     * The method returns information about average values of two arrays
+     */
+    private static void getInfoAboutTwoArrayAverageValue(String greaterValue, String lowerValue) {
+        if (greaterValue.equals(lowerValue)) {
+            System.out.println("the arithmetic mean of the elements of the first and second array are equal");
+        } else {
+            System.out.println("the arithmetic mean value of the elements of the " + greaterValue + " array is greater than the " +
+                    "arithmetic mean value of the elements of the " + lowerValue + " array");
+        }
+    }
 }

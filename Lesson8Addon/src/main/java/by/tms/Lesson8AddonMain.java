@@ -3,9 +3,11 @@ package by.tms;
 import by.tms.tasks.Task0;
 import by.tms.tasks.Task1;
 import by.tms.tasks.Task2;
+import by.tms.tasks.Task3;
 
 import java.util.Arrays;
 
+import static by.tms.utils.ArraysHelper.getComparisonAverageOfTwoArrays;
 import static by.tms.utils.ArraysHelper.getMaxMinAverageInfoOfArray;
 
 public class Lesson8AddonMain {
@@ -22,5 +24,10 @@ public class Lesson8AddonMain {
         Task2 task2 = new Task2();
         System.out.println(Arrays.toString(task2.getUnderTestArray()));
         getMaxMinAverageInfoOfArray(task2.getUnderTestArray());
+        System.out.println("Task 3");
+        Task3 task3 = new Task3();
+        System.out.println(Arrays.toString(task3.getFirstArray()));
+        System.out.println(Arrays.toString(task3.getSecondArray()));
+        getComparisonAverageOfTwoArrays(task3.getFirstArray(), task3.getSecondArray());
     }
 }
