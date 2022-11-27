@@ -4,7 +4,7 @@ import lombok.Getter;
 
 import java.util.Scanner;
 
-import static by.tms.utils.ArraysHelper.createFixedLengthArray;
+import static by.tms.utils.ArraysHelper.createSpecifiedLengthArray;
 import static by.tms.utils.ArraysHelper.fillingArrayNumbersFromRange;
 import static by.tms.utils.ScannerType.getInputIntValueAccordingConditions;
 
@@ -13,12 +13,16 @@ import static by.tms.utils.ScannerType.getInputIntValueAccordingConditions;
 сообщение о том, входит ли заданное число в массив или нет.
 Пусть число для поиска задается с консоли (класс Scanner).
 */
-@Getter
+
 public class Task0 {
 
     private final int desiredValue = getInputIntValueAccordingConditions(new Scanner(System.in), -10, 10);
-    private final int[] underTestArray = fillingArrayNumbersFromRange(createFixedLengthArray(10), -10, 10);
+    @Getter
+    private final int[] underTestArray = fillingArrayNumbersFromRange(createSpecifiedLengthArray(10), -10, 10);
 
+    /**
+     * The method checks for the presence of a number in an array of numbers
+     */
     public boolean isIntInstanceOfArray() {
         boolean isInstance = false;
         for (int value : underTestArray) {
@@ -30,6 +34,9 @@ public class Task0 {
         return isInstance;
     }
 
+    /**
+     * The method notifies about the presence of a number in the array of numbers
+     */
     public void getIntInstanceOfArrayInfo(boolean isInstance) {
         String instance;
         if (isInstance) {

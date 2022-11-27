@@ -10,10 +10,13 @@ public final class ScannerType {
     private ScannerType() {
     }
 
+    /**
+     * The method returns an integer corresponding to the specified limits from the console
+     */
     public static int getInputIntValueAccordingConditions(Scanner scanner, int minLimit, int maxLimit) {
         int value = 0;
         boolean compliance = false;
-        System.out.println("Input integer with conditions: min limit - " + minLimit + " , max limit - " + maxLimit);
+        System.out.println("Input integer with conditions: min limit \" " + minLimit + " \" , max limit \" " + maxLimit + " \"");
         do {
             if (scanner.hasNextInt()) {
                 value = scanner.nextInt();
@@ -31,10 +34,16 @@ public final class ScannerType {
         return value;
     }
 
+    /**
+     * The method notifies the requirements for the entered value
+     */
     private static void getIntConditionsInfo(String conditions) {
         System.out.println("Need integer" + conditions + "!\nRepeat input");
     }
 
+    /**
+     * The method returns an integer from the console
+     */
     public static int getInputIntValueAllIntRange(Scanner scanner) {
         int value;
         System.out.println("Input integer:");
