@@ -6,6 +6,8 @@ import by.tms.tasks.Task2;
 
 import java.util.Arrays;
 
+import static by.tms.utils.ArraysHelper.getMaxMinAverageInfoOfArray;
+
 public class Lesson8AddonMain {
     public static void main(String[] args) {
         System.out.println("Task 0");
@@ -19,6 +21,6 @@ public class Lesson8AddonMain {
         System.out.println("Task 2");
         Task2 task2 = new Task2();
         System.out.println(Arrays.toString(task2.getUnderTestArray()));
-        task2.getMaxMinAverageInfoOfArray(task2.getUnderTestArray());
+        getMaxMinAverageInfoOfArray(task2.getUnderTestArray());
     }
 }
