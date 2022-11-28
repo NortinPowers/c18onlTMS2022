@@ -19,6 +19,7 @@
         <module>tictactoe</module>
         <module>Lesson8</module>
         <module>Lesson9</module>
+        <module>Lesson8Addon</module>
     </modules>
 
     <properties>
@@ -52,8 +53,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${mavenCompalePlugin.version}</version>
                 <configuration>
-                    <source>12</source>
-                    <target>12</target>
+                    <source>19</source>
+                    <target>19</target>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>

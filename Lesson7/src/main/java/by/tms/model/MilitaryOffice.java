@@ -43,7 +43,7 @@ public class MilitaryOffice {
         List<Person> sufferersFromMinskList = getSufferersName();
         for (int i = 0; i < getSufferersName().size(); i++) {
             Person person = getSufferersName().get(i);
-            if (!person.getAddress().getCity().equals("Minsk") && !person.getAddress().getCity().equals("minsk")) {
+            if (!person.getAddress().getCity().equalsIgnoreCase("minsk")) {
                 sufferersFromMinskList.remove(person);
             }
         }
@@ -71,7 +71,7 @@ public class MilitaryOffice {
         List<Person> sufferersAmongAleksandrs = getSufferersName();
         for (int i = 0; i < getSufferersName().size(); i++) {
             Person person = getSufferersName().get(i);
-            if (!person.getName().equals("Aleksandr") && !person.getName().equals("aleksandr")) {
+            if (!person.getName().equalsIgnoreCase("aleksandr")) {
                 sufferersAmongAleksandrs.remove(person);
             }
         }
