@@ -20,6 +20,7 @@
         <module>Lesson8</module>
         <module>Lesson9</module>
         <module>Lesson8Addon</module>
+        <module>Lesson9Inheritance</module>
     </modules>
 
     <properties>
