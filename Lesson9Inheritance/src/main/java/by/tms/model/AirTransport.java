@@ -1,11 +1,13 @@
 package by.tms.model;
 
 import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 
 @Getter
+@SuperBuilder
 public class AirTransport extends Transport {
-    private int wingspan;
-    private int MinimumRunwayLengthForTakeOff;
+    private double wingspan;
+    private int minimumRunwayLengthForTakeOff;
 
     @Override
     public void getInfo() {
