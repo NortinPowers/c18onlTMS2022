@@ -10,9 +10,9 @@ public class GroundTransportation extends Transport {
     private double fuelConsumption;
 
     @Override
-    public void getInfo() {
-        super.getInfo();
-        System.out.println("Number of wheels: " + getWheelsCount() + "\n" +
-                "Fuel consumption(l/100km): " + getFuelConsumption());
+    public String givesInfo() {
+
+        return super.givesInfo() + "\nNumber of wheels: " + getWheelsCount() + "\n" +
+                "Fuel consumption(l/100km): " + getFuelConsumption();
     }
 }

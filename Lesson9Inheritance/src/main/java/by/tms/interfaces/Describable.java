@@ -4,7 +4,7 @@ public interface Describable {
     /**
      * The method gives information about the object
      */
-    default void getInfo() {
-        System.out.println("It`s " + getClass().getSimpleName());
+    default String givesInfo() {
+        return "It`s " + getClass().getSimpleName();
     }
 }
