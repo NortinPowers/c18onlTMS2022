@@ -10,7 +10,7 @@ public class SonyHand implements IHand {
     private final int cost = 18;
 
     @Override
-    public void grab() {
-        System.out.println("the hand holds the camera");
+    public String grab() {
+        return "the hand holds the camera";
     }
 }

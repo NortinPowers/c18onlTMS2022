@@ -10,7 +10,7 @@ public class ToshibaLeg implements ILeg {
     private final int cost = 16;
 
     @Override
-    public void go() {
-        System.out.println("the leg uses a wheel and a gyroscope");
+    public String go() {
+        return "the leg uses a wheel and a gyroscope";
     }
 }

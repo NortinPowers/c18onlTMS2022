@@ -10,7 +10,7 @@ public class SonyLeg implements ILeg {
     private final int cost = 22;
 
     @Override
-    public void go() {
-        System.out.println("the leg moves cinematically");
+    public String go() {
+        return "the leg moves cinematically";
     }
 }

@@ -39,7 +39,7 @@ public class Main {
         ArrayList<Integer> robotCosts = new ArrayList<>();
         for (int i = 0; i < robots.size(); i++) {
             Robot tempRobot = robots.get(i);
-            tempRobot.action();
+            System.out.println(tempRobot.action());
             robotCosts.add(tempRobot.getHead().getCost() + tempRobot.getHand().getCost() + tempRobot.getLeg().getCost());
             System.out.println("the cost of this robot " + robotCosts.get(i));
             System.out.println();

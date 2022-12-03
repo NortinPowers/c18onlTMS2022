@@ -10,8 +10,8 @@ public class SamsungHead implements IHead {
     private final int cost = 25;
 
     @Override
-    public void think() {
-        System.out.println("the head thinks of three stars");
+    public String think() {
+        return "the head thinks of three stars";
     }
 
 }

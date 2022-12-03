@@ -2,7 +2,7 @@ package by.tms.interfaces;
 
 
 public interface IHand {
-    void grab();
+    String grab();
 
     int getCost();
 

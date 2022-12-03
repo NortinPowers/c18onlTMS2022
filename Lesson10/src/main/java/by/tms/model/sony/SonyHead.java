@@ -10,7 +10,7 @@ public class SonyHead implements IHead {
     private final int cost = 23;
 
     @Override
-    public void think() {
-        System.out.println("the head learns to pronounce \"Tokyo Tsushin Kogyo\"");
+    public String think() {
+        return "the head learns to pronounce \"Tokyo Tsushin Kogyo\"";
     }
 }

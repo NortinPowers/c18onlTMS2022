@@ -10,7 +10,7 @@ public class ToshibaHead implements IHead {
     private final int cost = 26;
 
     @Override
-    public void think() {
-        System.out.println("head with video interface");
+    public String think() {
+        return "head with video interface";
     }
 }

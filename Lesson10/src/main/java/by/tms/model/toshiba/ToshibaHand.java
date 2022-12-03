@@ -10,7 +10,7 @@ public class ToshibaHand implements IHand {
     private final int cost = 19;
 
     @Override
-    public void grab() {
-        System.out.println("the hand snatches the katana");
+    public String grab() {
+        return "the hand snatches the katana";
     }
 }

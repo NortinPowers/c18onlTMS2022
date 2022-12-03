@@ -15,10 +15,8 @@ public class Robot {
     private ILeg leg;
     private IHand hand;
 
-    public void action() {
-        head.think();
-        hand.grab();
-        leg.go();
+    public String action() {
+        return head.think() + "\n" + hand.grab() + "\n" + leg.go();
     }
 
 }

@@ -10,7 +10,7 @@ public class SamsungHand implements IHand {
     private final int cost = 20;
 
     @Override
-    public void grab() {
-        System.out.println("the hand snatches the geom");
+    public String grab() {
+        return "the hand snatches the geom";
     }
 }
