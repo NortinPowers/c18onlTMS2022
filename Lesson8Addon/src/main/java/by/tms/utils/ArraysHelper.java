@@ -5,7 +5,7 @@ import java.util.Random;
 
 public final class ArraysHelper {
 
-    static Random random = new Random();
+    private static final Random random = new Random();
 
     private ArraysHelper() {
     }
