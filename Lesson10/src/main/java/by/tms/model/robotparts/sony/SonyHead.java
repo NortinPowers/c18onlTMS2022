@@ -1,13 +1,16 @@
 package by.tms.model.robotparts.sony;
 
 import by.tms.interfaces.IHead;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
 @Getter
-@ToString(onlyExplicitlyIncluded = true)
+@ToString
+@AllArgsConstructor
 public class SonyHead implements IHead {
-    private final int cost = 23;
+    @ToString.Exclude
+    private int cost;
 
     @Override
     public String think() {

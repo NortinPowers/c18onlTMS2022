@@ -1,14 +1,16 @@
 package by.tms.model.robotparts.samsung;
 
 import by.tms.interfaces.ILeg;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
 @Getter
-@ToString(onlyExplicitlyIncluded = true)
-
+@ToString
+@AllArgsConstructor
 public class SamsungLeg implements ILeg {
-    private final int cost = 20;
+    @ToString.Exclude
+    private int cost;
 
     @Override
     public String go() {

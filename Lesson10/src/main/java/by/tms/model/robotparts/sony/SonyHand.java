@@ -1,13 +1,16 @@
 package by.tms.model.robotparts.sony;
 
 import by.tms.interfaces.IHand;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
 @Getter
-@ToString(onlyExplicitlyIncluded = true)
+@ToString
+@AllArgsConstructor
 public class SonyHand implements IHand {
-    private final int cost = 18;
+    @ToString.Exclude
+    private int cost;
 
     @Override
     public String grab() {

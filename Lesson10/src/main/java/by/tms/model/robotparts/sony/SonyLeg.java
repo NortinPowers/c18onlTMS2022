@@ -1,13 +1,16 @@
 package by.tms.model.robotparts.sony;
 
 import by.tms.interfaces.ILeg;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
 @Getter
-@ToString(onlyExplicitlyIncluded = true)
+@ToString
+@AllArgsConstructor
 public class SonyLeg implements ILeg {
-    private final int cost = 22;
+    @ToString.Exclude
+    private int cost;
 
     @Override
     public String go() {

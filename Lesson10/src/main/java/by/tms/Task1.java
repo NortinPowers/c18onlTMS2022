@@ -18,19 +18,19 @@ import static by.tms.utils.CostDeterminant.getMaxCostOfRobot;
 public class Task1 {
     public static void main(String[] args) {
         Robot firstRobot = Robot.builder()
-                .hand(new SamsungHand())
-                .head(new ToshibaHead())
-                .leg(new SamsungLeg())
+                .hand(new SamsungHand(20))
+                .head(new ToshibaHead(12))
+                .leg(new SamsungLeg(16))
                 .build();
         Robot secondRobot = Robot.builder()
-                .hand(new SonyHand())
-                .head(new SonyHead())
-                .leg(new ToshibaLeg())
+                .hand(new SonyHand(15))
+                .head(new SonyHead(20))
+                .leg(new ToshibaLeg(19))
                 .build();
         Robot thirdRobot = Robot.builder()
-                .hand(new ToshibaHand())
-                .head(new SamsungHead())
-                .leg(new SonyLeg())
+                .hand(new ToshibaHand(18))
+                .head(new SamsungHead(16))
+                .leg(new SonyLeg(17))
                 .build();
         ArrayList<Robot> robots = new ArrayList<>();
         robots.add(firstRobot);
