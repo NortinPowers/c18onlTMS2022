@@ -21,11 +21,12 @@
         <module>Lesson9</module>
         <module>Lesson8Addon</module>
         <module>Lesson9Inheritance</module>
+        <module>Lesson10</module>
     </modules>
 
     <properties>
-        <maven.compiler.source>19</maven.compiler.source>
-        <maven.compiler.target>19</maven.compiler.target>
+        <maven.compiler.source>19(Preview)</maven.compiler.source>
+        <maven.compiler.target>19(Preview)</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <lombok.version>1.18.24</lombok.version>
         <mavenCompalePlugin.version>3.10.1</mavenCompalePlugin.version>
@@ -54,8 +55,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${mavenCompalePlugin.version}</version>
                 <configuration>
-                    <source>19</source>
-                    <target>19</target>
+                    <source>19(Preview)</source>
+                    <target>19(Preview)</target>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>

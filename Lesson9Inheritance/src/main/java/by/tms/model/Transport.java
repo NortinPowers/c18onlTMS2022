@@ -16,12 +16,12 @@ public class Transport implements Describable, Transportable {
     private String brand;
 
     @Override
-    public void getInfo() {
-        System.out.println("The characteristics of this vehicle are as follows:\n" +
+    public String givesInfo() {
+        return "The characteristics of this vehicle are as follows:\n" +
                 "Power (in horsepower): " + getPowerInHorsepower() +
                 " (in kilowatts: " + getPowerInKilowatts(getPowerInHorsepower()) + ")\n" +
                 "Maximum speed(km/h): " + getMaxSpeedKmPerHour() + "\n" +
                 "Weight (kg): " + getWeightKg() + "\n" +
-                "Brand \"" + getBrand() + "\"");
+                "Brand \"" + getBrand() + "\"";
     }
 }

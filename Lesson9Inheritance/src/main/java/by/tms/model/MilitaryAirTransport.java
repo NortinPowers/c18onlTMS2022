@@ -12,21 +12,20 @@ public class MilitaryAirTransport extends AirTransport {
     private int numberOfMissilesOnBoard;
 
     @Override
-    public void getInfo() {
-        super.getInfo();
-        System.out.println("Availability of ejection system: " + isEjectionSystems() + "\n" +
-                "Number of missiles on board: " + getNumberOfMissilesOnBoard());
+    public String givesInfo() {
+        return super.givesInfo() + "\nAvailability of ejection system: " + isEjectionSystems() + "\n" +
+                "Number of missiles on board: " + getNumberOfMissilesOnBoard();
     }
 
     /**
      * The method returns information about a missile shot
      */
-    public void returnsStatusOfMissileShot() {
+    public String returnsStatusOfMissileShot() {
         if (getNumberOfMissilesOnBoard() > 0) {
             shoot();
-            System.out.println("The rocket went..");
+            return "The rocket went..";
         } else {
-            System.out.println("Ammunition is missing");
+            return "Ammunition is missing";
         }
     }
 
@@ -40,11 +39,11 @@ public class MilitaryAirTransport extends AirTransport {
     /**
      * The method trying to eject pilot
      */
-    public void tryingToEject() {
+    public String tryingToEject() {
         if (ejectionSystems) {
-            System.out.println("The ejection was successful");
+            return "The ejection was successful";
         } else {
-            System.out.println("You don't have such a system");
+            return "You don't have such a system";
         }
     }
 }

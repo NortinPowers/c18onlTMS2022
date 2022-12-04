@@ -52,22 +52,22 @@ public class Main {
         transports.add(militaryAirTransport);
         transports.add(passengerTransport);
         for (Transport transport : transports) {
-            transport.getInfo();
+            System.out.println(transport.givesInfo());
             if (transport instanceof PassengerTransport passengerTransportNew) {
-                passengerTransportNew.givesInfoAboutTripCertainDuration(5);
+                System.out.println(passengerTransportNew.givesInfoAboutTripCertainDuration(5));
             }
             if (transport instanceof CargoTransport cargoTransportNew) {
-                cargoTransportNew.givesInfoAboutPossibilityOfTransportation(5);
+                System.out.println(cargoTransportNew.givesInfoAboutPossibilityOfTransportation(5));
             }
             if (transport instanceof CivilAirTransport civilAirTransportNew) {
-                civilAirTransportNew.givesInfoAboutPossibilityOfTransportation(100);
+                System.out.println(civilAirTransportNew.givesInfoAboutPossibilityOfTransportation(100));
             }
             if (transport instanceof MilitaryAirTransport militaryAirTransportNew) {
                 while (militaryAirTransportNew.getNumberOfMissilesOnBoard() > 0) {
-                    militaryAirTransportNew.returnsStatusOfMissileShot();
+                    System.out.println(militaryAirTransportNew.returnsStatusOfMissileShot());
                 }
-                militaryAirTransportNew.returnsStatusOfMissileShot();
-                militaryAirTransportNew.tryingToEject();
+                System.out.println(militaryAirTransportNew.returnsStatusOfMissileShot());
+                System.out.println(militaryAirTransportNew.tryingToEject());
             }
             System.out.println();
         }

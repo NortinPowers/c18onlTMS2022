@@ -10,18 +10,17 @@ public class CivilAirTransport extends AirTransport {
     private boolean businessClass;
 
     @Override
-    public void getInfo() {
-        super.getInfo();
-        System.out.println("Number of passengers: " + getNumberOfPassengers() + "\n" +
-                "Business class availability: " + isBusinessClass());
+    public String givesInfo() {
+        return super.givesInfo() + "\nNumber of passengers: " + getNumberOfPassengers() + "\n" +
+                "Business class availability: " + isBusinessClass();
     }
 
     @Override
-    public void givesInfoAboutPossibilityOfTransportation(int transported) {
+    public String givesInfoAboutPossibilityOfTransportation(int transported) {
         if (transported <= numberOfPassengers) {
-            System.out.println(transported + " passengers can be transported");
+            return transported + " passengers can be transported";
         } else {
-            System.out.println("You need a bigger aircraft");
+            return "You need a bigger aircraft";
         }
     }
 }

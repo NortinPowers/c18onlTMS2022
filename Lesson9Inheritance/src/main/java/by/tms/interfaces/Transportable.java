@@ -4,7 +4,7 @@ public interface Transportable {
     /**
      * The method provide information about the possibility of transporting a certain cargo
      */
-    default void givesInfoAboutPossibilityOfTransportation(int transported) {
-        System.out.println("The possibility of transportation is not checked");
+    default String givesInfoAboutPossibilityOfTransportation(int transported) {
+        return "The possibility of transportation is not checked";
     }
 }

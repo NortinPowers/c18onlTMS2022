@@ -10,9 +10,8 @@ public class AirTransport extends Transport {
     private int minimumRunwayLengthForTakeOff;
 
     @Override
-    public void getInfo() {
-        super.getInfo();
-        System.out.println("Wingspan (m): " + getWingspan() + "\n" +
-                "The minimum length of the runway for take-off: " + getMinimumRunwayLengthForTakeOff());
+    public String givesInfo() {
+        return super.givesInfo() + "\nWingspan (m): " + getWingspan() + "\n" +
+                "The minimum length of the runway for take-off: " + getMinimumRunwayLengthForTakeOff();
     }
 }
