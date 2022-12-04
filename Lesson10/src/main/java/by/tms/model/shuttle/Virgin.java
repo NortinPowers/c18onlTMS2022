@@ -1,4 +1,4 @@
-package by.tms.model;
+package by.tms.model.shuttle;
 
 import by.tms.interfaces.IStart;
 

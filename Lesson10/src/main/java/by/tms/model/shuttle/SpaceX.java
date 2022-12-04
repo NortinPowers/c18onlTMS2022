@@ -1,22 +1,22 @@
-package by.tms.model;
+package by.tms.model.shuttle;
 
 import by.tms.interfaces.IStart;
 
 import java.util.Random;
 
-public class Shuttle implements IStart {
+public class SpaceX implements IStart {
     @Override
     public boolean preLaunchSystemCheck() {
-        return new Random().nextInt() * 11 > 3;
+        return new Random().nextInt() * 11 % 2 == 0;
     }
 
     @Override
     public String engineStart() {
-        return "The Shuttle engines are running. All systems are normal.";
+        return "The Falcon engines are running. All systems are normal.";
     }
 
     @Override
     public String start() {
-        return "Shuttle Launch";
+        return "Dragon Launch";
     }
 }

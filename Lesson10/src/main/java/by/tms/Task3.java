@@ -1,9 +1,9 @@
 package by.tms;
 
-import by.tms.model.Shuttle;
-import by.tms.model.SpaceX;
 import by.tms.model.Spaceport;
-import by.tms.model.Virgin;
+import by.tms.model.shuttle.Shuttle;
+import by.tms.model.shuttle.SpaceX;
+import by.tms.model.shuttle.Virgin;
 
 public class Task3 {
     public static void main(String[] args) {
