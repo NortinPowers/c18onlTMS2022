@@ -1,4 +1,4 @@
-package by.tms.model.samsung;
+package by.tms.model.robotparts.samsung;
 
 import by.tms.interfaces.IHand;
 import lombok.Getter;

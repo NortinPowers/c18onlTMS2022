@@ -1,4 +1,4 @@
-package by.tms.model.toshiba;
+package by.tms.model.robotparts.toshiba;
 
 import by.tms.interfaces.IHead;
 import lombok.Getter;

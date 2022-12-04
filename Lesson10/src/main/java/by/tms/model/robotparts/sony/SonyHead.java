@@ -1,4 +1,4 @@
-package by.tms.model.sony;
+package by.tms.model.robotparts.sony;
 
 import by.tms.interfaces.IHead;
 import lombok.Getter;

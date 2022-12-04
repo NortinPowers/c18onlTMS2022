@@ -1,4 +1,4 @@
-package by.tms.model.toshiba;
+package by.tms.model.robotparts.samsung;
 
 import by.tms.interfaces.ILeg;
 import lombok.Getter;
@@ -6,11 +6,12 @@ import lombok.ToString;
 
 @Getter
 @ToString(onlyExplicitlyIncluded = true)
-public class ToshibaLeg implements ILeg {
-    private final int cost = 16;
+
+public class SamsungLeg implements ILeg {
+    private final int cost = 20;
 
     @Override
     public String go() {
-        return "the leg uses a wheel and a gyroscope";
+        return "the leg moves confidently";
     }
 }
