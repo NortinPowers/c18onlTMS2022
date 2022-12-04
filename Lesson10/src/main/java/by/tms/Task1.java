@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 import static by.tms.utils.CostDeterminant.getMaxCostOfRobot;
 
-public class Main {
+public class Task1 {
     public static void main(String[] args) {
         Robot firstRobot = Robot.builder()
                 .hand(new SamsungHand())
@@ -45,6 +45,8 @@ public class Main {
             System.out.println();
         }
         int indexOfMaxCost = getMaxCostOfRobot(robotCosts);
-        System.out.println("Robot with max cost (" + robotCosts.get(indexOfMaxCost) + ") is " + robots.get(indexOfMaxCost));
+        if (indexOfMaxCost > 0) {
+            System.out.println("Robot with max cost (" + robotCosts.get(indexOfMaxCost) + ") is " + robots.get(indexOfMaxCost));
+        }
     }
 }
