@@ -23,6 +23,7 @@
         <module>Lesson8Addon</module>
         <module>Lesson9Inheritance</module>
         <module>Lesson10</module>
+        <module>Lesson11</module>
     </modules>
 
     <properties>
