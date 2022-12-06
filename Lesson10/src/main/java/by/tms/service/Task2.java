@@ -1,4 +1,4 @@
-package by.tms;
+package by.tms.service;
 
 import by.tms.model.People;
 import by.tms.model.clothes.*;

@@ -1,4 +1,4 @@
-package by.tms;
+package by.tms.model;
 
 public class User {
     private String name;

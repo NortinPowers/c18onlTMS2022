@@ -1,11 +1,11 @@
 package by.tms.utils;
 
+import lombok.experimental.UtilityClass;
+
 import java.util.ArrayList;
 
-public final class CostDeterminant {
-
-    private CostDeterminant() {
-    }
+@UtilityClass
+public class CostDeterminant {
 
     public static int getMaxCostOfRobot(ArrayList<Integer> robotCosts) {
         int maxCost;

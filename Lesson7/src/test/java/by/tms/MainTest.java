@@ -1,6 +1,7 @@
 package by.tms;
 
 import by.tms.model.Person;
+import by.tms.service.Main;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

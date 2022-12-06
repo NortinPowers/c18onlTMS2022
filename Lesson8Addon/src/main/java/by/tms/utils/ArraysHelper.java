@@ -1,14 +1,14 @@
 package by.tms.utils;
 
+import lombok.experimental.UtilityClass;
+
 import java.util.Arrays;
 import java.util.Random;
 
-public final class ArraysHelper {
+@UtilityClass
+public class ArraysHelper {
 
     private static final Random random = new Random();
-
-    private ArraysHelper() {
-    }
 
     /**
      * The method creates an array of numbers of a given length

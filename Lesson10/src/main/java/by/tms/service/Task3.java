@@ -1,4 +1,4 @@
-package by.tms;
+package by.tms.service;
 
 import by.tms.model.Spaceport;
 import by.tms.model.shuttle.Shuttle;

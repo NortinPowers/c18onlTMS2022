@@ -1,4 +1,4 @@
-package by.tms;
+package by.tms.service;
 
 import by.tms.tasks.Task0;
 import by.tms.tasks.Task1;

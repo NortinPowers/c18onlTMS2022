@@ -1,9 +1,9 @@
 package by.tms.utils;
 
-public final class UnitsOfMeasurement {
+import lombok.experimental.UtilityClass;
 
-    private UnitsOfMeasurement() {
-    }
+@UtilityClass
+public class UnitsOfMeasurement {
 
     /**
      * The method returns the power value in kilowatts based on the horsepower value

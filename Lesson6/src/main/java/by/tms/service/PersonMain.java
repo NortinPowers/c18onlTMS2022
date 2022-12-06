@@ -1,6 +1,8 @@
-package by.tms;
+package by.tms.service;
 
-public class Main {
+import by.tms.model.User;
+
+public class PersonMain {
     public static void main(String[] args) {
         User person1 = new User();
         System.out.println(person1.getFullName());
