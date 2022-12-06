@@ -1,5 +1,7 @@
 package by.tms.service;
 
+import by.tms.interfaces.ClothingForMenAware;
+import by.tms.interfaces.ClothingForWomenAware;
 import by.tms.model.Atelier;
 import by.tms.model.clothes.*;
 
@@ -33,5 +35,10 @@ public class Task2 {
         Atelier atelier = new Atelier();
         System.out.println(atelier.dressMan(clothes));
         System.out.println(atelier.dressWoman(clothes));
+        System.out.println(((ClothingForMenAware) clothes[3]).dressMan());
+        System.out.println(((ClothingForWomenAware) clothes[1]).dressWoman());
+        System.out.println(clothes[1].getClothingSize().getDescription());
+        System.out.println(clothes[2].getClothingSize().getDescription());
+
     }
 }
