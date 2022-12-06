@@ -1,4 +1,4 @@
-package by.tms.model;
+package by.tms.model.instrument;
 
 import by.tms.interfaces.InstrumentAware;
 import lombok.AllArgsConstructor;

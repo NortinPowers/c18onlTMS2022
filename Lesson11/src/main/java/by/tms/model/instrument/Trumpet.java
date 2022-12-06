@@ -1,4 +1,4 @@
-package by.tms.model;
+package by.tms.model.instrument;
 
 import by.tms.interfaces.InstrumentAware;
 import lombok.AllArgsConstructor;
@@ -10,11 +10,11 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class Guitar implements InstrumentAware {
-    private int numberOfStrings;
+public class Trumpet implements InstrumentAware {
+    private int diameter;
 
     @Override
     public String play() {
-        return "a " + numberOfStrings + "-string guitar is playing now";
+        return "now the trumpet is playing, it is " + diameter + " in diameter";
     }
 }
