@@ -39,6 +39,5 @@ public class Task2 {
         System.out.println(((ClothingForWomenAware) clothes[1]).dressWoman());
         System.out.println(clothes[1].getClothingSize().getDescription());
         System.out.println(clothes[2].getClothingSize().getDescription());
-
     }
 }
