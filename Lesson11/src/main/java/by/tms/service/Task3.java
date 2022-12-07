@@ -35,7 +35,6 @@ public class Task3 {
             if (fruit instanceof Pear) {
                 AllPearsCost = getFruitsCost(fruit, AllPearsCost);
             }
-
         }
         System.out.println("The cost of all fruits is " + fullFruitsCost);
         System.out.println("The cost of all apples is " + AllApplesCost);
@@ -43,6 +42,4 @@ public class Task3 {
         System.out.println("The cost of all pears is " + AllPearsCost);
         fruits.get(2).printManufacturerInfo();
     }
-
-
 }
