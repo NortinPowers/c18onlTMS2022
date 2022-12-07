@@ -1,4 +1,4 @@
-package by.tms.interfaces;
+package by.tms.service.interfaces;
 
 public interface ClothingForMenAware {
 

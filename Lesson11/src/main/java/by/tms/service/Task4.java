@@ -5,7 +5,7 @@ import by.tms.model.figures.Line;
 import by.tms.model.figures.Rectangle;
 import by.tms.model.figures.Triangle;
 
-import static by.tms.utils.Figures.*;
+import static by.tms.model.Figures.*;
 
 public class Task4 {
     public static void main(String[] args) {

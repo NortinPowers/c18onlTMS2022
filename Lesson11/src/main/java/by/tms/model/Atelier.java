@@ -1,8 +1,8 @@
 package by.tms.model;
 
-import by.tms.interfaces.ClothingForMenAware;
-import by.tms.interfaces.ClothingForWomenAware;
 import by.tms.model.clothes.Clothes;
+import by.tms.service.interfaces.ClothingForMenAware;
+import by.tms.service.interfaces.ClothingForWomenAware;
 import org.jetbrains.annotations.NotNull;
 
 public class Atelier {

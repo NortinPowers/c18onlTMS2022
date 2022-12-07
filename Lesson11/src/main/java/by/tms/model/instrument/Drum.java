@@ -1,6 +1,6 @@
 package by.tms.model.instrument;
 
-import by.tms.interfaces.InstrumentAware;
+import by.tms.service.interfaces.InstrumentAware;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

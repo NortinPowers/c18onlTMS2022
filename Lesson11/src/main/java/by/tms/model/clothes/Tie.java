@@ -1,6 +1,6 @@
 package by.tms.model.clothes;
 
-import by.tms.interfaces.ClothingForMenAware;
+import by.tms.service.interfaces.ClothingForMenAware;
 import lombok.experimental.SuperBuilder;
 
 @SuperBuilder

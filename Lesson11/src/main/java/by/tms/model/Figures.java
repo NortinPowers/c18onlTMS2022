@@ -1,4 +1,4 @@
-package by.tms.utils;
+package by.tms.model;
 
 public enum Figures {
     LINE {

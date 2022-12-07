@@ -1,6 +1,6 @@
 package by.tms.model.figures;
 
-import by.tms.interfaces.AreaOfFigureCalculable;
+import by.tms.service.interfaces.AreaOfFigureCalculable;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 

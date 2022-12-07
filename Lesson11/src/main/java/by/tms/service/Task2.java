@@ -1,13 +1,13 @@
 package by.tms.service;
 
-import by.tms.interfaces.ClothingForMenAware;
-import by.tms.interfaces.ClothingForWomenAware;
 import by.tms.model.Atelier;
 import by.tms.model.clothes.*;
+import by.tms.service.interfaces.ClothingForMenAware;
+import by.tms.service.interfaces.ClothingForWomenAware;
 
 import java.math.BigDecimal;
 
-import static by.tms.utils.ClothingSize.*;
+import static by.tms.model.ClothingSize.*;
 
 public class Task2 {
     public static void main(String[] args) {

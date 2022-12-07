@@ -1,9 +1,9 @@
 package by.tms.service;
 
-import by.tms.interfaces.InstrumentAware;
+import by.tms.service.interfaces.InstrumentAware;
 import by.tms.utils.InstrumentCreator;
 
-import static by.tms.interfaces.InstrumentAware.InstrumentType.*;
+import static by.tms.service.interfaces.InstrumentAware.InstrumentType.*;
 
 public class Task1 {
     public static void main(String[] args) {

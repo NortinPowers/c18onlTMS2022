@@ -1,6 +1,6 @@
 package by.tms.model.clothes;
 
-import by.tms.utils.ClothingSize;
+import by.tms.model.ClothingSize;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 

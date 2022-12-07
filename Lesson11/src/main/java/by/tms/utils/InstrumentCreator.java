@@ -1,9 +1,9 @@
 package by.tms.utils;
 
-import by.tms.interfaces.InstrumentAware;
 import by.tms.model.instrument.Drum;
 import by.tms.model.instrument.Guitar;
 import by.tms.model.instrument.Trumpet;
+import by.tms.service.interfaces.InstrumentAware;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
