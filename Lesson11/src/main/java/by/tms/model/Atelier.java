@@ -27,7 +27,7 @@ public class Atelier {
         return new StringBuilder("Women`s clothing:\n" + result);
     }
 
-    private static void getSelectedTypeOfClothingCharacteristics(@NotNull StringBuilder result, @NotNull Clothes clothesType) {
+    private static void getSelectedTypeOfClothingCharacteristics(StringBuilder result, Clothes clothesType) {
         result.append(clothesType.getClass().getSimpleName())
                 .append(": Clothing size - ")
                 .append(clothesType.getClothingSize())
