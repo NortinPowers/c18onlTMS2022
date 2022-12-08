@@ -16,5 +16,4 @@ public class SamsungHead implements IHead {
     public String think() {
         return "the head thinks of three stars";
     }
-
 }
