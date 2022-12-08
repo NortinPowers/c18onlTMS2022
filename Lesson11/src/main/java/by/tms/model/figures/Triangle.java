@@ -1,8 +1,11 @@
 package by.tms.model.figures;
 
+import by.tms.model.Figures;
 import by.tms.service.interfaces.AreaOfFigureCalculable;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
+
+import static by.tms.model.Figures.TRIANGLE;
 
 @SuperBuilder
 @Getter
@@ -43,5 +46,10 @@ public class Triangle extends Figure implements AreaOfFigureCalculable {
      */
     public String getCannotExistConditionMessage() {
         return "a triangle with sides " + sideA + ", " + sideB + ", " + sideC + " cannot exist";
+    }
+
+    @Override
+    public Figures getType() {
+        return TRIANGLE;
     }
 }

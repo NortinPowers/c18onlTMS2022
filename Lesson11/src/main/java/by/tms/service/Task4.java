@@ -27,17 +27,15 @@ public class Task4 {
                 .sideC(8)
                 .build();
         for (Figure figure : figures) {
-            if (figure.getClass().getSimpleName().equalsIgnoreCase(LINE.name())) {
+            if (figure.getType() == LINE) {
                 System.out.println(LINE.getSquareInfo());
-            }
-            if (figure.getClass().getSimpleName().equalsIgnoreCase(TRIANGLE.name())) {
+            } else if (figure.getType() == TRIANGLE) {
                 if (((Triangle) figure).getConditionForExistenceOfTriangle()) {
                     System.out.printf("%s%.2f\n", TRIANGLE.getSquareInfo(), ((Triangle) figure).getSquare());
                 } else {
                     System.out.printf(((Triangle) figure).getCannotExistConditionMessage());
                 }
-            }
-            if (figure.getClass().getSimpleName().equalsIgnoreCase(RECTANGLE.name())) {
+            } else if (figure.getType() == RECTANGLE) {
                 System.out.println(RECTANGLE.getSquareInfo() + ((Rectangle) figure).getSquare());
             }
         }
