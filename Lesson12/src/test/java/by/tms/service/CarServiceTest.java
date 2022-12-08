@@ -94,5 +94,4 @@ class CarServiceTest {
                 "Now there are 60 liters of fuel in the gas tank of Pontiac.", pontiac.refuelingFuel(30));
         Assertions.assertThrows(CarNotFuelTankException.class, () -> bmw.refuelingFuel(20));
     }
-
 }
