@@ -4,13 +4,13 @@ import by.tms.model.fruit.Apple;
 import by.tms.model.fruit.Apricot;
 import by.tms.model.fruit.Fruit;
 import by.tms.model.fruit.Pear;
-import by.tms.utils.Paymaster;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import static by.tms.utils.Paymaster.getFruitsCost;
+
 
 public class Task3 {
     public static void main(String[] args) {
@@ -25,7 +25,7 @@ public class Task3 {
         BigDecimal allApricotsCost = BigDecimal.ZERO;
         BigDecimal allPearsCost = BigDecimal.ZERO;
         for (Fruit fruit : fruits) {
-            fullFruitsCost = Paymaster.getFruitsCost(fruit, fullFruitsCost);
+            fullFruitsCost = getFruitsCost(fruit, fullFruitsCost);
             if (fruit instanceof Apple) {
                 allApplesCost = getFruitsCost(fruit, allApplesCost);
             }
