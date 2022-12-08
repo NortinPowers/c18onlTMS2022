@@ -15,22 +15,23 @@ import java.util.ArrayList;
 
 import static by.tms.utils.CostDeterminant.getMaxCostOfRobot;
 
+
 public class Task1 {
     public static void main(String[] args) {
         Robot firstRobot = Robot.builder()
-                .hand(new SamsungHand(20))
-                .head(new ToshibaHead(12))
-                .leg(new SamsungLeg(16))
+                .hand(SamsungHand.builder().price(20).build())
+                .head(ToshibaHead.builder().price(60).build())
+                .leg(SamsungLeg.builder().price(30).build())
                 .build();
         Robot secondRobot = Robot.builder()
-                .hand(new SonyHand(15))
-                .head(new SonyHead(20))
-                .leg(new ToshibaLeg(19))
+                .hand(SonyHand.builder().price(15).build())
+                .head(SonyHead.builder().price(20).build())
+                .leg(ToshibaLeg.builder().price(19).build())
                 .build();
         Robot thirdRobot = Robot.builder()
-                .hand(new ToshibaHand(18))
-                .head(new SamsungHead(16))
-                .leg(new SonyLeg(17))
+                .hand(ToshibaHand.builder().price(18).build())
+                .head(SamsungHead.builder().price(16).build())
+                .leg(SonyLeg.builder().price(17).build())
                 .build();
         ArrayList<Robot> robots = new ArrayList<>();
         robots.add(firstRobot);
@@ -40,12 +41,12 @@ public class Task1 {
         for (int i = 0; i < robots.size(); i++) {
             Robot tempRobot = robots.get(i);
             System.out.println(tempRobot.action());
-            robotCosts.add(tempRobot.getHead().getCost() + tempRobot.getHand().getCost() + tempRobot.getLeg().getCost());
+            robotCosts.add(tempRobot.getHead().getPrice() + tempRobot.getHand().getPrice() + tempRobot.getLeg().getPrice());
             System.out.println("the cost of this robot " + robotCosts.get(i));
             System.out.println();
         }
         int indexOfMaxCost = getMaxCostOfRobot(robotCosts);
-        if (indexOfMaxCost > 0) {
+        if (indexOfMaxCost > -1) {
             System.out.println("Robot with max cost (" + robotCosts.get(indexOfMaxCost) + ") is " + robots.get(indexOfMaxCost));
         }
     }

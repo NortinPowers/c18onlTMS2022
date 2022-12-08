@@ -1,17 +1,15 @@
 package by.tms.model.robotparts.toshiba;
 
 import by.tms.interfaces.IHand;
-import lombok.AllArgsConstructor;
+import by.tms.model.robotparts.RobotParts;
 import lombok.Getter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @ToString
-@AllArgsConstructor
-public class ToshibaHand implements IHand {
-    @ToString.Exclude
-    private int cost;
-
+@SuperBuilder
+public class ToshibaHand extends RobotParts implements IHand {
     @Override
     public String grab() {
         return "the hand snatches the katana";

@@ -1,17 +1,15 @@
 package by.tms.model.robotparts.samsung;
 
 import by.tms.interfaces.ILeg;
-import lombok.AllArgsConstructor;
+import by.tms.model.robotparts.RobotParts;
 import lombok.Getter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @ToString
-@AllArgsConstructor
-public class SamsungLeg implements ILeg {
-    @ToString.Exclude
-    private int cost;
-
+@SuperBuilder
+public class SamsungLeg extends RobotParts implements ILeg {
     @Override
     public String go() {
         return "the leg moves confidently";

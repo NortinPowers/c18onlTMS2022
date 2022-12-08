@@ -1,17 +1,15 @@
 package by.tms.model.robotparts.samsung;
 
 import by.tms.interfaces.IHead;
-import lombok.AllArgsConstructor;
+import by.tms.model.robotparts.RobotParts;
 import lombok.Getter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @ToString
-@AllArgsConstructor
-public class SamsungHead implements IHead {
-    @ToString.Exclude
-    private int cost;
-
+@SuperBuilder
+public class SamsungHead extends RobotParts implements IHead {
     @Override
     public String think() {
         return "the head thinks of three stars";
