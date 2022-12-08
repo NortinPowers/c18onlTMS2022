@@ -5,7 +5,7 @@
 
     <parent>
         <artifactId>c18onlTMS2022</artifactId>
-        <groupId>org.example</groupId>
+        <groupId>by.tms</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
