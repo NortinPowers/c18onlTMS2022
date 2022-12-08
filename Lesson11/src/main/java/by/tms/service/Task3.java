@@ -21,25 +21,25 @@ public class Task3 {
         fruits.add(Apricot.builder().price(new BigDecimal("45.56")).weight(90).build());
         fruits.add(Apple.builder().price(new BigDecimal("23.99")).weight(152).build());
         BigDecimal fullFruitsCost = new BigDecimal("0");
-        BigDecimal AllApplesCost = new BigDecimal("0");
-        BigDecimal AllApricotsCost = new BigDecimal("0");
-        BigDecimal AllPearsCost = new BigDecimal("0");
+        BigDecimal allApplesCost = new BigDecimal("0");
+        BigDecimal allApricotsCost = new BigDecimal("0");
+        BigDecimal allPearsCost = new BigDecimal("0");
         for (Fruit fruit : fruits) {
             fullFruitsCost = Paymaster.getFruitsCost(fruit, fullFruitsCost);
             if (fruit instanceof Apple) {
-                AllApplesCost = getFruitsCost(fruit, AllApplesCost);
+                allApplesCost = getFruitsCost(fruit, allApplesCost);
             }
             if (fruit instanceof Apricot) {
-                AllApricotsCost = getFruitsCost(fruit, AllApricotsCost);
+                allApricotsCost = getFruitsCost(fruit, allApricotsCost);
             }
             if (fruit instanceof Pear) {
-                AllPearsCost = getFruitsCost(fruit, AllPearsCost);
+                allPearsCost = getFruitsCost(fruit, allPearsCost);
             }
         }
         System.out.println("The cost of all fruits is " + fullFruitsCost);
-        System.out.println("The cost of all apples is " + AllApplesCost);
-        System.out.println("The cost of all apricot is " + AllApricotsCost);
-        System.out.println("The cost of all pears is " + AllPearsCost);
+        System.out.println("The cost of all apples is " + allApplesCost);
+        System.out.println("The cost of all apricot is " + allApricotsCost);
+        System.out.println("The cost of all pears is " + allPearsCost);
         fruits.get(2).printManufacturerInfo();
     }
 }
