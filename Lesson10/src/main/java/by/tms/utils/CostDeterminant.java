@@ -7,7 +7,7 @@ import java.util.ArrayList;
 @UtilityClass
 public class CostDeterminant {
 
-    public static int getMaxCostOfRobot(ArrayList<Integer> robotCosts) {
+    public int getMaxCostOfRobot(ArrayList<Integer> robotCosts) {
         int maxCost;
         int index = -1;
         if (robotCosts.size() > 0) {

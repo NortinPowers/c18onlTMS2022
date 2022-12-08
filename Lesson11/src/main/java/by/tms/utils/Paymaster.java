@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 public class Paymaster {
 
     @NotNull
-    public static BigDecimal getFruitsCost(Fruit fruit, BigDecimal fruitsCost) {
+    public BigDecimal getFruitsCost(Fruit fruit, BigDecimal fruitsCost) {
         fruitsCost = fruitsCost.add(fruit.getValueOfFruitPrice(fruit.getWeight()));
         return fruitsCost;
     }
