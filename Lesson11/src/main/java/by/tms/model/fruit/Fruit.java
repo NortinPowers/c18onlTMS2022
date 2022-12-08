@@ -23,5 +23,4 @@ public abstract class Fruit {
     public BigDecimal getValueOfFruitPrice(double weight) {
         return this.getPrice().multiply(new BigDecimal(weight)).divide(new BigDecimal(KILOGRAM), 4, HALF_UP);
     }
-
 }

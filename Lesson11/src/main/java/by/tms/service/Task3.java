@@ -43,11 +43,9 @@ public class Task3 {
             fullFruitsCost = getFruitsCost(fruit, fullFruitsCost);
             if (fruit instanceof Apple) {
                 allApplesCost = getFruitsCost(fruit, allApplesCost);
-            }
-            if (fruit instanceof Apricot) {
+            } else if (fruit instanceof Apricot) {
                 allApricotsCost = getFruitsCost(fruit, allApricotsCost);
-            }
-            if (fruit instanceof Pear) {
+            } else if (fruit instanceof Pear) {
                 allPearsCost = getFruitsCost(fruit, allPearsCost);
             }
         }
