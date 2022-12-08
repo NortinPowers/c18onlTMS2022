@@ -20,10 +20,10 @@ public class Task3 {
         fruits.add(Pear.builder().price(new BigDecimal("62.30")).weight(162).build());
         fruits.add(Apricot.builder().price(new BigDecimal("45.56")).weight(90).build());
         fruits.add(Apple.builder().price(new BigDecimal("23.99")).weight(152).build());
-        BigDecimal fullFruitsCost = new BigDecimal("0");
-        BigDecimal allApplesCost = new BigDecimal("0");
-        BigDecimal allApricotsCost = new BigDecimal("0");
-        BigDecimal allPearsCost = new BigDecimal("0");
+        BigDecimal fullFruitsCost = BigDecimal.ZERO;
+        BigDecimal allApplesCost = BigDecimal.ZERO;
+        BigDecimal allApricotsCost = BigDecimal.ZERO;
+        BigDecimal allPearsCost = BigDecimal.ZERO;
         for (Fruit fruit : fruits) {
             fullFruitsCost = Paymaster.getFruitsCost(fruit, fullFruitsCost);
             if (fruit instanceof Apple) {
