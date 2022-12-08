@@ -1,7 +1,7 @@
-package by.tms.model.robotparts.sony;
+package by.tms.model.robot_parts.sony;
 
 import by.tms.interfaces.IHand;
-import by.tms.model.robotparts.RobotParts;
+import by.tms.model.robot_parts.RobotParts;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;

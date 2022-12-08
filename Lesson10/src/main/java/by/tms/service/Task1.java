@@ -1,15 +1,15 @@
 package by.tms.service;
 
 import by.tms.model.Robot;
-import by.tms.model.robotparts.samsung.SamsungHand;
-import by.tms.model.robotparts.samsung.SamsungHead;
-import by.tms.model.robotparts.samsung.SamsungLeg;
-import by.tms.model.robotparts.sony.SonyHand;
-import by.tms.model.robotparts.sony.SonyHead;
-import by.tms.model.robotparts.sony.SonyLeg;
-import by.tms.model.robotparts.toshiba.ToshibaHand;
-import by.tms.model.robotparts.toshiba.ToshibaHead;
-import by.tms.model.robotparts.toshiba.ToshibaLeg;
+import by.tms.model.robot_parts.samsung.SamsungHand;
+import by.tms.model.robot_parts.samsung.SamsungHead;
+import by.tms.model.robot_parts.samsung.SamsungLeg;
+import by.tms.model.robot_parts.sony.SonyHand;
+import by.tms.model.robot_parts.sony.SonyHead;
+import by.tms.model.robot_parts.sony.SonyLeg;
+import by.tms.model.robot_parts.toshiba.ToshibaHand;
+import by.tms.model.robot_parts.toshiba.ToshibaHead;
+import by.tms.model.robot_parts.toshiba.ToshibaLeg;
 
 import java.util.ArrayList;
 

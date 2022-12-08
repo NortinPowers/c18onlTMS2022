@@ -1,4 +1,4 @@
-package by.tms.model.robotparts;
+package by.tms.model.robot_parts;
 
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;

@@ -1,7 +1,7 @@
-package by.tms.model.robotparts.toshiba;
+package by.tms.model.robot_parts.toshiba;
 
 import by.tms.interfaces.IHead;
-import by.tms.model.robotparts.RobotParts;
+import by.tms.model.robot_parts.RobotParts;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
