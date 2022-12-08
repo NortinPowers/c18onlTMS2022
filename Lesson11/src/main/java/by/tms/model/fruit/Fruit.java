@@ -6,6 +6,9 @@ import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 
+import static by.tms.utils.Constants.KILOGRAM;
+import static java.math.RoundingMode.HALF_UP;
+
 @Getter
 @SuperBuilder
 @ToString
@@ -17,6 +20,8 @@ public abstract class Fruit {
         System.out.print("Made in Belarus");
     }
 
-    public abstract BigDecimal getValueOfFruitPrice(double weight);
+    public BigDecimal getValueOfFruitPrice(double weight) {
+        return this.getPrice().multiply(new BigDecimal(weight)).divide(new BigDecimal(KILOGRAM), 4, HALF_UP);
+    }
 
 }
