@@ -8,48 +8,56 @@ import org.junit.jupiter.api.Test;
 
 class CarServiceTest {
     CarAware pontiac = CarService.builder()
-            .engine(Engine.builder()
-                    .engineType("V9")
+            .car(Car.builder()
+                    .engine(Engine.builder()
+                            .engineType("V6")
+                            .build())
+                    .fuelTank(FuelTank.builder()
+                            .fuelTankLimit(60)
+                            .fuelLimit(15)
+                            .build())
+                    .brand("Pontiac")
+                    .productionYear(2022)
+                    .kilometerCounter(0)
                     .build())
-            .fuelTank(FuelTank.builder()
-                    .fuelTankLimit(60)
-                    .fuelLimit(15)
-                    .build())
-            .brand("Pontiac")
-            .productionYear(2022)
-            .kilometerCounter(0)
             .build();
     CarAware lada = CarService.builder()
+            .car(Car.builder()
+                    .build())
             .build();
     CarAware jeep = CarService.builder()
-            .engine(Engine.builder()
-                    .engineType("V6")
+            .car(Car.builder()
+                    .engine(Engine.builder()
+                            .engineType("V8")
+                            .build())
+                    .fuelTank(FuelTank.builder()
+                            .fuelTankLimit(60)
+                            .fuelLimit(0)
+                            .build())
+                    .brand("JEEP")
+                    .productionYear(2022)
+                    .kilometerCounter(0)
                     .build())
-            .fuelTank(FuelTank.builder()
-                    .fuelTankLimit(60)
-                    .fuelLimit(0)
-                    .build())
-            .brand("JEEP")
-            .productionYear(2022)
-            .kilometerCounter(0)
-            .build();
-    CarAware bmw = CarService.builder()
-            .engine(Engine.builder()
-                    .engineType("V6")
-                    .build())
-            .brand("BMW")
-            .productionYear(2022)
-            .kilometerCounter(0)
             .build();
 
+    CarAware bmw = CarService.builder()
+            .car(Car.builder()
+                    .engine(Engine.builder()
+                            .engineType("V6")
+                            .build())
+                    .brand("BMW")
+                    .productionYear(2022)
+                    .kilometerCounter(0)
+                    .build())
+            .build();
     @Test
     void startCar() throws CarNotFuelTankException, CarNotEngineException {
         Assertions.assertEquals("Pontiac started successfully.", pontiac.startCar());
-        Assertions.assertTrue(((Car) pontiac).isStarted());
-        Assertions.assertTrue(((Car) pontiac).getEngine().isStarted());
+        Assertions.assertTrue(((CarService) pontiac).getCar().isStarted());
+        Assertions.assertTrue(((CarService) pontiac).getCar().getEngine().isStarted());
         pontiac.stopCar();
-        Assertions.assertFalse(((Car) pontiac).isStarted());
-        Assertions.assertFalse(((Car) pontiac).getEngine().isStarted());
+        Assertions.assertFalse(((CarService) pontiac).getCar().isStarted());
+        Assertions.assertFalse(((CarService) pontiac).getCar().getEngine().isStarted());
         Assertions.assertThrows(CarNotEngineException.class, () -> lada.startCar());
         Assertions.assertThrows(CarNotFuelTankException.class, () -> bmw.startCar());
         Assertions.assertEquals("JEEP didn't start. Fill it with fuel.", jeep.startCar());
@@ -58,11 +66,11 @@ class CarServiceTest {
     @Test
     void goingCar() throws CarNotFuelTankException, CarNotEngineException {
         Assertions.assertEquals("Pontiac is not started.", pontiac.goingCar());
-        Assertions.assertFalse(((Car) pontiac).isStarted());
-        Assertions.assertFalse(((Car) pontiac).getEngine().isStarted());
+        Assertions.assertFalse(((CarService) pontiac).getCar().isStarted());
+        Assertions.assertFalse(((CarService) pontiac).getCar().getEngine().isStarted());
         pontiac.startCar();
-        Assertions.assertTrue(((Car) pontiac).isStarted());
-        Assertions.assertTrue(((Car) pontiac).getEngine().isStarted());
+        Assertions.assertTrue(((CarService) pontiac).getCar().isStarted());
+        Assertions.assertTrue(((CarService) pontiac).getCar().getEngine().isStarted());
         Assertions.assertEquals("Pontiac is going. ", pontiac.goingCar());
         Assertions.assertEquals("Pontiac is going. Fuel ran out before the end of the trip.", pontiac.goingCar());
     }
@@ -70,13 +78,13 @@ class CarServiceTest {
     @Test
     void stopCar() throws CarNotEngineException, CarNotFuelTankException {
         Assertions.assertThrows(CarNotEngineException.class, () -> lada.stopCar());
-        Assertions.assertFalse(((Car) pontiac).isStarted());
+        Assertions.assertFalse(((CarService) pontiac).getCar().isStarted());
         pontiac.startCar();
-        Assertions.assertTrue(((Car) pontiac).isStarted());
-        Assertions.assertTrue(((Car) pontiac).getEngine().isStarted());
+        Assertions.assertTrue(((CarService) pontiac).getCar().isStarted());
+        Assertions.assertTrue(((CarService) pontiac).getCar().getEngine().isStarted());
         pontiac.stopCar();
-        Assertions.assertFalse(((Car) pontiac).isStarted());
-        Assertions.assertFalse(((Car) pontiac).getEngine().isStarted());
+        Assertions.assertFalse(((CarService) pontiac).getCar().isStarted());
+        Assertions.assertFalse(((CarService) pontiac).getCar().getEngine().isStarted());
         Assertions.assertEquals("Pontiac is stopped.", pontiac.stopCar());
     }
 

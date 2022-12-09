@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @ToString
 @SuperBuilder
-public abstract class Car {
+public class Car {
     private final Engine engine;
     private final FuelTank fuelTank;
     private boolean started;
