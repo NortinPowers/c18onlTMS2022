@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
+    <groupId>by.tms</groupId>
     <artifactId>c18onlTMS2022</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -12,6 +12,7 @@
     <modules>
         <module>Lesson1</module>
         <module>Lesson2</module>
+        <module>Lesson3</module>
         <module>Lesson4</module>
         <module>Lesson5</module>
         <module>Lesson6</module>
@@ -22,6 +23,8 @@
         <module>Lesson8Addon</module>
         <module>Lesson9Inheritance</module>
         <module>Lesson10</module>
+        <module>Lesson11</module>
+        <module>Lesson12</module>
     </modules>
 
     <properties>
@@ -55,8 +58,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${mavenCompalePlugin.version}</version>
                 <configuration>
-                    <source>19(Preview)</source>
-                    <target>19(Preview)</target>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>

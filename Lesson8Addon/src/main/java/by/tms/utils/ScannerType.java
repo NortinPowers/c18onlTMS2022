@@ -1,14 +1,14 @@
 package by.tms.utils;
 
+import lombok.experimental.UtilityClass;
+
 import java.util.Scanner;
 
 import static by.tms.utils.Constants.NO_CONTAINS;
 import static by.tms.utils.Constants.SOME_CONTAINS;
 
-public final class ScannerType {
-
-    private ScannerType() {
-    }
+@UtilityClass
+public class ScannerType {
 
     /**
      * The method returns an integer corresponding to the specified limits from the console

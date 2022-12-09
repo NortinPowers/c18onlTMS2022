@@ -1,9 +1,15 @@
 package by.tms.utils;
 
-public final class Constants {
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
+public class Constants {
     public static final String MEN = "men";
     public static final String WOMEN = "women";
 
-    private Constants() {
-    }
+    public static final int MINIMUM_CONSCRIPTION_AGE = 18;
+
+    public static final int MAXIMUM_CONSCRIPTION_AGE = 27;
+
+
 }

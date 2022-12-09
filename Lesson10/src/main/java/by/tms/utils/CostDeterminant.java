@@ -1,13 +1,14 @@
 package by.tms.utils;
 
+import lombok.NonNull;
+import lombok.experimental.UtilityClass;
+
 import java.util.ArrayList;
 
-public final class CostDeterminant {
+@UtilityClass
+public class CostDeterminant {
 
-    private CostDeterminant() {
-    }
-
-    public static int getMaxCostOfRobot(ArrayList<Integer> robotCosts) {
+    public int getMaxCostOfRobot(@NonNull ArrayList<Integer> robotCosts) {
         int maxCost;
         int index = -1;
         if (robotCosts.size() > 0) {
