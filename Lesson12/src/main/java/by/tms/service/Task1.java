@@ -9,35 +9,30 @@ import java.util.ArrayList;
 public class Task1 {
     public static void main(String[] args) {
         CarAware pontiac = CarService.builder()
-                .car(Car.builder()
-                        .engine(Engine.builder()
-                                .engineType("V6")
-                                .build())
-                        .fuelTank(FuelTank.builder()
-                                .fuelTankLimit(60)
-                                .fuelLimit(15)
-                                .build())
+                .car(Car.builder(Engine.builder("V9")
+                                        .build(),
+                                FuelTank.builder(60)
+                                        .fuelLimit(15)
+                                        .build())
                         .brand("Pontiac")
                         .productionYear(2022)
                         .kilometerCounter(0)
                         .build())
                 .build();
-        CarAware lada = CarService.builder()
-                .car(Car.builder()
-                        .build())
-                .build();
-        CarAware bmw = CarService.builder()
-                .car(Car.builder()
-                        .engine(Engine.builder()
-                                .engineType("V6")
-                                .build())
-                        .brand("BMW")
+        CarAware jeep = CarService.builder()
+                .car(Car.builder(Engine.builder("V6")
+                                        .build(),
+                                FuelTank.builder(90)
+                                        .fuelLimit(0)
+                                        .build())
+                        .brand("JEEP")
+                        .productionYear(2022)
+                        .kilometerCounter(0)
                         .build())
                 .build();
         ArrayList<CarAware> cars = new ArrayList<>();
         cars.add(pontiac);
-        cars.add(lada);
-        cars.add(bmw);
+        cars.add(jeep);
         for (CarAware car : cars) {
             try {
                 System.out.println(car.startCar());

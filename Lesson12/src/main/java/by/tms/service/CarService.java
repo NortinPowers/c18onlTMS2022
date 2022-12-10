@@ -2,10 +2,10 @@ package by.tms.service;
 
 import by.tms.model.Car;
 import by.tms.utils.Messenger;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.experimental.SuperBuilder;
 
-@SuperBuilder
+@Builder
 @Getter
 public class CarService implements CarAware {
     private Car car;
