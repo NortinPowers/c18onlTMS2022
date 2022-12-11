@@ -1,16 +1,15 @@
 package by.tms.utils;
 
 import by.tms.model.fruit.Fruit;
+import lombok.NonNull;
 import lombok.experimental.UtilityClass;
-import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
 
 @UtilityClass
 public class Paymaster {
 
-    @NotNull
-    public BigDecimal getFruitsCost(Fruit fruit, BigDecimal fruitsCost) {
+    public BigDecimal getFruitsCost(@NonNull Fruit fruit, BigDecimal fruitsCost) {
         fruitsCost = fruitsCost.add(fruit.getValueOfFruitPrice(fruit.getWeight()));
         return fruitsCost;
     }
