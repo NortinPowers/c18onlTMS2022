@@ -8,30 +8,18 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class CarServiceTest {
-    CarService pontiac = new CarService.CarServiceBuilder(
-            new Car.CarBuilder(
-                    new Engine.EngineBuilder("V9")
-                            .build(),
-                    new FuelTank.FuelTankBuilder(60)
-                            .setFuelLimit(15)
-                            .build())
-                    .setBrand("Pontiac")
-                    .setProductionYear(2022)
-                    .setKilometerCounter(0)
-                    .build())
-            .build();
-    CarService jeep = new CarService.CarServiceBuilder(
-            new Car.CarBuilder(
-                    new Engine.EngineBuilder("V9")
-                            .build(),
-                    new FuelTank.FuelTankBuilder(90)
-                            .setFuelLimit(0)
-                            .build())
-                    .setBrand("JEEP")
-                    .setProductionYear(2022)
-                    .setKilometerCounter(0)
-                    .build())
-            .build();
+    CarService pontiac = new CarService(new Car(
+            new Engine("V6"),
+            new FuelTank(15, 60),
+            "Pontiac",
+            2022,
+            0));
+    CarService jeep = new CarService(new Car(
+            new Engine("V9"),
+            new FuelTank(0, 90),
+            "JEEP",
+            2022,
+            0));
 
     @Test
     void startCar() {

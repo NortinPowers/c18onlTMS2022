@@ -9,20 +9,8 @@ public class Engine {
     private final String engineType;
     private boolean started;
 
-    private Engine(EngineBuilder engineBuilder) {
-        engineType = engineBuilder.engineType;
-    }
-
-    public static class EngineBuilder {
-        private final String engineType;
-
-        public EngineBuilder(String engineType) {
-            this.engineType = engineType;
-        }
-
-        public Engine build() {
-            return new Engine(this);
-        }
+    public Engine(String engineType) {
+        this.engineType = engineType;
     }
 
     public void startEngine() {

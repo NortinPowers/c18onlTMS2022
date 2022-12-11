@@ -11,30 +11,18 @@ import java.util.ArrayList;
 
 public class MainTask1 {
     public static void main(String[] args) {
-        CarService pontiac = new CarService.CarServiceBuilder(
-                new Car.CarBuilder(
-                        new Engine.EngineBuilder("V9")
-                                .build(),
-                        new FuelTank.FuelTankBuilder(60)
-                                .setFuelLimit(15)
-                                .build())
-                        .setBrand("Pontiac")
-                        .setProductionYear(2022)
-                        .setKilometerCounter(0)
-                        .build())
-                .build();
-        CarService jeep = new CarService.CarServiceBuilder(
-                new Car.CarBuilder(
-                        new Engine.EngineBuilder("V9")
-                                .build(),
-                        new FuelTank.FuelTankBuilder(90)
-                                .setFuelLimit(0)
-                                .build())
-                        .setBrand("JEEP")
-                        .setProductionYear(2022)
-                        .setKilometerCounter(0)
-                        .build())
-                .build();
+        CarService pontiac = new CarService(new Car(
+                new Engine("V6"),
+                new FuelTank(60, 15),
+                "Pontiac",
+                2022,
+                0));
+        CarService jeep = new CarService(new Car(
+                new Engine("V9"),
+                new FuelTank(90, 0),
+                "JEEP",
+                2022,
+                0));
         ArrayList<CarAware> cars = new ArrayList<>();
         cars.add(pontiac);
         cars.add(jeep);
