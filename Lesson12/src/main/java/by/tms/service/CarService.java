@@ -10,20 +10,8 @@ import java.util.Random;
 public class CarService implements CarAware {
     private final Car car;
 
-    private CarService(CarServiceBuilder carServiceBuilder) {
-        car = carServiceBuilder.car;
-    }
-
-    public static class CarServiceBuilder {
-        private final Car car;
-
-        public CarServiceBuilder(Car car) {
-            this.car = car;
-        }
-
-        public CarService build() {
-            return new CarService(this);
-        }
+    public CarService(Car car) {
+        this.car = car;
     }
 
     @Override
@@ -40,7 +28,6 @@ public class CarService implements CarAware {
         } else {
             throw new CarNotStartedException("Failed to start the car " + car.getBrand() + ".");
         }
-
     }
 
     @Override
