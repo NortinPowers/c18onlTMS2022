@@ -1,13 +1,15 @@
 package by.tms.service;
 
+import by.tms.exception.CarNotStartedException;
+
 public interface CarAware {
-    String startCar() throws CarNotEngineException, CarNotFuelTankException;
+    String startCar() throws CarNotStartedException;
 
     String goingCar();
 
-    String stopCar() throws CarNotEngineException;
+    String stopCar();
 
-    String getFuelLevel() throws CarNotFuelTankException;
+    String getFuelLevel();
 
-    String refuelingFuel(int fuelVolume) throws CarNotFuelTankException;
+    String refuelingFuel(int fuelVolume);
 }

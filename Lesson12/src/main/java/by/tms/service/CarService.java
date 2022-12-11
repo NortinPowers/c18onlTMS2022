@@ -1,18 +1,35 @@
 package by.tms.service;
 
+import by.tms.exception.CarNotStartedException;
 import by.tms.model.Car;
-import by.tms.utils.Messenger;
-import lombok.Builder;
 import lombok.Getter;
 
-@Builder
+import java.util.Random;
+
 @Getter
 public class CarService implements CarAware {
-    private Car car;
+    private final Car car;
+
+    private CarService(CarServiceBuilder carServiceBuilder) {
+        car = carServiceBuilder.car;
+    }
+
+    public static class CarServiceBuilder {
+        private final Car car;
+
+        public CarServiceBuilder(Car car) {
+            this.car = car;
+        }
+
+        public CarService build() {
+            return new CarService(this);
+        }
+    }
 
     @Override
-    public String startCar() throws CarNotEngineException, CarNotFuelTankException {
-        if (car.getEngine() != null && car.getFuelTank() != null) {
+    public String startCar() throws CarNotStartedException {
+        Random random = new Random();
+        if (random.nextInt(21) % 2 != 0) {
             if (car.getFuelTank().getFuelLimit() > 0) {
                 car.getEngine().startEngine();
                 car.setStarted(true);
@@ -20,11 +37,10 @@ public class CarService implements CarAware {
             } else {
                 return car.getBrand() + " didn't start. Fill it with fuel.";
             }
-        } else if (car.getEngine() == null) {
-            throw new CarNotEngineException(Messenger.NOT_ENGINE_EXCEPTION);
         } else {
-            throw new CarNotFuelTankException(Messenger.NOT_FUEL_TANK_EXCEPTION);
+            throw new CarNotStartedException("Failed to start the car " + car.getBrand() + ".");
         }
+
     }
 
     @Override
@@ -45,39 +61,31 @@ public class CarService implements CarAware {
     }
 
     @Override
-    public String stopCar() throws CarNotEngineException {
-        if (car.getEngine() != null) {
+    public String stopCar() {
+        if (car.isStarted()) {
             car.getEngine().stopEngine();
             car.setStarted(false);
             return car.getBrand() + " is stopped.";
         } else {
-            throw new CarNotEngineException(Messenger.NOT_ENGINE_EXCEPTION);
+            return car.getBrand() + " is already stopped.";
         }
     }
 
     @Override
-    public String getFuelLevel() throws CarNotFuelTankException {
-        if (car.getFuelTank() != null) {
-            return "Fuel level of " + car.getBrand() + " is " + car.getFuelTank().getFuelLimit() + " liters.";
-        } else {
-            throw new CarNotFuelTankException(Messenger.NOT_FUEL_TANK_EXCEPTION);
-        }
+    public String getFuelLevel() {
+        return "Fuel level of " + car.getBrand() + " is " + car.getFuelTank().getFuelLimit() + " liters.";
     }
 
     @Override
-    public String refuelingFuel(int fuelVolume) throws CarNotFuelTankException {
-        if (car.getFuelTank() != null) {
-            if (fuelVolume > car.getFuelTank().getFuelTankLimit() - car.getFuelTank().getFuelLimit()) {
-                car.getFuelTank().setFuelLimit(car.getFuelTank().getFuelTankLimit());
-                return "Some of the fuel did not fit into the fuel tank. Now there are "
-                        + car.getFuelTank().getFuelLimit() + " liters of fuel in the gas tank of " + car.getBrand() + ".";
-            } else {
-                car.getFuelTank().setFuelLimit(car.getFuelTank().getFuelLimit() + fuelVolume);
-                return "Now there are " + car.getFuelTank().getFuelLimit() + " liters of fuel in the gas tank of "
-                        + car.getBrand() + ".";
-            }
+    public String refuelingFuel(int fuelVolume) {
+        if (fuelVolume > car.getFuelTank().getFuelTankLimit() - car.getFuelTank().getFuelLimit()) {
+            car.getFuelTank().setFuelLimit(car.getFuelTank().getFuelTankLimit());
+            return "Some of the fuel did not fit into the fuel tank. Now there are "
+                    + car.getFuelTank().getFuelLimit() + " liters of fuel in the gas tank of " + car.getBrand() + ".";
         } else {
-            throw new CarNotFuelTankException(Messenger.NOT_FUEL_TANK_EXCEPTION);
+            car.getFuelTank().setFuelLimit(car.getFuelTank().getFuelLimit() + fuelVolume);
+            return "Now there are " + car.getFuelTank().getFuelLimit() + " liters of fuel in the gas tank of "
+                    + car.getBrand() + ".";
         }
     }
 }

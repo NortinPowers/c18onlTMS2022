@@ -1,19 +1,36 @@
 package by.tms.model;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @ToString
-@Builder(builderMethodName = "internalBuilder")
 public class FuelTank {
     @Setter
     private int fuelLimit;
     private final int fuelTankLimit;
 
-    public static FuelTankBuilder builder(int fuelTankLimit) {
-        return internalBuilder().fuelTankLimit(fuelTankLimit);
+    private FuelTank(FuelTankBuilder fuelTankBuilder) {
+        fuelTankLimit = fuelTankBuilder.fuelTankLimit;
+        fuelLimit = fuelTankBuilder.fuelLimit;
+    }
+
+    public static class FuelTankBuilder {
+        private final int fuelTankLimit;
+        private int fuelLimit;
+
+        public FuelTankBuilder(int fuelTankLimit) {
+            this.fuelTankLimit = fuelTankLimit;
+        }
+
+        public FuelTankBuilder setFuelLimit(int fuelLimit) {
+            this.fuelLimit = fuelLimit;
+            return this;
+        }
+
+        public FuelTank build() {
+            return new FuelTank(this);
+        }
     }
 }
