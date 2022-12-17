@@ -1,15 +1,16 @@
 package by.tms.service;
 
 import by.tms.utils.Constants;
+import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 
 public class TextFormatter {
-    public int getNumberOfWordsInString(String string) {
+    public int getNumberOfWordsInString(@NonNull String string) {
         return string.split(" ").length;
     }
 
-    public boolean checkPalindromeWordInString(String string) {
-        for (String strPalindromeTestValue : string.split("[\\s,\\.;:-\\?!]")) {
+    public boolean checkPalindromeWordInString(@NonNull String string) {
+        for (String strPalindromeTestValue : string.split("[\\s,\\.;:-\\?!\\)\\(]")) {
             if (strPalindromeTestValue.equals(StringUtils.reverse(strPalindromeTestValue))
                     && strPalindromeTestValue.length() > Constants.MIN_PALINDROME_LENGTH) {
                 return true;
@@ -18,7 +19,7 @@ public class TextFormatter {
         return false;
     }
 
-    public String getMiddleCharOfWord(String string) {
+    public String getMiddleCharOfWord(@NonNull String string) {
         if (string.length() > 0) {
             int srtLength = string.length();
             if (srtLength % 2 == 0) {
@@ -29,5 +30,15 @@ public class TextFormatter {
         } else {
             return "";
         }
+    }
+
+    public int getNumberOfLatinAlphabetWords(@NonNull String string) {
+        int count = 0;
+        for (String str : string.split("[\\s \\W]")) {
+            if (str.matches("([A-Za-z])+")) {
+                count++;
+            }
+        }
+        return count;
     }
 }
