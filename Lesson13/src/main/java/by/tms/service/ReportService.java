@@ -8,7 +8,7 @@ import java.util.List;
 public class ReportService implements ReportAware {
 
     public String getEditedName(@NonNull String fullName) {
-        if (fullName.matches("([A-Z])([a-z])+ ([A-Z])([a-z])+")) {
+        if (fullName.matches("([A-Z])([a-z]){2,30} ([A-Z])([a-z]){2,30}")) {
             return fullName.split(" ")[0].charAt(0) + ". " + fullName.split(" ")[1];
         } else {
             return "The full name was entered incorrectly";
