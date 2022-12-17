@@ -19,7 +19,7 @@ public class Main {
         String strTask3 = "В массиве находятся слова. Вывести на экран слова палиндромы\n" +
                 " * (т.е которые читаются справа на лево и слева на право одинаково, например: заказ, казак, дед...)";
         ArrayList<String> stringTask3ArrayList = new ArrayList<>();
-        for (String strPalindromeTestValue : strTask3.split("[\\s,\\.;:-\\?!\\)\\(]")) {
+        for (String strPalindromeTestValue : strTask3.split(REG_EX_RUS_NOT_LETTERS)) {
             if (strPalindromeTestValue.equals(StringUtils.reverse(strPalindromeTestValue))
                     && strPalindromeTestValue.length() > MIN_PALINDROME_LENGTH) {
                 stringTask3ArrayList.add(strPalindromeTestValue);

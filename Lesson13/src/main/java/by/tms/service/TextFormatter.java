@@ -1,8 +1,10 @@
 package by.tms.service;
 
-import by.tms.utils.Constants;
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
+
+import static by.tms.utils.Constants.MIN_PALINDROME_LENGTH;
+import static by.tms.utils.Constants.REG_EX_RUS_NOT_LETTERS;
 
 public class TextFormatter {
     public int getNumberOfWordsInString(@NonNull String string) {
@@ -10,9 +12,9 @@ public class TextFormatter {
     }
 
     public boolean checkPalindromeWordInString(@NonNull String string) {
-        for (String strPalindromeTestValue : string.split("[\\s,\\.;:-\\?!\\)\\(]")) {
+        for (String strPalindromeTestValue : string.split(REG_EX_RUS_NOT_LETTERS)) {
             if (strPalindromeTestValue.equals(StringUtils.reverse(strPalindromeTestValue))
-                    && strPalindromeTestValue.length() > Constants.MIN_PALINDROME_LENGTH) {
+                    && strPalindromeTestValue.length() > MIN_PALINDROME_LENGTH) {
                 return true;
             }
         }
