@@ -4,7 +4,7 @@ import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 
 import static by.tms.utils.Constants.MIN_PALINDROME_LENGTH;
-import static by.tms.utils.Constants.REG_EX_RUS_NOT_LETTERS;
+import static by.tms.utils.Constants.REGEX_NOT_RUS_LETTERS;
 
 public class TextFormatter {
     public int getNumberOfWordsInString(@NonNull String string) {
@@ -12,7 +12,7 @@ public class TextFormatter {
     }
 
     public boolean checkPalindromeWordInString(@NonNull String string) {
-        for (String strPalindromeTestValue : string.split(REG_EX_RUS_NOT_LETTERS)) {
+        for (String strPalindromeTestValue : string.split(REGEX_NOT_RUS_LETTERS)) {
             if (strPalindromeTestValue.equals(StringUtils.reverse(strPalindromeTestValue))
                     && strPalindromeTestValue.length() > MIN_PALINDROME_LENGTH) {
                 return true;

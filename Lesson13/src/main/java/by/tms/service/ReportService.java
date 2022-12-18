@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ReportService implements ReportAware {
 
-    public String getEditedName(@NonNull String fullName) {
+    public String getEditedFullName(@NonNull String fullName) {
         if (fullName.matches("([A-Z])([a-z]){2,30} ([A-Z])([a-z]){2,30}")) {
             return fullName.split(" ")[0].charAt(0) + ". " + fullName.split(" ")[1];
         } else {
@@ -26,7 +26,7 @@ public class ReportService implements ReportAware {
 
     public String getEmployeeInfo(@NonNull Employee employee) {
         return String.format("| %-25s | %12.2f | %n",
-                getEditedName(employee.getFullName()), employee.getSalary());
+                getEditedFullName(employee.getFullName()), employee.getSalary());
     }
 }
 
