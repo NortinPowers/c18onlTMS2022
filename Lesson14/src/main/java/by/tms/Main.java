@@ -6,9 +6,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
-    static Pattern patternTask2 = Pattern.compile("c+a+b+");
+    static Pattern patternTask2 = Pattern.compile("c+ab");
     static Pattern patternTask3 = Pattern.compile("Java\\s+\\d+");
-    static Pattern patternTask5 = Pattern.compile("[a-z1-5]{4,20}");
+    static Pattern patternTask5 = Pattern.compile("[a-z15]{4,20}");
 
     public static void main(String[] args) {
         System.out.println("Task 2:\n");
