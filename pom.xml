@@ -25,6 +25,8 @@
         <module>Lesson10</module>
         <module>Lesson11</module>
         <module>Lesson12</module>
+        <module>Lesson13</module>
+        <module>Lesson14</module>
     </modules>
 
     <properties>
@@ -33,6 +35,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <lombok.version>1.18.24</lombok.version>
         <mavenCompalePlugin.version>3.10.1</mavenCompalePlugin.version>
+        <commons-lang.version>3.12.0</commons-lang.version>
     </properties>
 
     <dependencies>
@@ -48,8 +51,12 @@
             <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang.version}</version>
+        </dependency>
     </dependencies>
-
 
     <build>
         <plugins>
@@ -71,6 +78,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>
