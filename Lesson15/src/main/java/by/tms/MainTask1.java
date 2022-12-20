@@ -8,8 +8,8 @@ import static by.tms.utils.FilePaths.*;
 
 public class MainTask1 {
     public static void main(String[] args) {
-        try (BufferedReader bR = new BufferedReader(new FileReader(INPUT_T1));
-             BufferedWriter bW = new BufferedWriter(new FileWriter(OUTPUT_T1))) {
+        try (BufferedReader bR = new BufferedReader(new FileReader(INPUT_TASK1));
+             BufferedWriter bW = new BufferedWriter(new FileWriter(OUTPUT_TASK1))) {
             String text;
             TextFormatter textFormatter = new TextFormatter();
             while ((text = bR.readLine()) != null) {
@@ -21,7 +21,7 @@ public class MainTask1 {
         } catch (IOException e) {
             System.out.println("Unexpected error " + e);
         }
-        System.out.println("Palindromes from file \"" + INPUT_T1_NAME + "\" were written to file \"" + OUTPUT_T1_NAME +
+        System.out.println("Palindromes from file \"" + INPUT_FILE_NAME + "\" were written to file \"" + OUTPUT_FILE_NAME +
                 "\" into the package: " + TASK1_PACKAGE);
     }
 }
