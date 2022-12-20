@@ -21,7 +21,7 @@ public class Main {
         printMatcher(matcherTask3);
         System.out.println("\nTask 4:");
         String str = "One two three раз два три one1 two2 123 ";
-        System.out.println(str.split("\\w+\\d+|\\W+\\s*").length);
+        System.out.println(str.split("\\w*\\d+|\\W+\\s*").length);
         System.out.println("\nTask 5:\n");
         System.out.println(validate("asd12"));
     }
