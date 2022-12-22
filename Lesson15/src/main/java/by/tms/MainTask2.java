@@ -8,14 +8,11 @@ import java.util.List;
 import static by.tms.utils.FilePaths.*;
 
 public class MainTask2 {
+    static TextFormatter textFormatter = new TextFormatter();
     public static void main(String[] args) {
         try (BufferedReader bR = new BufferedReader(new FileReader(INPUT_TASK2));
              BufferedWriter bW = new BufferedWriter(new FileWriter(OUTPUT_TASK2))) {
-            StringBuilder text = new StringBuilder();
-            TextFormatter textFormatter = new TextFormatter();
-            while (bR.read() != -1) {
-                text.append(bR.readLine());
-            }
+            StringBuilder text = textFormatter.getStringBuilderFromInputTxt(bR);
             List<String> stringsListBasedOnText = textFormatter.getStringsListBasedOnText(text.toString());
             for (String string : stringsListBasedOnText) {
                 if (textFormatter.checkStringLength(string) || textFormatter.checkPalindromeWordInString(string)) {
