@@ -6,9 +6,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
-    static Pattern patternTask2 = Pattern.compile("c+a+b+");
+    static Pattern patternTask2 = Pattern.compile("c+ab");
     static Pattern patternTask3 = Pattern.compile("Java\\s+\\d+");
-    static Pattern patternTask5 = Pattern.compile("[a-z1-5]{4,20}");
+    static Pattern patternTask5 = Pattern.compile("[a-z15]{4,20}");
 
     public static void main(String[] args) {
         System.out.println("Task 2:\n");
@@ -21,7 +21,7 @@ public class Main {
         printMatcher(matcherTask3);
         System.out.println("\nTask 4:");
         String str = "One two three раз два три one1 two2 123 ";
-        System.out.println(str.split("\\w+\\d+|\\W+\\s*").length);
+        System.out.println(str.split("\\w*\\d+|\\W+\\s*").length);
         System.out.println("\nTask 5:\n");
         System.out.println(validate("asd12"));
     }

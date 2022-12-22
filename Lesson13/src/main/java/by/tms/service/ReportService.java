@@ -16,7 +16,7 @@ public class ReportService implements ReportAware {
     }
 
     @Override
-    public String generateReport(@NonNull List<Employee> employees) {
+    public String generateReport(List<Employee> employees) {
         StringBuilder info = new StringBuilder();
         for (Employee employee : employees) {
             info.append(getEmployeeInfo(employee));
