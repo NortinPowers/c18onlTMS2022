@@ -54,14 +54,14 @@ public class TextFormatter {
         return false;
     }
 
-    public static void createOutputTxtFromList(BufferedWriter bW, List<String> stringsBlackListText) throws IOException {
+    public void createOutputTxtFromList(BufferedWriter bW, List<String> stringsBlackListText) throws IOException {
         for (String string : stringsBlackListText) {
             bW.write(string.trim() + "\n");
             bW.flush();
         }
     }
 
-    public static List<String> getStringsFromInputTxt(BufferedReader bRC) throws IOException {
+    public List<String> getStringsFromInputTxt(BufferedReader bRC) throws IOException {
         String word;
         List<String> wordList = new ArrayList<>();
         while ((word = bRC.readLine()) != null) {
@@ -70,7 +70,7 @@ public class TextFormatter {
         return wordList;
     }
 
-    public static StringBuilder getStringBuilderFromInputTxt(BufferedReader bR) throws IOException {
+    public StringBuilder getStringBuilderFromInputTxt(BufferedReader bR) throws IOException {
         StringBuilder text = new StringBuilder();
         char[] strBuf = new char[MAX_WORDS_LENGTH];
         int readCount;
