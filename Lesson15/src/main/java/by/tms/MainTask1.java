@@ -21,7 +21,7 @@ public class MainTask1 {
         } catch (IOException e) {
             System.out.println("Unexpected error " + e);
         }
-        System.out.println("Palindromes from file \"" + INPUT_FILE_NAME + "\" were written to file \"" + OUTPUT_FILE_NAME +
+        System.out.println("Palindromes from file \"" + INPUT_TXT_FILE_NAME + "\" were written to file \"" + OUTPUT_TXT_FILE_NAME +
                 "\" into the package: " + TASK1_PACKAGE);
     }
 }

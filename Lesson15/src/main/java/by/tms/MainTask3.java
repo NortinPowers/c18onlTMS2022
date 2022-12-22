@@ -33,7 +33,7 @@ public class MainTask3 {
         } catch (IOException e) {
             System.out.println("Unexpected error " + e);
         }
-        System.out.println("The file \"" + OUTPUT_FILE_NAME + "\" into " + TASK3_PACKAGE
+        System.out.println("The file \"" + OUTPUT_TXT_FILE_NAME + "\" into " + TASK3_PACKAGE
                 + " contains sentences that have not passed the censorship check");
     }
 }
