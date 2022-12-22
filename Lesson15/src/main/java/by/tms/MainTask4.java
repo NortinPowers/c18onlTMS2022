@@ -20,13 +20,13 @@ public class MainTask4 {
         try (ObjectOutputStream oOs = new ObjectOutputStream(new FileOutputStream(CAR_DAT))) {
             oOs.writeObject(pontiac);
         } catch (IOException e) {
-            System.out.println("Unexpected error " + e);
+            System.out.println("Unexpected save error " + e);
         }
         try (ObjectInputStream oIs = new ObjectInputStream(new FileInputStream(CAR_DAT))) {
             Car car = (Car) oIs.readObject();
             System.out.println(car);
         } catch (Exception e) {
-            System.out.println("Unexpected error " + e);
+            System.out.println("Unexpected read error " + e);
         }
     }
 }

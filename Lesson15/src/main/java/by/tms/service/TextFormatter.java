@@ -13,8 +13,6 @@ import java.util.List;
 import static by.tms.utils.Constants.*;
 
 public class TextFormatter {
-
-
     public boolean isPalindrome(@NonNull String word) {
         String worldIgnoreCase = word.toLowerCase();
         return worldIgnoreCase.equals(StringUtils.reverse(worldIgnoreCase))
