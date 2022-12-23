@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @UtilityClass
 public class FileHelper {
-    public static final String LESSON_FILE_PATH = "Lesson16";
+    public static final String LESSON16_FILE_PATH = "Lesson16";
 
     private static void printFileStructureInfo(@NonNull File dir) {
         if (dir.isDirectory()) {
