@@ -8,9 +8,9 @@ import java.util.Objects;
 
 @UtilityClass
 public class FileHelper {
-    public static final String LESSON_FILE_PATCH = "Lesson16";
+    public static final String LESSON_FILE_PATH = "Lesson16";
 
-    public static void printFileStructureInfo(@NonNull File dir) {
+    private static void printFileStructureInfo(@NonNull File dir) {
         if (dir.isDirectory()) {
             for (File file : Objects.requireNonNull(dir.listFiles())) {
                 if (file.isDirectory()) {
@@ -26,5 +26,10 @@ public class FileHelper {
     public String getFileInfo(@NonNull File file) {
         String type = file.isDirectory() ? "dir" : "file";
         return String.format("%-20s|%4s|", file.getName(), type);
+    }
+
+    public static void printFileStructureByPath(String path) {
+        File dir = new File(path);
+        printFileStructureInfo(dir);
     }
 }
