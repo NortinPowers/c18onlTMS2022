@@ -12,14 +12,14 @@ public class FileHelper {
     public static final int FILE_MARK = 1;
     public static final int DIR_MARK = 0;
 
-    private void printFileStructureInfo(@NonNull File dir, StringBuilder fileStructure) {
+    private void fillFileStructure(@NonNull File dir, StringBuilder fileStructure) {
         int structureMark;
         if (dir.isDirectory()) {
             for (File file : Objects.requireNonNull(dir.listFiles())) {
                 if (file.isDirectory()) {
                     structureMark = DIR_MARK;
                     fileStructure.append(getFileInfo(file, structureMark));
-                    printFileStructureInfo(file, fileStructure);
+                    fillFileStructure(file, fileStructure);
                 } else {
                     structureMark = FILE_MARK;
                     fileStructure.append(getFileInfo(file, structureMark));
@@ -33,10 +33,10 @@ public class FileHelper {
         return String.format("%-20s|%4s|\n", file.getName(), type);
     }
 
-    public static String printFileStructureByPath(String path) {
+    public static String getFileStructureByPath(String path) {
         File dir = new File(path);
         StringBuilder fileStructure = new StringBuilder();
-        printFileStructureInfo(dir, fileStructure);
+        fillFileStructure(dir, fileStructure);
         return fileStructure.toString();
     }
 }
