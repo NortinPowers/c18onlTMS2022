@@ -50,10 +50,10 @@ public class TextFormatter {
         return false;
     }
 
-    public void createOutputTxtFileFromList(BufferedWriter bW, List<String> textList) throws IOException {
+    public void createOutputTxtFileFromList(BufferedWriter writer, List<String> textList) throws IOException {
         for (String string : textList) {
-            bW.write(string.trim() + "\n");
-            bW.flush();
+            writer.write(string.trim() + "\n");
+            writer.flush();
         }
     }
 
@@ -78,9 +78,9 @@ public class TextFormatter {
         return text.toString();
     }
 
-    public void createFileTxtFromString(String outputFile, List<String> info) {
+    public void createFileTxtFromString(String outputFile, List<String> text) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
-            createOutputTxtFileFromList(writer, info);
+            createOutputTxtFileFromList(writer, text);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
