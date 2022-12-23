@@ -11,11 +11,11 @@ import static by.tms.utils.FilePaths.*;
 public class MainTask3 {
     static TextFormatter textFormatter = new TextFormatter();
     public static void main(String[] args) {
-        try (BufferedReader bR = new BufferedReader(new FileReader(INPUT_TASK3));
-             BufferedReader bRC = new BufferedReader(new FileReader(CENSOR));
-             BufferedWriter bW = new BufferedWriter(new FileWriter(OUTPUT_TASK3))) {
-            StringBuilder text = textFormatter.getStringBuilderFromInputTxt(bR);
-            List<String> censorBlackList = textFormatter.getStringsFromInputTxt(bRC);
+        try (BufferedReader reader = new BufferedReader(new FileReader(INPUT_TASK3));
+             BufferedReader readerCensor = new BufferedReader(new FileReader(CENSOR));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(OUTPUT_TASK3))) {
+            StringBuilder text = textFormatter.getStringBuilderFromInputTxt(reader);
+            List<String> censorBlackList = textFormatter.getStringsFromInputTxt(readerCensor);
             List<String> stringsListBasedOnText = textFormatter.getStringsListBasedOnText(text.toString());
             List<String> stringsBlackListText = new ArrayList<>();
             boolean censorFlag = false;
@@ -26,9 +26,9 @@ public class MainTask3 {
                 }
             }
             if (censorFlag) {
-                bW.write(stringsBlackListText.size() + " sentences of the text did not pass the censors check:\n");
-                bW.flush();
-                textFormatter.createOutputTxtFromList(bW, stringsBlackListText);
+                writer.write(stringsBlackListText.size() + " sentences of the text did not pass the censors check:\n");
+                writer.flush();
+                textFormatter.createOutputTxtFromList(writer, stringsBlackListText);
             }
         } catch (IOException e) {
             System.out.println("Unexpected error " + e);

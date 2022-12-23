@@ -10,14 +10,14 @@ import static by.tms.utils.FilePaths.*;
 public class MainTask2 {
     static TextFormatter textFormatter = new TextFormatter();
     public static void main(String[] args) {
-        try (BufferedReader bR = new BufferedReader(new FileReader(INPUT_TASK2));
-             BufferedWriter bW = new BufferedWriter(new FileWriter(OUTPUT_TASK2))) {
-            StringBuilder text = textFormatter.getStringBuilderFromInputTxt(bR);
+        try (BufferedReader reader = new BufferedReader(new FileReader(INPUT_TASK2));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(OUTPUT_TASK2))) {
+            StringBuilder text = textFormatter.getStringBuilderFromInputTxt(reader);
             List<String> stringsListBasedOnText = textFormatter.getStringsListBasedOnText(text.toString());
             for (String string : stringsListBasedOnText) {
                 if (textFormatter.checkStringLength(string) || textFormatter.checkPalindromeWordInString(string)) {
-                    bW.write(string.trim() + "\n");
-                    bW.flush();
+                    writer.write(string.trim() + "\n");
+                    writer.flush();
                 }
             }
         } catch (IOException e) {
