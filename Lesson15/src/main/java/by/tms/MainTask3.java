@@ -17,18 +17,18 @@ public class MainTask3 {
             StringBuilder text = textFormatter.getStringBuilderFromInputTxt(reader);
             List<String> censorBlackList = textFormatter.getStringsFromInputTxt(readerCensor);
             List<String> stringsListBasedOnText = textFormatter.getStringsListBasedOnText(text.toString());
-            List<String> stringsBlackListText = new ArrayList<>();
+            List<String> textBlackList = new ArrayList<>();
             boolean censorFlag = false;
             for (String string : stringsListBasedOnText) {
                 if (textFormatter.isCensorNotPass(string, censorBlackList)) {
                     censorFlag = true;
-                    stringsBlackListText.add(string);
+                    textBlackList.add(string);
                 }
             }
             if (censorFlag) {
-                writer.write(stringsBlackListText.size() + " sentences of the text did not pass the censors check:\n");
+                writer.write(textBlackList.size() + " sentences of the text did not pass the censors check:\n");
                 writer.flush();
-                textFormatter.createOutputTxtFromList(writer, stringsBlackListText);
+                textFormatter.createOutputTxtFromList(writer, textBlackList);
             }
         } catch (IOException e) {
             System.out.println("Unexpected error " + e);
