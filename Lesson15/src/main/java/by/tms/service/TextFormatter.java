@@ -14,9 +14,8 @@ import static by.tms.utils.Constants.*;
 
 public class TextFormatter {
     public boolean isPalindrome(@NonNull String word) {
-        String worldIgnoreCase = word.toLowerCase();
-        return worldIgnoreCase.equals(StringUtils.reverse(worldIgnoreCase))
-                && worldIgnoreCase.matches("[a-zа-я]{2,}");
+        return word.equalsIgnoreCase(StringUtils.reverse(word))
+                && word.toLowerCase().matches("[a-zа-я]{2,}");
     }
 
     public int getNumberOfWordsInString(@NonNull String string) {
@@ -37,8 +36,9 @@ public class TextFormatter {
     }
 
     public boolean checkStringLength(String string) {
-        return getNumberOfWordsInString(string) >= MIN_NUMBER_OF_WORDS_IN_STRING
-                && getNumberOfWordsInString(string) <= MAX_NUMBER_OF_WORDS_IN_STRING;
+        int numberOfWordsInString = getNumberOfWordsInString(string);
+        return numberOfWordsInString >= MIN_NUMBER_OF_WORDS_IN_STRING
+                && numberOfWordsInString <= MAX_NUMBER_OF_WORDS_IN_STRING;
     }
 
     public boolean isCensorNotPass(String string, List<String> censorList) {
