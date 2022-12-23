@@ -5,6 +5,6 @@ import static by.tms.utils.FileHelper.printFileStructureByPath;
 
 public class MainTask1 {
     public static void main(String[] args) {
-        printFileStructureByPath(LESSON16_FILE_PATH);
+        System.out.println(printFileStructureByPath(LESSON16_FILE_PATH));
     }
 }

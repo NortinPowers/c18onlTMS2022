@@ -9,27 +9,34 @@ import java.util.Objects;
 @UtilityClass
 public class FileHelper {
     public static final String LESSON16_FILE_PATH = "Lesson16";
+    public static final int FILE_MARK = 1;
+    public static final int DIR_MARK = 0;
 
-    private static void printFileStructureInfo(@NonNull File dir) {
+    private void printFileStructureInfo(@NonNull File dir, StringBuilder fileStructure) {
+        int structureMark;
         if (dir.isDirectory()) {
             for (File file : Objects.requireNonNull(dir.listFiles())) {
                 if (file.isDirectory()) {
-                    System.out.println(getFileInfo(file));
-                    printFileStructureInfo(file);
+                    structureMark = DIR_MARK;
+                    fileStructure.append(getFileInfo(file, structureMark));
+                    printFileStructureInfo(file, fileStructure);
                 } else {
-                    System.out.println(getFileInfo(file));
+                    structureMark = FILE_MARK;
+                    fileStructure.append(getFileInfo(file, structureMark));
                 }
             }
         }
     }
 
-    public String getFileInfo(@NonNull File file) {
-        String type = file.isDirectory() ? "dir" : "file";
-        return String.format("%-20s|%4s|", file.getName(), type);
+    private String getFileInfo(@NonNull File file, int structureMark) {
+        String type = structureMark == DIR_MARK ? "dir" : "file";
+        return String.format("%-20s|%4s|\n", file.getName(), type);
     }
 
-    public static void printFileStructureByPath(String path) {
+    public static String printFileStructureByPath(String path) {
         File dir = new File(path);
-        printFileStructureInfo(dir);
+        StringBuilder fileStructure = new StringBuilder();
+        printFileStructureInfo(dir, fileStructure);
+        return fileStructure.toString();
     }
 }
