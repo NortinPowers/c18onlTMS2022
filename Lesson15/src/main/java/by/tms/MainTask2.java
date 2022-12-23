@@ -12,7 +12,7 @@ public class MainTask2 {
     public static void main(String[] args) {
         try (BufferedReader reader = new BufferedReader(new FileReader(INPUT_TASK2));
              BufferedWriter writer = new BufferedWriter(new FileWriter(OUTPUT_TASK2))) {
-            StringBuilder text = textFormatter.getStringBuilderFromInputTxt(reader);
+            StringBuilder text = textFormatter.getStringBuilderFromFileTxt(reader);
             List<String> stringsListBasedOnText = textFormatter.getStringsListBasedOnText(text.toString());
             for (String string : stringsListBasedOnText) {
                 if (textFormatter.checkStringLength(string) || textFormatter.checkPalindromeWordInString(string)) {

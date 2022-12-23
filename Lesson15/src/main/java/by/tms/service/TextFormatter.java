@@ -57,7 +57,7 @@ public class TextFormatter {
         }
     }
 
-    public StringBuilder getStringBuilderFromInputTxt(BufferedReader reader) throws IOException {
+    public StringBuilder getStringBuilderFromFileTxt(BufferedReader reader) throws IOException {
         StringBuilder text = new StringBuilder();
         char[] strBuf = new char[MAX_WORDS_LENGTH];
         int readCount;
@@ -71,14 +71,14 @@ public class TextFormatter {
     public String getStringFromFileTxt(String inputFile) {
         StringBuilder text;
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFile))) {
-            text = getStringBuilderFromInputTxt(reader);
+            text = getStringBuilderFromFileTxt(reader);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         return text.toString();
     }
 
-    public void createFileTxtFromString(String outputFile, List<String> text) {
+    public void createOutputFileTxtFromString(String outputFile, List<String> text) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
             createOutputTxtFileFromList(writer, text);
         } catch (IOException e) {
@@ -86,7 +86,7 @@ public class TextFormatter {
         }
     }
 
-    public List<String> getListStrFromInputTxt(String inputFile) {
+    public List<String> getListStrFromFileTxt(String inputFile) {
         String word;
         List<String> wordList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFile))) {
