@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @UtilityClass
 public class FileHelper {
-    public static final String LESSON16_FILE_PATH = "Lesson16";
+    public static final String LESSON16_PATH = "Lesson16";
     public static final int FILE_MARK = 1;
     public static final int DIR_MARK = 0;
 
