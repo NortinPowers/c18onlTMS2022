@@ -1,6 +1,6 @@
 package by.tms;
 
-import static by.tms.model.Calculator.*;
+import static by.tms.service.Calculator.*;
 
 public class MainTask4 {
     public static void main(String[] args) {

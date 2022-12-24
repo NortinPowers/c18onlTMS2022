@@ -1,4 +1,4 @@
-package by.tms.model;
+package by.tms.service;
 
 import lombok.NonNull;
 
