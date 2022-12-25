@@ -17,13 +17,13 @@ public class MainTask4 {
                 .speed(160)
                 .price(2000.30)
                 .build();
-        try (ObjectOutputStream oOs = new ObjectOutputStream(new FileOutputStream(CAR_DAT))) {
-            oOs.writeObject(pontiac);
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(CAR_DAT))) {
+            outputStream.writeObject(pontiac);
         } catch (IOException e) {
             System.out.println("Unexpected save error " + e);
         }
-        try (ObjectInputStream oIs = new ObjectInputStream(new FileInputStream(CAR_DAT))) {
-            Car car = (Car) oIs.readObject();
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(CAR_DAT))) {
+            Car car = (Car) inputStream.readObject();
             System.out.println(car);
         } catch (Exception e) {
             System.out.println("Unexpected read error " + e);

@@ -8,14 +8,14 @@ import static by.tms.utils.FilePaths.*;
 
 public class MainTask1 {
     public static void main(String[] args) {
-        try (BufferedReader bR = new BufferedReader(new FileReader(INPUT_TASK1));
-             BufferedWriter bW = new BufferedWriter(new FileWriter(OUTPUT_TASK1))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(INPUT_TASK1));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(OUTPUT_TASK1))) {
             String text;
             TextFormatter textFormatter = new TextFormatter();
-            while ((text = bR.readLine()) != null) {
+            while ((text = reader.readLine()) != null) {
                 if (textFormatter.isPalindrome(text)) {
-                    bW.write(text + "\n");
-                    bW.flush();
+                    writer.write(text + "\n");
+                    writer.flush();
                 }
             }
         } catch (IOException e) {
