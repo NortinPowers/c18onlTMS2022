@@ -69,11 +69,11 @@ public class TextFormatter {
     }
 
     public String getStringFromFileTxt(String inputFile) {
-        StringBuilder text;
+        StringBuilder text = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFile))) {
             text = getStringBuilderFromFileTxt(reader);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Unexpected error " + e.getMessage());
         }
         return text.toString();
     }
@@ -82,7 +82,7 @@ public class TextFormatter {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
             createOutputTxtFileFromList(writer, text);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Unexpected error " + e.getMessage());
         }
     }
 
@@ -94,7 +94,7 @@ public class TextFormatter {
                 wordList.add(word);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Unexpected error " + e.getMessage());
         }
         return wordList;
     }

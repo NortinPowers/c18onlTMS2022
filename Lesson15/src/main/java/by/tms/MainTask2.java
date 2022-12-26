@@ -21,7 +21,7 @@ public class MainTask2 {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Unexpected error " + e);
+            System.out.println("Unexpected error " + e.getMessage());
         }
         System.out.println("The file \"" + OUTPUT_TXT_FILE_NAME + "\" into " + TASK2_PACKAGE
                 + " contains sentences from the text in which from 3 to 5 words or a palindrome is present");
