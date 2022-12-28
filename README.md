@@ -1,5 +1,5 @@
 <h1 align="center">java course study / TMS / group c18onlTMS202</h1>
-<h3 align="center">Java junior developer from Belarus</h3>
+<h3 align="center">Java developer from Belarus</h3>
 <h4 align="center">TeachMeSkills</h4>
 
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=25&color=730EC4&multiline=true&width=435&height=100&lines=oooo+you+Teach+Me+tra-la-la;my+Skills+din-don++++)](https://git.io/typing-svg)
