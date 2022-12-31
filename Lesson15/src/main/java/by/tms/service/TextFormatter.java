@@ -16,6 +16,18 @@ public class TextFormatter {
                 && word.toLowerCase().matches("[a-zа-я]{2,}");
     }
 
+    public String getPalindrome(List<String> string) {
+        StringBuilder palindromeWords = new StringBuilder();
+        String testWord;
+        for (String s : string) {
+            testWord = s;
+            if (isPalindrome(testWord)) {
+                palindromeWords.append(testWord).append("\n");
+            }
+        }
+        return palindromeWords.toString();
+    }
+
     public int getNumberOfWordsInString(@NonNull String string) {
         return string.split(" ").length;
     }
