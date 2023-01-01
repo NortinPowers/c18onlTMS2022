@@ -9,6 +9,6 @@ import java.util.ArrayList;
 @Getter
 @AllArgsConstructor
 @Setter
-public class Shop<E extends Product> {
-    private ArrayList<E> products;
+public class Shop {
+    private ArrayList products;
 }

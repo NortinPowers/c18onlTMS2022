@@ -30,14 +30,12 @@ public class Product<N extends Number> implements Comparable<Product> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product<?> product = (Product<?>) o;
-        return id == product.id &&
-                Objects.equals(name, product.name) &&
-                Objects.equals(price, product.price);
+        return id == product.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price);
+        return Objects.hash(id);
     }
 
     public long getId() {

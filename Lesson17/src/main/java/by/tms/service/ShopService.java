@@ -15,32 +15,22 @@ public class ShopService {
 
     public boolean addProduct(Product product) {
         List<Product> productList = shop.getProducts();
-        if (CollectionUtils.isNotEmpty(productList)) {
-            boolean flag = false;
-            for (Product value : productList) {
-                if (value.equals(product)) {
-                    flag = true;
-                    break;
-                }
+        boolean flag = false;
+        for (Product value : productList) {
+            if (value.equals(product)) {
+                flag = true;
+                break;
             }
-            if (flag) {
-                return false;
-            } else {
-                return productList.add(product);
-            }
+        }
+        if (flag) {
+            return false;
         } else {
-            List<Product> products = new ArrayList<>();
-            Shop shop = new Shop((ArrayList) products);
-            return shop.getProducts().add(product);
+            return productList.add(product);
         }
     }
 
     public ArrayList<Product> getAllProduct() {
-        ArrayList<Product> productList = shop.getProducts();
-        if (CollectionUtils.isNotEmpty(productList)) {
-            return productList;
-        } else
-            return null;
+        return shop.getProducts();
     }
 
     public void deleteProduct(long id) {
@@ -55,12 +45,12 @@ public class ShopService {
         }
     }
 
-    public void changeProduct(long id, Product product) {
+    public void changeProduct(long id, String productName, Double productPrice) {
         List<Product> productList = shop.getProducts();
         if (CollectionUtils.isNotEmpty(productList)) {
             for (int i = 0; i < productList.size(); i++) {
                 if (productList.get(i).getId() == id) {
-                    Collections.replaceAll(productList, getAllProduct().get(i), product);
+                    Collections.replaceAll(productList, getAllProduct().get(i), new Product(id, productName, productPrice));
                     break;
                 }
             }
