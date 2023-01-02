@@ -1,5 +1,5 @@
 <h1 align="center">java course study / TMS / group c18onlTMS202</h1>
-<h3 align="center">Java junior developer from Belarus</h3>
+<h3 align="center">Java developer</h3>
 <h4 align="center">TeachMeSkills</h4>
 
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=25&color=730EC4&multiline=true&width=435&height=100&lines=oooo+you+Teach+Me+tra-la-la;my+Skills+din-don++++)](https://git.io/typing-svg)
@@ -25,3 +25,4 @@
 | 14    | RegEx                            | working with regex patterns                                                            | using regex patterns to solve tasks                                                                       |
 | 15    | Streams                          | working with files and directories                                                     | creating streams, reading and writing files                                                               |
 | 16    | Generics                         | the concept and application of generics                                                | creating generalized classes and methods                                                                  |
+| 17    | Collections                      | analysis of all collections and auxiliary methods                                      | working with collections, sorting, adding, deleting, extracting items, and bypassing errors. Using collections in a javafx-based application implementation                                                                                                          |
