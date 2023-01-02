@@ -9,17 +9,16 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 
-import static by.tms.utils.CommandPattern.*;
+import static by.tms.utils.Constants.*;
 
 public class MainConsoleShop {
-    static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         ArrayList<Product<Double>> products = new ArrayList<>();
         ShopService shopService = new ShopService(new Shop(products));
-        shopService.addProduct(new Product(1L, "phone", 1200));
-        shopService.addProduct(new Product(2L, "radio", 600.30));
-        shopService.addProduct(new Product(3L, "TV", 1850));
+        shopService.addProduct(new Product<>(1L, "phone", 1200.0));
+        shopService.addProduct(new Product<>(2L, "radio", 600.30));
+        shopService.addProduct(new Product<>(3L, "TV", 1850.0));
         System.out.println(products);
         boolean shopIsOpen = true;
         String commandLevel1;
@@ -31,6 +30,7 @@ public class MainConsoleShop {
         String errorMessage = "you entered the wrong command in the console";
         String sortType = "enter the sort type";
         String sortDirection = "enter the sorting direction (" + UP + " or " + DOWN + ")";
+        Scanner scanner = new Scanner(System.in);
         while (shopIsOpen) {
             System.out.println(enterMessage);
             commandLevel1 = scanner.next().toLowerCase();
