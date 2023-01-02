@@ -55,24 +55,26 @@ public class MainApplication extends Application {
                 ButtonType buttonCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
                 alert.getButtonTypes().setAll(buttonIdMin, buttonIdMax, buttonPriceMin, buttonPriceMax, buttonCancel);
                 Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == buttonIdMin) {
-                    products.sort(Comparator.comparing(Product<Double>::getId));
-                    showSortedInfo(shopService, infoField);
-                } else if (result.get() == buttonIdMax) {
-                    products.sort(Comparator.comparing(Product<Double>::getId).reversed());
-                    showSortedInfo(shopService, infoField);
-                } else if (result.get() == buttonPriceMin) {
-                    Collections.sort(products);
-                    showSortedInfo(shopService, infoField);
-                } else if (result.get() == buttonPriceMax) {
-                    Collections.sort(products);
-                    Collections.reverse(products);
+                if (result.isPresent()) {
+                    if (result.get() == buttonIdMin) {
+                        products.sort(Comparator.comparing(Product<Double>::getId));
+                        showSortedInfo(shopService, infoField);
+                    } else if (result.get() == buttonIdMax) {
+                        products.sort(Comparator.comparing(Product<Double>::getId).reversed());
+                        showSortedInfo(shopService, infoField);
+                    } else if (result.get() == buttonPriceMin) {
+                        Collections.sort(products);
+                        showSortedInfo(shopService, infoField);
+                    } else if (result.get() == buttonPriceMax) {
+                        Collections.sort(products);
+                        Collections.reverse(products);
 //                products.sort(Comparator.comparing(Product<Double>::getPrice).reversed());
 //                it doesn't work here, but it works in general (the problem is in the generalized type)
 //                need your comments!
-                    showSortedInfo(shopService, infoField);
-                } else {
-                    alert.close();
+                        showSortedInfo(shopService, infoField);
+                    } else {
+                        alert.close();
+                    }
                 }
             } else {
                 showInfoMessage(infoField, "The list of products is empty");
@@ -93,7 +95,7 @@ public class MainApplication extends Application {
             Optional<Pair<String, Pair<String, String>>> result = getStringFromThreeTextFields(dialog, buttonConfirm, grid, id, name, price);
             result.ifPresent(newProduct -> {
                 if (isValidData(newProduct)) {
-                    if (!shopService.addProduct(new Product(Long.parseLong(newProduct.getKey()), newProduct.getValue().getKey(), Double.parseDouble(newProduct.getValue().getValue())))) {
+                    if (!shopService.addProduct(new Product<>(Long.parseLong(newProduct.getKey()), newProduct.getValue().getKey(), Double.parseDouble(newProduct.getValue().getValue())))) {
                         showInfoMessage(infoField, "Product with this ID (" + Long.parseLong(newProduct.getKey()) + ") already exists");
                     } else {
                         showProductInfo(shopService, infoField);
