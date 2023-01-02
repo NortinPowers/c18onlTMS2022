@@ -18,9 +18,7 @@ public class TextFormatter {
 
     public String getPalindrome(List<String> string) {
         StringBuilder palindromeWords = new StringBuilder();
-        String testWord;
-        for (String s : string) {
-            testWord = s;
+        for (String testWord : string) {
             if (isPalindrome(testWord)) {
                 palindromeWords.append(testWord).append("\n");
             }
