@@ -118,7 +118,7 @@ public class ApplicationsUtils {
 
     public static void setDialog(@NonNull Dialog<Pair<String, Pair<String, String>>> dialog) {
         dialog.setTitle("Change Product Dialog");
-        dialog.setHeaderText("enter the ID of the product you want to change, as well as the name " +
+        dialog.setHeaderText("Enter the ID of the product you want to change, as well as the name " +
                 "and price of the new product");
     }
 

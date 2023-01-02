@@ -23,7 +23,7 @@ import static by.tms.utils.ApplicationsUtils.*;
 
 public class MainApplication extends Application {
     public static void main(String[] args) {
-        System.out.println("the application is running");
+        System.out.println("Application is running");
         launch();
     }
 
