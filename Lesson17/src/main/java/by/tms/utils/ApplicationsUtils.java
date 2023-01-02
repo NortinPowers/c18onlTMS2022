@@ -27,13 +27,13 @@ public class ApplicationsUtils {
         area.appendText(info.toString());
     }
 
-    public static @NonNull TextField getTextField(String name) {
+    public static TextField getTextField(String name) {
         TextField id = new TextField();
         id.setPromptText(name);
         return id;
     }
 
-    public static @NonNull GridPane getGridPane() {
+    public static GridPane getGridPane() {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);

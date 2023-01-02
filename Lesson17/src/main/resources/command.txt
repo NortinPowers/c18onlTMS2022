@@ -1,3 +1,0 @@
-products ( id ( up | dawn ) | price ( up | dawn ) )
-adding
-exit
