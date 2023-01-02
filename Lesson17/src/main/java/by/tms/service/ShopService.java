@@ -10,13 +10,14 @@ import java.util.Collections;
 import java.util.List;
 
 @AllArgsConstructor
-public class ShopService {
+public class ShopService implements ShopServiceAware {
     private final Shop shop;
 
-    public boolean addProduct(Product product) {
-        List<Product> productList = shop.getProducts();
+    @Override
+    public boolean addProduct(Product<Double> product) {
+        List<Product<Double>> productList = shop.getProducts();
         boolean flag = false;
-        for (Product value : productList) {
+        for (Product<Double> value : productList) {
             if (value.equals(product)) {
                 flag = true;
                 break;
@@ -29,12 +30,14 @@ public class ShopService {
         }
     }
 
-    public ArrayList<Product> getAllProduct() {
+    @Override
+    public ArrayList<Product<Double>> getAllProduct() {
         return shop.getProducts();
     }
 
+    @Override
     public void deleteProduct(long id) {
-        List<Product> productList = shop.getProducts();
+        List<Product<Double>> productList = shop.getProducts();
         if (CollectionUtils.isNotEmpty(productList)) {
             for (int i = 0; i < productList.size(); i++) {
                 if (productList.get(i).getId() == id) {
@@ -45,12 +48,13 @@ public class ShopService {
         }
     }
 
+    @Override
     public void changeProduct(long id, String productName, Double productPrice) {
-        List<Product> productList = shop.getProducts();
+        List<Product<Double>> productList = shop.getProducts();
         if (CollectionUtils.isNotEmpty(productList)) {
             for (int i = 0; i < productList.size(); i++) {
                 if (productList.get(i).getId() == id) {
-                    Collections.replaceAll(productList, getAllProduct().get(i), new Product(id, productName, productPrice));
+                    Collections.replaceAll(productList, getAllProduct().get(i), new Product<>(id, productName, productPrice));
                     break;
                 }
             }
