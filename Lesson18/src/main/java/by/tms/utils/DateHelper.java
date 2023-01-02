@@ -10,7 +10,7 @@ public class DateHelper {
     private final int TWO_DIGIT_YEAR_LIMIT = 100;
     private final int OUR_TIME_PREFIX = 2000;
     private final int NUMBER_OF_MONTHS = 12;
-    private final int NULL = 0;
+    private final int ZERO = 0;
     public static final String DATE_FORMAT = "\\d{1,2}\\.\\d{1,2}\\.\\d{1,4}";
 
     /**
@@ -40,7 +40,7 @@ public class DateHelper {
      * @return boolean
      */
     public static boolean isMonthNotValid(int month) {
-        if (month > NUMBER_OF_MONTHS || month <= NULL) {
+        if (month > NUMBER_OF_MONTHS || month <= ZERO) {
             System.out.println(getErrorMessage());
             return true;
         }
@@ -54,7 +54,7 @@ public class DateHelper {
      */
     public static boolean isDayNotValid(int day, int month, int year) {
         int dayOnMonth = Month.of(month).length(Year.isLeap(year));
-        if (day > dayOnMonth || day <= NULL) {
+        if (day > dayOnMonth || day <= ZERO) {
             System.out.println(getErrorMessage());
             return true;
         }
