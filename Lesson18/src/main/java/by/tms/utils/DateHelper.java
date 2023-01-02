@@ -11,7 +11,7 @@ public class DateHelper {
     private final int OUR_TIME_PREFIX = 2000;
     private final int NUMBER_OF_MONTHS = 12;
     private final int ZERO = 0;
-    public static final String DATE_FORMAT = "\\d{1,2}\\.\\d{1,2}\\.\\d{1,4}";
+    public static final String VALID_DATE_FORMAT = "\\d{1,2}\\.\\d{1,2}\\.\\d{1,4}";
 
     /**
      * The method returns a message that the entered data is incorrect

@@ -14,7 +14,7 @@ public class MainTask1 {
         do {
             if (scanner.hasNext()) {
                 inputDate = scanner.nextLine();
-                if (inputDate.matches(DATE_FORMAT)) {
+                if (inputDate.matches(VALID_DATE_FORMAT)) {
                     String[] dateElement = inputDate.split("\\.");
                     int month = Integer.parseInt(dateElement[1]);
                     if (isMonthNotValid(month)) continue;
