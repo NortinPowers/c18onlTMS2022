@@ -150,16 +150,6 @@ public class MainApplication extends Application {
     }
 
     @Override
-    public void init() {
-        System.out.println("Application inits");
-        try {
-            super.init();
-        } catch (Exception e) {
-            System.out.println("Unexpected error " + e);
-        }
-    }
-
-    @Override
     public void stop() {
         System.out.println("Application stops");
         try {
