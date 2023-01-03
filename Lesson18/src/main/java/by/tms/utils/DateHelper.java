@@ -1,7 +1,9 @@
 package by.tms.utils;
 
+import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 
+import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
 
@@ -11,6 +13,8 @@ public class DateHelper {
     private final int OUR_TIME_PREFIX = 2000;
     private final int NUMBER_OF_MONTHS = 12;
     private final int ZERO = 0;
+    private final int BETWEEN_MON_AND_TUE = 1;
+    private final int WEEK_PLUS_TUE = 9;
     public static final String VALID_DATE_FORMAT = "\\d{1,2}\\.\\d{1,2}\\.\\d{1,4}";
 
     /**
@@ -59,5 +63,21 @@ public class DateHelper {
             return true;
         }
         return false;
+    }
+
+    /**
+     * The method returns the date of the following Tuesday
+     *
+     * @return boolean
+     */
+    public static LocalDate getNextTuesdayDate(@NonNull LocalDate now) {
+        int dayOfWeek = now.getDayOfWeek().getValue();
+        LocalDate nextTuesday;
+        if (dayOfWeek == 1) {
+            nextTuesday = now.plusDays(BETWEEN_MON_AND_TUE);
+        } else {
+            nextTuesday = now.plusDays(WEEK_PLUS_TUE - dayOfWeek);
+        }
+        return nextTuesday;
     }
 }
