@@ -1,33 +1,39 @@
 package by.tms;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static by.tms.utils.Constants.ERROR_MESSAGE;
-import static by.tms.utils.DateHelper.*;
 
 public class MainTask1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean act = true;
         String inputDate;
-        System.out.println("Enter the date in the format dd.mm.yyyy or dd.mm.yyyy");
+        System.out.println("Enter the date in the format dd.mm.yy or dd.mm.yyyy");
+        List<DateTimeFormatter> formatters = new ArrayList<>();
+        formatters.add(DateTimeFormatter.ofPattern("[dd.MM.yy]"));
+        formatters.add(DateTimeFormatter.ofPattern("[dd.MM.yyyy]"));
+        LocalDate date;
+        String errorMessage = "";
         do {
             if (scanner.hasNext()) {
                 inputDate = scanner.nextLine();
-                if (inputDate.matches(VALID_DATE_FORMAT)) {
-                    String[] dateElement = inputDate.split("\\.");
-                    int month = Integer.parseInt(dateElement[1]);
-                    if (isMonthNotValid(month)) continue;
-                    int year = Integer.parseInt(dateElement[2]);
-                    year = getFormattedYear(year);
-                    int day = Integer.parseInt(dateElement[0]);
-                    if (isDayNotValid(day, month, year)) continue;
-                    LocalDate date = LocalDate.of(year, month, day);
-                    System.out.println(date.getDayOfWeek());
-                    act = false;
-                } else {
-                    System.out.println(ERROR_MESSAGE);
+                for (DateTimeFormatter formatter : formatters) {
+                    try {
+                        date = LocalDate.parse(inputDate, formatter);
+                        System.out.println(date.getDayOfWeek());
+                        act = false;
+                        break;
+                    } catch (Exception e) {
+                        errorMessage = e.getMessage();
+                    }
+                }
+                if (act) {
+                    System.out.println(ERROR_MESSAGE + " " + errorMessage);
                 }
             } else {
                 scanner.next();
