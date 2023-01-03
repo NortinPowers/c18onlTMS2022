@@ -18,15 +18,6 @@ import java.util.Optional;
 
 @UtilityClass
 public class ApplicationsUtils {
-    public static void showProductInfo(@NonNull ShopService shopService, TextArea area) {
-        StringBuilder info = new StringBuilder();
-        for (int i = 0; i < shopService.getAllProduct().size(); i++) {
-            info.append(shopService.getAllProduct().get(i)).append("\n");
-        }
-        area.clear();
-        area.appendText(info.toString());
-    }
-
     public static TextField getTextField(String name) {
         TextField id = new TextField();
         id.setPromptText(name);
@@ -76,13 +67,17 @@ public class ApplicationsUtils {
         return value.getKey().matches("\\d+L?") && value.getValue().getValue().matches("\\d+");
     }
 
-    public static void showSortedInfo(@NonNull ShopService shopService, @NonNull TextArea area) {
+    public static void showProductInfo(String info, TextArea area) {
         area.clear();
+        area.appendText(info);
+    }
+
+    public static String getInfoString(ShopService shopService) {
         StringBuilder info = new StringBuilder();
         for (int i = 0; i < shopService.getAllProduct().size(); i++) {
             info.append(shopService.getAllProduct().get(i)).append("\n");
         }
-        area.appendText(info.toString());
+        return info.toString();
     }
 
     public static void setAlertWindow(@NonNull Alert alert) {

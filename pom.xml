@@ -40,6 +40,7 @@
         <lombok.version>1.18.24</lombok.version>
         <mavenCompalePlugin.version>3.10.1</mavenCompalePlugin.version>
         <commons-lang.version>3.12.0</commons-lang.version>
+        <guava.version>31.1-jre</guava.version>
     </properties>
 
     <dependencies>
@@ -60,6 +61,12 @@
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>

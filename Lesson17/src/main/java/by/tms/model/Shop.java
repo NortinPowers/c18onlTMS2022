@@ -1,14 +1,20 @@
 package by.tms.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.List;
 
-@Getter
 @AllArgsConstructor
 @Setter
 public class Shop {
-    private ArrayList products;
+    private List<Product<Double>> products;
+
+    public List<Product<Double>> getProducts() {
+        if (products == null) {
+            products = new ArrayList<>();
+        }
+        return products;
+    }
 }

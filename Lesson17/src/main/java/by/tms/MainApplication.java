@@ -15,7 +15,6 @@ import javafx.util.Pair;
 import lombok.NonNull;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Optional;
 
@@ -38,7 +37,7 @@ public class MainApplication extends Application {
         Button showAllProductButton = getButton("Products", 0);
         showAllProductButton.setOnAction(actionEvent -> {
             if (CollectionUtils.isNotEmpty(products)) {
-                showProductInfo(shopService, infoField);
+                showProductInfo(getInfoString(shopService), infoField);
             } else {
                 showInfoMessage(infoField, "The list of products is empty");
             }
@@ -58,20 +57,16 @@ public class MainApplication extends Application {
                 if (result.isPresent()) {
                     if (result.get() == buttonIdMin) {
                         products.sort(Comparator.comparing(Product<Double>::getId));
-                        showSortedInfo(shopService, infoField);
+                        showProductInfo(getInfoString(shopService), infoField);
                     } else if (result.get() == buttonIdMax) {
                         products.sort(Comparator.comparing(Product<Double>::getId).reversed());
-                        showSortedInfo(shopService, infoField);
+                        showProductInfo(getInfoString(shopService), infoField);
                     } else if (result.get() == buttonPriceMin) {
-                        Collections.sort(products);
-                        showSortedInfo(shopService, infoField);
+                        products.sort(Comparator.comparing(Product<Double>::getPrice));
+                        showProductInfo(getInfoString(shopService), infoField);
                     } else if (result.get() == buttonPriceMax) {
-                        Collections.sort(products);
-                        Collections.reverse(products);
-//                products.sort(Comparator.comparing(Product<Double>::getPrice).reversed());
-//                it doesn't work here, but it works in general (the problem is in the generalized type)
-//                need your comments!
-                        showSortedInfo(shopService, infoField);
+                        products.sort(Comparator.comparing(Product<Double>::getPrice).reversed());
+                        showProductInfo(getInfoString(shopService), infoField);
                     } else {
                         alert.close();
                     }
@@ -98,7 +93,7 @@ public class MainApplication extends Application {
                     if (!shopService.addProduct(new Product<>(Long.parseLong(newProduct.getKey()), newProduct.getValue().getKey(), Double.parseDouble(newProduct.getValue().getValue())))) {
                         showInfoMessage(infoField, "Product with this ID (" + Long.parseLong(newProduct.getKey()) + ") already exists");
                     } else {
-                        showProductInfo(shopService, infoField);
+                        showProductInfo(getInfoString(shopService), infoField);
                     }
                 } else {
                     showInfoMessage(infoField, "Incorrect input data");
@@ -112,7 +107,7 @@ public class MainApplication extends Application {
             Optional<String> result = dialog.showAndWait();
             if (result.isPresent()) {
                 shopService.deleteProduct(Long.parseLong(result.get()));
-                showProductInfo(shopService, infoField);
+                showProductInfo(getInfoString(shopService), infoField);
             }
         });
         Button buttonChangeProduct = getButton("Change product", 488);
@@ -132,7 +127,7 @@ public class MainApplication extends Application {
                 if (isValidData(newValue)) {
                     shopService.changeProduct(Long.parseLong(newValue.getKey()),
                             newValue.getValue().getKey(), Double.parseDouble(newValue.getValue().getValue()));
-                    showProductInfo(shopService, infoField);
+                    showProductInfo(getInfoString(shopService), infoField);
                 } else {
                     showInfoMessage(infoField, "Incorrect input data");
                 }
@@ -147,15 +142,5 @@ public class MainApplication extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }
-
-    @Override
-    public void stop() {
-        System.out.println("Application stops");
-        try {
-            super.stop();
-        } catch (Exception e) {
-            System.out.println("Unexpected error " + e);
-        }
     }
 }
