@@ -10,24 +10,18 @@ public class ScannerHelper {
      * The method returns an integer (1 or 2) from the console
      */
     public static int getConditionalInputIntValue(Scanner scanner) {
-        int value = 0;
-        boolean act = true;
+        int value;
         System.out.println("Input integer 1 (to reverse string) or 2 (to get the factorial of a number):");
         do {
             if (scanner.hasNextInt()) {
                 value = scanner.nextInt();
                 if (value == 1 || value == 2) {
-                    act = false;
-                } else {
-                    System.out.println("Need integer 1 or 2!\nRepeat input");
-                    scanner.nextLine();
+                    return value;
                 }
-            } else {
-                System.out.println("Need integer 1 or 2!\nRepeat input");
-                scanner.nextLine();
             }
-        } while (act);
-        return value;
+            System.out.println("Need integer 1 or 2!\nRepeat input");
+            scanner.nextLine();
+        } while (true);
     }
 
     /**
