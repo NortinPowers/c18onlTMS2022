@@ -21,12 +21,12 @@ public class MainTask3 {
             scanner.nextLine();
             String str = scanner.nextLine();
             firstInterface = () -> StringUtils.reverse(str);
-            System.out.println("The reversed string: " + firstInterface.singleMethod());
+            System.out.println("The reversed string: " + firstInterface.get());
         } else {
             scanner.nextLine();
             int number = getInputIntPositiveValue(scanner);
             firstInterface = () -> BigIntegerMath.factorial(number).toString();
-            System.out.println("The factorial of the number " + number + " is: " + firstInterface.singleMethod());
+            System.out.println("The factorial of the number " + number + " is: " + firstInterface.get());
         }
     }
 }
