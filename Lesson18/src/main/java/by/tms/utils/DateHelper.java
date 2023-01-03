@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
 
+import static by.tms.utils.Constants.ERROR_MESSAGE;
+
 @UtilityClass
 public class DateHelper {
     private final int TWO_DIGIT_YEAR_LIMIT = 100;
@@ -16,15 +18,6 @@ public class DateHelper {
     private final int BETWEEN_MON_AND_TUE = 1;
     private final int WEEK_PLUS_TUE = 9;
     public static final String VALID_DATE_FORMAT = "\\d{1,2}\\.\\d{1,2}\\.\\d{1,4}";
-
-    /**
-     * The method returns a message that the entered data is incorrect
-     *
-     * @return String
-     */
-    public static String getErrorMessage() {
-        return "invalid date format, re-enter the date (date format dd.mm.yyyy or dd.mm.yyyy)";
-    }
 
     /**
      * The method returns the year value converted from YY format to YYYY format
@@ -45,7 +38,7 @@ public class DateHelper {
      */
     public static boolean isMonthNotValid(int month) {
         if (month > NUMBER_OF_MONTHS || month <= ZERO) {
-            System.out.println(getErrorMessage());
+            System.out.println(ERROR_MESSAGE);
             return true;
         }
         return false;
@@ -59,7 +52,7 @@ public class DateHelper {
     public static boolean isDayNotValid(int day, int month, int year) {
         int dayOnMonth = Month.of(month).length(Year.isLeap(year));
         if (day > dayOnMonth || day <= ZERO) {
-            System.out.println(getErrorMessage());
+            System.out.println(ERROR_MESSAGE);
             return true;
         }
         return false;

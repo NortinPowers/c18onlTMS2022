@@ -3,6 +3,7 @@ package by.tms;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+import static by.tms.utils.Constants.ERROR_MESSAGE;
 import static by.tms.utils.DateHelper.*;
 
 public class MainTask1 {
@@ -26,7 +27,7 @@ public class MainTask1 {
                     System.out.println(date.getDayOfWeek());
                     act = false;
                 } else {
-                    System.out.println(getErrorMessage());
+                    System.out.println(ERROR_MESSAGE);
                 }
             } else {
                 scanner.next();
