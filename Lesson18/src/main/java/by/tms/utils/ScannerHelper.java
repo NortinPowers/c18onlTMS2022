@@ -34,13 +34,12 @@ public class ScannerHelper {
             if (scanner.hasNextInt()) {
                 value = scanner.nextInt();
                 if (value >= 0) {
-                    break;
+                    return value;
                 }
             } else {
                 System.out.println("Need positive integer or 0!\nRepeat input");
                 scanner.nextLine();
             }
         } while (true);
-        return value;
     }
 }
