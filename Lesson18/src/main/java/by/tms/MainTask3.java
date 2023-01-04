@@ -18,12 +18,10 @@ public class MainTask3 {
         FirstInterface<String> firstInterface;
         if (inputValue == COMMAND_ONE) {
             System.out.println("Enter the string:");
-            scanner.nextLine();
-            String str = scanner.nextLine();
+            String str = scanner.skip("\\R").nextLine();
             firstInterface = () -> StringUtils.reverse(str);
             System.out.println("The reversed string: " + firstInterface.get());
         } else {
-            scanner.nextLine();
             int number = getInputIntPositiveValue(scanner);
             firstInterface = () -> BigIntegerMath.factorial(number).toString();
             System.out.println("The factorial of the number " + number + " is: " + firstInterface.get());
