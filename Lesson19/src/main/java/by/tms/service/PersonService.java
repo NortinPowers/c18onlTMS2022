@@ -45,11 +45,9 @@ public class PersonService implements PersonServiceAware {
                 .collect(Collectors.groupingBy(person1 -> person1.getSurname().charAt(0), Collectors.counting()));
         StringBuilder result = new StringBuilder();
         for (Map.Entry<Character, Long> item : personBySurname.entrySet()) {
-            String surnameFirstChar = String.valueOf(item.getKey());
             Long count = item.getValue();
-            int modifyCount = modifyCount(Math.toIntExact(count));
-            String postfix = getPostfix(modifyCount);
-            result.append("\"").append(surnameFirstChar).append("\"").append(" ").append(count)
+            String postfix = getPostfix(modifyCount(Math.toIntExact(count)));
+            result.append("\"").append(item.getKey()).append("\"").append(" ").append(count)
                     .append(" - сотрудни").append(postfix).append("\n");
         }
         return result.toString();
