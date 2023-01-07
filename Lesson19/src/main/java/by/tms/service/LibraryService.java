@@ -24,6 +24,11 @@ import static by.tms.utils.Group.TOO_MUCH;
 public class LibraryService implements LibraryServiceAware {
     private Library library;
 
+    /**
+     * The method returns a list of books sorted by year of issue
+     *
+     * @return List
+     */
     @Override
     public List<Book> getBookByYear() {
         return library.books().stream()
@@ -31,6 +36,11 @@ public class LibraryService implements LibraryServiceAware {
                 .toList();
     }
 
+    /**
+     * The method returns a list of books that readers currently have
+     *
+     * @return List
+     */
     @Override
     public List<Book> getTakenBook() {
         Set<Book> takenBooks = library.readers().stream()
@@ -40,6 +50,11 @@ public class LibraryService implements LibraryServiceAware {
                 .toList();
     }
 
+    /**
+     * The method returns a list of readers who have a book by a certain author
+     *
+     * @return List
+     */
     @Override
     public List<Reader> getReadersWhoTakenBookByAuthor(String author) {
         Map<Reader, List<Book>> readerBookMap = library.readers().stream()
@@ -56,6 +71,11 @@ public class LibraryService implements LibraryServiceAware {
         return readers;
     }
 
+    /**
+     * The method returns a list of objects of the EmailAddress type
+     *
+     * @return List
+     */
     @Override
     public List<EmailAddress> getAllEmail() {
         return library.readers().stream()
@@ -63,6 +83,11 @@ public class LibraryService implements LibraryServiceAware {
                 .toList();
     }
 
+    /**
+     * The method returns a list of objects of the EmailAddress type for readers who have more than 1 book
+     *
+     * @return List
+     */
     @Override
     public List<String> getConcertedEmail() {
         return library.readers().stream()
@@ -73,6 +98,11 @@ public class LibraryService implements LibraryServiceAware {
                 .toList();
     }
 
+    /**
+     * The method assigns the book to the reader
+     *
+     * @return boolean
+     */
     @Override
     public boolean setBookToReader(long readerId, long bookId) {
         Optional<Book> neededBook = library.books().stream()
@@ -90,6 +120,11 @@ public class LibraryService implements LibraryServiceAware {
         return false;
     }
 
+    /**
+     * The method returns generate a string containing information about the maximum of books taken by readers
+     *
+     * @return String
+     */
     @Override
     public String getMaxCountOfBookByReaders() {
         Map<Reader, Integer> readerCountBookMap = getReaderCountBookByReaderMap();
