@@ -3,8 +3,10 @@ package by.tms.service;
 import by.tms.model.Book;
 import by.tms.model.EmailAddress;
 import by.tms.model.Reader;
+import by.tms.utils.Group;
 
 import java.util.List;
+import java.util.Map;
 
 public interface LibraryServiceAware {
     List<Book> getBookByYear();
@@ -15,7 +17,15 @@ public interface LibraryServiceAware {
 
     List<EmailAddress> getAllEmail();
 
-    List<EmailAddress> getConcertedEmail();
+    List<String> getConcertedEmail();
 
     boolean setBookToReader(long readerId, long bookId);
+
+    String getMaxCountOfBookByReaders();
+
+    Map<Enum<Group>, List<EmailAddress>> getDependedEmailByBooksCount();
+
+    Map<Enum<Group>, List<String>> getReaderFullNameByEmailGroup();
+
+    String getReaderFullNameByEmailGroupWithFormatting();
 }

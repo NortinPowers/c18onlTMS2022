@@ -57,5 +57,13 @@ public class MainTask6 {
         System.out.println(libraryService.getTakenBook());
         System.out.println();
         System.out.println(libraryService.getReadersWhoTakenBookByAuthor("Александр Сергеевич Пушкин"));
+        System.out.println();
+        System.out.println(libraryService.getMaxCountOfBookByReaders());
+        System.out.println();
+        System.out.println(libraryService.getDependedEmailByBooksCount());
+        System.out.println();
+        System.out.println(libraryService.getReaderFullNameByEmailGroup());
+        System.out.println();
+        System.out.println(libraryService.getReaderFullNameByEmailGroupWithFormatting());
     }
 }

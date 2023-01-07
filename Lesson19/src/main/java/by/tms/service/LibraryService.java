@@ -4,6 +4,7 @@ import by.tms.model.Book;
 import by.tms.model.EmailAddress;
 import by.tms.model.Library;
 import by.tms.model.Reader;
+import by.tms.utils.Group;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
@@ -12,7 +13,10 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static by.tms.utils.Constants.MAX_NUMBER_OF_BOOKS_TAKEN_TO_OK_LIST;
 import static by.tms.utils.Constants.NUMBER_OF_BOOKS_TAKEN;
+import static by.tms.utils.Group.OK;
+import static by.tms.utils.Group.TOO_MUCH;
 
 @AllArgsConstructor
 @ToString
@@ -41,12 +45,12 @@ public class LibraryService implements LibraryServiceAware {
         Map<Reader, List<Book>> readerBookMap = library.readers().stream()
                 .collect(Collectors.toMap(Function.identity(), Reader::takenBooks));
         List<Reader> readers = new ArrayList<>();
-        for (Map.Entry<Reader, List<Book>> item : readerBookMap.entrySet()) {
-            Optional<Book> anyBook = item.getValue().stream()
+        for (Map.Entry<Reader, List<Book>> entry : readerBookMap.entrySet()) {
+            Optional<Book> anyBook = entry.getValue().stream()
                     .filter(book -> book.getAuthor().equals(author))
                     .findAny();
             if (anyBook.isPresent()) {
-                readers.add(item.getKey());
+                readers.add(entry.getKey());
             }
         }
         return readers;
@@ -60,11 +64,12 @@ public class LibraryService implements LibraryServiceAware {
     }
 
     @Override
-    public List<EmailAddress> getConcertedEmail() {
+    public List<String> getConcertedEmail() {
         return library.readers().stream()
                 .filter(reader -> reader.takenBooks().size() > NUMBER_OF_BOOKS_TAKEN)
                 .filter(Reader::mailingConsent)
                 .map(Reader::email)
+                .map(EmailAddress::getEmailAddress)
                 .toList();
     }
 
@@ -83,5 +88,79 @@ public class LibraryService implements LibraryServiceAware {
             }
         }
         return false;
+    }
+
+    @Override
+    public String getMaxCountOfBookByReaders() {
+        Map<Reader, Integer> readerCountBookMap = getReaderCountBookByReaderMap();
+        Optional<Map.Entry<Reader, Integer>> optionalReaderIntegerEntry = readerCountBookMap.entrySet().stream().max(Map.Entry.comparingByValue());
+        return optionalReaderIntegerEntry.map(readerIntegerEntry -> "The largest number of books in the hands of the reader: "
+                + readerIntegerEntry.getValue() + ".").orElse(null);
+    }
+
+    @Override
+    public Map<Enum<Group>, List<EmailAddress>> getDependedEmailByBooksCount() {
+        Map<Reader, Integer> readerCountBookMap = getReaderCountBookByReaderMap();
+        Map<Enum<Group>, List<EmailAddress>> enumEmailMap = new HashMap<>();
+        List<EmailAddress> okEmailAddresses = new ArrayList<>();
+        List<EmailAddress> tooMuchEmailAddresses = new ArrayList<>();
+        for (Map.Entry<Reader, Integer> entry : readerCountBookMap.entrySet()) {
+            EmailAddress email = entry.getKey().email();
+            if (entry.getValue() < MAX_NUMBER_OF_BOOKS_TAKEN_TO_OK_LIST) {
+                okEmailAddresses.add(email);
+            } else {
+                tooMuchEmailAddresses.add(email);
+            }
+        }
+        enumEmailMap.put(OK, okEmailAddresses);
+        enumEmailMap.put(TOO_MUCH, tooMuchEmailAddresses);
+        return enumEmailMap;
+    }
+
+    @Override
+    public Map<Enum<Group>, List<String>> getReaderFullNameByEmailGroup() {
+        Map<Reader, Integer> readerCountBookMap = getReaderCountBookByReaderMap();
+        Map<Enum<Group>, List<String>> enumFullNameMap = new HashMap<>();
+        List<String> okFullNameGroups = new ArrayList<>();
+        List<String> tooMuchFullNameGroups = new ArrayList<>();
+        for (Map.Entry<Reader, Integer> entry : readerCountBookMap.entrySet()) {
+            String fullName = entry.getKey().fullName();
+            if (entry.getValue() < MAX_NUMBER_OF_BOOKS_TAKEN_TO_OK_LIST) {
+                okFullNameGroups.add(fullName);
+            } else {
+                tooMuchFullNameGroups.add(fullName);
+            }
+        }
+        enumFullNameMap.put(OK, okFullNameGroups);
+        enumFullNameMap.put(TOO_MUCH, tooMuchFullNameGroups);
+        return enumFullNameMap;
+    }
+
+    @Override
+    public String getReaderFullNameByEmailGroupWithFormatting() {
+        Map<Enum<Group>, List<String>> enumFullNameMap = getReaderFullNameByEmailGroup();
+        Map<Enum<Group>, String> valueFormattedMap = new HashMap<>();
+        String okValueFormattedStr = getFormattingStr(enumFullNameMap, OK);
+        String tooMuchValueFormattedStr = getFormattingStr(enumFullNameMap, TOO_MUCH);
+        valueFormattedMap.put(OK, okValueFormattedStr);
+        valueFormattedMap.put(TOO_MUCH, tooMuchValueFormattedStr);
+        return convertMapToFormattedStr(valueFormattedMap);
+    }
+
+    private String convertMapToFormattedStr(Map<Enum<Group>, String> map) {
+        return map.keySet().stream()
+                .map(key -> key + " " + map.get(key))
+                .collect(Collectors.joining("\n"));
+    }
+
+    private static String getFormattingStr(Map<Enum<Group>, List<String>> enumFullNameMap, Enum<Group> group) {
+        List<String> fullNameGroups = enumFullNameMap.get(group);
+        return fullNameGroups.stream()
+                .collect(Collectors.joining(", ", "{", "}"));
+    }
+
+    private Map<Reader, Integer> getReaderCountBookByReaderMap() {
+        return library.readers().stream()
+                .collect(Collectors.toMap(Function.identity(), reader -> reader.takenBooks().size()));
     }
 }
