@@ -179,7 +179,7 @@ public class LibraryService implements LibraryServiceAware {
                 .collect(Collectors.joining("\n"));
     }
 
-    private static String getFormattingStr
+    private String getFormattingStr
             (Map<Enum<Group>, List<String>> enumFullNameMap, Enum<Group> group) {
         List<String> fullNameGroups = enumFullNameMap.get(group);
         return fullNameGroups.stream()
