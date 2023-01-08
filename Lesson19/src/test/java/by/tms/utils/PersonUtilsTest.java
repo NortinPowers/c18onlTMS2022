@@ -28,6 +28,7 @@ class PersonUtilsTest {
         Assertions.assertEquals("ков", PersonUtils.getPostfix(18));
         Assertions.assertEquals("ков", PersonUtils.getPostfix(19));
         Assertions.assertEquals("ков", PersonUtils.getPostfix(20));
+        Assertions.assertEquals("ков", PersonUtils.getPostfix(0));
     }
 
     @Test
@@ -39,5 +40,6 @@ class PersonUtilsTest {
         Assertions.assertEquals(2, PersonUtils.modifyCount(45454542));
         Assertions.assertEquals(12, PersonUtils.modifyCount(45454512));
         Assertions.assertEquals(16, PersonUtils.modifyCount(87816));
+        Assertions.assertEquals(0, PersonUtils.modifyCount(0));
     }
 }
