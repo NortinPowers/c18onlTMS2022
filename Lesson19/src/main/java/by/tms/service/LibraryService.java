@@ -44,7 +44,7 @@ public class LibraryService implements LibraryServiceAware {
     @Override
     public List<Book> getTakenBooks() {
         Set<Book> takenBooks = library.readers().stream()
-                .flatMap(reader -> reader.takenBooks().stream())
+                .flatMap(reader -> reader.getTakenBooks().stream())
                 .collect(Collectors.toSet());
         return takenBooks.stream()
                 .toList();
@@ -58,7 +58,7 @@ public class LibraryService implements LibraryServiceAware {
     @Override
     public List<Reader> getReadersWhoTakenBookByAuthor(String author) {
         Map<Reader, List<Book>> readerBookMap = library.readers().stream()
-                .collect(Collectors.toMap(Function.identity(), Reader::takenBooks));
+                .collect(Collectors.toMap(Function.identity(), Reader::getTakenBooks));
         List<Reader> readers = new ArrayList<>();
         for (Map.Entry<Reader, List<Book>> entry : readerBookMap.entrySet()) {
             Optional<Book> anyBook = entry.getValue().stream()
@@ -79,7 +79,7 @@ public class LibraryService implements LibraryServiceAware {
     @Override
     public List<EmailAddress> getAllEmails() {
         return library.readers().stream()
-                .map(Reader::email)
+                .map(Reader::getEmail)
                 .toList();
     }
 
@@ -91,9 +91,9 @@ public class LibraryService implements LibraryServiceAware {
     @Override
     public List<String> getConcertedEmails() {
         return library.readers().stream()
-                .filter(reader -> reader.takenBooks().size() > NUMBER_OF_BOOKS_TAKEN)
-                .filter(Reader::mailingConsent)
-                .map(Reader::email)
+                .filter(reader -> reader.getTakenBooks().size() > NUMBER_OF_BOOKS_TAKEN)
+                .filter(Reader::isMailingConsent)
+                .map(Reader::getEmail)
                 .map(EmailAddress::getEmailAddress)
                 .toList();
     }
@@ -107,8 +107,8 @@ public class LibraryService implements LibraryServiceAware {
                 .filter(book -> book.getId() == bookId)
                 .findAny();
         neededBook.ifPresent(book -> library.readers().stream()
-                .filter(reader -> reader.id() == readerId)
-                .forEach(reader -> reader.takenBooks().add(book)));
+                .filter(reader -> reader.getId() == readerId)
+                .forEach(reader -> reader.getTakenBooks().add(book)));
     }
 
     /**
@@ -131,7 +131,7 @@ public class LibraryService implements LibraryServiceAware {
         List<EmailAddress> okEmailAddresses = new ArrayList<>();
         List<EmailAddress> tooMuchEmailAddresses = new ArrayList<>();
         for (Map.Entry<Reader, Integer> entry : readerCountBookMap.entrySet()) {
-            EmailAddress email = entry.getKey().email();
+            EmailAddress email = entry.getKey().getEmail();
             if (entry.getValue() < MAX_NUMBER_OF_BOOKS_TAKEN_TO_OK_LIST) {
                 okEmailAddresses.add(email);
             } else {
@@ -150,7 +150,7 @@ public class LibraryService implements LibraryServiceAware {
         List<String> okFullNameGroups = new ArrayList<>();
         List<String> tooMuchFullNameGroups = new ArrayList<>();
         for (Map.Entry<Reader, Integer> entry : readerCountBookMap.entrySet()) {
-            String fullName = entry.getKey().fullName();
+            String fullName = entry.getKey().getFullName();
             if (entry.getValue() < MAX_NUMBER_OF_BOOKS_TAKEN_TO_OK_LIST) {
                 okFullNameGroups.add(fullName);
             } else {
@@ -188,6 +188,6 @@ public class LibraryService implements LibraryServiceAware {
 
     private Map<Reader, Integer> getReaderCountBookByReaderMap() {
         return library.readers().stream()
-                .collect(Collectors.toMap(Function.identity(), reader -> reader.takenBooks().size()));
+                .collect(Collectors.toMap(Function.identity(), reader -> reader.getTakenBooks().size()));
     }
 }
