@@ -43,10 +43,9 @@ public class LibraryService implements LibraryServiceAware {
      */
     @Override
     public List<Book> getTakenBooks() {
-        Set<Book> takenBooks = library.readers().stream()
+        return library.readers().stream()
                 .flatMap(reader -> reader.getTakenBooks().stream())
-                .collect(Collectors.toSet());
-        return takenBooks.stream()
+                .distinct()
                 .toList();
     }
 
