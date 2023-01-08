@@ -2,7 +2,6 @@ package by.tms.service;
 
 import by.tms.model.Product;
 import by.tms.model.Shop;
-import by.tms.utils.CollectionUtils;
 import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
@@ -43,13 +42,11 @@ public class ShopService implements ShopServiceAware {
     @Override
     public void changeProduct(long id, String productName, Double productPrice) {
         List<Product<Double>> productList = getAllProduct();
-        if (CollectionUtils.isNotEmpty(productList)) {
-            for (Product<Double> product : productList) {
-                if (product.getId() == id) {
-                    product.setName(productName);
-                    product.setPrice(productPrice);
-                    break;
-                }
+        for (Product<Double> product : productList) {
+            if (product.getId() == id) {
+                product.setName(productName);
+                product.setPrice(productPrice);
+                break;
             }
         }
     }
