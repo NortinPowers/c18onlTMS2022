@@ -10,7 +10,7 @@ import static by.tms.utils.Constants.EMPTY_BOX_WEIGHT;
 @Setter
 @ToString
 public class HeavyBox {
-    public Integer weight;
+    private Integer weight;
 
     public HeavyBox(Integer weight) {
         getAllowedWeight(weight);
