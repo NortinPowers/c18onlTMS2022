@@ -1,5 +1,5 @@
 package by.tms.service;
 
-public interface UniqueIntegerListMakeable {
+public interface UniqueIntegersListMakeable {
     String getNonRepeatIntegerValue();
 }

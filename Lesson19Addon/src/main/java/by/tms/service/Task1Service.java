@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class ServiceTask1 implements UniqueIntegerListMakeable {
+public class Task1Service implements UniqueIntegersListMakeable {
     @Override
     public String getNonRepeatIntegerValue() {
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");

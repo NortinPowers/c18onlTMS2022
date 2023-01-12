@@ -1,6 +1,6 @@
 package by.tms.utils;
 
-public enum WeightFilter {
+public enum WeightFilters {
     GREATER,
     EQUAL,
     LESS,

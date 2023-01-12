@@ -1,7 +1,7 @@
 package by.tms.service;
 
 import by.tms.model.HeavyBox;
-import by.tms.utils.WeightFilter;
+import by.tms.utils.WeightFilters;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-import static by.tms.utils.WeightFilter.EQUAL;
-import static by.tms.utils.WeightFilter.GREATER;
+import static by.tms.utils.WeightFilters.EQUAL;
+import static by.tms.utils.WeightFilters.GREATER;
 
 @Getter
 @ToString
@@ -30,7 +30,7 @@ public class Storage implements BoxSorterAware {
     }
 
     @Override
-    public List<HeavyBox> getHeavyBoxesFromWeight(Integer weight, Enum<WeightFilter> filter) {
+    public List<HeavyBox> getHeavyBoxesFromWeight(Integer weight, Enum<WeightFilters> filter) {
         Predicate<HeavyBox> boxPredicate;
         if (filter == GREATER) {
             boxPredicate = heavyBox -> heavyBox.getWeight() > weight;

@@ -3,7 +3,7 @@ package by.tms;
 import by.tms.service.BoxSorterAware;
 import by.tms.service.Storage;
 
-import static by.tms.utils.WeightFilter.*;
+import static by.tms.utils.WeightFilters.*;
 
 public class MainTask2 {
     public static void main(String[] args) {
