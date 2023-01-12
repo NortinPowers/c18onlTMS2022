@@ -1,6 +1,6 @@
 package by.tms;
 
-import by.tms.servise.FirstInterface;
+import by.tms.service.FirstInterface;
 import com.google.common.math.BigIntegerMath;
 import org.apache.commons.lang3.StringUtils;
 

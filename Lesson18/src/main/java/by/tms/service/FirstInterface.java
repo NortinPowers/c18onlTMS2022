@@ -1,4 +1,4 @@
-package by.tms.servise;
+package by.tms.service;
 
 @FunctionalInterface
 public interface FirstInterface<T> {

@@ -9,23 +9,23 @@ import java.util.List;
 import java.util.Map;
 
 public interface LibraryServiceAware {
-    List<Book> getBookByYear();
+    List<Book> getBooksSortedByYear();
 
-    List<Book> getTakenBook();
+    List<Book> getTakenBooks();
 
     List<Reader> getReadersWhoTakenBookByAuthor(String author);
 
-    List<EmailAddress> getAllEmail();
+    List<EmailAddress> getAllEmails();
 
-    List<String> getConcertedEmail();
+    List<String> getConcertedEmails();
 
-    boolean setBookToReader(long readerId, long bookId);
+    void setBookToReader(long readerId, long bookId);
 
     String getMaxCountOfBookByReaders();
 
-    Map<Enum<Group>, List<EmailAddress>> getDependedEmailByBooksCount();
+    Map<Enum<Group>, List<EmailAddress>> getDependedEmailsByBooksCount();
 
-    Map<Enum<Group>, List<String>> getReaderFullNameByEmailGroup();
+    Map<Enum<Group>, List<String>> getReadersFullNamesByEmailsGroups();
 
     String getReaderFullNameByEmailGroupWithFormatting();
 }
