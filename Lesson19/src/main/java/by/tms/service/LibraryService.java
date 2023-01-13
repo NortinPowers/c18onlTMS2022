@@ -30,7 +30,7 @@ public class LibraryService implements LibraryServiceAware {
      * @return List
      */
     @Override
-    public List<Book> getBookByYear() {
+    public List<Book> getBooksSortedByYear() {
         return library.books().stream()
                 .sorted(Comparator.comparing(Book::getYear))
                 .toList();
@@ -42,11 +42,10 @@ public class LibraryService implements LibraryServiceAware {
      * @return List
      */
     @Override
-    public List<Book> getTakenBook() {
-        Set<Book> takenBooks = library.readers().stream()
-                .flatMap(reader -> reader.takenBooks().stream())
-                .collect(Collectors.toSet());
-        return takenBooks.stream()
+    public List<Book> getTakenBooks() {
+        return library.readers().stream()
+                .flatMap(reader -> reader.getTakenBooks().stream())
+                .distinct()
                 .toList();
     }
 
@@ -58,7 +57,7 @@ public class LibraryService implements LibraryServiceAware {
     @Override
     public List<Reader> getReadersWhoTakenBookByAuthor(String author) {
         Map<Reader, List<Book>> readerBookMap = library.readers().stream()
-                .collect(Collectors.toMap(Function.identity(), Reader::takenBooks));
+                .collect(Collectors.toMap(Function.identity(), Reader::getTakenBooks));
         List<Reader> readers = new ArrayList<>();
         for (Map.Entry<Reader, List<Book>> entry : readerBookMap.entrySet()) {
             Optional<Book> anyBook = entry.getValue().stream()
@@ -77,9 +76,9 @@ public class LibraryService implements LibraryServiceAware {
      * @return List
      */
     @Override
-    public List<EmailAddress> getAllEmail() {
+    public List<EmailAddress> getAllEmails() {
         return library.readers().stream()
-                .map(Reader::email)
+                .map(Reader::getEmail)
                 .toList();
     }
 
@@ -89,35 +88,26 @@ public class LibraryService implements LibraryServiceAware {
      * @return List
      */
     @Override
-    public List<String> getConcertedEmail() {
+    public List<String> getConcertedEmails() {
         return library.readers().stream()
-                .filter(reader -> reader.takenBooks().size() > NUMBER_OF_BOOKS_TAKEN)
-                .filter(Reader::mailingConsent)
-                .map(Reader::email)
+                .filter(reader -> reader.getTakenBooks().size() > NUMBER_OF_BOOKS_TAKEN)
+                .filter(Reader::isMailingConsent)
+                .map(Reader::getEmail)
                 .map(EmailAddress::getEmailAddress)
                 .toList();
     }
 
     /**
      * The method assigns the book to the reader
-     *
-     * @return boolean
      */
     @Override
-    public boolean setBookToReader(long readerId, long bookId) {
+    public void setBookToReader(long readerId, long bookId) {
         Optional<Book> neededBook = library.books().stream()
                 .filter(book -> book.getId() == bookId)
                 .findAny();
-        if (neededBook.isPresent()) {
-            Optional<Boolean> bookToReader = library.readers().stream()
-                    .filter(reader -> reader.id() == readerId)
-                    .map(reader -> reader.takenBooks().add(neededBook.get()))
-                    .findAny();
-            if (bookToReader.isPresent()) {
-                return bookToReader.get();
-            }
-        }
-        return false;
+        neededBook.ifPresent(book -> library.readers().stream()
+                .filter(reader -> reader.getId() == readerId)
+                .forEach(reader -> reader.getTakenBooks().add(book)));
     }
 
     /**
@@ -134,13 +124,13 @@ public class LibraryService implements LibraryServiceAware {
     }
 
     @Override
-    public Map<Enum<Group>, List<EmailAddress>> getDependedEmailByBooksCount() {
+    public Map<Enum<Group>, List<EmailAddress>> getDependedEmailsByBooksCount() {
         Map<Reader, Integer> readerCountBookMap = getReaderCountBookByReaderMap();
         Map<Enum<Group>, List<EmailAddress>> enumEmailMap = new HashMap<>();
         List<EmailAddress> okEmailAddresses = new ArrayList<>();
         List<EmailAddress> tooMuchEmailAddresses = new ArrayList<>();
         for (Map.Entry<Reader, Integer> entry : readerCountBookMap.entrySet()) {
-            EmailAddress email = entry.getKey().email();
+            EmailAddress email = entry.getKey().getEmail();
             if (entry.getValue() < MAX_NUMBER_OF_BOOKS_TAKEN_TO_OK_LIST) {
                 okEmailAddresses.add(email);
             } else {
@@ -153,13 +143,13 @@ public class LibraryService implements LibraryServiceAware {
     }
 
     @Override
-    public Map<Enum<Group>, List<String>> getReaderFullNameByEmailGroup() {
+    public Map<Enum<Group>, List<String>> getReadersFullNamesByEmailsGroups() {
         Map<Reader, Integer> readerCountBookMap = getReaderCountBookByReaderMap();
         Map<Enum<Group>, List<String>> enumFullNameMap = new HashMap<>();
         List<String> okFullNameGroups = new ArrayList<>();
         List<String> tooMuchFullNameGroups = new ArrayList<>();
         for (Map.Entry<Reader, Integer> entry : readerCountBookMap.entrySet()) {
-            String fullName = entry.getKey().fullName();
+            String fullName = entry.getKey().getFullName();
             if (entry.getValue() < MAX_NUMBER_OF_BOOKS_TAKEN_TO_OK_LIST) {
                 okFullNameGroups.add(fullName);
             } else {
@@ -173,7 +163,7 @@ public class LibraryService implements LibraryServiceAware {
 
     @Override
     public String getReaderFullNameByEmailGroupWithFormatting() {
-        Map<Enum<Group>, List<String>> enumFullNameMap = getReaderFullNameByEmailGroup();
+        Map<Enum<Group>, List<String>> enumFullNameMap = getReadersFullNamesByEmailsGroups();
         Map<Enum<Group>, String> valueFormattedMap = new HashMap<>();
         String okValueFormattedStr = getFormattingStr(enumFullNameMap, OK);
         String tooMuchValueFormattedStr = getFormattingStr(enumFullNameMap, TOO_MUCH);
@@ -188,7 +178,8 @@ public class LibraryService implements LibraryServiceAware {
                 .collect(Collectors.joining("\n"));
     }
 
-    private static String getFormattingStr(Map<Enum<Group>, List<String>> enumFullNameMap, Enum<Group> group) {
+    private String getFormattingStr
+            (Map<Enum<Group>, List<String>> enumFullNameMap, Enum<Group> group) {
         List<String> fullNameGroups = enumFullNameMap.get(group);
         return fullNameGroups.stream()
                 .collect(Collectors.joining(", ", "{", "}"));
@@ -196,6 +187,6 @@ public class LibraryService implements LibraryServiceAware {
 
     private Map<Reader, Integer> getReaderCountBookByReaderMap() {
         return library.readers().stream()
-                .collect(Collectors.toMap(Function.identity(), reader -> reader.takenBooks().size()));
+                .collect(Collectors.toMap(Function.identity(), reader -> reader.getTakenBooks().size()));
     }
 }

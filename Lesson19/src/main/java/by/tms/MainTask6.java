@@ -49,20 +49,20 @@ public class MainTask6 {
         libraryService.setBookToReader(3, 5);
         libraryService.setBookToReader(4, 13);
         libraryService.setBookToReader(6, 12);
-        System.out.println(libraryService.getBookByYear());
-        System.out.println(libraryService.getAllEmail());
+        System.out.println(libraryService.getBooksSortedByYear());
+        System.out.println(libraryService.getAllEmails());
         System.out.println();
-        System.out.println(libraryService.getConcertedEmail());
+        System.out.println(libraryService.getConcertedEmails());
         System.out.println();
-        System.out.println(libraryService.getTakenBook());
+        System.out.println(libraryService.getTakenBooks());
         System.out.println();
         System.out.println(libraryService.getReadersWhoTakenBookByAuthor("Александр Сергеевич Пушкин"));
         System.out.println();
         System.out.println(libraryService.getMaxCountOfBookByReaders());
         System.out.println();
-        System.out.println(libraryService.getDependedEmailByBooksCount());
+        System.out.println(libraryService.getDependedEmailsByBooksCount());
         System.out.println();
-        System.out.println(libraryService.getReaderFullNameByEmailGroup());
+        System.out.println(libraryService.getReadersFullNamesByEmailsGroups());
         System.out.println();
         System.out.println(libraryService.getReaderFullNameByEmailGroupWithFormatting());
     }

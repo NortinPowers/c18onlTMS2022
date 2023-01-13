@@ -9,6 +9,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static by.tms.utils.PersonUtils.getPostfix;
+import static by.tms.utils.PersonUtils.modifyCount;
+
 @ToString
 public class PersonService implements PersonServiceAware {
     private final List<Person> person;
@@ -51,30 +54,5 @@ public class PersonService implements PersonServiceAware {
                     .append(" - сотрудни").append(postfix).append("\n");
         }
         return result.toString();
-    }
-
-    /**
-     * The method generates the necessary postfix
-     *
-     * @return String
-     */
-    private static String getPostfix(int count) {
-        return switch (count) {
-            case 1 -> "к";
-            case 2, 3, 4 -> "ка";
-            default -> "ков";
-        };
-    }
-
-    /**
-     * The method modify a given count to provide the method getPostfix
-     *
-     * @return int
-     */
-    private static int modifyCount(int count) {
-        while (count > 100) {
-            count = count % 100;
-        }
-        return count > 20 ? count % 10 : count;
     }
 }
