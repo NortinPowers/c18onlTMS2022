@@ -16,8 +16,6 @@ public class Task1Service implements UniqueIntegersListMakeable {
     }
 
     private String[] getIntegerModifyStrFromInputStr(String str) {
-        return str
-                .replaceAll("[^0-9]+", " ")
-                .replaceAll("\\s+", " ").split("\\s");
+        return str.split("[^0-9]+");
     }
 }

@@ -1,6 +1,7 @@
 package by.tms.service;
 
 import by.tms.model.Toy;
+import lombok.AllArgsConstructor;
 import lombok.ToString;
 
 import java.util.ArrayList;
@@ -9,14 +10,15 @@ import java.util.List;
 import java.util.Map;
 
 @ToString
+@AllArgsConstructor
 public class ToyService implements ToyServiceAware {
-    private HashMap<String, Toy> toyHashMap;
+    private Map<String, Toy> toyHashMap;
 
-    public ToyService(HashMap<String, Toy> toyHashMap) {
+    public Map<String, Toy> getToyHashMap() {
         if (toyHashMap == null) {
             toyHashMap = new HashMap<>();
         }
-        this.toyHashMap = toyHashMap;
+        return toyHashMap;
     }
 
     public ToyService() {
