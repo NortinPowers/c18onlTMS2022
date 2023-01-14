@@ -1,5 +1,6 @@
 package by.tms.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -8,15 +9,15 @@ import java.util.List;
 
 @ToString
 @Getter
+@AllArgsConstructor
 public class Customer {
-    private final Long ID;
-    private final List<Product> products;
+    private final Long id;
+    private List<Product> products;
 
-    public Customer(Long ID, List<Product> products) {
+    public List<Product> getProducts() {
         if (products == null) {
             products = new ArrayList<>();
         }
-        this.ID = ID;
-        this.products = products;
+        return products;
     }
 }

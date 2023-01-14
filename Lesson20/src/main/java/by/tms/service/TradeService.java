@@ -21,15 +21,17 @@ public class TradeService implements Runnable {
 
     @Override
     public void run() {
+        Long customerId = customer.getId();
         try {
-            while (shop.getRegisterCount() <= semaphore.availablePermits()) {
-                semaphore.acquire();
-                Thread.sleep(customer.getProducts().size() * PROCESSING_TIME_OF_ONE_PRODUCT + PAYMENT_TIME_FOR_PURCHASES);
-                System.out.println("Customer " + customer.getID() + " purchased the following products: " + customer.getProducts());
-            }
+            System.out.println("Customer " + customerId + " coming to the registers");
+            semaphore.acquire();
+            System.out.println("Customer " + customerId + " lays out the goods");
+            Thread.sleep(customer.getProducts().size() * PROCESSING_TIME_OF_ONE_PRODUCT + PAYMENT_TIME_FOR_PURCHASES);
+            System.out.println("Customer " + customerId + " purchased the following products: " + customer.getProducts());
         } catch (InterruptedException e) {
             System.out.println("Exception: " + e.getMessage());
         }
         semaphore.release();
+        System.out.println("Customer " + customerId + " leaves the store");
     }
 }
