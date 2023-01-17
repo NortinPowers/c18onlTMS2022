@@ -8,6 +8,13 @@ create table public.students
     age     integer     not null,
     city    varchar(50)
         constraint student_city_name_fk
-            references public.cities (name),
+            references public.cities (name)
+            on delete cascade,
     course  varchar(30)
 );
+
+comment
+on table public.students is 'student_db for lesson21';
+
+alter table public.students
+    owner to postgres;
