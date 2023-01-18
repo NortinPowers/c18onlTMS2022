@@ -12,12 +12,11 @@ public class Task1Service implements UniqueIntegersListMakeable {
         String[] arrayInputStr = getIntegerModifyStrFromInputStr(inputStr);
         return Arrays.stream(arrayInputStr)
                 .distinct()
+                .filter(integer -> integer.matches("[0-9]+"))
                 .collect(Collectors.joining(", "));
     }
 
     private String[] getIntegerModifyStrFromInputStr(String str) {
-        return str
-                .replaceAll("[^0-9]+", " ")
-                .replaceAll("\\s+", " ").split("\\s");
+        return str.split("[^0-9]+");
     }
 }

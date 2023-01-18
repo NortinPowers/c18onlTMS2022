@@ -1,0 +1,6 @@
+For correct operation in by/tms/utils/DBUtils, specify:
+DB_URL
+DB_USERNAME
+DB_PASSWORD
+
+sql queries are specified for postgresql
