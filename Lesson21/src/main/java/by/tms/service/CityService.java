@@ -14,7 +14,7 @@ import static by.tms.utils.CRUDUtils.deleteById;
 import static by.tms.utils.CRUDUtils.updateOneParameterById;
 import static by.tms.utils.DBUtils.getConnection;
 
-public class CityCRUD {
+public class CityService {
     private static final String GET_ALL_CITIES_QUERY = "SELECT * FROM cities ORDER BY cities.id";
     private static final String INSERT_CITIES_QUERY = "INSERT INTO cities(name, info) VALUES(?, ?);";
     private static final String UPDATE_CITIES_QUERY = "UPDATE cities SET info = ? WHERE id = ?;";

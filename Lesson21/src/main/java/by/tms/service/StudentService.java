@@ -16,7 +16,7 @@ import static by.tms.utils.CRUDUtils.deleteById;
 import static by.tms.utils.CRUDUtils.updateOneParameterById;
 import static by.tms.utils.DBUtils.getConnection;
 
-public class StudentCRUD {
+public class StudentService {
     private static final String GET_ALL_STUDENTS_QUERY = "SELECT * FROM students";
     private static final String INSERT_STUDENT_QUERY = "INSERT INTO students(name, surname, age, city, course) VALUES(?, ?, ?, ?, ?);";
     private static final String UPDATE_STUDENT_QUERY = "UPDATE students SET course = ? WHERE id = ?;";
@@ -33,8 +33,8 @@ public class StudentCRUD {
                 String surname = resultSet.getString("surname");
                 Integer age = resultSet.getInt("age");
                 String cityName = resultSet.getString("city");
-                CityCRUD cityCRUD = new CityCRUD();
-                City city = cityCRUD.getCity(cityName);
+                CityService cityService = new CityService();
+                City city = cityService.getCity(cityName);
                 String course = resultSet.getString("course");
                 students.add(new Student(id, name, surname, age, city, course));
             }
@@ -50,10 +50,10 @@ public class StudentCRUD {
             statement.setString(1, student.getName());
             statement.setString(2, student.getSurname());
             statement.setInt(3, student.getAge());
-            CityCRUD cityCRUD = new CityCRUD();
-            Optional<City> optionalCity = cityCRUD.getOptionalCity(student.getCity().getName());
+            CityService cityService = new CityService();
+            Optional<City> optionalCity = cityService.getOptionalCity(student.getCity().getName());
             if (optionalCity.isEmpty()) {
-                cityCRUD.addNewCity(new City(student.getCity().getName()));
+                cityService.addNewCity(new City(student.getCity().getName()));
             }
             statement.setString(4, student.getCity().getName());
             statement.setString(5, student.getCourse());
