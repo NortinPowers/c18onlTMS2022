@@ -8,17 +8,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static by.tms.utils.CRUDUtils.deleteById;
 import static by.tms.utils.CRUDUtils.updateOneParameterById;
 import static by.tms.utils.DBUtils.getConnection;
 
 public class CityService {
-    private static final String GET_ALL_CITIES_QUERY = "SELECT * FROM cities ORDER BY cities.id";
-    private static final String INSERT_CITIES_QUERY = "INSERT INTO cities(name, info) VALUES(?, ?);";
-    private static final String UPDATE_CITIES_QUERY = "UPDATE cities SET info = ? WHERE id = ?;";
-    private static final String DELETE_CITIES_QUERY = "DELETE FROM cities WHERE id = ?";
+    private static final String GET_ALL_CITIES_QUERY = "select * from cities order by cities.id";
+    private static final String GET_CURRENT_CITY_QUERY = "select * from cities where cities.name = ?";
+    private static final String INSERT_CITIES_QUERY = "insert into cities(name, info) values(?, ?);";
+    private static final String UPDATE_CITIES_QUERY = "update cities set info = ? where id = ?;";
+    private static final String DELETE_CITIES_QUERY = "delete from cities where id = ?";
 
     public List<City> getAllCities() {
         List<City> cities = new ArrayList<>();
@@ -57,13 +57,20 @@ public class CityService {
     }
 
     public City findCityByName(String name) {
-        Optional<City> optionalCity = getOptionalCity(name);
-        return optionalCity.orElse(null);
-    }
-
-    public Optional<City> getOptionalCity(String name) {
-        return getAllCities().stream()
-                .filter(city -> city.getName().equals(name))
-                .findAny();
+        City city = null;
+        try (Connection connection = getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(GET_CURRENT_CITY_QUERY);
+            statement.setString(1, name);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                String cityName = resultSet.getString("name");
+                if (!cityName.isEmpty()) {
+                    city = new City(name);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+        return city;
     }
 }

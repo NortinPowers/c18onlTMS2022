@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static by.tms.utils.CRUDUtils.deleteById;
 import static by.tms.utils.CRUDUtils.updateOneParameterById;
@@ -51,8 +50,7 @@ public class StudentService {
             statement.setString(2, student.getSurname());
             statement.setInt(3, student.getAge());
             CityService cityService = new CityService();
-            Optional<City> optionalCity = cityService.getOptionalCity(student.getCity().getName());
-            if (optionalCity.isEmpty()) {
+            if (cityService.findCityByName(student.getCity().getName()) == null) {
                 cityService.addNewCity(new City(student.getCity().getName()));
             }
             statement.setString(4, student.getCity().getName());
