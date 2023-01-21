@@ -16,6 +16,7 @@ public class DBUtils {
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/postgres";
     private static final String DB_USERNAME = "postgres";
     private static final String DB_PASSWORD = "root";
+    public static final String SCRIPT_FILE_ADDRESS = "Lesson21/src/main/resources/scripts/create_and_fill_tables.sql";
 
     public static Connection getConnection() {
         Connection connection = null;
@@ -27,12 +28,12 @@ public class DBUtils {
         return connection;
     }
 
-    public static void createAndFillTables() {
+    public static void createAndFillTablesByScript(String scriptFileAddress) {
         Connection connection = getConnection();
         ScriptRunner sr = new ScriptRunner(connection);
         Reader reader = null;
         try {
-            reader = new BufferedReader(new FileReader("Lesson21/src/main/resources/scripts/create_and_fill_tables.sql"));
+            reader = new BufferedReader(new FileReader(scriptFileAddress));
         } catch (FileNotFoundException e) {
             System.out.println("Exc: " + e.getMessage());
         }

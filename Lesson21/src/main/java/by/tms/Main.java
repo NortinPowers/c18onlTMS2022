@@ -5,12 +5,13 @@ import by.tms.model.Student;
 import by.tms.service.CityService;
 import by.tms.service.StudentService;
 
-import static by.tms.utils.DBUtils.createAndFillTables;
+import static by.tms.utils.DBUtils.SCRIPT_FILE_ADDRESS;
+import static by.tms.utils.DBUtils.createAndFillTablesByScript;
 import static by.tms.utils.DisplayUtils.getEachEntryFromNewLine;
 
 public class Main {
     public static void main(String[] args) {
-        createAndFillTables();
+        createAndFillTablesByScript(SCRIPT_FILE_ADDRESS);
         CityService cityService = new CityService();
         cityService.addNewCity(new City("Paris", "is the capital and most populous city of France."));
         cityService.addNewCity(new City("Rome"));
