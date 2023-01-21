@@ -27,7 +27,7 @@ public class StudentService {
             PreparedStatement statement = connection.prepareStatement(GET_ALL_STUDENTS_QUERY);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Integer id = resultSet.getInt("id");
+                Long id = resultSet.getLong("id");
                 String name = resultSet.getString("name");
                 String surname = resultSet.getString("surname");
                 Integer age = resultSet.getInt("age");
@@ -61,11 +61,11 @@ public class StudentService {
         }
     }
 
-    public void updateStudent(Integer id, String course) {
+    public void updateStudent(Long id, String course) {
         updateOneParameterById(id, course, UPDATE_STUDENT_QUERY);
     }
 
-    public void deleteStudent(Integer id) {
+    public void deleteStudent(Long id) {
         deleteById(id, DELETE_STUDENT_QUERY);
     }
 }

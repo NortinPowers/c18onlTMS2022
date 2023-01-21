@@ -15,15 +15,15 @@ public class Main {
         CityService cityService = new CityService();
         cityService.addNewCity(new City("Paris", "is the capital and most populous city of France."));
         cityService.addNewCity(new City("Rome"));
-        cityService.updateCity(6, "is the capital city of Italy.");
-        cityService.deleteCity(4);
+        cityService.updateCity(6L, "is the capital city of Italy.");
+        cityService.deleteCity(4L);
         System.out.println(getEachEntryFromNewLine(cityService.getAllCities()));
         System.out.println();
         StudentService studentService = new StudentService();
         studentService.addNewStudent(new Student("Mike", "Turner", 18, new City("Boston"), "20onl"));
         studentService.addNewStudent(new Student("Daniel", "Clark", 26, new City("Lisbon"), "24onl"));
-        studentService.updateStudent(3, "19onl");
-        studentService.deleteStudent(4);
+        studentService.updateStudent(3L, "19onl");
+        studentService.deleteStudent(4L);
         System.out.println(getEachEntryFromNewLine(studentService.getAllStudents()));
     }
 }

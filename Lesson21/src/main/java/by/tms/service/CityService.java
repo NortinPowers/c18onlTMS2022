@@ -26,7 +26,7 @@ public class CityService {
             PreparedStatement statement = connection.prepareStatement(GET_ALL_CITIES_QUERY);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Integer id = resultSet.getInt("id");
+                Long id = resultSet.getLong("id");
                 String name = resultSet.getString("name");
                 String info = resultSet.getString("info") == null ? "no information available" : resultSet.getString("info");
                 cities.add(new City(id, name, info));
@@ -48,11 +48,11 @@ public class CityService {
         }
     }
 
-    public void updateCity(Integer id, String info) {
+    public void updateCity(Long id, String info) {
         updateOneParameterById(id, info, UPDATE_CITIES_QUERY);
     }
 
-    public void deleteCity(Integer id) {
+    public void deleteCity(Long id) {
         deleteById(id, DELETE_CITIES_QUERY);
     }
 

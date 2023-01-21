@@ -8,7 +8,7 @@ import lombok.ToString;
 @ToString
 @Getter
 public class City {
-    private Integer id;
+    private Long id;
     private String name;
     private String info;
 
