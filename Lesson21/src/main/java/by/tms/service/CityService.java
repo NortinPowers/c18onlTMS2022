@@ -56,7 +56,7 @@ public class CityService {
         deleteById(id, DELETE_CITIES_QUERY);
     }
 
-    public City getCity(String name) {
+    public City findCityByName(String name) {
         Optional<City> optionalCity = getOptionalCity(name);
         return optionalCity.orElse(null);
     }

@@ -34,7 +34,7 @@ public class StudentService {
                 Integer age = resultSet.getInt("age");
                 String cityName = resultSet.getString("city");
                 CityService cityService = new CityService();
-                City city = cityService.getCity(cityName);
+                City city = cityService.findCityByName(cityName);
                 String course = resultSet.getString("course");
                 students.add(new Student(id, name, surname, age, city, course));
             }
