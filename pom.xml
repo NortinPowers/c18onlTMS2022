@@ -35,6 +35,7 @@
         <module>Lesson19Addon</module>
         <module>Lesson20</module>
         <module>Lesson21</module>
+        <module>Lesson22</module>
     </modules>
 
     <properties>
