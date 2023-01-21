@@ -11,8 +11,8 @@ public class Task1Service implements UniqueIntegersListMakeable {
         String inputStr = scanner.next();
         String[] arrayInputStr = getIntegerModifyStrFromInputStr(inputStr);
         return Arrays.stream(arrayInputStr)
-                .distinct()
                 .filter(integer -> integer.matches("[0-9]+"))
+                .distinct()
                 .collect(Collectors.joining(", "));
     }
 
