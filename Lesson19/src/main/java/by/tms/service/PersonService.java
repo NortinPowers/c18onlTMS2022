@@ -11,16 +11,14 @@ import java.util.stream.Collectors;
 
 import static by.tms.utils.PersonUtils.getPostfix;
 import static by.tms.utils.PersonUtils.modifyCount;
+import static java.util.Objects.nonNull;
 
 @ToString
 public class PersonService implements PersonServiceAware {
     private final List<Person> person;
 
     public PersonService(List<Person> person) {
-        if (person == null) {
-            person = new ArrayList<>();
-        }
-        this.person = person;
+        this.person = nonNull(person) ? person : new ArrayList<>();
     }
 
     /**
