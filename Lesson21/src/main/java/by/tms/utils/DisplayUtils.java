@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class DisplayUtils {
     public static String getEachEntryFromNewLine(@NonNull List<?> list) {
         return list.stream()
-                .map(object -> object + "")
+                .map(Object::toString)
                 .collect(Collectors.joining(",\n"));
     }
 }

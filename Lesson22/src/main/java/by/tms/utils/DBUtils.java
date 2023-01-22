@@ -16,7 +16,7 @@ public class DBUtils {
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/postgres";
     private static final String DB_USERNAME = "postgres";
     private static final String DB_PASSWORD = "root";
-    public static final String SCRIPT_FILE_ADDRESS = "Lesson21/src/main/resources/scripts/create_and_fill_tables.sql";
+    public static final String SCRIPT_FILE_ADDRESS = "Lesson22/src/main/resources/script.sql";
 
     public static Connection getConnection() {
         Connection connection = null;
@@ -28,7 +28,7 @@ public class DBUtils {
         return connection;
     }
 
-    public static void createAndFillTablesByScript(String scriptFileAddress) {
+    public static void initScript(String scriptFileAddress) {
         Connection connection = getConnection();
         ScriptRunner runner = new ScriptRunner(connection);
         Reader reader = null;
