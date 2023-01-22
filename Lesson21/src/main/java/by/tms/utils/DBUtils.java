@@ -30,13 +30,13 @@ public class DBUtils {
 
     public static void createAndFillTablesByScript(String scriptFileAddress) {
         Connection connection = getConnection();
-        ScriptRunner sr = new ScriptRunner(connection);
+        ScriptRunner runner = new ScriptRunner(connection);
         Reader reader = null;
         try {
             reader = new BufferedReader(new FileReader(scriptFileAddress));
         } catch (FileNotFoundException e) {
             System.out.println("Exc: " + e.getMessage());
         }
-        sr.runScript(reader);
+        runner.runScript(reader);
     }
 }
