@@ -136,10 +136,6 @@ VALUES ('Kate', 350.50, 28, current_date, 'Fish Out Of Water');
 --------------------------------------------------------
 insert into workers (login, salary, age, date, description)
 VALUES ('Anna', 350.50, 28, clock_timestamp(), 'Top Drawer');
-
---!!! WORKS RANDOMLY !!!
--- need your comment (работает только на одном из двух компьютеров): VALUES ('Anna', 350.50, 28, current_time, 'Top Drawer');
-
 --------------------------------------------------------
 -- Выберите из таблицы workers все записи за 2016 год.
 --------------------------------------------------------
