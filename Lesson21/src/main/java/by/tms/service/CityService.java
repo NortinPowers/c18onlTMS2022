@@ -16,6 +16,7 @@ import static by.tms.utils.DBUtils.getConnection;
 public class CityService {
     private static final String GET_ALL_CITIES_QUERY = "select * from cities order by cities.id";
     private static final String GET_CURRENT_CITY_QUERY = "select * from cities where cities.name = ?";
+    private static final String GET_CITY_BY_ID_QUERY = "select id from cities where cities.name = ?";
     private static final String INSERT_CITIES_QUERY = "insert into cities(name, info) values(?, ?);";
     private static final String UPDATE_CITIES_QUERY = "update cities set info = ? where id = ?;";
     private static final String DELETE_CITIES_QUERY = "delete from cities where id = ?";
@@ -72,5 +73,20 @@ public class CityService {
             System.out.println("Exception: " + e.getMessage());
         }
         return city;
+    }
+
+    public Long getCityId(String name) {
+        long id = -1L;
+        try (Connection connection = getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(GET_CITY_BY_ID_QUERY);
+            statement.setString(1, name);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                id = resultSet.getLong("id");
+            }
+        } catch (SQLException e) {
+            System.out.println("Exception 1: " + e.getMessage());
+        }
+        return id;
     }
 }

@@ -1,9 +1,7 @@
 <h1 align="center">java course study / TMS / group c18onlTMS202</h1>
 <h3 align="center">Java developer</h3>
 
-<h4 align="center">[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&color=730EC4&multiline=true&width=270&height=100&lines=Teach+Me+Skills)](https://git.io/typing-svg)</h4>
-
-<h5 align="center">[![GitHub Streak](https://streak-stats.demolab.com/?user=DenverCoder1&theme=dark)](https://git.io/streak-stats)</h5>
+[![GitHub Streak](https://streak-stats.demolab.com/?user=DenverCoder1&theme=dark)](https://git.io/streak-stats)
 
 | #        | Lesson                           | Description                                                                              | Homework theme                                                                                                                                              |
 |----------|----------------------------------|------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
