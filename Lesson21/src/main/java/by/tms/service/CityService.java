@@ -16,7 +16,7 @@ import static by.tms.utils.DBUtils.getConnection;
 public class CityService {
     private static final String GET_ALL_CITIES_QUERY = "select * from cities order by cities.id";
     private static final String GET_CURRENT_CITY_QUERY = "select * from cities where cities.name = ?";
-    private static final String GET_CITY_BY_ID_QUERY = "select id from cities where cities.name = ?";
+    private static final String GET_CITY_ID_BY_NAME_QUERY = "select id from cities where cities.name = ?";
     private static final String INSERT_CITIES_QUERY = "insert into cities(name, info) values(?, ?);";
     private static final String UPDATE_CITIES_QUERY = "update cities set info = ? where id = ?;";
     private static final String DELETE_CITIES_QUERY = "delete from cities where id = ?";
@@ -75,18 +75,17 @@ public class CityService {
         return city;
     }
 
-    public Long getCityId(String name) {
-        long id = -1L;
+    public Long getCityIdByName(String name) {
         try (Connection connection = getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(GET_CITY_BY_ID_QUERY);
+            PreparedStatement statement = connection.prepareStatement(GET_CITY_ID_BY_NAME_QUERY);
             statement.setString(1, name);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                id = resultSet.getLong("id");
+            if (resultSet.next()) {
+                return resultSet.getLong("id");
             }
         } catch (SQLException e) {
-            System.out.println("Exception 1: " + e.getMessage());
+            System.out.println("Exception: " + e.getMessage());
         }
-        return id;
+        return null;
     }
 }
