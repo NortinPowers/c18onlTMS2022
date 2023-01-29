@@ -5,5 +5,5 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class Constants {
 
-    public final Integer KILOGRAM = 1000;
+    public static final Integer KILOGRAM = 1000;
 }

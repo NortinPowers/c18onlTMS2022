@@ -36,6 +36,7 @@
         <module>Lesson20</module>
         <module>Lesson21</module>
         <module>Lesson22</module>
+        <module>Lesson23</module>
     </modules>
 
     <properties>
@@ -48,6 +49,8 @@
         <guava.version>31.1-jre</guava.version>
         <postgresql.version>42.5.1</postgresql.version>
         <mybatis.version>3.5.11</mybatis.version>
+        <javax.servlet.version>4.0.1</javax.servlet.version>
+        <jstl.version>1.2</jstl.version>
     </properties>
 
     <dependencies>
@@ -82,6 +85,17 @@
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
             <version>${mybatis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${javax.servlet.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl.version}</version>
         </dependency>
     </dependencies>
 
