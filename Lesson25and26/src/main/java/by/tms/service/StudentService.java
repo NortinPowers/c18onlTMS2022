@@ -17,4 +17,8 @@ public class StudentService {
     public void deleteStudent(Long id) {
         jdbsStudentsRepository.deleteStudent(id);
     }
+
+    public void addNewStudent(Student student) {
+        jdbsStudentsRepository.addNewStudent(student);
+    }
 }

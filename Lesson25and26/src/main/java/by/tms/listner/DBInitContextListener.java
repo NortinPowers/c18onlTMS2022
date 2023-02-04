@@ -1,4 +1,4 @@
-package by.tms.listener;
+package by.tms.listner;
 
 import by.tms.repository.JDBSStudentsRepository;
 import by.tms.repository.StudentRepositoryAware;

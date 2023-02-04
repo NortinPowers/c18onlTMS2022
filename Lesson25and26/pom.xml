@@ -6,11 +6,12 @@
         <artifactId>c18onlTMS2022</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>Lesson23</artifactId>
+
+    <artifactId>Lesson25and26</artifactId>
     <packaging>war</packaging>
-    <name>Lesson23 Maven Webapp</name>
-    <url>http://maven.apache.org</url>
+    <name>Lesson25and26 Maven Webapp</name>
+
     <build>
-        <finalName>Lesson23</finalName>
+        <finalName>Lesson25and26</finalName>
     </build>
 </project>

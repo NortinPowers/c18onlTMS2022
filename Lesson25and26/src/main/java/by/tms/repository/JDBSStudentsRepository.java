@@ -2,6 +2,7 @@ package by.tms.repository;
 
 import by.tms.model.City;
 import by.tms.model.Student;
+import by.tms.service.CityService;
 import lombok.AllArgsConstructor;
 
 import java.sql.Connection;
@@ -15,6 +16,7 @@ import java.util.List;
 public class JDBSStudentsRepository implements StudentRepositoryAware {
     private Connection connection;
     private static final String GET_ALL_STUDENTS_QUERY = "select s.id, s.name, s.surname, s.age, s.course, c.id as city_id, c.name as city_name, c.info from students s left join cities c on s.city_id = c.id order by s.id;";
+    private static final String INSERT_STUDENT_QUERY = "INSERT INTO students(name, surname, age, city_id, course) VALUES(?, ?, ?, ?, ?);";
     private static final String DELETE_STUDENT_QUERY = "DELETE FROM students WHERE id = ?";
 
     @Override
@@ -46,6 +48,26 @@ public class JDBSStudentsRepository implements StudentRepositoryAware {
             PreparedStatement statement = connection.prepareStatement(DELETE_STUDENT_QUERY);
             statement.setLong(1, id);
             statement.execute();
+        } catch (SQLException e) {
+            System.out.println("Exception: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void addNewStudent(Student student) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(INSERT_STUDENT_QUERY);
+            statement.setString(1, student.getName());
+            statement.setString(2, student.getSurname());
+            statement.setInt(3, student.getAge());
+            CityService cityService = new CityService(connection);
+            String cityName = student.getCity().getName();
+            if (cityService.findCityByName(cityName) == null) {
+                cityService.addNewCity(new City(cityName));
+            }
+            statement.setLong(4, cityService.getCityIdByName(cityName));
+            statement.setString(5, student.getCourse());
+            statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Exception: " + e.getMessage());
         }

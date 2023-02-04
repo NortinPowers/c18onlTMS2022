@@ -1,6 +1,8 @@
-package by.tms.servlets;
+package by.tms.servlet;
 
 import by.tms.service.SecurityAware;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -12,10 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/hidden-page")
-public class HiddenPageServlet extends HttpServlet {
+@WebServlet("/login")
+public class IndexServlet extends HttpServlet {
 
     private SecurityAware securityService;
+    @Setter
+    @Getter
     private static Object access = null;
 
     @Override
@@ -32,7 +36,7 @@ public class HiddenPageServlet extends HttpServlet {
             HttpSession session = req.getSession();
             access = new Object();
             session.setAttribute("accessPermission", access);
-            getRedirect(req, resp, "/hidden-page.jsp");
+            getRedirect(req, resp, "/open-page.jsp");
         } else {
             getRedirect(req, resp, "/index.jsp");
         }
@@ -41,7 +45,7 @@ public class HiddenPageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (access != null) {
-            getRedirect(req, resp, "/hidden-page.jsp");
+            getRedirect(req, resp, "/open-page.jsp");
         } else {
             getRedirect(req, resp, "/index.jsp");
         }
