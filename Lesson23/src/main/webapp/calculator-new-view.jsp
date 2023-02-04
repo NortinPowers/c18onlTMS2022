@@ -3,10 +3,10 @@
 <head>
     <title>Calculator</title>
 </head>
-<link rel="stylesheet" href="css/calculator.css">
+<link rel="stylesheet" href="css/inputForm.css">
 <body>
 <div class="form-box">
-    <form action="CalculatorNewResult" method="post">
+    <form action="calculator-result" method="post">
         <div class="value-box">
             <p> Value: </p>
             <input type="number" step="any" name="value1">

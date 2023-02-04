@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
-
 body {
     margin: 0;
     display: flex;
@@ -8,7 +7,6 @@ body {
     height: 100vh;
     background: black;
 }
-
 h1 {
     font-family: 'Roboto Slab', serif;
     text-align: center;
@@ -18,7 +16,6 @@ h1 {
     text-shadow: 0 0 1px #eee, 5px 5px 1px #00dcdc, -5px -2px 1px #ff3232;
     animation: glitch 4s ease-in-out infinite alternate;
 }
-
 @keyframes glitch {
     0%, 40%, 44%, 58%, 61%, 65%, 69%, 73%, 100% {
         transform: skewX(0deg);

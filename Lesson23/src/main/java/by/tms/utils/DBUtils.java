@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 @UtilityClass
 public class DBUtils {
-    private static final String DB_URL = "jdbc:postgresql://localhost:5432/postgres";
+    private static final String DB_URL = "jdbc:postgresql://localhost:5434/postgres";
     private static final String DB_USERNAME = "postgres";
     private static final String DB_PASSWORD = "root";
     public static final String SCRIPT_FILE_ADDRESS = "Lesson23/src/main/resources/scripts/create_and_fill_tables.sql";
@@ -31,12 +31,12 @@ public class DBUtils {
     public static void createAndFillTablesByScript(String scriptFileAddress) {
         Connection connection = getConnection();
         ScriptRunner runner = new ScriptRunner(connection);
-        Reader reader = null;
+        Reader reader;
         try {
             reader = new BufferedReader(new FileReader(scriptFileAddress));
+            runner.runScript(reader);
         } catch (FileNotFoundException e) {
             System.out.println("Exc: " + e.getMessage());
         }
-        runner.runScript(reader);
     }
 }
