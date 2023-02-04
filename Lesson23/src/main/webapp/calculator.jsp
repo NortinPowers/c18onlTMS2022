@@ -2,9 +2,9 @@
 <html>
 <head>
     <title>Calculator</title>
+    <link rel="stylesheet" href="css/inputForm.css">
 </head>
 <body>
-<link rel="stylesheet" href="css/inputForm.css">
 <div class="form-box">
     <h2>Math operations</h2>
     <form action="calculator-result.jsp">

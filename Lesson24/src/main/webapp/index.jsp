@@ -2,8 +2,8 @@
 <html>
 <head>
     <title>Login</title>
+    <link rel="stylesheet" href="css/login.css">
 </head>
-<link rel="stylesheet" href="css/login.css">
 <body>
 <div class="login-box">
     <h2>Login</h2>

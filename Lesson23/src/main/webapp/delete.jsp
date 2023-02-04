@@ -3,9 +3,9 @@
 <html>
 <head>
     <title>Add new student</title>
+    <link rel="stylesheet" href="css/inputForm.css">
 </head>
 <body>
-<link rel="stylesheet" href="css/inputForm.css">
 <div class="form-box">
     <h2>Delete student by ID</h2>
     <form action="<c:url value="/delete"/>" method="post">

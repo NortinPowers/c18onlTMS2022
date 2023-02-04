@@ -2,8 +2,8 @@
 <html>
 <head>
     <title>Hidden page</title>
+    <link rel="stylesheet" href="css/glitch.css">
 </head>
-<link rel="stylesheet" href="css/glitch.css">
 <body>
 <h1>Welcome to the hidden page</h1>
 </body>

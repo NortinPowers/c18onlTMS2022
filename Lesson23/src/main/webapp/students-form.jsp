@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Students</title>
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="css/inputForm.css">
 </head>
-<link rel="stylesheet" href="css/table.css">
-<link rel="stylesheet" href="css/inputForm.css">
 <h1><span class="blue">&lt</span>All<span class="blue">&gt</span> <span class="yellow">Students</span></h1>
 <body>
 <table class="container">

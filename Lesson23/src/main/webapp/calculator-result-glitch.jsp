@@ -3,8 +3,8 @@
 <html>
 <head>
     <title>Result page</title>
+    <link rel="stylesheet" href="css/result.css">
 </head>
-<link rel="stylesheet" href="css/result.css">
 <body>
 <h1>${result}</h1>
 </body>

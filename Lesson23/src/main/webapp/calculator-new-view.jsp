@@ -2,8 +2,8 @@
 <html>
 <head>
     <title>Calculator</title>
+    <link rel="stylesheet" href="css/inputForm.css">
 </head>
-<link rel="stylesheet" href="css/inputForm.css">
 <body>
 <div class="form-box">
     <form action="calculator-result" method="post">
