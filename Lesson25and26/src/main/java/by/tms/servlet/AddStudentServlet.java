@@ -25,7 +25,7 @@ public class AddStudentServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        getRedirect(req, resp);
+        sendForward(req, resp);
     }
 
     @Override
@@ -40,11 +40,11 @@ public class AddStudentServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/students");
         } catch (Exception e) {
             System.out.println("Exception: " + e.getMessage());
-            getRedirect(req, resp);
+            sendForward(req, resp);
         }
     }
 
-    private void getRedirect(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void sendForward(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/create.jsp");
         requestDispatcher.forward(req, resp);
     }

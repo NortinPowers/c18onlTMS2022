@@ -24,7 +24,7 @@ public class DeleteStudentServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        getRedirect(request, response);
+        sendForward(request, response);
     }
 
     @Override
@@ -35,11 +35,11 @@ public class DeleteStudentServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/students");
         } catch (Exception e) {
             System.out.println("Exception: " + e.getMessage());
-            getRedirect(request, response);
+            sendForward(request, response);
         }
     }
 
-    private void getRedirect(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void sendForward(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/delete.jsp");
         requestDispatcher.forward(req, resp);
     }

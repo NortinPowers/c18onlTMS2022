@@ -16,9 +16,7 @@
             <input type="password" name="password" required="">
             <label>Password</label>
         </div>
-        <span></span>
-        <span></span>
-        <div>
+        <div style="margin-top: 15px">
             <input type="submit" value="Submit"/>
         </div>
     </form>

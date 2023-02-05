@@ -29,8 +29,6 @@
             <input type="text" name="course" required="">
             <label>Student course</label>
         </div>
-        <span></span>
-        <span></span>
         <div>
             <input type="submit" value="Create">
         </div>

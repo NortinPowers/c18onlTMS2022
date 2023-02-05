@@ -6,7 +6,7 @@
 </head>
 <body>
 <div>
-    <a id="DB" class="button purple" href="${pageContext.request.contextPath}/students">
+    <a id="db" class="button purple" href="${pageContext.request.contextPath}/students">
         <i class="fa fa-address-book" aria-hidden="true"></i>
         <span>Работа с БД</span>
     </a>

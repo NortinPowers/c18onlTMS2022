@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Add new student</title>
+    <title>Delete student</title>
     <link rel="stylesheet" href="css/page.css">
 </head>
 <body>
@@ -13,8 +13,6 @@
             <input type="number" name="id" required="">
             <label>ID</label>
         </div>
-        <span></span>
-        <span></span>
         <div>
             <input type="submit" value="Delete"/>
         </div>

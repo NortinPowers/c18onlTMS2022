@@ -1,6 +1,6 @@
-package by.tms.listener;
+package by.tms.listner;
 
-import by.tms.repository.JDBSStudentsRepository;
+import by.tms.repository.JdbsStudentsRepository;
 import by.tms.repository.StudentRepositoryAware;
 import by.tms.service.StudentService;
 
@@ -12,17 +12,17 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 @WebListener
-public class DBInitContextListener implements ServletContextListener {
+public class DbInitContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        final String dbDriver = "org.postgresql.Driver";
         String dbURl = sce.getServletContext().getInitParameter("db_url");
         String dbUser = sce.getServletContext().getInitParameter("db_user");
         String dbPassword = sce.getServletContext().getInitParameter("db_password");
         try {
+            final String dbDriver = "org.postgresql.Driver";
             Class.forName(dbDriver);
             Connection connection = DriverManager.getConnection(dbURl, dbUser, dbPassword);
-            StudentRepositoryAware jdbsStudentsRepository = new JDBSStudentsRepository(connection);
+            StudentRepositoryAware jdbsStudentsRepository = new JdbsStudentsRepository(connection);
             StudentService studentService = new StudentService(jdbsStudentsRepository);
             sce.getServletContext().setAttribute("connection", connection);
             sce.getServletContext().setAttribute("studentService", studentService);
