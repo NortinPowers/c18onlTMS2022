@@ -3,12 +3,12 @@
 <html>
 <head>
     <title>Delete student</title>
-    <link rel="stylesheet" href="css/page.css">
+    <link rel="stylesheet" href="<c:url value="/css/page.css"/>">
 </head>
 <body>
 <div class="login-box">
     <h2>Delete student by ID</h2>
-    <form action="<c:url value="/delete"/>" method="post">
+    <form action="<c:url value="/view/delete"/>" method="post">
         <div class="user-box">
             <input type="number" name="id" required="">
             <label>ID</label>
@@ -17,7 +17,7 @@
             <input type="submit" value="Delete"/>
         </div>
     </form>
-    <form action="<c:url value="/students"/>">
+    <form action="<c:url value="/view/students"/>">
         <br>
         <div>
             <input type="submit" value="Back">

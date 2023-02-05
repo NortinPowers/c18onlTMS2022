@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/open-page.jsp", "/create.jsp", "/delete.jsp", "/create", "/delete", "/students"})
+@WebFilter("/view/*")
 public class SecurityFilter implements Filter {
 
     @Override

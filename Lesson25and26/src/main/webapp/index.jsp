@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Login</title>
-    <link rel="stylesheet" href="css/page.css">
+    <link rel="stylesheet" href="<c:url value="/css/page.css"/>">
 </head>
 <body>
 <div class="login-box">

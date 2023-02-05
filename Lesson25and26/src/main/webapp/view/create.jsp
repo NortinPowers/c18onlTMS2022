@@ -3,12 +3,12 @@
 <html>
 <head>
     <title>Create</title>
-    <link rel="stylesheet" href="css/page.css">
+    <link rel="stylesheet" href="<c:url value="/css/page.css"/>">
 </head>
 <body>
 <div class="login-box">
     <h2>Create Student</h2>
-    <form action="<c:url value="/create"/>" method="post">
+    <form action="<c:url value="/view/create"/>" method="post">
         <div class="user-box">
             <input type="text" name="name" required="">
             <label>Student name</label>
@@ -33,7 +33,7 @@
             <input type="submit" value="Create">
         </div>
     </form>
-    <form action="<c:url value="/students"/>">
+    <form action="<c:url value="/view/students"/>">
         <br>
         <div>
             <input type="submit" value="Back">

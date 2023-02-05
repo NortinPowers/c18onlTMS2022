@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/students")
+@WebServlet("/view/students")
 public class StudentsServlet extends HttpServlet {
 
     private StudentService studentService;
@@ -28,7 +28,7 @@ public class StudentsServlet extends HttpServlet {
         response.setContentType("text/plain");
         List<Student> students = studentService.getStudents();
         request.setAttribute("students", students);
-        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/students-form.jsp");
+        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/students-form.jsp");
         requestDispatcher.forward(request, response);
     }
 }

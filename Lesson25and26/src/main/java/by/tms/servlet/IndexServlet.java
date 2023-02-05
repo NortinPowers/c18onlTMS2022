@@ -31,7 +31,7 @@ public class IndexServlet extends HttpServlet {
         if (securityService.isVerifiedUser(name, password)) {
             HttpSession session = req.getSession();
             session.setAttribute("accessPermission", new User(name, password));
-            sendForward(req, resp, "/open-page.jsp");
+            sendForward(req, resp, "/view/open-page.jsp");
         } else {
             sendForward(req, resp, "/index.jsp");
         }
@@ -42,7 +42,7 @@ public class IndexServlet extends HttpServlet {
         HttpSession session = req.getSession();
         Object permission = session.getAttribute("accessPermission");
         if (permission != null) {
-            sendForward(req, resp, "/open-page.jsp");
+            sendForward(req, resp, "/view/open-page.jsp");
         } else {
             sendForward(req, resp, "/index.jsp");
         }
