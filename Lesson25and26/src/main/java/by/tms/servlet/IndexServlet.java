@@ -1,8 +1,6 @@
 package by.tms.servlet;
 
 import by.tms.service.SecurityAware;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -18,9 +16,7 @@ import java.io.IOException;
 public class IndexServlet extends HttpServlet {
 
     private SecurityAware securityService;
-    @Setter
-    @Getter
-    private static Object access = null;
+    private HttpSession session;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -33,9 +29,8 @@ public class IndexServlet extends HttpServlet {
         String name = req.getParameter("name");
         String password = req.getParameter("password");
         if (securityService.isVerifiedUser(name, password)) {
-            HttpSession session = req.getSession();
-            access = new Object();
-            session.setAttribute("accessPermission", access);
+            session = req.getSession();
+            session.setAttribute("accessPermission", new Object());
             getRedirect(req, resp, "/open-page.jsp");
         } else {
             getRedirect(req, resp, "/index.jsp");
@@ -44,7 +39,9 @@ public class IndexServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (access != null) {
+        session = req.getSession();
+        Object permission = session.getAttribute("accessPermission");
+        if (permission != null) {
             getRedirect(req, resp, "/open-page.jsp");
         } else {
             getRedirect(req, resp, "/index.jsp");
