@@ -1,11 +1,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Students</title>
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="css/inputForm.css">
 </head>
-<link rel="stylesheet" href="css/table.css">
-<h1><span class="blue">&lt;</span>All<span class="blue">&gt;</span> <span class="yellow">Students</span></h1>
+<h1><span class="blue">&lt</span>All<span class="blue">&gt</span> <span class="yellow">Students</span></h1>
 <body>
 <table class="container">
     <tr>
@@ -28,5 +30,14 @@
         </tr>
     </c:forEach>
 </table>
+<span></span>
+<span></span>
+<span></span>
+<form action="delete" method="get">
+    <div class="button">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="submit" value="Delete student"/>
+    </div>
+</form>
 </body>
 </html>

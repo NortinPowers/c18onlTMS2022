@@ -2,12 +2,12 @@
 <html>
 <head>
     <title>Calculator</title>
+    <link rel="stylesheet" href="css/inputForm.css">
 </head>
 <body>
-<link rel="stylesheet" href="css/calculator.css">
 <div class="form-box">
     <h2>Math operations</h2>
-    <form action="calculatorResult.jsp">
+    <form action="calculator-result.jsp">
         <div class="value-box">
             <input type="number" step="any" name="value1" required="">
             <label>Value</label>
@@ -16,6 +16,7 @@
             <input type="number" step="any" name="value2" required="">
             <label>Value</label>
         </div>
+        <span></span>
         <span></span>
         <div class="button">
             <input type="submit" value="Do operation"/>

@@ -2,11 +2,11 @@
 <html>
 <head>
     <title>Calculator</title>
+    <link rel="stylesheet" href="css/inputForm.css">
 </head>
-<link rel="stylesheet" href="css/calculator.css">
 <body>
 <div class="form-box">
-    <form action="CalculatorNewResult" method="post">
+    <form action="calculator-result" method="post">
         <div class="value-box">
             <p> Value: </p>
             <input type="number" step="any" name="value1">

@@ -4,4 +4,16 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
                       http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+    <context-param>
+        <param-name>db_url</param-name>
+        <param-value>jdbc:postgresql://localhost:5432/postgres</param-value>
+    </context-param>
+    <context-param>
+        <param-name>db_user</param-name>
+        <param-value>postgres</param-value>
+    </context-param>
+    <context-param>
+        <param-name>db_password</param-name>
+        <param-value>root</param-value>
+    </context-param>
 </web-app>

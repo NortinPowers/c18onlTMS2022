@@ -37,6 +37,8 @@
         <module>Lesson21</module>
         <module>Lesson22</module>
         <module>Lesson23</module>
+        <module>Lesson24</module>
+        <module>Lesson25and26</module>
     </modules>
 
     <properties>
@@ -96,6 +98,12 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>${jstl.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.2</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
