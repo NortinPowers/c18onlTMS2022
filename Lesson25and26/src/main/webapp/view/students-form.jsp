@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>Students</title>
     <link rel="stylesheet" href="<c:url value="/css/table.css"/>">
-    <link rel="stylesheet" href="<c:url value="/css/inputForm.css"/>">
     <link rel="stylesheet" href="<c:url value="/css/page.css"/>">
 </head>
 <h1><span class="blue">&lt</span>All<span class="blue">&gt</span> <span class="yellow">Students</span></h1>
