@@ -33,12 +33,7 @@
             <input type="submit" value="Create">
         </div>
     </form>
-    <form action="<c:url value="/view/students"/>">
-        <br>
-        <div>
-            <input type="submit" value="Back">
-        </div>
-    </form>
+    <a href="<c:url value="/view/students"/>" class="button">Back</a>
 </div>
 </body>
 </html>

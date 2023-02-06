@@ -1,13 +1,18 @@
 package by.tms.model;
 
+import lombok.ToString;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.util.Objects.nonNull;
+@ToString
 public class Authenticator {
     private Map<String, String> authenticators;
 
     public Map<String, String> getAuthenticators() {
-        return nonNull(authenticators) ? authenticators : new HashMap<>();
+        if (authenticators == null) {
+            authenticators = new HashMap<>();
+        }
+        return authenticators;
     }
 }
