@@ -19,6 +19,6 @@ public class HiddenPageInitContextListener implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        sce.getServletContext().setAttribute("authenticator", null);
+        sce.getServletContext().setAttribute("security", null);
     }
 }

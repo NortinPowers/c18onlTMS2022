@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/create")
+@WebServlet("/view/create")
 public class AddStudentServlet extends HttpServlet {
     private StudentService studentService;
 
@@ -25,7 +25,7 @@ public class AddStudentServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        getRedirect(req, resp);
+        sendForward(req, resp);
     }
 
     @Override
@@ -37,15 +37,15 @@ public class AddStudentServlet extends HttpServlet {
             City city = new City(req.getParameter("cityName"));
             String course = req.getParameter("course");
             studentService.addNewStudent(new Student(name, surname, age, city, course));
-            resp.sendRedirect(req.getContextPath() + "/students");
+            resp.sendRedirect(req.getContextPath() + "/view/students");
         } catch (Exception e) {
             System.out.println("Exception: " + e.getMessage());
-            getRedirect(req, resp);
+            sendForward(req, resp);
         }
     }
 
-    private void getRedirect(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/create.jsp");
+    private void sendForward(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/create.jsp");
         requestDispatcher.forward(req, resp);
     }
 }

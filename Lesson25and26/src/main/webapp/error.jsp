@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%
     String message = pageContext.getException().getMessage();
@@ -6,7 +7,7 @@
 <html>
 <head>
     <title>Exception</title>
-    <link rel="stylesheet" href="css/glitch.css">
+    <link rel="stylesheet" href="<c:url value="/css/glitch.css"/>">
 </head>
 <body>
 <h1 style="

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/delete")
+@WebServlet("/view/delete")
 public class DeleteStudentServlet extends HttpServlet {
 
     private StudentService studentService;
@@ -24,7 +24,7 @@ public class DeleteStudentServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        getRedirect(request, response);
+        sendForward(request, response);
     }
 
     @Override
@@ -32,15 +32,15 @@ public class DeleteStudentServlet extends HttpServlet {
         try {
             Long id = Long.parseLong(request.getParameter("id"));
             studentService.deleteStudent(id);
-            response.sendRedirect(request.getContextPath() + "/students");
+            response.sendRedirect(request.getContextPath() + "/view/students");
         } catch (Exception e) {
             System.out.println("Exception: " + e.getMessage());
-            getRedirect(request, response);
+            sendForward(request, response);
         }
     }
 
-    private void getRedirect(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/delete.jsp");
+    private void sendForward(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/view/delete.jsp");
         requestDispatcher.forward(req, resp);
     }
 }

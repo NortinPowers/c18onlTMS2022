@@ -4,27 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Students</title>
-    <link rel="stylesheet" href="css/table.css">
-    <link rel="stylesheet" href="css/inputForm.css">
-    <link rel="stylesheet" href="css/page.css">
+    <link rel="stylesheet" href="<c:url value="/css/table.css"/>">
+    <link rel="stylesheet" href="<c:url value="/css/page.css"/>">
 </head>
 <h1><span class="blue">&lt</span>All<span class="blue">&gt</span> <span class="yellow">Students</span></h1>
 <body>
 <div>
     <div style="float: left; margin: 0 10px 0 10px">
-        <form action="create.jsp">
-            <input type="submit" value="Create">
-        </form>
+        <a href="<c:url value="/view/create.jsp"/>" class="button">Create</a>
     </div>
     <div style="float: left; margin: 0 420px 0 0">
-        <form action="delete.jsp">
-            <input type="submit" value="Delete">
-        </form>
+        <a href="<c:url value="/view/delete.jsp"/>" class="button">Delete</a>
     </div>
     <div style="float: right">
-        <form action="<c:url value="open-page.jsp"/>">
-            <input type="submit" value="Back">
-        </form>
+        <a href="<c:url value="open-page.jsp"/>" class="button">Back</a>
     </div>
 </div>
 <br>
