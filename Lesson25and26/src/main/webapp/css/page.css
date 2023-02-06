@@ -113,13 +113,13 @@ input[type=submit] {
     width: 320px;
 }
 
-input[type=submit]:hover {
+input[type=submit]:hover, .button:hover {
     background: transparent;
     color: dodgerblue;
     border-color: #4676d7;
 }
 
-input[type=submit]:focus {
+input[type=submit]:focus, .button:focus {
     outline: none;
     box-shadow: 0 0 0 4px #cbd6ee;
 }
@@ -140,15 +140,4 @@ input[type=submit]:focus {
     text-decoration: none;
     margin-top: 15px;
     margin-bottom: 15px;
-}
-
-.button:hover {
-    background: transparent;
-    color: dodgerblue;
-    border-color: #4676d7;
-}
-
-.button:focus {
-    outline: none;
-    box-shadow: 0 0 0 4px #cbd6ee;
 }
