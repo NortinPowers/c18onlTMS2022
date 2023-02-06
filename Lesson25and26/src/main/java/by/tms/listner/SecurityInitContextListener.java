@@ -7,13 +7,16 @@ import by.tms.service.SecurityService;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebListener
 public class SecurityInitContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        Authenticator authenticator = new Authenticator();
-        authenticator.getAuthenticators().put("test", "test");
+        Map<String, String> accessMap = new HashMap<>();
+        accessMap.put("test", "test");
+        Authenticator authenticator = new Authenticator(accessMap);
         SecurityAware security = new SecurityService(authenticator);
         sce.getServletContext().setAttribute("security", security);
     }
