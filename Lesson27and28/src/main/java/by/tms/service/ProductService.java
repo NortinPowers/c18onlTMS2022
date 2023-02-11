@@ -66,7 +66,7 @@ public class ProductService implements ProductServiceAware {
 
     @Override
     public BigDecimal getProductsPrice(List<Product> products) {
-        BigDecimal fullPrice = new BigDecimal("0");
+        BigDecimal fullPrice = BigDecimal.ZERO;
         for (Product product : products) {
             fullPrice = fullPrice.add(product.getPrice());
         }
