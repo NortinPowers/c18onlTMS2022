@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static by.tms.utils.ServletUtils.forwardToAddress;
+
 @WebServlet("/delete-favorite")
 public class DeleteFavoriteProductsServlet extends HttpServlet {
     private ProductServiceAware productService;
@@ -25,10 +27,10 @@ public class DeleteFavoriteProductsServlet extends HttpServlet {
         try {
             Long id = Long.parseLong(req.getParameter("id"));
             productService.deleteFavoriteProduct(id);
-            req.getServletContext().getRequestDispatcher("/view/favorites").forward(req, resp);
+            forwardToAddress(req, resp, "/view/favorites");
         } catch (Exception e) {
             System.out.println("Exception (get-DelFPS): " + e.getMessage());
-            req.getServletContext().getRequestDispatcher("/view/favorites").forward(req, resp);
+            forwardToAddress(req, resp, "/view/favorites");
         }
     }
 }

@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Objects;
+
+import static by.tms.utils.ServletUtils.forwardToAddress;
+import static by.tms.utils.ServletUtils.setAddressAndForward;
 
 @WebServlet("/add-favorite")
 public class AddFavoriteProductsServlet extends HttpServlet {
@@ -26,18 +28,10 @@ public class AddFavoriteProductsServlet extends HttpServlet {
         try {
             Long id = Long.parseLong(req.getParameter("id"));
             productService.addFavoriteProduct(id);
-            req.getServletContext().getRequestDispatcher("/view/products?type="
-                            + productService.getFavoriteProducts().stream()
-                            .filter(product -> Objects.equals(product.getId(), id))
-                            .findFirst()
-                            .get()
-                            .getType()
-                            .toString()
-                            .toLowerCase())
-                    .forward(req, resp);
+            setAddressAndForward(req, resp, id, productService);
         } catch (Exception e) {
             System.out.println("Exception (get-AddFPS): " + e.getMessage());
-            req.getServletContext().getRequestDispatcher("/").forward(req, resp);
+            forwardToAddress(req, resp, "/");
         }
     }
 }

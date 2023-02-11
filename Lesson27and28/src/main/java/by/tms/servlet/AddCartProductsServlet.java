@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Objects;
+
+import static by.tms.utils.ServletUtils.forwardToAddress;
+import static by.tms.utils.ServletUtils.setAddressAndForward;
 
 @WebServlet("/add-cart")
 public class AddCartProductsServlet extends HttpServlet {
@@ -31,24 +33,16 @@ public class AddCartProductsServlet extends HttpServlet {
             if (shopFlag == null) {
                 String location = req.getParameter("location");
                 if (location == null) {
-                    req.getServletContext().getRequestDispatcher("/view/products?type="
-                                    + productService.getCartProducts().stream()
-                                    .filter(product -> Objects.equals(product.getId(), id))
-                                    .findFirst()
-                                    .get()
-                                    .getType()
-                                    .toString()
-                                    .toLowerCase())
-                            .forward(req, resp);
+                    setAddressAndForward(req, resp, id, productService);
                 } else {
-                    req.getServletContext().getRequestDispatcher("/view/favorites").forward(req, resp);
+                    forwardToAddress(req, resp, "/view/favorites");
                 }
             } else {
-                req.getServletContext().getRequestDispatcher("/view/shopping-cart").forward(req, resp);
+                forwardToAddress(req, resp, "/view/shopping-cart");
             }
         } catch (Exception e) {
             System.out.println("Exception (get-AddCPS): " + e.getMessage());
-            req.getServletContext().getRequestDispatcher("/").forward(req, resp);
+            forwardToAddress(req, resp, "/");
         }
     }
 }

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Set;
 
+import static by.tms.utils.ServletUtils.forwardToAddress;
+
 @WebServlet("/view/favorites")
 public class FavoriteProductsServlet extends HttpServlet {
     private ProductServiceAware productService;
@@ -26,6 +28,6 @@ public class FavoriteProductsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Set<Product> favoriteProducts = productService.getFavoriteProducts();
         req.getServletContext().setAttribute("favoriteProducts", favoriteProducts);
-        req.getServletContext().getRequestDispatcher("/view/favorites.jsp").forward(req, resp);
+        forwardToAddress(req, resp, "/view/favorites.jsp");
     }
 }

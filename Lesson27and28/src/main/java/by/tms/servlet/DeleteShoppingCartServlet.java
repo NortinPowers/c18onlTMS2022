@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static by.tms.utils.ServletUtils.forwardToAddress;
+
 @WebServlet("/delete-cart-product")
 public class DeleteShoppingCartServlet extends HttpServlet {
     private ProductServiceAware productService;
@@ -23,6 +25,6 @@ public class DeleteShoppingCartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         productService.deleteCartProduct(Long.parseLong(req.getParameter("id")));
-        req.getServletContext().getRequestDispatcher("/view/shopping-cart").forward(req, resp);
+        forwardToAddress(req, resp, "/view/shopping-cart");
     }
 }

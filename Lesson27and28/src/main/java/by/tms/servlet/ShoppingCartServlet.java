@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 
+import static by.tms.utils.ServletUtils.forwardToAddress;
+
 @WebServlet("/view/shopping-cart")
 public class ShoppingCartServlet extends HttpServlet {
     private ProductServiceAware productService;
@@ -30,7 +32,7 @@ public class ShoppingCartServlet extends HttpServlet {
                 .toList();
         req.getServletContext().setAttribute("cartProducts", cartProducts);
         req.getServletContext().setAttribute("full_price", productService.getProductsPrice(cartProducts));
-        req.getServletContext().getRequestDispatcher("/view/shopping-cart.jsp").forward(req, resp);
+        forwardToAddress(req, resp, "/view/shopping-cart.jsp");
     }
 
     @Override
@@ -38,9 +40,9 @@ public class ShoppingCartServlet extends HttpServlet {
         String buyButton = req.getParameter("buy");
         if (buyButton.equals("buy")) {
             productService.clearProductsCart();
-            req.getServletContext().getRequestDispatcher("/success-buy.jsp").forward(req, resp);
+            forwardToAddress(req, resp, "/success-buy.jsp");
         } else {
-            req.getServletContext().getRequestDispatcher("/shopping-cart").forward(req, resp);
+            forwardToAddress(req, resp, "/shopping-cart");
         }
     }
 }
