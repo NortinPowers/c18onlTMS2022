@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static by.tms.model.ProductType.getProductType;
+
 @AllArgsConstructor
 public class JdbsProductRepository implements JdbsProductRepositoryAware {
     private Connection connection;
@@ -41,13 +43,13 @@ public class JdbsProductRepository implements JdbsProductRepositoryAware {
         return products;
     }
 
-    private static ProductType getProductType(String type) {
-        return switch (type) {
-            case "tv" -> ProductType.TV;
-            case "phone" -> ProductType.PHONE;
-            default -> throw new IllegalStateException("Unexpected value: " + type);
-        };
-    }
+//    private static ProductType getProductType(String type) {
+//        return switch (type) {
+//            case "tv" -> ProductType.TV;
+//            case "phone" -> ProductType.PHONE;
+//            default -> throw new IllegalStateException("Unexpected value: " + type);
+//        };
+//    }
 
     @Override
     public List<Product> getProductsByType(String type) {
