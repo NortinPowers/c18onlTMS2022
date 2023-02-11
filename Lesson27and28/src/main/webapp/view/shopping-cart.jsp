@@ -22,7 +22,7 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach var="product" items="${cartProducts}">
+    <c:forEach var="product" items="${applicationScope.cartProducts}">
         <tr>
             <th scope="row">-</th>
             <td class="font-italic">${product.name}</td>
@@ -37,7 +37,7 @@
     </c:forEach>
     <tr style="border-top: chartreuse solid 2px">
         <td colspan="3" style="text-align: right">Full price:</td>
-        <td class="font-weight-bold" style="text-align: center">${full_price}</td>
+        <td class="font-weight-bold" style="text-align: center">${applicationScope.full_price}</td>
     </tr>
     </tbody>
 </table>
