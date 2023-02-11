@@ -17,6 +17,7 @@ public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         session.setAttribute("accessPermission", null);
+        session.invalidate();
         forwardToAddress(req, resp, "/index.jsp");
     }
 }
