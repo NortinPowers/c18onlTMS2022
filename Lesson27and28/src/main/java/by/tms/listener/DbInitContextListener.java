@@ -1,8 +1,10 @@
-package by.tms.listner;
+package by.tms.listener;
 
-import by.tms.repository.JdbsStudentsRepository;
-import by.tms.repository.StudentRepositoryAware;
-import by.tms.service.StudentService;
+import by.tms.model.Product;
+import by.tms.repository.JdbsProductRepository;
+import by.tms.repository.JdbsProductRepositoryAware;
+import by.tms.service.ProductService;
+import by.tms.service.ProductServiceAware;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -10,6 +12,10 @@ import javax.servlet.annotation.WebListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @WebListener
 public class DbInitContextListener implements ServletContextListener {
@@ -22,12 +28,14 @@ public class DbInitContextListener implements ServletContextListener {
         try {
             Class.forName(dbDriver);
             Connection connection = DriverManager.getConnection(dbURl, dbUser, dbPassword);
-            StudentRepositoryAware jdbsStudentsRepository = new JdbsStudentsRepository(connection);
-            StudentService studentService = new StudentService(jdbsStudentsRepository);
+            JdbsProductRepositoryAware jdbsStudentsRepository = new JdbsProductRepository(connection);
+            List<Product> cartProducts = new ArrayList<>();
+            Set<Product> favoriteProducts = new HashSet<>();
+            ProductServiceAware productService = new ProductService(jdbsStudentsRepository, cartProducts, favoriteProducts);
             sce.getServletContext().setAttribute("connection", connection);
-            sce.getServletContext().setAttribute("studentService", studentService);
+            sce.getServletContext().setAttribute("productService", productService);
         } catch (SQLException | ClassNotFoundException e) {
-            System.out.println("Exception: " + e.getMessage());
+            System.out.println("ContextInitialized exception: " + e.getMessage());
         }
     }
 
