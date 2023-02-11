@@ -26,20 +26,25 @@ public class AddCartProductsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             Long id = Long.parseLong(req.getParameter("id"));
+            String shopFlag = req.getParameter("shop");
             productService.addCartProduct(id);
-            String location = req.getParameter("location");
-            if (location == null) {
-                req.getServletContext().getRequestDispatcher("/view/products?type="
-                                + productService.getCartProducts().stream()
-                                .filter(product -> Objects.equals(product.getId(), id))
-                                .findFirst()
-                                .get()
-                                .getType()
-                                .toString()
-                                .toLowerCase())
-                        .forward(req, resp);
+            if (shopFlag == null) {
+                String location = req.getParameter("location");
+                if (location == null) {
+                    req.getServletContext().getRequestDispatcher("/view/products?type="
+                                    + productService.getCartProducts().stream()
+                                    .filter(product -> Objects.equals(product.getId(), id))
+                                    .findFirst()
+                                    .get()
+                                    .getType()
+                                    .toString()
+                                    .toLowerCase())
+                            .forward(req, resp);
+                } else {
+                    req.getServletContext().getRequestDispatcher("/view/favorites").forward(req, resp);
+                }
             } else {
-                req.getServletContext().getRequestDispatcher("/view/favorites").forward(req, resp);
+                req.getServletContext().getRequestDispatcher("/view/shopping-cart").forward(req, resp);
             }
         } catch (Exception e) {
             System.out.println("Exception (get-AddCPS): " + e.getMessage());
