@@ -10,7 +10,7 @@ public class SecurityService implements SecurityAware {
     private Authenticator authenticator;
 
     @Override
-    public Boolean isVerifiedUser(String name, String password) {
+    public boolean isVerifiedUser(String name, String password) {
         Map<String, String> authenticators = authenticator.getAuthenticators();
         for (Map.Entry<String, String> entry : authenticators.entrySet()) {
             if (entry.getKey().equals(name) && entry.getValue().equals(password)) {
