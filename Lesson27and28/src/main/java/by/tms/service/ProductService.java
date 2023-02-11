@@ -7,18 +7,37 @@ import lombok.Getter;
 import lombok.ToString;
 
 import java.math.BigDecimal;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @AllArgsConstructor
 @Getter
+
 @ToString
+
 public class ProductService implements ProductServiceAware {
     private JdbsProductRepositoryAware jdbsProductRepository;
     private List<Product> cartProducts;
     private Set<Product> favoriteProducts;
+
+    public ProductService(JdbsProductRepositoryAware jdbsProductRepository) {
+        this.jdbsProductRepository = jdbsProductRepository;
+    }
+
+    public List<Product> getCartProducts() {
+        if (cartProducts == null) {
+            cartProducts = new ArrayList<>();
+        }
+        return cartProducts;
+//        return nonNull(cartProducts) ? cartProducts : new ArrayList<>();
+    }
+
+    public Set<Product> getFavoriteProducts() {
+        if (favoriteProducts == null) {
+            favoriteProducts = new HashSet<>();
+        }
+        return favoriteProducts;
+//        return nonNull(favoriteProducts) ? favoriteProducts : new HashSet<>();
+    }
 
     @Override
     public List<Product> getProducts() {
@@ -32,12 +51,12 @@ public class ProductService implements ProductServiceAware {
 
     @Override
     public void addCartProduct(Long id) {
-        addProduct(id, cartProducts);
+        addProduct(id, getCartProducts());
     }
 
     @Override
     public void addFavoriteProduct(Long id) {
-        addProduct(id, favoriteProducts);
+        addProduct(id, getFavoriteProducts());
     }
 
     private void addProduct(Long id, Collection<Product> products) {
@@ -49,12 +68,12 @@ public class ProductService implements ProductServiceAware {
 
     @Override
     public void deleteCartProduct(Long id) {
-        deleteProduct(id, cartProducts);
+        deleteProduct(id, getCartProducts());
     }
 
     @Override
     public void deleteFavoriteProduct(Long id) {
-        deleteProduct(id, favoriteProducts);
+        deleteProduct(id, getFavoriteProducts());
     }
 
     private void deleteProduct(Long id, Collection<Product> products) {
@@ -75,11 +94,11 @@ public class ProductService implements ProductServiceAware {
 
     @Override
     public void clearProductsCart() {
-        cartProducts.clear();
+        getCartProducts().clear();
     }
 
     @Override
     public void clearFavoriteProducts() {
-        favoriteProducts.clear();
+        getFavoriteProducts().clear();
     }
 }

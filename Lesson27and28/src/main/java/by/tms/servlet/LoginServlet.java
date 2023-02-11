@@ -1,7 +1,6 @@
 package by.tms.servlet;
 
 
-import by.tms.model.User;
 import by.tms.service.SecurityAware;
 
 import javax.servlet.ServletConfig;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 import static by.tms.utils.ServletUtils.forwardToAddress;
+import static by.tms.utils.ServletUtils.saveUserSession;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -28,17 +28,16 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = req.getParameter("name");
+        String login = req.getParameter("name");
         String password = req.getParameter("password");
-        if (securityService.isVerifiedUser(name, password)) {
-            HttpSession session = req.getSession();
-            session.setAttribute("accessPermission", new User(name, password));
-            session.setAttribute("userName", name);
+        if (securityService.isVerifiedUser(login, password)) {
+            saveUserSession(req, login);
             forwardToAddress(req, resp, "/index.jsp");
         } else {
             forwardToAddress(req, resp, "/login.jsp");
         }
     }
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
