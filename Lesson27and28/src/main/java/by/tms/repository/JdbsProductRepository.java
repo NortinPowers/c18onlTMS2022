@@ -25,16 +25,7 @@ public class JdbsProductRepository implements JdbsProductRepositoryAware {
         List<Product> products = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement(GET_ALL_PRODUCTS);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                Long id = resultSet.getLong("id");
-                String name = resultSet.getString("name");
-                BigDecimal price = resultSet.getBigDecimal("price");
-                String type = resultSet.getString("type");
-                ProductType productType = getProductType(type);
-                String info = resultSet.getString("info");
-                products.add(new Product(id, name, price, productType, info));
-            }
+            fillsValues(products, statement);
         } catch (SQLException e) {
             System.out.println("SQLException (.getProducts()): " + e.getMessage());
         } catch (Exception e) {
@@ -43,34 +34,31 @@ public class JdbsProductRepository implements JdbsProductRepositoryAware {
         return products;
     }
 
-//    private static ProductType getProductType(String type) {
-//        return switch (type) {
-//            case "tv" -> ProductType.TV;
-//            case "phone" -> ProductType.PHONE;
-//            default -> throw new IllegalStateException("Unexpected value: " + type);
-//        };
-//    }
-
     @Override
     public List<Product> getProductsByType(String type) {
         List<Product> products = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement(GET_PRODUCTS_BY_TYPE);
             statement.setString(1, type);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                Long id = resultSet.getLong("id");
-                String name = resultSet.getString("name");
-                BigDecimal price = resultSet.getBigDecimal("price");
-                ProductType productType = getProductType(type);
-                String info = resultSet.getString("info");
-                products.add(new Product(id, name, price, productType, info));
-            }
+            fillsValues(products, statement);
         } catch (SQLException e) {
-            System.out.println("SQLException (.getProducts()): " + e.getMessage());
+            System.out.println("SQLException (.getProductsByType()): " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("IllegalStateException (productType): " + e.getMessage());
+            System.out.println("IllegalStateException (.getProductsByType()): " + e.getMessage());
         }
         return products;
+    }
+
+    private void fillsValues(List<Product> products, PreparedStatement statement) throws SQLException {
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            Long id = resultSet.getLong("id");
+            String name = resultSet.getString("name");
+            BigDecimal price = resultSet.getBigDecimal("price");
+            String type = resultSet.getString("type");
+            ProductType productType = getProductType(type);
+            String info = resultSet.getString("info");
+            products.add(new Product(id, name, price, productType, info));
+        }
     }
 }
