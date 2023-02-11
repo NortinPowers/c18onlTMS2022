@@ -15,7 +15,7 @@
 <body style="background: #243855;">
 <jsp:include page="/view/navigate.jsp"/>
 <div class="row row-cols-1 row-cols-md-3 mr-5 ml-5 mt-5">
-    <c:forEach var="product" items="${favoriteProducts}">
+    <c:forEach var="product" items="${applicationScope.favoriteProducts}">
         <div class="card mr-5 ml-5 mt-5" style="max-width: 14rem;">
             <img class="card-img-top" style="max-height: 20rem"
                  src="/img/${fn:toLowerCase(product.type)}/${product.name}.jpg"
@@ -28,9 +28,11 @@
                 <small class="text-muted" style="font-size: 20px;">${product.price}</small>
             </div>
             <div class="btn-group btn-group-sm">
-                <a href="<c:url value="/add-cart?id=${product.id}&&shop=true"/>" class="btn btn-success active w-75"
+                <a href="<c:url value="/add-cart?id=${product.id}&shop=true&location=none"/>"
+                   class="btn btn-success active w-75"
                    aria-current="page">Buy</a>
-                <a href="<c:url value="/add-cart?id=${product.id}&location=favorite"/>" class="btn btn-success">
+                <a href="<c:url value="/add-cart?id=${product.id}&shop=none&location=favorite"/>"
+                   class="btn btn-success">
                     <div class="text-center mt-1">
                         <i class="bi bi-cart-plus"></i>
                     </div>

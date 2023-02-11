@@ -28,7 +28,7 @@ public class AddFavoriteProductsServlet extends HttpServlet {
         try {
             Long id = Long.parseLong(req.getParameter("id"));
             productService.addFavoriteProduct(id);
-            setAddressAndForward(req, resp, id, productService);
+            setAddressAndForward(req, resp, id, productService.getFavoriteProducts());
         } catch (Exception e) {
             System.out.println("Exception (get-AddFPS): " + e.getMessage());
             forwardToAddress(req, resp, "/");

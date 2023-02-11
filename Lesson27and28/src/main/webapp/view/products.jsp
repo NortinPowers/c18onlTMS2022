@@ -15,7 +15,7 @@
 <body style="background: #243855;">
 <jsp:include page="/view/navigate.jsp"/>
 <div class="card-deck mr-5 ml-5 mt-5">
-    <c:forEach var="product" items="${products}">
+    <c:forEach var="product" items="${applicationScope.products}">
         <div class="card">
             <img class="card-img-top" style=" height: 25rem"
                  src="/img/${fn:toLowerCase(product.type)}/${product.name}.jpg"
@@ -28,14 +28,16 @@
                 <small class="text-muted" style="font-size: 20px;">${product.price}</small>
             </div>
             <div class="btn-group btn-group-sm">
-                <a href="<c:url value="/add-cart?id=${product.id}&shop=true"/>" class="btn btn-success active w-75"
+                <a href="<c:url value="/add-cart?id=${product.id}&shop=true&location=none"/>"
+                   class="btn btn-success active w-75"
                    aria-current="page">Buy</a>
-                <a href="<c:url value="/add-cart?id=${product.id}"/>" class="btn btn-success">
+                <a href="<c:url value="/add-cart?id=${product.id}&shop=none&location=none"/>" class="btn btn-success">
                     <div class="text-center mt-1">
                         <i class="bi bi-cart-plus"></i>
                     </div>
                 </a>
-                <a href="<c:url value="/add-favorite?id=${product.id}"/>" class="btn btn-success">
+                <a href="<c:url value="/add-favorite?id=${product.id}&shop=none&location=none"/>"
+                   class="btn btn-success">
                     <div class="text-center mt-1">
                         <i class="bi bi-heart"></i>
                     </div>

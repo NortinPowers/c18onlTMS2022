@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Objects;
 
 import static by.tms.utils.ServletUtils.forwardToAddress;
 import static by.tms.utils.ServletUtils.setAddressAndForward;
@@ -29,16 +30,14 @@ public class AddCartProductsServlet extends HttpServlet {
         try {
             Long id = Long.parseLong(req.getParameter("id"));
             String shopFlag = req.getParameter("shop");
+            String location = req.getParameter("location");
             productService.addCartProduct(id);
-            if (shopFlag == null) {
-                String location = req.getParameter("location");
-                if (location == null) {
-                    setAddressAndForward(req, resp, id, productService);
-                } else {
-                    forwardToAddress(req, resp, "/view/favorites");
-                }
-            } else {
+            if (Objects.equals(shopFlag, "true")) {
                 forwardToAddress(req, resp, "/view/shopping-cart");
+            } else if (Objects.equals(location, "favorite")) {
+                forwardToAddress(req, resp, "/view/favorites");
+            } else {
+                setAddressAndForward(req, resp, id, productService.getCartProducts());
             }
         } catch (Exception e) {
             System.out.println("Exception (get-AddCPS): " + e.getMessage());
