@@ -4,6 +4,7 @@ import by.tms.model.Authenticator;
 import lombok.AllArgsConstructor;
 
 import java.util.Map;
+import java.util.Objects;
 
 @AllArgsConstructor
 public class SecurityService implements SecurityAware {
@@ -12,10 +13,8 @@ public class SecurityService implements SecurityAware {
     @Override
     public boolean isVerifiedUser(String name, String password) {
         Map<String, String> authenticators = authenticator.getAuthenticators();
-        for (Map.Entry<String, String> entry : authenticators.entrySet()) {
-            if (entry.getKey().equals(name) && entry.getValue().equals(password)) {
-                return true;
-            }
+        if (authenticators != null && authenticators.containsKey(name)) {
+            return Objects.equals(authenticators.get(name), password);
         }
         return false;
     }
