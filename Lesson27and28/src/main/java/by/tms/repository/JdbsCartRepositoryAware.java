@@ -12,7 +12,9 @@ public interface JdbsCartRepositoryAware {
 
     List<Pair<Product, Integer>> getProductsFromCart(Long userId, boolean cart, boolean favorite);
 
-    boolean checkFavoritesProduct(Long userId, Long productId);
+//    boolean checkFavoritesProduct(Long userId, Long productId);
+//    boolean checkCartProduct(Long userId, Long productId);
+boolean checkProduct(Long userId, Long productId, boolean cart, boolean favorite);
 
     Integer getCartProductCount(Long userId, Long productId);
 }

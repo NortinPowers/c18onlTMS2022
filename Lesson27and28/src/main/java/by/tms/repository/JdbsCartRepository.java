@@ -25,12 +25,28 @@ public class JdbsCartRepository implements JdbsCartRepositoryAware {
 
     @Override
     public void addProduct(Long userId, Long productId, boolean cart, boolean favorite) {
+
+//        card не нужен
+
         if (favorite) {
-            if (checkFavoritesProduct(userId, productId)) {
+            if (checkProduct(userId, productId, false, true)) {
                 addProductToCart(userId, productId, cart, true);
             }
         } else {
-            addProductToCart(userId, productId, cart, false);
+            if (checkProduct(userId, productId, true, false)) {
+                addProductToCart(userId, productId, cart, false);
+            } else {
+                Integer productCount = getCartProductCount(userId, productId);
+                try {
+                    PreparedStatement statement = connection.prepareStatement(UPDATE_CURRENT_PRODUCT_COUNT);
+                    statement.setInt(1, productCount + 1);
+                    statement.setLong(1, userId);
+                    statement.setLong(2, productId);
+                    statement.executeUpdate();
+                } catch (SQLException e) {
+                    System.out.println("SQLException (deleteProductCartCount): " + e.getMessage());
+                }
+            }
         }
     }
 
@@ -53,10 +69,9 @@ public class JdbsCartRepository implements JdbsCartRepositoryAware {
                     statement.setInt(1, productCount - 1);
                     statement.setLong(1, userId);
                     statement.setLong(2, productId);
-
+                    statement.executeUpdate();
                 } catch (SQLException e) {
                     System.out.println("SQLException (deleteProductCartCount): " + e.getMessage());
-                    ;
                 }
             } else {
                 try {
@@ -106,9 +121,25 @@ public class JdbsCartRepository implements JdbsCartRepositoryAware {
         return products;
     }
 
+//    @Override
+//    public boolean checkFavoritesProduct(Long userId, Long productId) {
+//        return getProductsFromCart(userId, false, true).stream()
+//                .filter(product -> Objects.equals(product.getLeft().getId(), productId))
+//                .findAny()
+//                .isEmpty();
+//    }
+//
+//    @Override
+//    public boolean checkCartProduct(Long userId, Long productId) {
+//        return getProductsFromCart(userId, true, false).stream()
+//                .filter(product -> Objects.equals(product.getLeft().getId(), productId))
+//                .findAny()
+//                .isEmpty();
+//    }
+
     @Override
-    public boolean checkFavoritesProduct(Long userId, Long productId) {
-        return getProductsFromCart(userId, false, true).stream()
+    public boolean checkProduct(Long userId, Long productId, boolean cart, boolean favorite) {
+        return getProductsFromCart(userId, cart, favorite).stream()
                 .filter(product -> Objects.equals(product.getLeft().getId(), productId))
                 .findAny()
                 .isEmpty();
@@ -128,7 +159,6 @@ public class JdbsCartRepository implements JdbsCartRepositoryAware {
         } catch (SQLException e) {
             System.out.println("SQLException (getCartProductCount): " + e.getMessage());
         }
-
         return count;
     }
 }
