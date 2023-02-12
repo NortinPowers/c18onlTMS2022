@@ -28,4 +28,6 @@ public interface ProductServiceAware {
     void clearProductsCart();
 
     void clearFavoriteProducts();
+
+    String getProductTypeValue(Long productId);
 }

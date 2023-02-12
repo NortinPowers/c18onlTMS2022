@@ -8,4 +8,6 @@ public interface JdbsProductRepositoryAware {
     List<Product> getProducts();
 
     List<Product> getProductsByType(String type);
+
+    String getProductTypeValue(Long productId);
 }

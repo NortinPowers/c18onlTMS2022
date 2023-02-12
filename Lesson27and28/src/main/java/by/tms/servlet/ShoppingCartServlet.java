@@ -1,7 +1,9 @@
 package by.tms.servlet;
 
 import by.tms.model.Product;
-import by.tms.service.ProductServiceAware;
+import by.tms.service.CartServiceAware;
+import by.tms.service.CustomerServiceAware;
+import org.apache.commons.lang3.tuple.Pair;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -10,39 +12,50 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.List;
 
 import static by.tms.utils.ServletUtils.forwardToAddress;
 
 @WebServlet("/view/shopping-cart")
 public class ShoppingCartServlet extends HttpServlet {
-    private ProductServiceAware productService;
+    //    private ProductServiceAware productService;
+    private CartServiceAware cartService;
+    private CustomerServiceAware customerService;
+//    private String login;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        productService = (ProductServiceAware) config.getServletContext().getAttribute("productService");
+//        productService = (ProductServiceAware) config.getServletContext().getAttribute("productService");
+        cartService = (CartServiceAware) config.getServletContext().getAttribute("cartService");
+        customerService = (CustomerServiceAware) config.getServletContext().getAttribute("customerService");
+//        login = (String) config.getServletContext().getAttribute("userName");
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Product> cartProducts = productService.getCartProducts().stream()
-                .sorted(Comparator.comparing(Product::getPrice))
-                .toList();
+//        List<Product> cartProducts = productService.getCartProducts().stream()
+//                .sorted(Comparator.comparing(Product::getPrice))
+//                .toList();
+        String login = req.getSession().getAttribute("userName").toString();
+        Long userId = customerService.getUserId(login);
+        List<Pair<Product, Integer>> cartProducts = cartService.getProductsFromCart(userId, true, false);
         req.getServletContext().setAttribute("cartProducts", cartProducts);
-        req.getServletContext().setAttribute("full_price", productService.getProductsPrice(cartProducts));
+//        req.getServletContext().setAttribute("full_price", productService.getProductsPrice(cartProducts));
+        req.getServletContext().setAttribute("full_price", cartService.getProductsPrice(cartProducts));
         forwardToAddress(req, resp, "/view/shopping-cart.jsp");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String buyButton = req.getParameter("buy");
+        String login = req.getSession().getAttribute("userName").toString();
         if (buyButton.equals("buy")) {
-            productService.clearProductsCart();
-            forwardToAddress(req, resp, "/success-buy.jsp");
+//            productService.clearProductsCart();
+            cartService.deleteCartProductsAfterBuy(customerService.getUserId(login));
+            forwardToAddress(req, resp, "/view/success-buy.jsp");
         } else {
-            forwardToAddress(req, resp, "/shopping-cart");
+            forwardToAddress(req, resp, "/view/shopping-cart");
         }
     }
 }

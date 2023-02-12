@@ -2,10 +2,13 @@ package by.tms.service;
 
 import by.tms.model.Product;
 import by.tms.repository.JdbsCartRepositoryAware;
+import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.math.BigDecimal;
 import java.util.List;
 
+@AllArgsConstructor
 public class CartService implements CartServiceAware {
     private JdbsCartRepositoryAware jdbsCartRepository;
 
@@ -20,7 +23,32 @@ public class CartService implements CartServiceAware {
     }
 
     @Override
-    public boolean checkFavoritesProduct(Long userId, Long productId) {
-        return jdbsCartRepository.checkFavoritesProduct(userId, productId);
+    public void deleteProduct(Long userId, Long productId, boolean cart, boolean favorite) {
+        jdbsCartRepository.deleteProduct(userId, productId, cart, favorite);
+    }
+
+    @Override
+    public boolean checkProduct(Long userId, Long productId, boolean cart, boolean favorite) {
+        return jdbsCartRepository.checkProduct(userId, productId, cart, favorite);
+    }
+
+    @Override
+    public Integer getCartProductCount(Long userId, Long productId) {
+        return jdbsCartRepository.getCartProductCount(userId, productId);
+    }
+
+    @Override
+    public void deleteCartProductsAfterBuy(Long userId) {
+        jdbsCartRepository.deleteCartProductsAfterBuy(userId);
+    }
+
+    @Override
+    public BigDecimal getProductsPrice(List<Pair<Product, Integer>> productWithCount) {
+        BigDecimal fullPrice = BigDecimal.ZERO;
+        for (Pair<Product, Integer> product : productWithCount) {
+            BigDecimal totalPrice = product.getLeft().getPrice().multiply(new BigDecimal(product.getRight()));
+            fullPrice = fullPrice.add(totalPrice);
+        }
+        return fullPrice;
     }
 }

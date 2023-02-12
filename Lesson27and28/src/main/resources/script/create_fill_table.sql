@@ -39,3 +39,24 @@ alter table public.customers
 
 insert into customers (login, password)
 VALUES ('test', 'test');
+
+create table public.carts
+(
+    id         bigserial
+        constraint carts_pk
+            primary key,
+    user_id    bigint            not null
+        constraint carts_customers_id_fk
+            references public.customers
+            on update cascade on delete cascade,
+    product_id bigint            not null
+        constraint carts_products_id_fk
+            references public.products
+            on update cascade on delete cascade,
+    cart       boolean,
+    favorite   boolean,
+    count      integer default 1 not null
+);
+
+alter table public.carts
+    owner to postgres;

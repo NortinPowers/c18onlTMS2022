@@ -101,4 +101,9 @@ public class ProductService implements ProductServiceAware {
     public void clearFavoriteProducts() {
         getFavoriteProducts().clear();
     }
+
+    @Override
+    public String getProductTypeValue(Long productId) {
+        return jdbsProductRepository.getProductTypeValue(productId);
+    }
 }

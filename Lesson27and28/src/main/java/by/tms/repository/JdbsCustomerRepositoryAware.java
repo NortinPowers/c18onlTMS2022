@@ -9,4 +9,5 @@ public interface JdbsCustomerRepositoryAware {
 
     void addUser(User user);
 
+    Long getUserId(String login);
 }

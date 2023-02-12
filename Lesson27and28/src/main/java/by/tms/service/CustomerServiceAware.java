@@ -9,4 +9,5 @@ public interface CustomerServiceAware {
 
     void addUser(User user);
 
+    Long getUserId(String login);
 }

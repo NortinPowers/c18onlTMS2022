@@ -1,10 +1,7 @@
 package by.tms.listener;
 
 import by.tms.model.Authenticator;
-import by.tms.repository.JdbsCustomerRepository;
-import by.tms.repository.JdbsCustomerRepositoryAware;
-import by.tms.repository.JdbsProductRepository;
-import by.tms.repository.JdbsProductRepositoryAware;
+import by.tms.repository.*;
 import by.tms.service.*;
 
 import javax.servlet.ServletContextEvent;
@@ -37,6 +34,10 @@ public class DbInitContextListener implements ServletContextListener {
             sce.getServletContext().setAttribute("connection", connection);
             sce.getServletContext().setAttribute("productService", productService);
 
+            JdbsCartRepositoryAware jdbsCartRepository = new JdbsCartRepository(connection);
+            CartServiceAware cartService = new CartService(jdbsCartRepository);
+            sce.getServletContext().setAttribute("cartService", cartService);
+
             JdbsCustomerRepositoryAware jdbsCustomerRepository = new JdbsCustomerRepository(connection);
             CustomerServiceAware customerService = new CustomerService(jdbsCustomerRepository);
             sce.getServletContext().setAttribute("customerService", customerService);
@@ -48,7 +49,7 @@ public class DbInitContextListener implements ServletContextListener {
             SecurityAware security = new SecurityService(authenticator);
             sce.getServletContext().setAttribute("security", security);
 
-            System.out.println(authenticator.getAuthenticators());
+//            System.out.println(authenticator.getAuthenticators());
 
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println("ContextInitialized exception: " + e.getMessage());

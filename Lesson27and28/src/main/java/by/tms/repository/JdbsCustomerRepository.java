@@ -14,7 +14,8 @@ import java.util.List;
 public class JdbsCustomerRepository implements JdbsCustomerRepositoryAware {
     private Connection connection;
     private static final String GET_USERS = "select * from customers";
-    public static final String ADD_USER = "insert into customers (login, password) values (?, ?)";
+    private static final String ADD_USER = "insert into customers (login, password) values (?, ?)";
+    private static final String GET_USER_ID = "select id from customers where login=?";
 
     @Override
     public List<User> getUsers() {
@@ -44,5 +45,21 @@ public class JdbsCustomerRepository implements JdbsCustomerRepositoryAware {
         } catch (SQLException e) {
             System.out.println("SQLException (addUser): " + e.getMessage());
         }
+    }
+
+    @Override
+    public Long getUserId(String login) {
+        Long id = null;
+        try {
+            PreparedStatement statement = connection.prepareStatement(GET_USER_ID);
+            statement.setString(1, login);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                id = resultSet.getLong("id");
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException (getUserId): " + e.getMessage());
+        }
+        return id;
     }
 }

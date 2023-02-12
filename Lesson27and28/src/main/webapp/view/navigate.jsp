@@ -5,16 +5,25 @@
         <li class="nav-item">
             <a class="nav-link navbar-brand mb-0 h1" href="<c:url value="/"/>">Home</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="<c:url value="/view/favorites"/>">Favorites</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="<c:url value="/view/shopping-cart"/>">Shopping cart</a>
-        </li>
+        <c:set var="access" value="${sessionScope.get('accessPermission')}"/>
+        <c:if test="${access != null}">
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value="/view/favorites"/>">Favorites</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value="/view/shopping-cart"/>">Shopping cart</a>
+            </li>
+        </c:if>
+        <%--        <li class="nav-item">--%>
+        <%--            <a class="nav-link" href="<c:url value="/view/favorites"/>">Favorites</a>--%>
+        <%--        </li>--%>
+        <%--        <li class="nav-item">--%>
+        <%--            <a class="nav-link" href="<c:url value="/view/shopping-cart"/>">Shopping cart</a>--%>
+        <%--        </li>--%>
     </ul>
     <c:set var="access" value="${sessionScope.get('accessPermission')}"/>
     <c:choose>
-        <c:when test="${access==null}">
+        <c:when test="${access == null}">
             <a id="loginButton" class="form-inline my-2 my-lg-0" style="text-decoration: none"
                href="<c:url value="/login"/>">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
