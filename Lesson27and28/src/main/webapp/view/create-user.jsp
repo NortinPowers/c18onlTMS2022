@@ -19,7 +19,7 @@
         </div>
         <div class="user-box">
             <input type="password" name="verifyPassword" required="">
-            <label>Password</label>
+            <label>Confirm password</label>
         </div>
         <div style="margin-top: 15px">
             <input type="submit" value="Register"/>
