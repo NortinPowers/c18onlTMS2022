@@ -24,5 +24,4 @@ public class CustomerService implements CustomerServiceAware {
     public Long getUserId(String login) {
         return jdbsCustomerRepository.getUserId(login);
     }
-
 }

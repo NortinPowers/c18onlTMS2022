@@ -13,9 +13,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static by.tms.model.ProductType.getProductType;
+import static by.tms.utils.RepositoryJdbsUtils.getModifyCount;
+import static by.tms.utils.RepositoryJdbsUtils.isEmpty;
 
 @AllArgsConstructor
 public class JdbsCartRepository implements JdbsCartRepositoryAware {
@@ -32,9 +33,6 @@ public class JdbsCartRepository implements JdbsCartRepositoryAware {
 
     @Override
     public void addProduct(Long userId, Long productId, boolean cart, boolean favorite) {
-
-//        card не нужен?
-
         if (favorite) {
             if (checkProduct(userId, productId, false, true)) {
                 addProductToCart(userId, productId, cart, true);
@@ -43,53 +41,47 @@ public class JdbsCartRepository implements JdbsCartRepositoryAware {
             if (checkProduct(userId, productId, true, false)) {
                 addProductToCart(userId, productId, cart, false);
             } else {
-                Integer productCount = getCartProductCount(userId, productId);
-                try {
-                    PreparedStatement statement = connection.prepareStatement(UPDATE_CURRENT_PRODUCT_COUNT);
-                    statement.setInt(1, productCount + 1);
-                    statement.setLong(2, userId);
-                    statement.setLong(3, productId);
-                    statement.executeUpdate();
-                } catch (SQLException e) {
-                    System.out.println("SQLException (deleteProductCartCount): " + e.getMessage());
-                }
+                modifyProductCount(userId, productId, true);
             }
+        }
+    }
+
+    private void modifyProductCount(Long userId, Long productId, boolean up) {
+        Integer productCount = getCartProductCount(userId, productId);
+        productCount = getModifyCount(up, productCount);
+        try {
+            PreparedStatement statement = connection.prepareStatement(UPDATE_CURRENT_PRODUCT_COUNT);
+            statement.setInt(1, productCount);
+            statement.setLong(2, userId);
+            statement.setLong(3, productId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("SQLException (deleteProductCartCount): " + e.getMessage());
         }
     }
 
     @Override
     public void deleteProduct(Long userId, Long productId, boolean cart, boolean favorite) {
         if (favorite) {
-            try {
-                PreparedStatement statement = connection.prepareStatement(DELETE_FAVORITE_PRODUCT);
-                statement.setLong(1, userId);
-                statement.setLong(2, productId);
-                statement.execute();
-            } catch (SQLException e) {
-                System.out.println("SQLException (deleteProductFavorite): " + e.getMessage());
-            }
+            deleteProductByMark(userId, productId, DELETE_FAVORITE_PRODUCT);
         } else {
             Integer productCount = getCartProductCount(userId, productId);
             if (productCount > 1) {
-                try {
-                    PreparedStatement statement = connection.prepareStatement(UPDATE_CURRENT_PRODUCT_COUNT);
-                    statement.setInt(1, productCount - 1);
-                    statement.setLong(2, userId);
-                    statement.setLong(3, productId);
-                    statement.execute();
-                } catch (SQLException e) {
-                    System.out.println("SQLException (deleteProductCartCount): " + e.getMessage());
-                }
+                modifyProductCount(userId, productId, false);
             } else {
-                try {
-                    PreparedStatement statement = connection.prepareStatement(DELETE_CART_PRODUCT);
-                    statement.setLong(1, userId);
-                    statement.setLong(2, productId);
-                    statement.execute();
-                } catch (SQLException e) {
-                    System.out.println("SQLException (deleteProductCart): " + e.getMessage());
-                }
+                deleteProductByMark(userId, productId, DELETE_CART_PRODUCT);
             }
+        }
+    }
+
+    private void deleteProductByMark(Long userId, Long productId, String query) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setLong(1, userId);
+            statement.setLong(2, productId);
+            statement.execute();
+        } catch (SQLException e) {
+            System.out.println("SQLException (deleteProduct): " + e.getMessage());
         }
     }
 
@@ -130,35 +122,16 @@ public class JdbsCartRepository implements JdbsCartRepositoryAware {
         return products;
     }
 
-//    @Override
-//    public boolean checkFavoritesProduct(Long userId, Long productId) {
-//        return getProductsFromCart(userId, false, true).stream()
-//                .filter(product -> Objects.equals(product.getLeft().getId(), productId))
-//                .findAny()
-//                .isEmpty();
-//    }
-//
-//    @Override
-//    public boolean checkCartProduct(Long userId, Long productId) {
-//        return getProductsFromCart(userId, true, false).stream()
-//                .filter(product -> Objects.equals(product.getLeft().getId(), productId))
-//                .findAny()
-//                .isEmpty();
-//    }
-
     @Override
     public boolean checkProduct(Long userId, Long productId, boolean cart, boolean favorite) {
-        List<Product> products = getProductsFromCart(userId, cart, favorite).stream()
+        List<Product> products = getProducts(userId, cart, favorite);
+        return isEmpty(productId, products);
+    }
+
+    private List<Product> getProducts(Long userId, boolean cart, boolean favorite) {
+        return getProductsFromCart(userId, cart, favorite).stream()
                 .map(Pair::getLeft)
                 .toList();
-        return products.stream()
-                .filter(product -> Objects.equals(product.getId(), productId))
-                .findAny()
-                .isEmpty();
-//        return getProductsFromCart(userId, cart, favorite).stream()
-//                .filter(product -> Objects.equals(product.getLeft().getId(), productId))
-//                .findAny()
-//                .isEmpty();
     }
 
     @Override
@@ -188,10 +161,4 @@ public class JdbsCartRepository implements JdbsCartRepositoryAware {
             System.out.println("SQLException (deleteCartProductsAfterBuy): " + e.getMessage());
         }
     }
-
-//    @Override
-//    public String getProductTypeValue(Long productId) {
-//        PreparedStatement statement = connection.prepareStatement()
-//        return null;
-//    }
 }

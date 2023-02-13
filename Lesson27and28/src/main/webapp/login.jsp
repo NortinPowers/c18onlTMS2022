@@ -23,9 +23,6 @@
     </form>
     <a href="<c:url value="/view/create-user.jsp"/>" class="button">Register</a>
     <a href="<c:url value="/index.jsp"/>" class="button">Back</a>
-
-    <%--    <a href="<c:url value="/index.jsp"/>" style="padding: 2px; width: 312px" class="button">Back</a>--%>
-
 </div>
 </body>
 </html>

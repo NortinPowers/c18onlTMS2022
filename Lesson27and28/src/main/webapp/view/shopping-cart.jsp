@@ -18,10 +18,8 @@
         <th scope="col">#</th>
         <th scope="col">Product name</th>
         <th scope="col">Price</th>
-
         <th scope="col">Count</th>
         <th scope="col">Total price</th>
-
         <th scope="col">#</th>
     </tr>
     </thead>
@@ -31,16 +29,12 @@
             <th scope="row">-</th>
             <td class="font-italic">${product.left.name}</td>
             <td class="font-italic">${product.left.price}</td>
-
             <td class="font-italic">${product.right}</td>
             <td class="font-italic">${product.left.price*product.right}</td>
-
-
             <td class="font-italic">
                 <a href="<c:url value="/delete-cart-product?id=${product.left.id}"/>">
                     Delete
                 </a>
-
             </td>
         </tr>
     </c:forEach>

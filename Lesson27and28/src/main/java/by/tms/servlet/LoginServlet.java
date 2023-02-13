@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-import static by.tms.utils.ServletUtils.forwardToAddress;
-import static by.tms.utils.ServletUtils.saveUserSession;
+import static by.tms.utils.ServletUtils.*;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -23,7 +22,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        securityService = (SecurityAware) config.getServletContext().getAttribute("security");
+        securityService = getSecurity(config);
     }
 
     @Override
@@ -38,12 +37,10 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        Object permission = session.getAttribute("accessPermission");
-        if (permission != null) {
+        if (session.getAttribute("accessPermission") != null) {
             forwardToAddress(req, resp, "/index.jsp");
         } else {
             forwardToAddress(req, resp, "/login.jsp");

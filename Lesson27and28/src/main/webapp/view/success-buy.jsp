@@ -6,6 +6,6 @@
     <link rel="stylesheet" href="<c:url value="/css/glitch.css"/>">
 </head>
 <body>
-<h1>Successful purchase</h1>
+<h1><a href="<c:url value="/"/>">Successful purchase</a></h1>
 </body>
 </html>

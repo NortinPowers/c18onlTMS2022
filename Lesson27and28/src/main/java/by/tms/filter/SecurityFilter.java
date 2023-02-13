@@ -6,7 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter("/view/success-buy.jsp")
+@WebFilter(urlPatterns = {"/view/success-buy.jsp", "/view/favorites.jsp",
+        "/view/favorites", "/view/shopping-cart.jsp", "/view/shopping-cart", "/view/success-register.jsp",
+        "/view/success-register", "/add-cart", "/add-favorite", "/delete-favorite", "/delete-cart-product"})
 public class SecurityFilter implements Filter {
 
     @Override

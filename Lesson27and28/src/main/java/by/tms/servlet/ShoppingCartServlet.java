@@ -14,34 +14,26 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import static by.tms.utils.ServletUtils.forwardToAddress;
+import static by.tms.utils.ServletUtils.*;
 
 @WebServlet("/view/shopping-cart")
 public class ShoppingCartServlet extends HttpServlet {
-    //    private ProductServiceAware productService;
     private CartServiceAware cartService;
     private CustomerServiceAware customerService;
-//    private String login;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-//        productService = (ProductServiceAware) config.getServletContext().getAttribute("productService");
-        cartService = (CartServiceAware) config.getServletContext().getAttribute("cartService");
-        customerService = (CustomerServiceAware) config.getServletContext().getAttribute("customerService");
-//        login = (String) config.getServletContext().getAttribute("userName");
+        cartService = getCartService(config);
+        customerService = getCustomerService(config);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        List<Product> cartProducts = productService.getCartProducts().stream()
-//                .sorted(Comparator.comparing(Product::getPrice))
-//                .toList();
         String login = req.getSession().getAttribute("userName").toString();
         Long userId = customerService.getUserId(login);
         List<Pair<Product, Integer>> cartProducts = cartService.getProductsFromCart(userId, true, false);
         req.getServletContext().setAttribute("cartProducts", cartProducts);
-//        req.getServletContext().setAttribute("full_price", productService.getProductsPrice(cartProducts));
         req.getServletContext().setAttribute("full_price", cartService.getProductsPrice(cartProducts));
         forwardToAddress(req, resp, "/view/shopping-cart.jsp");
     }
@@ -49,9 +41,8 @@ public class ShoppingCartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String buyButton = req.getParameter("buy");
-        String login = req.getSession().getAttribute("userName").toString();
+        String login = getLogin(req);
         if (buyButton.equals("buy")) {
-//            productService.clearProductsCart();
             cartService.deleteCartProductsAfterBuy(customerService.getUserId(login));
             forwardToAddress(req, resp, "/view/success-buy.jsp");
         } else {

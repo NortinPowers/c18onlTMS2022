@@ -14,12 +14,6 @@
                 <a class="nav-link" href="<c:url value="/view/shopping-cart"/>">Shopping cart</a>
             </li>
         </c:if>
-        <%--        <li class="nav-item">--%>
-        <%--            <a class="nav-link" href="<c:url value="/view/favorites"/>">Favorites</a>--%>
-        <%--        </li>--%>
-        <%--        <li class="nav-item">--%>
-        <%--            <a class="nav-link" href="<c:url value="/view/shopping-cart"/>">Shopping cart</a>--%>
-        <%--        </li>--%>
     </ul>
     <c:set var="access" value="${sessionScope.get('accessPermission')}"/>
     <c:choose>

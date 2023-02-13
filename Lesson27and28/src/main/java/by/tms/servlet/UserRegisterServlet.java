@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static by.tms.utils.ServletUtils.forwardToAddress;
-import static by.tms.utils.ServletUtils.saveUserSession;
+import static by.tms.utils.ServletUtils.*;
 
 @WebServlet("/create-user")
 public class UserRegisterServlet extends HttpServlet {
@@ -23,8 +22,8 @@ public class UserRegisterServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        customerService = (CustomerServiceAware) config.getServletContext().getAttribute("customerService");
-        authenticatorService = (AuthenticatorServiceAware) config.getServletContext().getAttribute("authenticatorService");
+        customerService = getCustomerService(config);
+        authenticatorService = getAuthenticatorService(config);
     }
 
     @Override

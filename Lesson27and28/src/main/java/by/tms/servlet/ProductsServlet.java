@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static by.tms.utils.ServletUtils.forwardToAddress;
+import static by.tms.utils.ServletUtils.getProductService;
 
 @WebServlet("/view/products")
 public class ProductsServlet extends HttpServlet {
@@ -21,7 +22,7 @@ public class ProductsServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        productService = (ProductServiceAware) config.getServletContext().getAttribute("productService");
+        productService = getProductService(config);
     }
 
     @Override

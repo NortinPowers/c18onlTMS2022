@@ -14,33 +14,29 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 
-import static by.tms.utils.ServletUtils.forwardToAddress;
-import static by.tms.utils.ServletUtils.setAddressAndForward;
+import static by.tms.utils.ServletUtils.*;
 
 @WebServlet("/add-cart")
 public class AddCartProductsServlet extends HttpServlet {
     private ProductServiceAware productService;
     private CartServiceAware cartService;
     private CustomerServiceAware customerService;
-//    private String login;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        productService = (ProductServiceAware) config.getServletContext().getAttribute("productService");
-        cartService = (CartServiceAware) config.getServletContext().getAttribute("cartService");
-        customerService = (CustomerServiceAware) config.getServletContext().getAttribute("customerService");
-//        login = (String) config.getServletContext().getAttribute("userName");
+        productService = getProductService(config);
+        cartService = getCartService(config);
+        customerService = getCustomerService(config);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String login = req.getSession().getAttribute("userName").toString();
+        String login = getLogin(req);
         try {
             Long id = Long.parseLong(req.getParameter("id"));
             String shopFlag = req.getParameter("shop");
             String location = req.getParameter("location");
-//            productService.addCartProduct(id);
             cartService.addProductToCart(customerService.getUserId(login), id, true, false);
             if (Objects.equals(shopFlag, "true")) {
                 forwardToAddress(req, resp, "/view/shopping-cart");

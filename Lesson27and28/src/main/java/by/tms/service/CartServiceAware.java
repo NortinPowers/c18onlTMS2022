@@ -13,10 +13,6 @@ public interface CartServiceAware {
 
     void deleteProduct(Long userId, Long productId, boolean cart, boolean favorite);
 
-    boolean checkProduct(Long userId, Long productId, boolean cart, boolean favorite);
-
-    Integer getCartProductCount(Long userId, Long productId);
-
     void deleteCartProductsAfterBuy(Long userId);
 
     BigDecimal getProductsPrice(List<Pair<Product, Integer>> productWithCount);

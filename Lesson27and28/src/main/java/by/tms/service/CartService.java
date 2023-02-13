@@ -28,16 +28,6 @@ public class CartService implements CartServiceAware {
     }
 
     @Override
-    public boolean checkProduct(Long userId, Long productId, boolean cart, boolean favorite) {
-        return jdbsCartRepository.checkProduct(userId, productId, cart, favorite);
-    }
-
-    @Override
-    public Integer getCartProductCount(Long userId, Long productId) {
-        return jdbsCartRepository.getCartProductCount(userId, productId);
-    }
-
-    @Override
     public void deleteCartProductsAfterBuy(Long userId) {
         jdbsCartRepository.deleteCartProductsAfterBuy(userId);
     }

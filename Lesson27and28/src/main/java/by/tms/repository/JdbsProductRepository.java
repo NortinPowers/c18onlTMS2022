@@ -1,10 +1,8 @@
 package by.tms.repository;
 
 import by.tms.model.Product;
-import by.tms.model.ProductType;
 import lombok.AllArgsConstructor;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,16 +10,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static by.tms.model.ProductType.getProductType;
+import static by.tms.utils.RepositoryJdbsUtils.fillsValues;
 
 @AllArgsConstructor
 public class JdbsProductRepository implements JdbsProductRepositoryAware {
     private Connection connection;
     private final static String GET_ALL_PRODUCTS = "select * from products";
     private final static String GET_PRODUCTS_BY_TYPE = "select * from products where type=?";
-
     private final static String GET_PRODUCT_TYPE = "select type from products where id=?";
-
 
     @Override
     public List<Product> getProducts() {
@@ -66,18 +62,5 @@ public class JdbsProductRepository implements JdbsProductRepositoryAware {
             System.out.println("SQLException (getProductTypeValue): " + e.getMessage());
         }
         return type;
-    }
-
-    private void fillsValues(List<Product> products, PreparedStatement statement) throws SQLException {
-        ResultSet resultSet = statement.executeQuery();
-        while (resultSet.next()) {
-            Long id = resultSet.getLong("id");
-            String name = resultSet.getString("name");
-            BigDecimal price = resultSet.getBigDecimal("price");
-            String type = resultSet.getString("type");
-            ProductType productType = getProductType(type);
-            String info = resultSet.getString("info");
-            products.add(new Product(id, name, price, productType, info));
-        }
     }
 }

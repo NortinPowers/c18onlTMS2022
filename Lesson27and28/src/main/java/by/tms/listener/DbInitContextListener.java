@@ -25,19 +25,12 @@ public class DbInitContextListener implements ServletContextListener {
             Class.forName(dbDriver);
             Connection connection = DriverManager.getConnection(dbURl, dbUser, dbPassword);
             JdbsProductRepositoryAware jdbsProductRepository = new JdbsProductRepository(connection);
-
-//            List<Product> cartProducts = new ArrayList<>();
-//            Set<Product> favoriteProducts = new HashSet<>();
-//            ProductServiceAware productService = new ProductService(jdbsStudentsRepository, cartProducts, favoriteProducts);
-
             ProductServiceAware productService = new ProductService(jdbsProductRepository);
             sce.getServletContext().setAttribute("connection", connection);
             sce.getServletContext().setAttribute("productService", productService);
-
             JdbsCartRepositoryAware jdbsCartRepository = new JdbsCartRepository(connection);
             CartServiceAware cartService = new CartService(jdbsCartRepository);
             sce.getServletContext().setAttribute("cartService", cartService);
-
             JdbsCustomerRepositoryAware jdbsCustomerRepository = new JdbsCustomerRepository(connection);
             CustomerServiceAware customerService = new CustomerService(jdbsCustomerRepository);
             sce.getServletContext().setAttribute("customerService", customerService);
@@ -48,9 +41,6 @@ public class DbInitContextListener implements ServletContextListener {
             sce.getServletContext().setAttribute("authenticatorService", authenticatorService);
             SecurityAware security = new SecurityService(authenticator);
             sce.getServletContext().setAttribute("security", security);
-
-//            System.out.println(authenticator.getAuthenticators());
-
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println("ContextInitialized exception: " + e.getMessage());
         }

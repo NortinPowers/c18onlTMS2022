@@ -14,28 +14,23 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import static by.tms.utils.ServletUtils.forwardToAddress;
+import static by.tms.utils.ServletUtils.*;
 
 @WebServlet("/view/favorites")
 public class FavoriteProductsServlet extends HttpServlet {
-    //    private ProductServiceAware productService;
     private CartServiceAware cartService;
     private CustomerServiceAware customerService;
-//    private String login;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-//        productService = (ProductServiceAware) config.getServletContext().getAttribute("productService");
-        cartService = (CartServiceAware) config.getServletContext().getAttribute("cartService");
-        customerService = (CustomerServiceAware) config.getServletContext().getAttribute("customerService");
-//        login = (String) config.getServletContext().getAttribute("userName");
+        cartService = getCartService(config);
+        customerService = getCustomerService(config);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        Set<Product> favoriteProducts = productService.getFavoriteProducts();
-        String login = req.getSession().getAttribute("userName").toString();
+        String login = getLogin(req);
         Long userId = customerService.getUserId(login);
         List<Product> favoriteProducts = cartService.getProductsFromCart(userId, false, true).stream()
                 .map(Pair::getLeft)
