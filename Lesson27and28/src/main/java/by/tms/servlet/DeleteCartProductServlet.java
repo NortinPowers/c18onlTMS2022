@@ -14,7 +14,7 @@ import java.io.IOException;
 import static by.tms.utils.ServletUtils.*;
 
 @WebServlet("/delete-cart-product")
-public class DeleteShoppingCartServlet extends HttpServlet {
+public class DeleteCartProductServlet extends HttpServlet {
     private CartServiceAware cartService;
     private CustomerServiceAware customerService;
 

@@ -15,7 +15,7 @@ import java.io.IOException;
 import static by.tms.utils.ServletUtils.*;
 
 @WebServlet("/create-user")
-public class UserRegisterServlet extends HttpServlet {
+public class CreateUserServlet extends HttpServlet {
     private CustomerServiceAware customerService;
     private AuthenticatorServiceAware authenticatorService;
 

@@ -17,7 +17,7 @@ import java.util.Objects;
 import static by.tms.utils.ServletUtils.*;
 
 @WebServlet("/add-cart")
-public class AddCartProductsServlet extends HttpServlet {
+public class AddCartServlet extends HttpServlet {
     private ProductServiceAware productService;
     private CartServiceAware cartService;
     private CustomerServiceAware customerService;

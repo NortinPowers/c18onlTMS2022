@@ -17,7 +17,7 @@ import java.util.List;
 import static by.tms.utils.ServletUtils.*;
 
 @WebServlet("/view/favorites")
-public class FavoriteProductsServlet extends HttpServlet {
+public class FavoritesServlet extends HttpServlet {
     private CartServiceAware cartService;
     private CustomerServiceAware customerService;
 
