@@ -3,7 +3,8 @@
 <nav class="navbar navbar-dark bg-dark">
     <ul class="nav nav-pills ">
         <li class="nav-item">
-            <a class="nav-link navbar-brand mb-0 h1" href="<c:url value="/"/>">Home</a>
+            <a class="nav-link navbar-brand mb-0 h1" style="border: chartreuse solid 2px"
+               href="<c:url value="/"/>">Home</a>
         </li>
         <c:set var="access" value="${sessionScope.get('accessPermission')}"/>
         <c:if test="${access != null}">
@@ -24,7 +25,7 @@
             </a>
         </c:when>
         <c:otherwise>
-            <p style="text-align: center; font-size: 1.2em; color: chartreuse">
+            <p style="text-align: center; font-size: 1.2em; color: chartreuse; margin-right: 5%">
                 Welcome ${sessionScope.get('userName')}</p>
             <a id="loginButton" class="form-inline my-2 my-lg-0" style="text-decoration: none;"
                href="<c:url value="/exit"/>">
