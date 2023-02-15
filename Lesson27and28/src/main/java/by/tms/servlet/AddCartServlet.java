@@ -1,6 +1,8 @@
 package by.tms.servlet;
 
 
+import by.tms.service.CartServiceAware;
+import by.tms.service.CustomerServiceAware;
 import by.tms.service.ProductServiceAware;
 
 import javax.servlet.ServletConfig;
@@ -12,38 +14,40 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 
+import static by.tms.utils.ServletUtils.*;
+
 @WebServlet("/add-cart")
-public class AddCartProductsServlet extends HttpServlet {
+public class AddCartServlet extends HttpServlet {
     private ProductServiceAware productService;
+    private CartServiceAware cartService;
+    private CustomerServiceAware customerService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        productService = (ProductServiceAware) config.getServletContext().getAttribute("productService");
+        productService = getProductService(config);
+        cartService = getCartService(config);
+        customerService = getCustomerService(config);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String login = getLogin(req);
         try {
             Long id = Long.parseLong(req.getParameter("id"));
-            productService.addCartProduct(id);
+            String shopFlag = req.getParameter("shop");
             String location = req.getParameter("location");
-            if (location == null) {
-                req.getServletContext().getRequestDispatcher("/view/products?type="
-                                + productService.getCartProducts().stream()
-                                .filter(product -> Objects.equals(product.getId(), id))
-                                .findFirst()
-                                .get()
-                                .getType()
-                                .toString()
-                                .toLowerCase())
-                        .forward(req, resp);
+            cartService.addProductToCart(customerService.getUserId(login), id, true, false);
+            if (Objects.equals(shopFlag, "true")) {
+                forwardToAddress(req, resp, "/view/shopping-cart");
+            } else if (Objects.equals(location, "favorite")) {
+                forwardToAddress(req, resp, "/view/favorites");
             } else {
-                req.getServletContext().getRequestDispatcher("/view/favorites").forward(req, resp);
+                setAddressAndForward(req, resp, productService.getProductTypeValue(id));
             }
         } catch (Exception e) {
             System.out.println("Exception (get-AddCPS): " + e.getMessage());
-            req.getServletContext().getRequestDispatcher("/").forward(req, resp);
+            forwardToAddress(req, resp, "/");
         }
     }
 }

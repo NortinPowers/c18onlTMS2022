@@ -1,5 +1,7 @@
 package by.tms.servlet;
 
+import by.tms.service.CartServiceAware;
+import by.tms.service.CustomerServiceAware;
 import by.tms.service.ProductServiceAware;
 
 import javax.servlet.ServletConfig;
@@ -9,35 +11,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Objects;
+
+import static by.tms.utils.ServletUtils.*;
 
 @WebServlet("/add-favorite")
-public class AddFavoriteProductsServlet extends HttpServlet {
+public class AddFavoriteServlet extends HttpServlet {
     private ProductServiceAware productService;
+    private CartServiceAware cartService;
+    private CustomerServiceAware customerService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        productService = (ProductServiceAware) config.getServletContext().getAttribute("productService");
+        productService = getProductService(config);
+        cartService = getCartService(config);
+        customerService = getCustomerService(config);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String login = getLogin(req);
         try {
             Long id = Long.parseLong(req.getParameter("id"));
-            productService.addFavoriteProduct(id);
-            req.getServletContext().getRequestDispatcher("/view/products?type="
-                            + productService.getFavoriteProducts().stream()
-                            .filter(product -> Objects.equals(product.getId(), id))
-                            .findFirst()
-                            .get()
-                            .getType()
-                            .toString()
-                            .toLowerCase())
-                    .forward(req, resp);
+            cartService.addProductToCart(customerService.getUserId(login), id, false, true);
+            setAddressAndForward(req, resp, productService.getProductTypeValue(id));
         } catch (Exception e) {
             System.out.println("Exception (get-AddFPS): " + e.getMessage());
-            req.getServletContext().getRequestDispatcher("/").forward(req, resp);
+            forwardToAddress(req, resp, "/");
         }
     }
 }

@@ -21,3 +21,42 @@ values ('Apple iphone 14', 999.99, 'phone', 'stylish ios phone'),
        ('LG 55NAN', 459.99, 'tv', 'lg TV 55d'),
        ('LG 49S', 320, 'tv', 'lg TV 49d'),
        ('Sony KD-55', 540, 'tv', 'sony TV 55d');
+
+create table public.customers
+(
+    id       bigserial
+        constraint customers_pk
+            primary key,
+    login    varchar(30) not null,
+    password varchar(30)
+);
+
+alter table public.customers
+    owner to postgres;
+
+alter table public.customers
+    owner to postgres;
+
+insert into customers (login, password)
+VALUES ('test', 'test');
+
+create table public.carts
+(
+    id         bigserial
+        constraint carts_pk
+            primary key,
+    user_id    bigint            not null
+        constraint carts_customers_id_fk
+            references public.customers
+            on update cascade on delete cascade,
+    product_id bigint            not null
+        constraint carts_products_id_fk
+            references public.products
+            on update cascade on delete cascade,
+    cart       boolean,
+    favorite   boolean,
+    count      integer default 1 not null
+);
+
+alter table public.carts
+    owner to postgres;
