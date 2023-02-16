@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static by.tms.utils.RepositoryJdbsUtils.fillsValues;
+import static by.tms.utils.RepositoryJdbcUtils.fillsValues;
 
 @AllArgsConstructor
 public class JdbcProductRepository implements JdbcProductRepositoryAware {

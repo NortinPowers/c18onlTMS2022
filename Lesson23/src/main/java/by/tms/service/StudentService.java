@@ -8,13 +8,13 @@ import java.util.List;
 
 @AllArgsConstructor
 public class StudentService {
-    private StudentRepositoryAware jdbsStudentsRepository;
+    private StudentRepositoryAware jdbcStudentsRepository;
 
     public List<Student> getStudents() {
-        return jdbsStudentsRepository.getStudents();
+        return jdbcStudentsRepository.getStudents();
     }
 
     public void deleteStudent(Long id) {
-        jdbsStudentsRepository.deleteStudent(id);
+        jdbcStudentsRepository.deleteStudent(id);
     }
 }

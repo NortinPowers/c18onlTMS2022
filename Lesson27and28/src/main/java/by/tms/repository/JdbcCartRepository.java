@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static by.tms.model.ProductType.getProductType;
-import static by.tms.utils.RepositoryJdbsUtils.getModifyCount;
-import static by.tms.utils.RepositoryJdbsUtils.isEmpty;
+import static by.tms.utils.RepositoryJdbcUtils.getModifyCount;
+import static by.tms.utils.RepositoryJdbcUtils.isEmpty;
 
 @AllArgsConstructor
 public class JdbcCartRepository implements JdbcCartRepositoryAware {

@@ -8,20 +8,20 @@ import java.util.List;
 
 @AllArgsConstructor
 public class CustomerService implements CustomerServiceAware {
-    private JdbcCustomerRepositoryAware jdbsCustomerRepository;
+    private JdbcCustomerRepositoryAware jdbcCustomerRepository;
 
     @Override
     public List<User> getUsers() {
-        return jdbsCustomerRepository.getUsers();
+        return jdbcCustomerRepository.getUsers();
     }
 
     @Override
     public void addUser(User user) {
-        jdbsCustomerRepository.addUser(user);
+        jdbcCustomerRepository.addUser(user);
     }
 
     @Override
     public Long getUserId(String login) {
-        return jdbsCustomerRepository.getUserId(login);
+        return jdbcCustomerRepository.getUserId(login);
     }
 }

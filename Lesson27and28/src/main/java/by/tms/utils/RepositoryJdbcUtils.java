@@ -14,7 +14,7 @@ import java.util.Objects;
 import static by.tms.model.ProductType.getProductType;
 
 @UtilityClass
-public class RepositoryJdbsUtils {
+public class RepositoryJdbcUtils {
 
     public static void fillsValues(List<Product> products, PreparedStatement statement) throws SQLException {
         ResultSet resultSet = statement.executeQuery();
