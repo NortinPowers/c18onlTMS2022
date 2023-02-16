@@ -40,7 +40,7 @@
     </c:forEach>
     <tr style="border-top: chartreuse solid 2px">
         <td colspan="4" style="text-align: right; font-weight: bold">Full price:</td>
-        <td class="font-weight-bold" style="text-align: center">${applicationScope.full_price}</td>
+        <td class="font-weight-bold" style="text-align: center">${applicationScope.fullPrice}</td>
     </tr>
     </tbody>
 </table>

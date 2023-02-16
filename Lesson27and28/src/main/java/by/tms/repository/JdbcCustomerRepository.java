@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
-public class JdbsCustomerRepository implements JdbsCustomerRepositoryAware {
+public class JdbcCustomerRepository implements JdbcCustomerRepositoryAware {
     private Connection connection;
     private static final String GET_USERS = "select * from customers";
     private static final String ADD_USER = "insert into customers (login, password) values (?, ?)";

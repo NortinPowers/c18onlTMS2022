@@ -13,7 +13,7 @@ import java.util.List;
 import static by.tms.utils.RepositoryJdbsUtils.fillsValues;
 
 @AllArgsConstructor
-public class JdbsProductRepository implements JdbsProductRepositoryAware {
+public class JdbcProductRepository implements JdbcProductRepositoryAware {
     private Connection connection;
     private final static String GET_ALL_PRODUCTS = "select * from products";
     private final static String GET_PRODUCTS_BY_TYPE = "select * from products where type=?";

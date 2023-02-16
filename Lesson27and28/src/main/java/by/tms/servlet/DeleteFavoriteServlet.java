@@ -31,10 +31,9 @@ public class DeleteFavoriteServlet extends HttpServlet {
         try {
             Long id = Long.parseLong(req.getParameter("id"));
             cartService.deleteProduct(customerService.getUserId(login), id, false, true);
-            forwardToAddress(req, resp, "/view/favorites");
         } catch (Exception e) {
             System.out.println("Exception (get-DelFPS): " + e.getMessage());
-            forwardToAddress(req, resp, "/view/favorites");
         }
+        forwardToAddress(req, resp, "/view/favorites");
     }
 }

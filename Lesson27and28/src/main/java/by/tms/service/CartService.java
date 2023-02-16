@@ -1,7 +1,7 @@
 package by.tms.service;
 
 import by.tms.model.Product;
-import by.tms.repository.JdbsCartRepositoryAware;
+import by.tms.repository.JdbcCartRepositoryAware;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 @AllArgsConstructor
 public class CartService implements CartServiceAware {
-    private JdbsCartRepositoryAware jdbsCartRepository;
+    private JdbcCartRepositoryAware jdbsCartRepository;
 
     @Override
     public void addProductToCart(Long userId, Long productId, boolean cart, boolean favorite) {

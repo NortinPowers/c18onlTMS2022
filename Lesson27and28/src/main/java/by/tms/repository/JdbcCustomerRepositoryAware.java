@@ -4,7 +4,7 @@ import by.tms.model.User;
 
 import java.util.List;
 
-public interface JdbsCustomerRepositoryAware {
+public interface JdbcCustomerRepositoryAware {
     List<User> getUsers();
 
     void addUser(User user);

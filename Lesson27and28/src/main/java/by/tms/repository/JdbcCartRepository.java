@@ -19,7 +19,7 @@ import static by.tms.utils.RepositoryJdbsUtils.getModifyCount;
 import static by.tms.utils.RepositoryJdbsUtils.isEmpty;
 
 @AllArgsConstructor
-public class JdbsCartRepository implements JdbsCartRepositoryAware {
+public class JdbcCartRepository implements JdbcCartRepositoryAware {
     private Connection connection;
     private static final String ADD_PRODUCT_TO_CART = "insert into carts (user_id, product_id, cart, favorite) VALUES (?, ?, ?, ?)";
     private static final String GET_CART_PRODUCTS_BY_USER_ID = "select p.id, p.name, p.price, p.type, p.info, c.count from carts c join products p on p.id = c.product_id where c.user_id=? and c.cart=true";

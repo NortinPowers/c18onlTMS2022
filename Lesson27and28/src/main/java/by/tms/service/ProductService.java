@@ -1,7 +1,7 @@
 package by.tms.service;
 
 import by.tms.model.Product;
-import by.tms.repository.JdbsProductRepositoryAware;
+import by.tms.repository.JdbcProductRepositoryAware;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
@@ -13,7 +13,7 @@ import java.util.List;
 @ToString
 
 public class ProductService implements ProductServiceAware {
-    private JdbsProductRepositoryAware jdbsProductRepository;
+    private JdbcProductRepositoryAware jdbsProductRepository;
 
     @Override
     public List<Product> getProductsByType(String type) {
