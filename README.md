@@ -1,7 +1,7 @@
 <h1 align="center">java course study / TMS / group c18onlTMS202</h1>
 <h3 align="center">Java developer</h3>
 
-[![GitHub Streak](https://streak-stats.demolab.com/?user=DenverCoder1&theme=dark)](https://git.io/streak-stats)
+[![GitHub Streak](https://streak-stats.demolab.com?user=NortinPowers&theme=dark&hide_border=true&border_radius=15)](https://git.io/streak-stats)
 
 | #        | Lesson                           | Description                                                                              | Homework theme                                                                                                                                              |
 |----------|----------------------------------|------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
