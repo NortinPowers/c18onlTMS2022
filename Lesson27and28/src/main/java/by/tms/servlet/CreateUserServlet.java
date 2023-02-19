@@ -36,15 +36,13 @@ public class CreateUserServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         String verifyPassword = req.getParameter("verifyPassword");
-        if (password.equals(verifyPassword)) {
-            if (!authenticatorService.getAuthenticatorMap().containsKey(login)) {
-                authenticatorService.getAuthenticatorMap().put(login, password);
-                customerService.addUser(new User(login, password));
-                saveUserSession(req, login);
-                forwardToAddress(req, resp, "/view/success-register.jsp");
-            } else {
-                forwardToAddress(req, resp, "/view/fail-register.jsp");
-            }
+        if (password.equals(verifyPassword) && !authenticatorService.getAuthenticatorMap().containsKey(login)) {
+            authenticatorService.getAuthenticatorMap().put(login, password);
+            customerService.addUser(new User(login, password));
+            saveUserSession(req, login);
+            forwardToAddress(req, resp, "/view/success-register.jsp");
+        } else {
+            forwardToAddress(req, resp, "/view/fail-register.jsp");
         }
     }
 }

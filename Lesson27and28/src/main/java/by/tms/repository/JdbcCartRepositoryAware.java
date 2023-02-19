@@ -5,7 +5,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 
-public interface JdbsCartRepositoryAware {
+public interface JdbcCartRepositoryAware {
     void addProduct(Long userId, Long productId, boolean cart, boolean favorite);
 
     void deleteProduct(Long userId, Long productId, boolean cart, boolean favorite);

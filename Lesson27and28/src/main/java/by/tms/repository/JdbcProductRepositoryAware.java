@@ -4,7 +4,7 @@ import by.tms.model.Product;
 
 import java.util.List;
 
-public interface JdbsProductRepositoryAware {
+public interface JdbcProductRepositoryAware {
     List<Product> getProducts();
 
     List<Product> getProductsByType(String type);

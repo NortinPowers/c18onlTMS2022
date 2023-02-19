@@ -34,7 +34,7 @@ public class ShoppingCartServlet extends HttpServlet {
         Long userId = customerService.getUserId(login);
         List<Pair<Product, Integer>> cartProducts = cartService.getProductsFromCart(userId, true, false);
         req.getServletContext().setAttribute("cartProducts", cartProducts);
-        req.getServletContext().setAttribute("full_price", cartService.getProductsPrice(cartProducts));
+        req.getServletContext().setAttribute("fullPrice", cartService.getProductsPrice(cartProducts));
         forwardToAddress(req, resp, "/view/shopping-cart.jsp");
     }
 

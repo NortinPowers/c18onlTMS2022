@@ -1,6 +1,6 @@
 package by.tms.listener;
 
-import by.tms.repository.JdbsStudentsRepository;
+import by.tms.repository.JdbcStudentsRepository;
 import by.tms.repository.StudentRepositoryAware;
 import by.tms.service.StudentService;
 
@@ -22,8 +22,8 @@ public class DbInitContextListener implements ServletContextListener {
             final String dbDriver = "org.postgresql.Driver";
             Class.forName(dbDriver);
             Connection connection = DriverManager.getConnection(dbURl, dbUser, dbPassword);
-            StudentRepositoryAware jdbsStudentsRepository = new JdbsStudentsRepository(connection);
-            StudentService studentService = new StudentService(jdbsStudentsRepository);
+            StudentRepositoryAware jdbcStudentsRepository = new JdbcStudentsRepository(connection);
+            StudentService studentService = new StudentService(jdbcStudentsRepository);
             sce.getServletContext().setAttribute("connection", connection);
             sce.getServletContext().setAttribute("studentService", studentService);
         } catch (SQLException | ClassNotFoundException e) {

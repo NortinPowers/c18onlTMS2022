@@ -24,15 +24,15 @@ public class DbInitContextListener implements ServletContextListener {
         try {
             Class.forName(dbDriver);
             Connection connection = DriverManager.getConnection(dbURl, dbUser, dbPassword);
-            JdbsProductRepositoryAware jdbsProductRepository = new JdbsProductRepository(connection);
-            ProductServiceAware productService = new ProductService(jdbsProductRepository);
+            JdbcProductRepositoryAware jdbcProductRepository = new JdbcProductRepository(connection);
+            ProductServiceAware productService = new ProductService(jdbcProductRepository);
             sce.getServletContext().setAttribute("connection", connection);
             sce.getServletContext().setAttribute("productService", productService);
-            JdbsCartRepositoryAware jdbsCartRepository = new JdbsCartRepository(connection);
-            CartServiceAware cartService = new CartService(jdbsCartRepository);
+            JdbcCartRepositoryAware jdbcCartRepository = new JdbcCartRepository(connection);
+            CartServiceAware cartService = new CartService(jdbcCartRepository);
             sce.getServletContext().setAttribute("cartService", cartService);
-            JdbsCustomerRepositoryAware jdbsCustomerRepository = new JdbsCustomerRepository(connection);
-            CustomerServiceAware customerService = new CustomerService(jdbsCustomerRepository);
+            JdbcCustomerRepositoryAware jdbcCustomerRepository = new JdbcCustomerRepository(connection);
+            CustomerServiceAware customerService = new CustomerService(jdbcCustomerRepository);
             sce.getServletContext().setAttribute("customerService", customerService);
             Map<String, String> accessMap = new HashMap<>();
             Authenticator authenticator = new Authenticator(accessMap);
