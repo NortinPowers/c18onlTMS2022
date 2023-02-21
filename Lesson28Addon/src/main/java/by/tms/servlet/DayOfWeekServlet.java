@@ -18,6 +18,6 @@ public class DayOfWeekServlet extends HttpServlet {
         LocalDate date = getLocalDate(req);
         req.setAttribute("dayOfWeekDate", date);
         req.setAttribute("dayOfWeek", date.getDayOfWeek());
-        forward(req, resp, "/day-of-week.jsp");
+        forward(req, resp, "/dayOfWeek.jsp");
     }
 }

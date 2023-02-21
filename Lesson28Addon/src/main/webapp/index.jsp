@@ -37,7 +37,7 @@
             <div class="card-body">
                 <h5 class="card-title">Current time</h5>
                 <p class="card-text">Using the javascript realization</p>
-                <a class="btn btn-outline-dark btn-lg btn-block" href="<c:url value="/time-js.jsp"/>">Time</a>
+                <a class="btn btn-outline-dark btn-lg btn-block" href="<c:url value="/timeJs.jsp"/>">Time</a>
             </div>
         </div>
     </div>

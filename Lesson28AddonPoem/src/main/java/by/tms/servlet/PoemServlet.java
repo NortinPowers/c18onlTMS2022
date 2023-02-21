@@ -1,5 +1,7 @@
 package by.tms.servlet;
 
+import by.tms.model.Poem;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.ServletException;
@@ -10,9 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Random;
 
-import static by.tms.utils.Constant.PATCH_TO_JSON;
-import static by.tms.utils.ServletUtils.getPoemName;
+import static by.tms.utils.Constants.PATCH_TO_JSON;
+import static by.tms.utils.Constants.ZERO;
 import static by.tms.utils.ServletUtils.setConfig;
 
 @WebServlet("/poem")
@@ -22,12 +28,12 @@ public class PoemServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         setConfig(req, resp);
         String name = getRandomPoemName();
-        String poem = getPoem(name);
+        String poem = getPoemFromFile(name);
         req.setAttribute("poem", poem);
         req.getServletContext().getRequestDispatcher("/poem.jsp").forward(req, resp);
     }
 
-    private String getPoem(String name) {
+    private String getPoemFromFile(String name) {
         try {
             return new String(getServletContext().getResourceAsStream("/WEB-INF/classes/poems/" + name + ".txt").readAllBytes(), StandardCharsets.UTF_8);
         } catch (IOException e) {
@@ -45,5 +51,21 @@ public class PoemServlet extends HttpServlet {
     private File getFile() {
         String path = getServletContext().getRealPath(PATCH_TO_JSON);
         return new File(path);
+    }
+
+    private String getPoemName(File file, ObjectMapper objectMapper) {
+        List<Poem> poems;
+        try {
+            poems = objectMapper.readValue(file, new TypeReference<ArrayList<Poem>>() {
+            });
+            Random random = new Random();
+            if (Objects.requireNonNull(poems).size() > ZERO) {
+                int number = random.nextInt(poems.size());
+                return poems.get(number).getName();
+            }
+        } catch (IOException e) {
+            System.out.println("IOException (getRandomPoemName): " + e.getMessage());
+        }
+        return null;
     }
 }

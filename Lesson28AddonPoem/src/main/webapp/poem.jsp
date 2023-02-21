@@ -13,7 +13,7 @@
 <div class="card text-center position-relative">
     <div class="card-body position-absolute top-50 start-50 translate-middle" style="width: 100%">
         <pre class="card-text fw-bold font-italic" style="font-size: 1.2em">${requestScope.poem}</pre>
-        <a class="btn btn-outline-dark mt-5 font-italic" style="width: 20em" href="<c:url value="/poem"/>">Re-roll</a>
+        <a class="btn btn-outline-dark mt-5 font-italic" style="width: 20em" href="<c:url value="/poem"/>">Reroll</a>
     </div>
 </div>
 </body>
