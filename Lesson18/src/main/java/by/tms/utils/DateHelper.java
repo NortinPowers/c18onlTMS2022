@@ -7,8 +7,8 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class DateHelper {
 
-    private final int ONE_DAY = 1;
-    private final int NINE_DAYS = 9;
+    private static final int ONE_DAY = 1;
+    private static final int NINE_DAYS = 9;
 
     /**
      * The method returns the date of the following Tuesday
