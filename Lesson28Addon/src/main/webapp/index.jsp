@@ -12,12 +12,7 @@
 <body style="background: linear-gradient(#c1c2c4, #90909a)">
 <ul class="nav justify-content-end text-white bg-dark mb-5 text-center">
     <li class="nav-item">
-        <c:if test="${sessionScope.numberOfVisits != null}">
-            <p class="mr-5 mt-3">Number of visits - ${sessionScope.numberOfVisits}</p>
-        </c:if>
-        <c:if test="${sessionScope.numberOfVisits == null}">
-            <p class="mr-5 mt-3">Number of visits - 1</p>
-        </c:if>
+        <p class="mr-5 mt-3">Number of visits: ${sessionScope.numberOfVisits}</p>
     </li>
 </ul>
 <div class="row text-center mt-5 ml-5 mr-5">
