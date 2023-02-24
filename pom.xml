@@ -61,10 +61,10 @@
         <maven-war-plugin.version>3.3.0</maven-war-plugin.version>
         <spotbugs.maven.plugin.version>4.7.2.1</spotbugs.maven.plugin.version>
         <spotbugs.version>4.7.3</spotbugs.version>
-        <checkstyle.maven.plugin.version>3.1.1</checkstyle.maven.plugin.version>
-        <checkstyle.version>8.30</checkstyle.version>
+        <checkstyle.maven.plugin.version>3.2.1</checkstyle.maven.plugin.version>
+        <checkstyle.version>10.7.0</checkstyle.version>
         <pmd.maven.plugin.version>3.14.0</pmd.maven.plugin.version>
-        <pmd.version>6.11.0</pmd.version>
+        <pmd.version>6.53.0</pmd.version>
     </properties>
 
     <dependencies>
