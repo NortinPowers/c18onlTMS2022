@@ -11,6 +11,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @ToString
 public class Robot {
+
     private IHead head;
     private ILeg leg;
     private IHand hand;

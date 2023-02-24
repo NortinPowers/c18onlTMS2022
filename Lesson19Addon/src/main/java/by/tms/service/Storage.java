@@ -16,6 +16,7 @@ import static by.tms.utils.WeightFilters.GREATER;
 @Getter
 @ToString
 public class Storage implements BoxSorterAware {
+
     private List<HeavyBox> heavyBoxes;
 
     public Storage(List<HeavyBox> heavyBoxes) {
@@ -40,8 +41,8 @@ public class Storage implements BoxSorterAware {
             boxPredicate = heavyBox -> heavyBox.getWeight() < weight;
         }
         return heavyBoxes.stream()
-                .filter(boxPredicate)
-                .toList();
+                         .filter(boxPredicate)
+                         .toList();
     }
 
     private void init() {

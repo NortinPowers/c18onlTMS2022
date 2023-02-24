@@ -7,6 +7,7 @@ import java.util.Map;
 
 @AllArgsConstructor
 public class SecurityService implements SecurityAware {
+
     private Authenticator authenticator;
 
     @Override

@@ -12,12 +12,7 @@
 <body style="background: linear-gradient(#c1c2c4, #90909a)">
 <ul class="nav justify-content-end text-white bg-dark mb-5 text-center">
     <li class="nav-item">
-        <c:if test="${sessionScope.numberOfVisits != null}">
-            <p class="mr-5 mt-3">Number of visits - ${sessionScope.numberOfVisits}</p>
-        </c:if>
-        <c:if test="${sessionScope.numberOfVisits == null}">
-            <p class="mr-5 mt-3">Number of visits - 1</p>
-        </c:if>
+        <p class="mr-5 mt-3">Number of visits: ${sessionScope.numberOfVisits}</p>
     </li>
 </ul>
 <div class="row text-center mt-5 ml-5 mr-5">
@@ -37,7 +32,7 @@
             <div class="card-body">
                 <h5 class="card-title">Current time</h5>
                 <p class="card-text">Using the javascript realization</p>
-                <a class="btn btn-outline-dark btn-lg btn-block" href="<c:url value="/time-js.jsp"/>">Time</a>
+                <a class="btn btn-outline-dark btn-lg btn-block" href="<c:url value="/timeJs.jsp"/>">Time</a>
             </div>
         </div>
     </div>

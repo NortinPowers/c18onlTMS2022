@@ -14,6 +14,7 @@ import static by.tms.utils.ArraysHelper.fillingArrayNumbersFromRange;
  */
 @Getter
 public class Task3 {
+
     private final int[] firstArray = fillingArrayNumbersFromRange(createSpecifiedLengthArray(5), -10, 10);
     private final int[] secondArray = fillingArrayNumbersFromRange(createSpecifiedLengthArray(5), -10, 10);
 }

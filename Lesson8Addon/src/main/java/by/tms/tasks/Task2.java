@@ -16,6 +16,7 @@ import static by.tms.utils.ScannerType.getInputIntValueAccordingConditions;
 Пусть размер массива вводится с консоли.
  */
 public class Task2 {
+
     private final int arrayLength = getInputIntValueAccordingConditions(new Scanner(System.in), 1, 100);
     @Getter
     private final int[] underTestArray = fillingArrayNumbersFromRange(createSpecifiedLengthArray(arrayLength), -20, 20);

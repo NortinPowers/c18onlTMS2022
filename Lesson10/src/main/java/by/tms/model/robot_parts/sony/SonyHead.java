@@ -10,6 +10,7 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @SuperBuilder
 public class SonyHead extends RobotParts implements IHead {
+
     @Override
     public String think() {
         return "the head learns to pronounce \"Tokyo Tsushin Kogyo\"";

@@ -2,12 +2,12 @@ package by.tms.service;
 
 import by.tms.model.User;
 import by.tms.repository.JdbcCustomerRepositoryAware;
-import lombok.AllArgsConstructor;
-
 import java.util.List;
+import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class CustomerService implements CustomerServiceAware {
+
     private JdbcCustomerRepositoryAware jdbcCustomerRepository;
 
     @Override

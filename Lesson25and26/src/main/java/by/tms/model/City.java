@@ -1,15 +1,15 @@
 package by.tms.model;
 
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
-
-import java.io.Serializable;
 
 @AllArgsConstructor
 @ToString
 @Getter
 public class City implements Serializable {
+
     private Long id;
     private String name;
     private String info;

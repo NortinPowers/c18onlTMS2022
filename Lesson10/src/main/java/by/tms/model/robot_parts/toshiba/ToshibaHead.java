@@ -10,6 +10,7 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @SuperBuilder
 public class ToshibaHead extends RobotParts implements IHead {
+
     @Override
     public String think() {
         return "head with video interface";

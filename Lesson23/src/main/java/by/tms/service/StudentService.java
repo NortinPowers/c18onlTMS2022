@@ -8,6 +8,7 @@ import java.util.List;
 
 @AllArgsConstructor
 public class StudentService {
+
     private StudentRepositoryAware jdbcStudentsRepository;
 
     public List<Student> getStudents() {

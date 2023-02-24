@@ -1,8 +1,5 @@
 package by.tms.utils;
 
-import lombok.experimental.UtilityClass;
-import org.apache.ibatis.jdbc.ScriptRunner;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -10,9 +7,12 @@ import java.io.Reader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import lombok.experimental.UtilityClass;
+import org.apache.ibatis.jdbc.ScriptRunner;
 
 @UtilityClass
 public class DBUtils {
+
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/postgres";
     private static final String DB_USERNAME = "postgres";
     private static final String DB_PASSWORD = "root";

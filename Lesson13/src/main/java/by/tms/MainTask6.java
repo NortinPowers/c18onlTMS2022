@@ -2,10 +2,10 @@ package by.tms;
 
 import by.tms.model.Employee;
 import by.tms.service.ReportService;
-
 import java.util.ArrayList;
 
 public class MainTask6 {
+
     public static void main(String[] args) {
         ArrayList<Employee> employees = new ArrayList<>();
         employees.add(new Employee("Petr Petrov", 1200.50));

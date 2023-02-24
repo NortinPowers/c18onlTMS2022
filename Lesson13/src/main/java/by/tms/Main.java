@@ -1,13 +1,16 @@
 package by.tms;
 
+import static by.tms.utils.Constants.MAX_NUMBER_OF_WORDS_IN_STRING;
+import static by.tms.utils.Constants.MIN_NUMBER_OF_WORDS_IN_STRING;
+import static by.tms.utils.Constants.MIN_PALINDROME_LENGTH;
+import static by.tms.utils.Constants.REGEX_NOT_RUS_LETTERS;
+
 import by.tms.service.TextFormatter;
+import java.util.ArrayList;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-
-import static by.tms.utils.Constants.*;
-
 public class Main {
+
     public static void main(String[] args) {
         System.out.println("Task 1:");
         String strTask1 = "Вырезать подстроку из строки начиная с первого вхождения символа(А) до, последнего вхождения символа(B).";

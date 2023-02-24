@@ -6,6 +6,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @SuperBuilder
 public class AirTransport extends Transport {
+
     private double wingspan;
     private int minimumRunwayLengthForTakeOff;
 

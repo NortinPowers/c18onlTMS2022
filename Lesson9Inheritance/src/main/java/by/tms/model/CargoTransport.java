@@ -6,6 +6,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @SuperBuilder
 public class CargoTransport extends GroundTransportation {
+
     private int loadCapacity;
 
     @Override

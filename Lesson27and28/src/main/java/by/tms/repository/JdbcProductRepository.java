@@ -1,19 +1,19 @@
 package by.tms.repository;
 
-import by.tms.model.Product;
-import lombok.AllArgsConstructor;
+import static by.tms.utils.RepositoryJdbcUtils.fillsValues;
 
+import by.tms.model.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static by.tms.utils.RepositoryJdbcUtils.fillsValues;
+import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class JdbcProductRepository implements JdbcProductRepositoryAware {
+
     private Connection connection;
     private final static String GET_ALL_PRODUCTS = "select * from products";
     private final static String GET_PRODUCTS_BY_TYPE = "select * from products where type=?";

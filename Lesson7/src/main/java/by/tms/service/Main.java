@@ -1,16 +1,16 @@
 package by.tms.service;
 
+import static by.tms.utils.Constants.MEN;
+
 import by.tms.model.Address;
 import by.tms.model.MilitaryOffice;
 import by.tms.model.Person;
 import by.tms.model.PersonRegistry;
 import by.tms.utils.Constants;
-
 import java.util.List;
 
-import static by.tms.utils.Constants.MEN;
-
 public class Main {
+
     public static void main(String[] args) {
         PersonRegistry personRegistry = new PersonRegistry();
         Person person = new Person();

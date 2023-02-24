@@ -1,6 +1,7 @@
 package by.tms.interfaces;
 
 public interface Transportable {
+
     /**
      * The method provide information about the possibility of transporting a certain cargo
      */

@@ -8,5 +8,6 @@ import lombok.ToString;
 @Getter
 @ToString
 public class Toy {
+
     private String type;
 }

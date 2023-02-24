@@ -1,20 +1,34 @@
 package by.tms.listener;
 
 import by.tms.model.Authenticator;
-import by.tms.repository.*;
-import by.tms.service.*;
-
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebListener;
+import by.tms.repository.JdbcCartRepository;
+import by.tms.repository.JdbcCartRepositoryAware;
+import by.tms.repository.JdbcCustomerRepository;
+import by.tms.repository.JdbcCustomerRepositoryAware;
+import by.tms.repository.JdbcProductRepository;
+import by.tms.repository.JdbcProductRepositoryAware;
+import by.tms.service.AuthenticatorService;
+import by.tms.service.AuthenticatorServiceAware;
+import by.tms.service.CartService;
+import by.tms.service.CartServiceAware;
+import by.tms.service.CustomerService;
+import by.tms.service.CustomerServiceAware;
+import by.tms.service.ProductService;
+import by.tms.service.ProductServiceAware;
+import by.tms.service.SecurityAware;
+import by.tms.service.SecurityService;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 
 @WebListener
 public class DbInitContextListener implements ServletContextListener {
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         String dbURl = sce.getServletContext().getInitParameter("db_url");

@@ -40,8 +40,8 @@ public class RepositoryJdbcUtils {
 
     public static boolean isEmpty(Long productId, List<Product> products) {
         return products.stream()
-                .filter(product -> Objects.equals(product.getId(), productId))
-                .findAny()
-                .isEmpty();
+                       .filter(product -> Objects.equals(product.getId(), productId))
+                       .findAny()
+                       .isEmpty();
     }
 }

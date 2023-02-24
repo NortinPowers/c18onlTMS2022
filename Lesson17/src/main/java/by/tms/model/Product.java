@@ -1,14 +1,18 @@
 package by.tms.model;
 
-import lombok.*;
-
 import java.util.Objects;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
+import lombok.ToString;
 
 @AllArgsConstructor
 @Getter
 @Setter
 @ToString
 public class Product<N extends Number> implements Comparable<Product> {
+
     private final long id;
     private String name;
     private N price;
@@ -27,8 +31,12 @@ public class Product<N extends Number> implements Comparable<Product> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Product<?> product = (Product<?>) o;
         return id == product.id;
     }

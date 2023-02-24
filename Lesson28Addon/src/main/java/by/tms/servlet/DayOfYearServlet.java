@@ -19,6 +19,6 @@ public class DayOfYearServlet extends HttpServlet {
         LocalDate date = getLocalDate(req);
         req.setAttribute("dayOfYearDate", date);
         req.setAttribute("dayOfYear", date.getDayOfYear());
-        forward(req, resp, "/day-of-year.jsp");
+        forward(req, resp, "/dayOfYear.jsp");
     }
 }

@@ -1,11 +1,11 @@
 package by.tms;
 
-import lombok.NonNull;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import lombok.NonNull;
 
 public class Main {
+
     static Pattern patternTask2 = Pattern.compile("c+ab");
     static Pattern patternTask3 = Pattern.compile("Java\\s+\\d+");
     static Pattern patternTask5 = Pattern.compile("[a-z15]{4,20}");

@@ -5,6 +5,7 @@ import lombok.experimental.SuperBuilder;
 
 @SuperBuilder
 public abstract class Figure {
+
     /**
      * The method returns the shape type from enum
      */

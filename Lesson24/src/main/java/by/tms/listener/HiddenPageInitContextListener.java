@@ -2,13 +2,13 @@ package by.tms.listener;
 
 import by.tms.model.Authenticator;
 import by.tms.service.SecurityService;
-
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 @WebListener
 public class HiddenPageInitContextListener implements ServletContextListener {
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         Authenticator authenticator = new Authenticator(null);

@@ -1,15 +1,16 @@
 package by.tms;
 
+import static by.tms.utils.DBUtils.SCRIPT_FILE_ADDRESS;
+import static by.tms.utils.DBUtils.createAndFillTablesByScript;
+import static by.tms.utils.DisplayUtils.getEachEntryFromNewLine;
+
 import by.tms.model.City;
 import by.tms.model.Student;
 import by.tms.service.CityService;
 import by.tms.service.StudentService;
 
-import static by.tms.utils.DBUtils.SCRIPT_FILE_ADDRESS;
-import static by.tms.utils.DBUtils.createAndFillTablesByScript;
-import static by.tms.utils.DisplayUtils.getEachEntryFromNewLine;
-
 public class Main {
+
     public static void main(String[] args) {
         createAndFillTablesByScript(SCRIPT_FILE_ADDRESS);
         CityService cityService = new CityService();

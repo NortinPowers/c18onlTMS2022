@@ -2,9 +2,20 @@ package by.tms.utils;
 
 import by.tms.model.Product;
 import by.tms.service.ShopService;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Optional;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -12,12 +23,9 @@ import javafx.util.Pair;
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Optional;
-
 @UtilityClass
 public class ApplicationsUtils {
+
     public static TextField getTextField(String name) {
         TextField id = new TextField();
         id.setPromptText(name);
@@ -104,8 +112,8 @@ public class ApplicationsUtils {
         dialog.setTitle("Add Product Dialog");
         if (CollectionUtils.isNotEmpty(products)) {
             dialog.setHeaderText("Fill in all the fields for the new product\n" +
-                    "(last entered product with ID: " + products.stream()
-                    .max(Comparator.comparing(Product<Double>::getId)).get().getId() + ")");
+                                         "(last entered product with ID: " + products.stream()
+                                                                                     .max(Comparator.comparing(Product<Double>::getId)).get().getId() + ")");
         } else {
             dialog.setHeaderText("The list of products is empty. Fill in all the fields for the new product");
         }
@@ -114,7 +122,7 @@ public class ApplicationsUtils {
     public static void setDialog(@NonNull Dialog<Pair<String, Pair<String, String>>> dialog) {
         dialog.setTitle("Change Product Dialog");
         dialog.setHeaderText("Enter the ID of the product you want to change, as well as the name " +
-                "and price of the new product");
+                                     "and price of the new product");
     }
 
     public static void setTextDialog(@NonNull TextInputDialog dialog) {

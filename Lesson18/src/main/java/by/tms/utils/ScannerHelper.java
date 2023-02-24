@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 @UtilityClass
 public class ScannerHelper {
+
     /**
      * The method returns an integer (1 or 2) from the console
      */

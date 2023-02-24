@@ -17,6 +17,7 @@ import static by.tms.utils.ServletUtils.getProductService;
 
 @WebServlet("/view/products")
 public class ProductsServlet extends HttpServlet {
+
     private ProductServiceAware productService;
 
     @Override

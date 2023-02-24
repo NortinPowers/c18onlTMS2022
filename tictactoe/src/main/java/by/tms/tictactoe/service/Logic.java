@@ -3,6 +3,7 @@ package by.tms.tictactoe.service;
 import by.tms.tictactoe.model.Figure;
 
 public class Logic {
+
     private final Figure[][] table;
 
     public Logic(Figure[][] table) {

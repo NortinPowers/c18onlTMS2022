@@ -1,11 +1,11 @@
 package by.tms.utils;
 
-import lombok.experimental.UtilityClass;
-
 import java.util.Collection;
+import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class CollectionUtils {
+
     public static boolean isEmpty(Collection<?> collection) {
         return collection == null || collection.isEmpty();
     }

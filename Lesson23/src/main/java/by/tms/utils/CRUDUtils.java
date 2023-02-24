@@ -1,15 +1,15 @@
 package by.tms.utils;
 
-import lombok.experimental.UtilityClass;
+import static by.tms.utils.DBUtils.getConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
-import static by.tms.utils.DBUtils.getConnection;
+import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class CRUDUtils {
+
     public static void updateOneParameterById(Long id, String parameter, String updateQuery) {
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement(updateQuery);

@@ -1,26 +1,48 @@
 package by.tms;
 
+import static by.tms.utils.ApplicationsUtils.getButton;
+import static by.tms.utils.ApplicationsUtils.getButtonConfirm;
+import static by.tms.utils.ApplicationsUtils.getGridPane;
+import static by.tms.utils.ApplicationsUtils.getInfoString;
+import static by.tms.utils.ApplicationsUtils.getStringFromThreeTextFields;
+import static by.tms.utils.ApplicationsUtils.getTextField;
+import static by.tms.utils.ApplicationsUtils.isValidData;
+import static by.tms.utils.ApplicationsUtils.setAlertWindow;
+import static by.tms.utils.ApplicationsUtils.setDialog;
+import static by.tms.utils.ApplicationsUtils.setDialogWindowWithListDependency;
+import static by.tms.utils.ApplicationsUtils.setGrid;
+import static by.tms.utils.ApplicationsUtils.setStage;
+import static by.tms.utils.ApplicationsUtils.setTextArea;
+import static by.tms.utils.ApplicationsUtils.setTextDialog;
+import static by.tms.utils.ApplicationsUtils.showInfoMessage;
+import static by.tms.utils.ApplicationsUtils.showProductInfo;
+
 import by.tms.model.Product;
 import by.tms.model.Shop;
 import by.tms.service.ShopService;
 import by.tms.utils.CollectionUtils;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Optional;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 import lombok.NonNull;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Optional;
-
-import static by.tms.utils.ApplicationsUtils.*;
-
 public class MainApplication extends Application {
+
     public static void main(String[] args) {
         System.out.println("Application is running");
         launch();
@@ -126,7 +148,7 @@ public class MainApplication extends Application {
             result.ifPresent(newValue -> {
                 if (isValidData(newValue)) {
                     shopService.changeProduct(Long.parseLong(newValue.getKey()),
-                            newValue.getValue().getKey(), Double.parseDouble(newValue.getValue().getValue()));
+                                              newValue.getValue().getKey(), Double.parseDouble(newValue.getValue().getValue()));
                     showProductInfo(getInfoString(shopService), infoField);
                 } else {
                     showInfoMessage(infoField, "Incorrect input data");
@@ -137,7 +159,7 @@ public class MainApplication extends Application {
         Button buttonExitShop = getButton("Exit", 662);
         buttonExitShop.setOnAction(actionEvent -> stage.close());
         Group group = new Group(showAllProductButton, filterButton, buttonAddProduct,
-                buttonDeleteProduct, buttonChangeProduct, buttonExitShop, infoField);
+                                buttonDeleteProduct, buttonChangeProduct, buttonExitShop, infoField);
         FlowPane root = new FlowPane(group);
         Scene scene = new Scene(root);
         stage.setScene(scene);

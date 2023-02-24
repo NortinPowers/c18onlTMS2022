@@ -4,13 +4,14 @@ import java.math.BigInteger;
 import java.util.Arrays;
 
 public class Homework {
+
     public static void main(String[] args) {
         //Некоторые тесты для проверки задач.
         System.out.println(sum(100, 200));
         System.out.println(sum(Integer.MAX_VALUE, Integer.MAX_VALUE));
-        System.out.println(max(56, 349));
+        System.out.println(selectMaxValue(56, 349));
         System.out.println(average(new int[]{0, -2, 3, -1, 5}));
-        System.out.println(max(new int[]{1, 2, 3, 4, 5, 100, 99}));
+        System.out.println(getMaxValue(new int[]{1, 2, 3, 4, 5, 100, 99}));
         System.out.println(calculateHypotenuse(3, 4));
     }
 
@@ -32,8 +33,8 @@ public class Homework {
     }
 
     public static int sumSecond(int a, int b) {
-        BigInteger aValue = new BigInteger(String.valueOf(a));
-        BigInteger result = aValue.add(BigInteger.valueOf(b));
+        BigInteger valueOfA = new BigInteger(String.valueOf(a));
+        BigInteger result = valueOfA.add(BigInteger.valueOf(b));
         if (result.compareTo(new BigInteger(String.valueOf(Integer.MAX_VALUE))) > 0) {
             return -1;
         }
@@ -63,7 +64,7 @@ public class Homework {
      * <p>
      * Метод должен вернуть 10
      */
-    public static int max(int a, int b) {
+    public static int selectMaxValue(int a, int b) {
         return Math.max(a, b);
     }
 
@@ -96,7 +97,7 @@ public class Homework {
      * <p>
      * Пример: array = {1,2,10,3} метод возвращает 10
      **/
-    public static int max(int[] array) {
+    public static int getMaxValue(int[] array) {
         if (array != null && array.length > 0) {
             Arrays.sort(array);
             return array[array.length - 1];

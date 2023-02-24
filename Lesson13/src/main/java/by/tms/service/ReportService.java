@@ -26,7 +26,7 @@ public class ReportService implements ReportAware {
 
     public String getEmployeeInfo(@NonNull Employee employee) {
         return String.format("| %-25s | %12.2f | %n",
-                getEditedFullName(employee.getFullName()), employee.getSalary());
+                             getEditedFullName(employee.getFullName()), employee.getSalary());
     }
 }
 

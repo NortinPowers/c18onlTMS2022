@@ -10,6 +10,7 @@ import static by.tms.utils.UnitsOfMeasurement.getPowerInKilowatts;
 @Getter
 @SuperBuilder
 public class Transport implements Describable, Transportable {
+
     private int powerInHorsepower;
     private int maxSpeedKmPerHour;
     private double weightKg;

@@ -1,6 +1,7 @@
 package by.tms.model;
 
 public class FuelTank {
+
     private int fuelLimit;
     private final int fuelTankLimit;
 

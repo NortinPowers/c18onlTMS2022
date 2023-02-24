@@ -1,14 +1,14 @@
 package by.tms.utils;
 
+import java.time.LocalDate;
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 
-import java.time.LocalDate;
-
 @UtilityClass
 public class DateHelper {
-    private final int ONE_DAY = 1;
-    private final int NINE_DAYS = 9;
+
+    private static final int ONE_DAY = 1;
+    private static final int NINE_DAYS = 9;
 
     /**
      * The method returns the date of the following Tuesday

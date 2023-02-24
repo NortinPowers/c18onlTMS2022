@@ -5,4 +5,5 @@ import lombok.experimental.SuperBuilder;
 
 @SuperBuilder
 public class Tie extends Clothes implements ClothingForMenAware {
+
 }

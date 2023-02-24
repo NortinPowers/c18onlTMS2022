@@ -1,12 +1,12 @@
 package by.tms.model;
 
-import lombok.Getter;
-
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
 
 @Getter
 public class Category {
+
     private final String name;
     private final List<Product> products;
 

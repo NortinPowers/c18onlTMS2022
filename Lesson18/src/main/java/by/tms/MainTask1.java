@@ -1,14 +1,15 @@
 package by.tms;
 
+import static by.tms.utils.Constants.ERROR_MESSAGE;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static by.tms.utils.Constants.ERROR_MESSAGE;
-
 public class MainTask1 {
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean act = true;

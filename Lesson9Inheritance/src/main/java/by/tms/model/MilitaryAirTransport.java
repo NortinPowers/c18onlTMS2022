@@ -7,6 +7,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @SuperBuilder
 public class MilitaryAirTransport extends AirTransport {
+
     private boolean ejectionSystems;
     @Setter
     private int numberOfMissilesOnBoard;

@@ -9,6 +9,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 public class FuelTank {
+
     @Setter
     private int fuelLimit;
     private final int fuelTankLimit;

@@ -1,16 +1,16 @@
 package by.tms.service;
 
+import static by.tms.utils.ArraysHelper.getComparisonAverageOfTwoArrays;
+import static by.tms.utils.ArraysHelper.getMaxMinAverageInfoOfArray;
+
 import by.tms.tasks.Task0;
 import by.tms.tasks.Task1;
 import by.tms.tasks.Task2;
 import by.tms.tasks.Task3;
-
 import java.util.Arrays;
 
-import static by.tms.utils.ArraysHelper.getComparisonAverageOfTwoArrays;
-import static by.tms.utils.ArraysHelper.getMaxMinAverageInfoOfArray;
-
 public class Lesson8AddonMain {
+
     public static void main(String[] args) {
         System.out.println("Task 0");
         Task0 task0 = new Task0();

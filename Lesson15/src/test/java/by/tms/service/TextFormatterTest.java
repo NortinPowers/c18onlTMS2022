@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class TextFormatterTest {
+
     private final TextFormatter testTextFormatter = new TextFormatter();
 
     @Test

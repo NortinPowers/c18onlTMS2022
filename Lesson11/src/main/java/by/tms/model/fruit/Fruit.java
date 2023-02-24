@@ -1,18 +1,18 @@
 package by.tms.model.fruit;
 
+import static by.tms.utils.Constants.KILOGRAM;
+import static java.math.RoundingMode.HALF_UP;
+
+import java.math.BigDecimal;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-
-import java.math.BigDecimal;
-
-import static by.tms.utils.Constants.KILOGRAM;
-import static java.math.RoundingMode.HALF_UP;
 
 @Getter
 @SuperBuilder
 @ToString
 public abstract class Fruit {
+
     private double weight;
     private BigDecimal price;
 

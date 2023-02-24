@@ -5,6 +5,7 @@ import by.tms.interfaces.IStart;
 import java.util.Random;
 
 public class Shuttle implements IStart {
+
     @Override
     public boolean preLaunchSystemCheck() {
         return new Random().nextInt() * 11 > 3;

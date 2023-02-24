@@ -1,27 +1,32 @@
 package by.tms.service;
 
-import by.tms.model.Book;
-import by.tms.model.EmailAddress;
-import by.tms.model.Library;
-import by.tms.model.Reader;
-import by.tms.utils.Group;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.ToString;
-
-import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
 import static by.tms.utils.Constants.MAX_NUMBER_OF_BOOKS_TAKEN_TO_OK_LIST;
 import static by.tms.utils.Constants.NUMBER_OF_BOOKS_TAKEN;
 import static by.tms.utils.Group.OK;
 import static by.tms.utils.Group.TOO_MUCH;
 
+import by.tms.model.Book;
+import by.tms.model.EmailAddress;
+import by.tms.model.Library;
+import by.tms.model.Reader;
+import by.tms.utils.Group;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
+
 @AllArgsConstructor
 @ToString
 @Getter
 public class LibraryService implements LibraryServiceAware {
+
     private Library library;
 
     /**
@@ -32,8 +37,8 @@ public class LibraryService implements LibraryServiceAware {
     @Override
     public List<Book> getBooksSortedByYear() {
         return library.books().stream()
-                .sorted(Comparator.comparing(Book::getYear))
-                .toList();
+                      .sorted(Comparator.comparing(Book::getYear))
+                      .toList();
     }
 
     /**
@@ -44,9 +49,9 @@ public class LibraryService implements LibraryServiceAware {
     @Override
     public List<Book> getTakenBooks() {
         return library.readers().stream()
-                .flatMap(reader -> reader.getTakenBooks().stream())
-                .distinct()
-                .toList();
+                      .flatMap(reader -> reader.getTakenBooks().stream())
+                      .distinct()
+                      .toList();
     }
 
     /**
@@ -57,12 +62,12 @@ public class LibraryService implements LibraryServiceAware {
     @Override
     public List<Reader> getReadersWhoTakenBookByAuthor(String author) {
         Map<Reader, List<Book>> readerBookMap = library.readers().stream()
-                .collect(Collectors.toMap(Function.identity(), Reader::getTakenBooks));
+                                                       .collect(Collectors.toMap(Function.identity(), Reader::getTakenBooks));
         List<Reader> readers = new ArrayList<>();
         for (Map.Entry<Reader, List<Book>> entry : readerBookMap.entrySet()) {
             Optional<Book> anyBook = entry.getValue().stream()
-                    .filter(book -> book.getAuthor().equals(author))
-                    .findAny();
+                                          .filter(book -> book.getAuthor().equals(author))
+                                          .findAny();
             if (anyBook.isPresent()) {
                 readers.add(entry.getKey());
             }
@@ -78,8 +83,8 @@ public class LibraryService implements LibraryServiceAware {
     @Override
     public List<EmailAddress> getAllEmails() {
         return library.readers().stream()
-                .map(Reader::getEmail)
-                .toList();
+                      .map(Reader::getEmail)
+                      .toList();
     }
 
     /**
@@ -90,11 +95,11 @@ public class LibraryService implements LibraryServiceAware {
     @Override
     public List<String> getConcertedEmails() {
         return library.readers().stream()
-                .filter(reader -> reader.getTakenBooks().size() > NUMBER_OF_BOOKS_TAKEN)
-                .filter(Reader::isMailingConsent)
-                .map(Reader::getEmail)
-                .map(EmailAddress::getEmailAddress)
-                .toList();
+                      .filter(reader -> reader.getTakenBooks().size() > NUMBER_OF_BOOKS_TAKEN)
+                      .filter(Reader::isMailingConsent)
+                      .map(Reader::getEmail)
+                      .map(EmailAddress::getEmailAddress)
+                      .toList();
     }
 
     /**
@@ -103,11 +108,11 @@ public class LibraryService implements LibraryServiceAware {
     @Override
     public void setBookToReader(long readerId, long bookId) {
         Optional<Book> neededBook = library.books().stream()
-                .filter(book -> book.getId() == bookId)
-                .findAny();
+                                           .filter(book -> book.getId() == bookId)
+                                           .findAny();
         neededBook.ifPresent(book -> library.readers().stream()
-                .filter(reader -> reader.getId() == readerId)
-                .forEach(reader -> reader.getTakenBooks().add(book)));
+                                            .filter(reader -> reader.getId() == readerId)
+                                            .forEach(reader -> reader.getTakenBooks().add(book)));
     }
 
     /**
@@ -174,19 +179,19 @@ public class LibraryService implements LibraryServiceAware {
 
     private String convertMapToFormattedStr(Map<Enum<Group>, String> map) {
         return map.keySet().stream()
-                .map(key -> key + " " + map.get(key))
-                .collect(Collectors.joining("\n"));
+                  .map(key -> key + " " + map.get(key))
+                  .collect(Collectors.joining("\n"));
     }
 
     private String getFormattingStr
             (Map<Enum<Group>, List<String>> enumFullNameMap, Enum<Group> group) {
         List<String> fullNameGroups = enumFullNameMap.get(group);
         return fullNameGroups.stream()
-                .collect(Collectors.joining(", ", "{", "}"));
+                             .collect(Collectors.joining(", ", "{", "}"));
     }
 
     private Map<Reader, Integer> getReaderCountBookByReaderMap() {
         return library.readers().stream()
-                .collect(Collectors.toMap(Function.identity(), reader -> reader.getTakenBooks().size()));
+                      .collect(Collectors.toMap(Function.identity(), reader -> reader.getTakenBooks().size()));
     }
 }

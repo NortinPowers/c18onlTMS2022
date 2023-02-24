@@ -11,6 +11,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class Trumpet implements InstrumentAware {
+
     private int diameter;
 
     @Override

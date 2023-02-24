@@ -1,17 +1,16 @@
 package by.tms;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 class HomeworkL4Test {
 
     @Test
     void getAlphabetTest() {
         Assertions.assertEquals("[A, B, C, D, E, F, G, H, I, J, K, L, M, N, " +
-                "O, P, Q, R, S, T, U, V, W, X, Y, Z]", HomeworkL4.getAlphabet());
+                                        "O, P, Q, R, S, T, U, V, W, X, Y, Z]", HomeworkL4.getAlphabet());
     }
 
     @Test
@@ -34,12 +33,12 @@ class HomeworkL4Test {
     @Test
     void getAlphabetSecondTest() {
         Assertions.assertEquals("[A, B, C, D, E, F, G, H, I, J, K, L, M," +
-                " N, O, P, Q, R, S, T, U, V, W, X, Y, Z]", HomeworkL4.getAlphabet());
+                                        " N, O, P, Q, R, S, T, U, V, W, X, Y, Z]", HomeworkL4.getAlphabet());
     }
 
     @Test
     void getAlphabetThird() {
         Assertions.assertEquals("[A, B, C, D, E, F, G, H, I, J, K, L, M, N," +
-                " O, P, Q, R, S, T, U, V, W, X, Y, Z]", HomeworkL4.getAlphabet());
+                                        " O, P, Q, R, S, T, U, V, W, X, Y, Z]", HomeworkL4.getAlphabet());
     }
 }

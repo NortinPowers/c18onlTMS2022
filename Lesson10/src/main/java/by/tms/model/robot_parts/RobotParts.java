@@ -6,5 +6,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Getter
 public abstract class RobotParts {
+
     private int price;
 }

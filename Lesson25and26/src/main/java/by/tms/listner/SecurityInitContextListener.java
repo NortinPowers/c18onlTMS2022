@@ -12,6 +12,7 @@ import java.util.Map;
 
 @WebListener
 public class SecurityInitContextListener implements ServletContextListener {
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         Map<String, String> accessMap = new HashMap<>();

@@ -1,9 +1,8 @@
 package by.tms.utils;
 
-import lombok.experimental.UtilityClass;
-
 import java.util.Arrays;
 import java.util.Random;
+import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class ArraysHelper {
@@ -107,8 +106,8 @@ public class ArraysHelper {
      */
     public static void getMaxMinAverageInfoOfArray(int[] array) {
         System.out.println("the maximum value of the array is " + getMaxArrayValue(array) +
-                "\nthe minimum value of the array is " + getMinArrayValue(array) +
-                "\nthe average value of the array is " + getAverageArrayValue(array));
+                                   "\nthe minimum value of the array is " + getMinArrayValue(array) +
+                                   "\nthe average value of the array is " + getAverageArrayValue(array));
     }
 
     /**
@@ -141,7 +140,7 @@ public class ArraysHelper {
             System.out.println("the arithmetic mean of the elements of the first and second array are equal");
         } else {
             System.out.println("the arithmetic mean value of the elements of the " + greaterValue + " array is greater than the " +
-                    "arithmetic mean value of the elements of the " + lowerValue + " array");
+                                       "arithmetic mean value of the elements of the " + lowerValue + " array");
         }
     }
 }

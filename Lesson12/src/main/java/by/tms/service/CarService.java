@@ -2,12 +2,12 @@ package by.tms.service;
 
 import by.tms.exception.CarNotStartedException;
 import by.tms.model.Car;
-import lombok.Getter;
-
 import java.util.Random;
+import lombok.Getter;
 
 @Getter
 public class CarService implements CarAware {
+
     private final Car car;
 
     public CarService(Car car) {
