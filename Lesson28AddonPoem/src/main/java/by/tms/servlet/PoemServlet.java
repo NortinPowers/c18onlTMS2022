@@ -19,14 +19,12 @@ import java.util.Random;
 
 import static by.tms.utils.Constants.PATCH_TO_JSON;
 import static by.tms.utils.Constants.ZERO;
-import static by.tms.utils.ServletUtils.setConfig;
 
 @WebServlet("/poem")
 public class PoemServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        setConfig(req, resp);
         String name = getRandomPoemName();
         String poem = getPoemFromFile(name);
         req.setAttribute("poem", poem);
