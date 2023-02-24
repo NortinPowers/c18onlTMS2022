@@ -26,10 +26,10 @@ public class HomeworkTest extends TestCase {
         Assert.assertEquals(Integer.MAX_VALUE, Homework.sumThird(Integer.MAX_VALUE - 1, 1));
     }
 
-    public void testMaxElement() {
-        Assert.assertEquals(5, Homework.max(4, 5));
-        Assert.assertEquals(10, Homework.max(10, 10));
-        Assert.assertEquals(349, Homework.max(56, 349));
+    public void testSelectMaxValue() {
+        Assert.assertEquals(5, Homework.selectMaxValue(4, 5));
+        Assert.assertEquals(10, Homework.selectMaxValue(10, 10));
+        Assert.assertEquals(349, Homework.selectMaxValue(56, 349));
     }
 
     public void testAverageArrayValue() {
@@ -42,13 +42,13 @@ public class HomeworkTest extends TestCase {
     }
 
     public void testMaxArrayElement() {
-        Assert.assertEquals(10, Homework.max(new int[]{1, 2, 10, 3}));
+        Assert.assertEquals(10, Homework.getMaxValue(new int[]{1, 2, 10, 3}));
         Assert.assertThrows(ArrayIndexOutOfBoundsException.class, () ->
-                Homework.max(new int[]{})
+                Homework.getMaxValue(new int[]{})
         );
-        Assert.assertEquals(100, Homework.max(new int[]{1, 2, 3, 4, 5, 100, 99}));
+        Assert.assertEquals(100, Homework.getMaxValue(new int[]{1, 2, 3, 4, 5, 100, 99}));
         Assert.assertThrows(ArrayIndexOutOfBoundsException.class, () ->
-                Homework.max(null)
+                Homework.getMaxValue(null)
         );
     }
 

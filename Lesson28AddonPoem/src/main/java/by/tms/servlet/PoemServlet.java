@@ -1,14 +1,11 @@
 package by.tms.servlet;
 
+import static by.tms.utils.Constants.PATCH_TO_JSON;
+import static by.tms.utils.Constants.ZERO;
+
 import by.tms.model.Poem;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -16,9 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
-
-import static by.tms.utils.Constants.PATCH_TO_JSON;
-import static by.tms.utils.Constants.ZERO;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/poem")
 public class PoemServlet extends HttpServlet {
@@ -64,13 +63,13 @@ public class PoemServlet extends HttpServlet {
         try {
             poems = objectMapper.readValue(file, new TypeReference<ArrayList<Poem>>() {
             });
-            Random random = new Random();
             if (Objects.requireNonNull(poems).size() > ZERO) {
+                Random random = new Random();
                 int number = random.nextInt(poems.size());
                 return poems.get(number).getName();
             }
         } catch (IOException e) {
-            System.out.println("IOException (getRandomPoemName): " + e.getMessage());
+            System.out.println("IOException (getPoemName): " + e.getMessage());
         }
         return null;
     }
