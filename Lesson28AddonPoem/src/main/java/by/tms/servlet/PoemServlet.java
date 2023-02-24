@@ -27,8 +27,16 @@ public class PoemServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = getRandomPoemName();
         String poem = getPoemFromFile(name);
-        req.setAttribute("poem", poem);
-        req.getServletContext().getRequestDispatcher("/poem.jsp").forward(req, resp);
+        if (poem != null) {
+            req.setAttribute("poem", poem);
+            forward(req, resp, "/poem.jsp");
+        } else {
+            forward(req, resp, "/noPoem.jsp");
+        }
+    }
+
+    private void forward(HttpServletRequest req, HttpServletResponse resp, String address) throws ServletException, IOException {
+        req.getServletContext().getRequestDispatcher(address).forward(req, resp);
     }
 
     private String getPoemFromFile(String name) {
