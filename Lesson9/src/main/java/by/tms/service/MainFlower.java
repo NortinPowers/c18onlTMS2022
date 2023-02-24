@@ -1,12 +1,21 @@
 package by.tms.service;
 
+import static by.tms.utils.FlowerType.ASTER;
+import static by.tms.utils.FlowerType.CARNATION;
+import static by.tms.utils.FlowerType.DAISY;
+import static by.tms.utils.FlowerType.GERBERA;
+import static by.tms.utils.FlowerType.IRIS;
+import static by.tms.utils.FlowerType.LILY;
+import static by.tms.utils.FlowerType.PEONY;
+import static by.tms.utils.FlowerType.ROSE;
+import static by.tms.utils.FlowerType.TULIP;
+
 import by.tms.model.Bouquet;
 import by.tms.model.Flower;
 import by.tms.model.FlowerMarket;
 
-import static by.tms.utils.FlowerType.*;
-
 public class MainFlower {
+
     public static void main(String[] args) {
         FlowerMarket flowerMarket = new FlowerMarket();
         Bouquet bouquetOne = flowerMarket.getBouquet(ASTER);

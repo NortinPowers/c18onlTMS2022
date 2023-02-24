@@ -1,6 +1,7 @@
 package by.tms.model;
 
 public class Address {
+
     private String country;
     private String city;
 

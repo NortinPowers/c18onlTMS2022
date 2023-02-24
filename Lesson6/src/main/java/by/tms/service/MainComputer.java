@@ -3,6 +3,7 @@ package by.tms.service;
 import by.tms.model.Computer;
 
 public class MainComputer {
+
     public static void main(String[] args) {
         Computer computer = new Computer("Intel i7", "16 Gb", "2 Tb", 2);
         System.out.println(computer.getComputerInfo());

@@ -1,17 +1,17 @@
 package by.tms.repository;
 
 import by.tms.model.User;
-import lombok.AllArgsConstructor;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class JdbcCustomerRepository implements JdbcCustomerRepositoryAware {
+
     private Connection connection;
     private static final String GET_USERS = "select * from customers";
     private static final String ADD_USER = "insert into customers (login, password) values (?, ?)";

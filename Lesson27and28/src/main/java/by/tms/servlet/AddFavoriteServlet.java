@@ -1,21 +1,26 @@
 package by.tms.servlet;
 
+import static by.tms.utils.ServletUtils.forwardToAddress;
+import static by.tms.utils.ServletUtils.getCartService;
+import static by.tms.utils.ServletUtils.getCustomerService;
+import static by.tms.utils.ServletUtils.getLogin;
+import static by.tms.utils.ServletUtils.getProductService;
+import static by.tms.utils.ServletUtils.setAddressAndForward;
+
 import by.tms.service.CartServiceAware;
 import by.tms.service.CustomerServiceAware;
 import by.tms.service.ProductServiceAware;
-
+import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
-import static by.tms.utils.ServletUtils.*;
 
 @WebServlet("/add-favorite")
 public class AddFavoriteServlet extends HttpServlet {
+
     private ProductServiceAware productService;
     private CartServiceAware cartService;
     private CustomerServiceAware customerService;

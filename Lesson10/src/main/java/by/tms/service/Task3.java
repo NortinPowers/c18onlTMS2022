@@ -9,6 +9,7 @@ import by.tms.model.shuttle.Virgin;
 import java.util.List;
 
 public class Task3 {
+
     public static void main(String[] args) {
         Spaceport spaceport = new Spaceport();
         List<IStart> shuttles = List.of(new Shuttle(), new SpaceX(), new Virgin());

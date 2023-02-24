@@ -10,6 +10,7 @@ import static by.tms.model.Figures.RECTANGLE;
 @Getter
 @SuperBuilder
 public class Rectangle extends Figure implements AreaOfFigureCalculable {
+
     private double sideA;
     private double sideB;
 

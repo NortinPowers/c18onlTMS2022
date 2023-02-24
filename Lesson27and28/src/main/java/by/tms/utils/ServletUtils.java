@@ -13,6 +13,7 @@ import java.io.IOException;
 
 @UtilityClass
 public class ServletUtils {
+
     public static void setAddressAndForward(HttpServletRequest req, HttpServletResponse resp, String type) throws ServletException, IOException {
         req.getServletContext().getRequestDispatcher("/view/products?type=" + type).forward(req, resp);
     }

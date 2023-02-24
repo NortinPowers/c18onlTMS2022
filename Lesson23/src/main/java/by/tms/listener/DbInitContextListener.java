@@ -3,16 +3,16 @@ package by.tms.listener;
 import by.tms.repository.JdbcStudentsRepository;
 import by.tms.repository.StudentRepositoryAware;
 import by.tms.service.StudentService;
-
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 
 @WebListener
 public class DbInitContextListener implements ServletContextListener {
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         String dbURl = sce.getServletContext().getInitParameter("db_url");

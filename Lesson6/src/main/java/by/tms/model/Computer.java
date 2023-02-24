@@ -4,6 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Computer {
+
     private String processor;
     private String ram;
     private String hardDrive;

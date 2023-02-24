@@ -4,6 +4,7 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class Constants {
+
     public static final String MEN = "men";
     public static final String WOMEN = "women";
 

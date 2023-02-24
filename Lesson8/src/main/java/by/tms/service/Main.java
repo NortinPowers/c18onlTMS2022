@@ -5,6 +5,7 @@ import by.tms.model.Engine;
 import by.tms.model.FuelTank;
 
 public class Main {
+
     public static void main(String[] args) {
         Car pontiac = new Car(new Engine("V9"), new FuelTank(60));
         pontiac.setBrand("Pontiac");

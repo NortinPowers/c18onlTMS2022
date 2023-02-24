@@ -1,10 +1,10 @@
 package by.tms.model;
 
 import by.tms.utils.Constants;
-
 import java.util.Scanner;
 
 public class Person {
+
     private String name;
     private int age;
     private String gender;

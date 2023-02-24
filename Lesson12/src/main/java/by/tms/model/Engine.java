@@ -6,6 +6,7 @@ import lombok.ToString;
 @ToString
 @Getter
 public class Engine {
+
     private final String engineType;
     private boolean started;
 

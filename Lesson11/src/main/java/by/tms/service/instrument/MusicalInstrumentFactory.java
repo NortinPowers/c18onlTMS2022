@@ -7,6 +7,7 @@ import by.tms.service.interfaces.InstrumentAware;
 import org.jetbrains.annotations.NotNull;
 
 public class MusicalInstrumentFactory {
+
     public InstrumentAware createInstrument(InstrumentAware.@NotNull InstrumentType instrumentType, int instrumentParam) {
         return switch (instrumentType) {
             case DRUM -> new Drum(instrumentParam);

@@ -10,6 +10,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 public class EmailAddress {
+
     private String emailAddress;
     private String additionalDetail;
 }

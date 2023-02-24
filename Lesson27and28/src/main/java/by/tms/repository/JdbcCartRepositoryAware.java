@@ -1,11 +1,11 @@
 package by.tms.repository;
 
 import by.tms.model.Product;
+import java.util.List;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.List;
-
 public interface JdbcCartRepositoryAware {
+
     void addProduct(Long userId, Long productId, boolean cart, boolean favorite);
 
     void deleteProduct(Long userId, Long productId, boolean cart, boolean favorite);

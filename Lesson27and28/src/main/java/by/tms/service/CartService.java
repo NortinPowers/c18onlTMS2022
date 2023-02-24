@@ -2,14 +2,14 @@ package by.tms.service;
 
 import by.tms.model.Product;
 import by.tms.repository.JdbcCartRepositoryAware;
+import java.math.BigDecimal;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 @AllArgsConstructor
 public class CartService implements CartServiceAware {
+
     private JdbcCartRepositoryAware jdbcCartRepository;
 
     @Override

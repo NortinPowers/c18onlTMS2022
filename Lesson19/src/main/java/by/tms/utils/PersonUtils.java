@@ -4,6 +4,7 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class PersonUtils {
+
     /**
      * The method generates the necessary postfix
      *

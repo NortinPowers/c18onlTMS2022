@@ -11,6 +11,7 @@ import java.util.List;
 import static by.tms.utils.Constants.*;
 
 public class TextFormatter {
+
     public boolean isPalindrome(@NonNull String word) {
         return word.equalsIgnoreCase(StringUtils.reverse(word))
                 && word.toLowerCase().matches("[a-zа-я]{2,}");

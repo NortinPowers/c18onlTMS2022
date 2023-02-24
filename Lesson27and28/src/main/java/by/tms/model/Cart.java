@@ -8,6 +8,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode
 public class Cart {
+
     private Long id;
     private Long userId;
     private Long productId;

@@ -4,6 +4,7 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class FilePaths {
+
     public static final String RES_PATCH = "Lesson15/src/main/resources/files/";
     public static final String INPUT_TXT_FILE_NAME = "input.txt";
     public static final String OUTPUT_TXT_FILE_NAME = "output.txt";

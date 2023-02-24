@@ -8,6 +8,7 @@ import java.util.Objects;
 
 @AllArgsConstructor
 public class SecurityService implements SecurityAware {
+
     private Authenticator authenticator;
 
     @Override

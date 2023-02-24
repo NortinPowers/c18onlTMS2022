@@ -6,6 +6,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @SuperBuilder
 public class PassengerTransport extends GroundTransportation {
+
     private String bodyType;
     private int numberOfPassengers;
 

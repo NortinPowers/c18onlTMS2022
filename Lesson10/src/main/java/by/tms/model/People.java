@@ -7,6 +7,7 @@ import lombok.Builder;
 
 @Builder
 public class People {
+
     private String name;
     private IJacket jacket;
     private IPants pants;

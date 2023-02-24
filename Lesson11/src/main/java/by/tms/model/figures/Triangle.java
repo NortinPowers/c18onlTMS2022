@@ -10,6 +10,7 @@ import static by.tms.model.Figures.TRIANGLE;
 @SuperBuilder
 @Getter
 public class Triangle extends Figure implements AreaOfFigureCalculable {
+
     private double sideA;
     private double sideB;
     private double sideC;

@@ -16,6 +16,7 @@ import static by.tms.utils.CRUDUtils.updateOneParameterById;
 import static by.tms.utils.DBUtils.getConnection;
 
 public class StudentService {
+
     private static final String GET_ALL_STUDENTS_QUERY = "select s.id, s.name, s.surname, s.age, s.course, c.id as city_id, c.name as city_name, c.info from students s left join cities c on s.city_id = c.id;";
     private static final String INSERT_STUDENT_QUERY = "INSERT INTO students(name, surname, age, city_id, course) VALUES(?, ?, ?, ?, ?);";
     private static final String UPDATE_STUDENT_QUERY = "UPDATE students SET course = ? WHERE id = ?;";

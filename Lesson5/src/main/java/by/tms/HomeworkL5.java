@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class HomeworkL5 {
+
     static Random random = new Random();
     static Scanner scanner = new Scanner(System.in);
 
@@ -417,7 +418,7 @@ public class HomeworkL5 {
         System.out.println("Created array: " + Arrays.toString(mass));
         int[] requiredInts = getArrayLastMaxElementValueIndex(mass);
         System.out.println("The maximum element is " + requiredInts[0] + ", the index of its last " +
-                "appearance in the array = " + requiredInts[1]);
+                                   "appearance in the array = " + requiredInts[1]);
     }
 
     /**

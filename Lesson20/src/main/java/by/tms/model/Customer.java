@@ -1,16 +1,16 @@
 package by.tms.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @ToString
 @Getter
 @AllArgsConstructor
 public class Customer {
+
     private final Long id;
     private List<Product> products;
 

@@ -1,16 +1,17 @@
 package by.tms.service;
 
-import by.tms.utils.Seasons;
-
 import static by.tms.utils.Seasons.AUTUMN;
 import static by.tms.utils.Seasons.getPreferences;
 
+import by.tms.utils.Seasons;
+
 public class Main {
+
     public static void main(String[] args) {
         Seasons currentSeason = AUTUMN;
         System.out.println("It`s " + currentSeason +
-                " now (№" + AUTUMN.ordinal() + ") Average temperature is "
-                + currentSeason.getAverageTemperature() + " degrees");
+                                   " now (№" + AUTUMN.ordinal() + ") Average temperature is "
+                                   + currentSeason.getAverageTemperature() + " degrees");
         System.out.println(getPreferences(AUTUMN));
         Seasons[] seasons = Seasons.values();
         for (Seasons season : seasons) {

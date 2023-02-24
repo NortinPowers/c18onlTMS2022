@@ -15,6 +15,7 @@ import static by.tms.utils.Constants.PROCESSING_TIME_OF_ONE_PRODUCT;
 @Getter
 @ToString
 public class TradeService implements Runnable {
+
     private Customer customer;
     private Shop shop;
     private Semaphore semaphore;

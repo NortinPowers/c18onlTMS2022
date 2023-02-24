@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class CarServiceTest {
+
     CarService pontiac = new CarService(new Car(
             new Engine("V6"),
             new FuelTank(15, 60),
@@ -76,8 +77,8 @@ class CarServiceTest {
     @Test
     void refuelingFuel() {
         Assertions.assertEquals("Now there are 45 liters of fuel in the gas tank of Pontiac.",
-                pontiac.refuelingFuel(30));
+                                pontiac.refuelingFuel(30));
         Assertions.assertEquals("Some of the fuel did not fit into the fuel tank. " +
-                "Now there are 60 liters of fuel in the gas tank of Pontiac.", pontiac.refuelingFuel(30));
+                                        "Now there are 60 liters of fuel in the gas tank of Pontiac.", pontiac.refuelingFuel(30));
     }
 }

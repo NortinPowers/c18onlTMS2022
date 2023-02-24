@@ -3,6 +3,7 @@ package by.tms.tictactoe.model;
 import javafx.scene.shape.Rectangle;
 
 public class Figure extends Rectangle {
+
     private boolean markX;
     private boolean markO;
 

@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @WebListener
 public class VisitCountListener implements ServletContextListener {
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         AtomicInteger count = new AtomicInteger();

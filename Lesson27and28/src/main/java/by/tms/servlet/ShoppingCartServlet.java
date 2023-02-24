@@ -18,6 +18,7 @@ import static by.tms.utils.ServletUtils.*;
 
 @WebServlet("/view/shopping-cart")
 public class ShoppingCartServlet extends HttpServlet {
+
     private CartServiceAware cartService;
     private CustomerServiceAware customerService;
 

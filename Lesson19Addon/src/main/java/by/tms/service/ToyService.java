@@ -12,6 +12,7 @@ import java.util.Map;
 @ToString
 @AllArgsConstructor
 public class ToyService implements ToyServiceAware {
+
     private Map<String, Toy> toyHashMap;
 
     public Map<String, Toy> getToyHashMap() {

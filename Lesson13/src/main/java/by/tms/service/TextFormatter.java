@@ -7,6 +7,7 @@ import static by.tms.utils.Constants.MIN_PALINDROME_LENGTH;
 import static by.tms.utils.Constants.REGEX_NOT_RUS_LETTERS;
 
 public class TextFormatter {
+
     public int getNumberOfWordsInString(@NonNull String string) {
         return string.split(" ").length;
     }

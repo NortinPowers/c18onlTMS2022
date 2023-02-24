@@ -10,6 +10,7 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @SuperBuilder
 public class SamsungHand extends RobotParts implements IHand {
+
     @Override
     public String grab() {
         return "the hand snatches the geom";

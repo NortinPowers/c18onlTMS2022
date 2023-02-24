@@ -1,11 +1,11 @@
 package by.tms.service;
 
-import lombok.AllArgsConstructor;
-
 import java.util.Arrays;
+import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class MinMax<A extends Number> {
+
     private A[] array;
 
     /**

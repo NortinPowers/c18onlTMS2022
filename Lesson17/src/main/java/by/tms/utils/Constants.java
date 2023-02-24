@@ -4,6 +4,7 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class Constants {
+
     public static final String PRODUCTS = "products";
     public static final String PRICE = "price";
     public static final String ID = "id";

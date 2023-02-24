@@ -4,12 +4,12 @@ import by.tms.comparator.ProductIdComparator;
 import by.tms.model.Product;
 import by.tms.model.Shop;
 import by.tms.service.ShopService;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 public class MainShop {
+
     public static void main(String[] args) {
         ArrayList<Product<Double>> products = new ArrayList<>();
         {

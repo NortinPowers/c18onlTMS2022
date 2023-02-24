@@ -1,16 +1,16 @@
 package by.tms;
 
-import by.tms.service.FirstInterface;
-import com.google.common.math.BigIntegerMath;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Scanner;
-
 import static by.tms.utils.Constants.COMMAND_ONE;
 import static by.tms.utils.ScannerHelper.getConditionalInputIntValue;
 import static by.tms.utils.ScannerHelper.getInputIntPositiveValue;
 
+import by.tms.service.FirstInterface;
+import com.google.common.math.BigIntegerMath;
+import java.util.Scanner;
+import org.apache.commons.lang3.StringUtils;
+
 public class MainTask3 {
+
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {

@@ -3,6 +3,7 @@ package by.tms.service;
 import by.tms.model.User;
 
 public class PersonMain {
+
     public static void main(String[] args) {
         User person1 = new User();
         System.out.println(person1.getFullName());

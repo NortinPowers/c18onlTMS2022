@@ -12,6 +12,7 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 public class Reader {
+
     private final long id;
     private final String fullName;
     private final EmailAddress email;

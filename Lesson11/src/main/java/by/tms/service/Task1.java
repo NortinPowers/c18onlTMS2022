@@ -6,6 +6,7 @@ import by.tms.service.interfaces.InstrumentAware;
 import static by.tms.service.interfaces.InstrumentAware.InstrumentType.*;
 
 public class Task1 {
+
     public static void main(String[] args) {
         InstrumentAware[] instruments = new InstrumentAware[3];
         MusicalInstrumentFactory instrumentFactory = new MusicalInstrumentFactory();

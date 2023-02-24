@@ -6,14 +6,15 @@ import org.jetbrains.annotations.NotNull;
 
 @UtilityClass
 public class Typer {
+
     public static void getSelectedTypeOfClothingCharacteristics(@NotNull StringBuilder result, @NotNull Clothes clothesType) {
         result.append(clothesType.getClass().getSimpleName())
-                .append(": Clothing size - ")
-                .append(clothesType.getClothingSize())
-                .append(", clothing color - ")
-                .append(clothesType.getClothingColor())
-                .append(", price - ")
-                .append(clothesType.getPrice())
-                .append("\n");
+              .append(": Clothing size - ")
+              .append(clothesType.getClothingSize())
+              .append(", clothing color - ")
+              .append(clothesType.getClothingColor())
+              .append(", price - ")
+              .append(clothesType.getPrice())
+              .append("\n");
     }
 }

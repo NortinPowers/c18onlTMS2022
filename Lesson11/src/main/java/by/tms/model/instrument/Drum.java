@@ -11,6 +11,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class Drum implements InstrumentAware {
+
     private int size;
 
     @Override

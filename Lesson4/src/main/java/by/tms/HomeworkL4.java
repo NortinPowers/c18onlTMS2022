@@ -1,6 +1,10 @@
 package by.tms;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
 
 public class HomeworkL4 {
 
@@ -131,14 +135,14 @@ public class HomeworkL4 {
      */
     public static void typeConversionInfo() {
         System.out.println("              byte\tshort\tchar\tint \tlong\tfloat\tdouble\tboolean\n" +
-                "    byte       т      ня      я      ня      ня       ня      ня       х\n" +
-                "    short      я       т      я      ня      ня       ня      ня       х\n" +
-                "    char       я       я      т      ня      ня       ня      ня       х\n" +
-                "    int        я       я      я       т      ня       ня      ня       х\n" +
-                "    long       я       я      я       я       т       ня      ня       х\n" +
-                "    float      я       я      я       я       я        т      ня       х\n" +
-                "    double     я       я      я       я       я        я       т       х\n" +
-                "    boolean    х       х      х       х       х        х       х       т");
+                                   "    byte       т      ня      я      ня      ня       ня      ня       х\n" +
+                                   "    short      я       т      я      ня      ня       ня      ня       х\n" +
+                                   "    char       я       я      т      ня      ня       ня      ня       х\n" +
+                                   "    int        я       я      я       т      ня       ня      ня       х\n" +
+                                   "    long       я       я      я       я       т       ня      ня       х\n" +
+                                   "    float      я       я      я       я       я        т      ня       х\n" +
+                                   "    double     я       я      я       я       я        я       т       х\n" +
+                                   "    boolean    х       х      х       х       х        х       х       т");
 
     }
 }
@@ -147,6 +151,7 @@ public class HomeworkL4 {
  * The interface declaring the ability to determine parity
  */
 interface ParityDeterminable {
+
     boolean isParityValue(String enteredCharacters);
 }
 
@@ -172,6 +177,7 @@ class ParityResultValue implements ParityDeterminable {
  * to get list of abs value
  */
 interface ValueReceivable {
+
     List<Double> getAbsValue(String enteredCharacters);
 }
 

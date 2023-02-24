@@ -10,6 +10,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 public class Book {
+
     private final long id;
     private String author;
     private String title;

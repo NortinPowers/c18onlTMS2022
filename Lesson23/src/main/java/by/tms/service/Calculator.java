@@ -5,6 +5,7 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 
 public class Calculator implements CalculatorAware {
+
     private final Integer precision = 3;
 
     @Override

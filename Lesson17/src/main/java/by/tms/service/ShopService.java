@@ -9,6 +9,7 @@ import java.util.List;
 
 @AllArgsConstructor
 public class ShopService implements ShopServiceAware {
+
     private final Shop shop;
 
     @Override

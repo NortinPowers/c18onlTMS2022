@@ -8,24 +8,25 @@ import by.tms.model.figures.Triangle;
 import static by.tms.model.Figures.*;
 
 public class Task4 {
+
     public static void main(String[] args) {
         Figure[] figures = new Figure[4];
         figures[0] = Line.builder()
-                .build();
+                         .build();
         figures[1] = Triangle.builder()
-                .sideA(5)
-                .sideB(6)
-                .sideC(8)
-                .build();
+                             .sideA(5)
+                             .sideB(6)
+                             .sideC(8)
+                             .build();
         figures[2] = Rectangle.builder()
-                .sideA(12)
-                .sideB(15)
-                .build();
+                              .sideA(12)
+                              .sideB(15)
+                              .build();
         figures[3] = Triangle.builder()
-                .sideA(2)
-                .sideB(2)
-                .sideC(8)
-                .build();
+                             .sideA(2)
+                             .sideB(2)
+                             .sideC(8)
+                             .build();
         for (Figure figure : figures) {
             if (figure.getType() == LINE) {
                 System.out.println(LINE.getSquareInfo());

@@ -1,7 +1,10 @@
 package by.tms.service;
 
-import by.tms.model.City;
+import static by.tms.utils.CRUDUtils.deleteById;
+import static by.tms.utils.CRUDUtils.updateOneParameterById;
+import static by.tms.utils.DBUtils.getConnection;
 
+import by.tms.model.City;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,11 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static by.tms.utils.CRUDUtils.deleteById;
-import static by.tms.utils.CRUDUtils.updateOneParameterById;
-import static by.tms.utils.DBUtils.getConnection;
-
 public class CityService {
+
     private static final String GET_ALL_CITIES_QUERY = "select * from cities order by cities.id";
     private static final String GET_CURRENT_CITY_QUERY = "select * from cities where cities.name = ?";
     private static final String GET_CITY_ID_BY_NAME_QUERY = "select id from cities where cities.name = ?";

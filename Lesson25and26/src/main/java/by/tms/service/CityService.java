@@ -1,15 +1,15 @@
 package by.tms.service;
 
 import by.tms.model.City;
-import lombok.AllArgsConstructor;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class CityService {
+
     private Connection connection;
     private static final String GET_CURRENT_CITY_QUERY = "select * from cities where cities.name = ?";
     private static final String GET_CITY_ID_BY_NAME_QUERY = "select id from cities where cities.name = ?";

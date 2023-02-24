@@ -6,6 +6,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Bouquet {
+
     private Flower[] flowers;
 
     public int calculatePrice() {

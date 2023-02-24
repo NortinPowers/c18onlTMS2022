@@ -2,12 +2,12 @@ package by.tms.service;
 
 import by.tms.model.Authenticator;
 import by.tms.model.User;
-import lombok.AllArgsConstructor;
-
 import java.util.Map;
+import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class AuthenticatorService implements AuthenticatorServiceAware {
+
     private CustomerServiceAware customerService;
     private Authenticator authenticator;
 

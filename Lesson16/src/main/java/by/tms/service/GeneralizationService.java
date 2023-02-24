@@ -7,6 +7,7 @@ import lombok.NonNull;
 
 @AllArgsConstructor
 public class GeneralizationService {
+
     private final Generalization generalization;
 
     /**

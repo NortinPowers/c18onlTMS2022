@@ -6,4 +6,5 @@ import lombok.experimental.SuperBuilder;
 
 @SuperBuilder
 public class TShirt extends Clothes implements ClothingForMenAware, ClothingForWomenAware {
+
 }

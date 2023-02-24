@@ -6,6 +6,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @SuperBuilder
 public class CivilAirTransport extends AirTransport {
+
     private int numberOfPassengers;
     private boolean businessClass;
 

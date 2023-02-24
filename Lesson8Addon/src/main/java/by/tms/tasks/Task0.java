@@ -15,6 +15,7 @@ import static by.tms.utils.ScannerType.getInputIntValueAccordingConditions;
 */
 
 public class Task0 {
+
     private final int desiredValue = getInputIntValueAccordingConditions(new Scanner(System.in), -10, 10);
     @Getter
     private final int[] underTestArray = fillingArrayNumbersFromRange(createSpecifiedLengthArray(10), -10, 10);

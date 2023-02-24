@@ -1,17 +1,17 @@
 package by.tms;
 
+import static by.tms.utils.Sex.MEN;
+import static by.tms.utils.Sex.WOMEN;
+
 import by.tms.model.Person;
 import by.tms.service.PersonService;
 import by.tms.service.PersonServiceAware;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static by.tms.utils.Sex.MEN;
-import static by.tms.utils.Sex.WOMEN;
-
 public class MainTask5 {
+
     public static void main(String[] args) {
         List<Person> employees = new ArrayList<>();
         employees.add(new Person("Tom", "Brown", 18, MEN));

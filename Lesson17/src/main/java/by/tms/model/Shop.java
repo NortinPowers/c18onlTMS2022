@@ -9,6 +9,7 @@ import java.util.List;
 @AllArgsConstructor
 @Setter
 public class Shop {
+
     private List<Product<Double>> products;
 
     public List<Product<Double>> getProducts() {

@@ -1,21 +1,24 @@
 package by.tms.servlet;
 
+import static by.tms.utils.ServletUtils.forwardToAddress;
+import static by.tms.utils.ServletUtils.getAuthenticatorService;
+import static by.tms.utils.ServletUtils.getCustomerService;
+import static by.tms.utils.ServletUtils.saveUserSession;
+
 import by.tms.model.User;
 import by.tms.service.AuthenticatorServiceAware;
 import by.tms.service.CustomerServiceAware;
-
+import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
-import static by.tms.utils.ServletUtils.*;
 
 @WebServlet("/create-user")
 public class CreateUserServlet extends HttpServlet {
+
     private CustomerServiceAware customerService;
     private AuthenticatorServiceAware authenticatorService;
 

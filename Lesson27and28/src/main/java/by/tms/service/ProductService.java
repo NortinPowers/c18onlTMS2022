@@ -13,6 +13,7 @@ import java.util.List;
 @ToString
 
 public class ProductService implements ProductServiceAware {
+
     private JdbcProductRepositoryAware jdbcProductRepository;
 
     @Override

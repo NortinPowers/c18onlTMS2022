@@ -10,6 +10,7 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @SuperBuilder
 public class ToshibaLeg extends RobotParts implements ILeg {
+
     @Override
     public String go() {
         return "the leg uses a wheel and a gyroscope";

@@ -6,11 +6,11 @@ import by.tms.model.Library;
 import by.tms.model.Reader;
 import by.tms.service.LibraryService;
 import by.tms.service.LibraryServiceAware;
-
 import java.util.Arrays;
 import java.util.List;
 
 public class MainTask6 {
+
     public static void main(String[] args) {
         List<Book> books = Arrays.asList(
                 new Book(1L, "Лев Толстой", "Смерть Ивана Ильича", 1886),
@@ -27,7 +27,6 @@ public class MainTask6 {
                 new Book(12L, "Александр Сергеевич Пушкин", "Руслан и Людмила", 1820),
                 new Book(13L, "Александр Сергеевич Пушкин", "Медный всадник", 1833),
                 new Book(14L, "Александр Сергеевич Пушкин", "Борис Годунов", 1825));
-
 
         List<Reader> readers = Arrays.asList(
                 new Reader(1L, "Платонова Есения Алексеевна", new EmailAddress("Платонова@mail.ru", ""), false, null),

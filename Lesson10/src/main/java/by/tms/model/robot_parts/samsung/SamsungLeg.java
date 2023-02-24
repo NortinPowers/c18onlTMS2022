@@ -10,6 +10,7 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @SuperBuilder
 public class SamsungLeg extends RobotParts implements ILeg {
+
     @Override
     public String go() {
         return "the leg moves confidently";
