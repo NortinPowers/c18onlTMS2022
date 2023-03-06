@@ -85,7 +85,7 @@ public class CreateUserServlet extends HttpServlet {
         if (!isAgeVerify(user.getBirthday())) {
             message.add("Registration is available from the age of 18");
         }
-        return new DataResult(message.size() == 0, message);
+        return new DataResult(message.isEmpty(), message);
     }
 
     private record DataResult(boolean checkResult, List<String> message) {
