@@ -12,22 +12,13 @@ import lombok.Getter;
 @Builder
 public class User {
 
-    Long id;
-    String login;
-    String password;
-    String name;
-    String surname;
-    String email;
-    LocalDate birthday;
-
-    public User(String login, String password, String name, String surname, String email, LocalDate birthday) {
-        this.login = login;
-        this.password = password;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.birthday = birthday;
-    }
+    private Long id;
+    private String login;
+    private String password;
+    private String name;
+    private String surname;
+    private String email;
+    private LocalDate birthday;
 
     public User(String login) {
         this.login = login;

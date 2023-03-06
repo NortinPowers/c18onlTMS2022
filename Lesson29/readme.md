@@ -1,0 +1,3 @@
+1) Создать gradle проект и выполнить сборку проекта.
+2) Подключить 3 плагина в свой проект и выполнить сборку прокета clean package, попробовать исправить все нашедшие ошибки плагинами.(плагины можно найти в проекте https://github.com/tmspavel/c18onl2022/tree/main/Lesson29 (https://github.com/tmspavel/c18onl2022/tree/main/Lesson29/codestyle))
+3) Подключить файлик tms_code_style.xml в интелиж идею(https://github.com/tmspavel/c18onl2022/tree/main/Lesson29/codestyle)

@@ -89,7 +89,6 @@
     this.invalidities = [];
     this.validityChecks = [];
   }
-
   CustomValidation.prototype = {
     addInvalidity: function (message) {
       this.invalidities.push(message);
@@ -238,12 +237,9 @@
           'label[for="birthday"] .input-requirements li:nth-child(1)')
     }
   ];
-
   function checkInput(input) {
-
     input.CustomValidation.invalidities = [];
     input.CustomValidation.checkValidity(input);
-
     if (input.CustomValidation.invalidities.length == 0 && input.value != '') {
       input.setCustomValidity('');
     } else {
@@ -251,7 +247,6 @@
       input.setCustomValidity(message);
     }
   }
-
   var loginInput = document.getElementById('login');
   var passwordInput = document.getElementById('password');
   var passwordRepeatInput = document.getElementById('password_repeat');

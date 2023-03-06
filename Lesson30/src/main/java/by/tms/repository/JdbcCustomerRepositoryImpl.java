@@ -6,42 +6,14 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class JdbcCustomerRepositoryImpl implements UserRepository {
 
     private Connection connection;
-    private static final String GET_USERS = "select * from users";
     private static final String ADD_USER = "insert into users (login, password, name, surname, email, birthday) values (?, ?, ?, ?, ?, ?)";
-    private static final String GET_USER_ID = "select id from users where login=?";
-
-    @Override
-    public List<User> getUsers() {
-        List<User> users = new ArrayList<>();
-        try {
-            PreparedStatement statement = connection.prepareStatement(GET_USERS);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                User user = User.builder()
-                                .id(resultSet.getLong("id"))
-                                .login(resultSet.getString("login"))
-                                .password(resultSet.getString("password"))
-                                .name(resultSet.getString("name"))
-                                .surname(resultSet.getString("surname"))
-                                .email(resultSet.getString("email"))
-                                .birthday(LocalDate.parse(resultSet.getString("birthday")))
-                                .build();
-                users.add(user);
-            }
-        } catch (SQLException e) {
-            System.out.println("SQLException (getUsers): " + e.getMessage());
-        }
-        return users;
-    }
+    private static final String GET_USER_BY_LOGIN = "select login, password from users where login=?";
 
     @Override
     public void addUser(User user) {
@@ -60,18 +32,22 @@ public class JdbcCustomerRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Long getUserId(String login) {
-        Long id = null;
+    public User getUserByLogin(String login) {
+        User user = null;
         try {
-            PreparedStatement statement = connection.prepareStatement(GET_USER_ID);
+            PreparedStatement statement = connection.prepareStatement(GET_USER_BY_LOGIN);
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                id = resultSet.getLong("id");
+                String password = resultSet.getString("password");
+                user = User.builder()
+                           .login(login)
+                           .password(password)
+                           .build();
             }
         } catch (SQLException e) {
-            System.out.println("SQLException (getUserId): " + e.getMessage());
+            System.out.println("SQLException (getUser): " + e.getMessage());
         }
-        return id;
+        return user;
     }
 }
