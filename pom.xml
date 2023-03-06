@@ -174,11 +174,19 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>${pmd.maven.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <failOnViolation>false</failOnViolation>
                     <printFailingErrors>true</printFailingErrors>
                     <rulesets>
-                        <ruleset>codequality/pmd-rulesets.xml</ruleset>
+                        <ruleset>D:\TMS\c18onlTMS2022\codequality\pmd-ruleset.xml</ruleset>
+                        <ruleset>D:\TMS\c18onlTMS2022\codequality\rulesets.xml</ruleset>
                     </rulesets>
                     <targetJdk>${maven.compiler.target}</targetJdk>
                     <linkXRef>false</linkXRef>
