@@ -56,14 +56,14 @@ public class CreateUserServlet extends HttpServlet {
                         .birthday(birthday)
                         .build();
         DataResult verifyUserData = isVerifyUserData(user, verifyPassword);
-        if (verifyUserData.checkResult) {
+        if (verifyUserData.checkResult()) {
             userService.addUser(user);
             saveUserSession(req, login);
             forwardToAddress(req, resp, "/view/success-register.jsp");
         } else {
-            req.setAttribute("invalid", verifyUserData.message.stream()
-                                                              .map(Object::toString)
-                                                              .collect(Collectors.joining(". ")));
+            req.setAttribute("invalid", verifyUserData.message().stream()
+                                                      .map(Object::toString)
+                                                      .collect(Collectors.joining(". ")));
             forwardToAddress(req, resp, "/view/fail-register.jsp");
         }
     }
@@ -88,14 +88,14 @@ public class CreateUserServlet extends HttpServlet {
         return new DataResult(message.isEmpty(), message);
     }
 
-    private record DataResult(boolean checkResult, List<String> message) {
-
-    }
-
     private boolean isNewUserVerify(String login, String password, String verifyPassword) {
         if (userService.getUserByLogin(login) == null) {
             return password.equals(verifyPassword);
         }
         return false;
     }
+}
+
+record DataResult(boolean checkResult, List<String> message) {
+
 }
