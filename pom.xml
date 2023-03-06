@@ -176,6 +176,7 @@
                 <version>${pmd.maven.plugin.version}</version>
                 <executions>
                     <execution>
+                        <phase>compile</phase>
                         <goals>
                             <goal>check</goal>
                         </goals>
