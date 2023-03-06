@@ -63,7 +63,7 @@ public class CreateUserServlet extends HttpServlet {
         } else {
             req.setAttribute("invalid", verifyUserData.message.stream()
                                                               .map(Object::toString)
-                                                              .collect(Collectors.joining(", ")));
+                                                              .collect(Collectors.joining(". ")));
             forwardToAddress(req, resp, "/view/fail-register.jsp");
         }
     }
