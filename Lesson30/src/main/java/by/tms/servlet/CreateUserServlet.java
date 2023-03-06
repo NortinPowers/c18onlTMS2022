@@ -3,16 +3,12 @@ package by.tms.servlet;
 import static by.tms.utils.ServletUtils.forwardToAddress;
 import static by.tms.utils.ServletUtils.getUserService;
 import static by.tms.utils.ServletUtils.saveUserSession;
-import static by.tms.utils.ValidatorUtils.isAgeVerify;
-import static by.tms.utils.ValidatorUtils.isEmailVerify;
-import static by.tms.utils.ValidatorUtils.isLoginPasswordVerify;
-import static by.tms.utils.ValidatorUtils.isNameSurnameVerify;
+import static by.tms.utils.ValidatorUtils.isVerifyUserData;
 
 import by.tms.model.User;
 import by.tms.service.UserService;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.ServletConfig;
@@ -55,37 +51,20 @@ public class CreateUserServlet extends HttpServlet {
                         .email(email)
                         .birthday(birthday)
                         .build();
-        DataResult verifyUserData = isVerifyUserData(user, verifyPassword);
-        if (verifyUserData.checkResult()) {
+        List<String> message = isVerifyUserData(user);
+        if (!isNewUserVerify(user.getLogin(), user.getPassword(), verifyPassword)) {
+            message.add("This user already exist");
+        }
+        if (message.isEmpty()) {
             userService.addUser(user);
             saveUserSession(req, login);
             forwardToAddress(req, resp, "/view/success-register.jsp");
         } else {
-            req.setAttribute("invalid", verifyUserData.message().stream()
-                                                      .map(Object::toString)
-                                                      .collect(Collectors.joining(". ")));
+            req.setAttribute("invalid", message.stream()
+                                               .map(Object::toString)
+                                               .collect(Collectors.joining(". ")));
             forwardToAddress(req, resp, "/view/fail-register.jsp");
         }
-    }
-
-    private DataResult isVerifyUserData(User user, String verifyPassword) {
-        List<String> message = new ArrayList<>();
-        if (!isLoginPasswordVerify(user.getLogin(), user.getPassword())) {
-            message.add("Incorrect login or password");
-        }
-        if (!isNewUserVerify(user.getLogin(), user.getPassword(), verifyPassword)) {
-            message.add("This user already exist");
-        }
-        if (!isNameSurnameVerify(user.getName(), user.getSurname())) {
-            message.add("Incorrect name or surname");
-        }
-        if (!isEmailVerify(user.getEmail())) {
-            message.add("Incorrect email");
-        }
-        if (!isAgeVerify(user.getBirthday())) {
-            message.add("Registration is available from the age of 18");
-        }
-        return new DataResult(message.isEmpty(), message);
     }
 
     private boolean isNewUserVerify(String login, String password, String verifyPassword) {
@@ -94,8 +73,4 @@ public class CreateUserServlet extends HttpServlet {
         }
         return false;
     }
-}
-
-record DataResult(boolean checkResult, List<String> message) {
-
 }
