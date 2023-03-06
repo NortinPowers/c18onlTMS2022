@@ -2,7 +2,6 @@ package by.tms.utils;
 
 import by.tms.model.User;
 import by.tms.service.AuthenticatorService;
-import by.tms.service.SecurityService;
 import by.tms.service.UserService;
 import java.io.IOException;
 import javax.servlet.ServletConfig;
@@ -25,16 +24,8 @@ public class ServletUtils {
         session.setAttribute("userName", login);
     }
 
-    public static String getLogin(HttpServletRequest req) {
-        return req.getSession().getAttribute("userName").toString();
-    }
-
     public static UserService getUserService(ServletConfig config) {
         return (UserService) config.getServletContext().getAttribute("customerService");
-    }
-
-    public static SecurityService getSecurity(ServletConfig config) {
-        return (SecurityService) config.getServletContext().getAttribute("security");
     }
 
     public static AuthenticatorService getAuthenticatorService(ServletConfig config) {

@@ -1,10 +1,10 @@
 package by.tms.service;
 
-import java.util.Map;
+import by.tms.model.User;
 
 public interface AuthenticatorService {
 
-    void fillAuthenticatorMap();
+    void putUser(User user);
 
-    Map<String, String> getAuthenticatorMap();
+    boolean isVerifiedUser(String login, String password);
 }

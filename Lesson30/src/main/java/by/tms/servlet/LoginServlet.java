@@ -1,10 +1,10 @@
 package by.tms.servlet;
 
 import static by.tms.utils.ServletUtils.forwardToAddress;
-import static by.tms.utils.ServletUtils.getSecurity;
+import static by.tms.utils.ServletUtils.getAuthenticatorService;
 import static by.tms.utils.ServletUtils.saveUserSession;
 
-import by.tms.service.SecurityService;
+import by.tms.service.AuthenticatorService;
 import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -17,19 +17,19 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
-    private SecurityService securityService;
+    private AuthenticatorService authenticatorService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        securityService = getSecurity(config);
+        authenticatorService = getAuthenticatorService(config);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("name");
         String password = req.getParameter("password");
-        if (securityService.isVerifiedUser(login, password)) {
+        if (authenticatorService.isVerifiedUser(login, password)) {
             saveUserSession(req, login);
             forwardToAddress(req, resp, "/index.jsp");
         } else {
