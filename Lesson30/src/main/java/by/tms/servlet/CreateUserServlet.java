@@ -12,6 +12,9 @@ import by.tms.model.User;
 import by.tms.service.UserService;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -58,33 +61,35 @@ public class CreateUserServlet extends HttpServlet {
             saveUserSession(req, login);
             forwardToAddress(req, resp, "/view/success-register.jsp");
         } else {
-            req.setAttribute("invalid", verifyUserData.message);
+            req.setAttribute("invalid", verifyUserData.message.stream()
+                                                              .map(Object::toString)
+                                                              .collect(Collectors.joining(", ")));
             forwardToAddress(req, resp, "/view/fail-register.jsp");
         }
     }
 
     private DataResult isVerifyUserData(User user, String verifyPassword) {
-        String message = "";
+        List<String> message = new ArrayList<>();
         if (!isLoginPasswordVerify(user.getLogin(), user.getPassword())) {
-            message = message + "Incorrect login or password.\n";
+            message.add("Incorrect login or password");
         }
         if (!isNewUserVerify(user.getLogin(), user.getPassword(), verifyPassword)) {
-            message = message + "This user already exist.\n";
+            message.add("This user already exist");
         }
         if (!isNameSurnameVerify(user.getName(), user.getSurname())) {
-            message = message + "Incorrect name or surname.\n";
+            message.add("Incorrect name or surname");
         }
         if (!isEmailVerify(user.getEmail())) {
-            message = message + "Incorrect email.\n";
+            message.add("Incorrect email");
         }
         if (!isAgeVerify(user.getBirthday())) {
-            message = message + "Registration is available from the age of 18.\n";
+            message.add("Registration is available from the age of 18");
         }
-        boolean checkResult = message.length() == 0;
-        return new DataResult(checkResult, message);
+        return new DataResult(message.size() == 0, message);
     }
 
-    private record DataResult(boolean checkResult, String message) {
+    private record DataResult(boolean checkResult, List<String> message) {
+
     }
 
     private boolean isNewUserVerify(String login, String password, String verifyPassword) {

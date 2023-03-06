@@ -1,7 +1,10 @@
 package by.tms.model.archer;
 
-public interface Archer {
+import by.tms.model.Squad;
 
+public interface Archer extends Squad {
+
+    @Override
     default String act() {
         return "Archer shoots a bow";
     }
