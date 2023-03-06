@@ -12,8 +12,7 @@ public class AuthenticatorServiceImpl implements AuthenticatorService {
     private UserService userService;
     private Authenticator authenticator;
 
-    @Override
-    public void putUser(User user) {
+    private void putUser(User user) {
         authenticator.getAuthenticators().put(user.getLogin(), user.getPassword());
     }
 

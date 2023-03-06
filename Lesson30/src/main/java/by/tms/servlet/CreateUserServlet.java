@@ -1,7 +1,6 @@
 package by.tms.servlet;
 
 import static by.tms.utils.ServletUtils.forwardToAddress;
-import static by.tms.utils.ServletUtils.getAuthenticatorService;
 import static by.tms.utils.ServletUtils.getUserService;
 import static by.tms.utils.ServletUtils.saveUserSession;
 import static by.tms.utils.ValidatorUtils.isAgeVerify;
@@ -10,7 +9,6 @@ import static by.tms.utils.ValidatorUtils.isLoginPasswordVerify;
 import static by.tms.utils.ValidatorUtils.isNameSurnameVerify;
 
 import by.tms.model.User;
-import by.tms.service.AuthenticatorService;
 import by.tms.service.UserService;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -25,13 +23,11 @@ import javax.servlet.http.HttpServletResponse;
 public class CreateUserServlet extends HttpServlet {
 
     private UserService userService;
-    private AuthenticatorService authenticatorService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         userService = getUserService(config);
-        authenticatorService = getAuthenticatorService(config);
     }
 
     @Override
@@ -58,7 +54,6 @@ public class CreateUserServlet extends HttpServlet {
                         .build();
         DataResult verifyUserData = isVerifyUserData(user, verifyPassword);
         if (verifyUserData.checkResult) {
-            authenticatorService.putUser(user);
             userService.addUser(user);
             saveUserSession(req, login);
             forwardToAddress(req, resp, "/view/success-register.jsp");
@@ -90,7 +85,6 @@ public class CreateUserServlet extends HttpServlet {
     }
 
     private record DataResult(boolean checkResult, String message) {
-
     }
 
     private boolean isNewUserVerify(String login, String password, String verifyPassword) {
