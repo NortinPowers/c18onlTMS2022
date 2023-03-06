@@ -14,6 +14,5 @@ public class LockPageFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         servletRequest.getServletContext().getRequestDispatcher("/index.jsp").forward(servletRequest, servletResponse);
-        filterChain.doFilter(servletRequest, servletResponse);
     }
 }
