@@ -1,15 +1,18 @@
 package by.tms.utils;
 
 import by.tms.model.User;
-import by.tms.service.*;
-import lombok.experimental.UtilityClass;
-
+import by.tms.service.AuthenticatorServiceAware;
+import by.tms.service.CartServiceAware;
+import by.tms.service.CustomerServiceAware;
+import by.tms.service.ProductServiceAware;
+import by.tms.service.SecurityAware;
+import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
+import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class ServletUtils {
@@ -37,7 +40,7 @@ public class ServletUtils {
     }
 
     public static CustomerServiceAware getCustomerService(ServletConfig config) {
-        return (CustomerServiceAware) config.getServletContext().getAttribute("customerService");
+        return (CustomerServiceAware) config.getServletContext().getAttribute("userService");
     }
 
     public static CartServiceAware getCartService(ServletConfig config) {

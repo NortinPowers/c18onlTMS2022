@@ -25,7 +25,7 @@ public class ServletUtils {
     }
 
     public static UserService getUserService(ServletConfig config) {
-        return (UserService) config.getServletContext().getAttribute("customerService");
+        return (UserService) config.getServletContext().getAttribute("userService");
     }
 
     public static AuthenticatorService getAuthenticatorService(ServletConfig config) {
