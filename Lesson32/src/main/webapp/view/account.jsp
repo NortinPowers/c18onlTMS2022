@@ -30,6 +30,11 @@
         </div>
     </div>
 </div>
+<div class="card text-center" style="background: #2a415e">
+    <div class="card-header text-center">
+        <h2 style="color: #e3e1da; text-shadow: #FC0 1px 0 10px;">Order history</h2>
+    </div>
+</div>
 <div class="accordion" id="accordionPanelsStayOpenExample">
     <c:forEach var="ordering" items="${applicationScope.orderings}">
         <div class="accordion-item" style="background: #314b6c">
