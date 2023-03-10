@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Test Bootstrap/JSP</title>
+    <title>EShop</title>
     <jsp:include page="/view/bootstrap.jsp"/>
 </head>
 <body style="background: linear-gradient(#0d1723, #243855)">

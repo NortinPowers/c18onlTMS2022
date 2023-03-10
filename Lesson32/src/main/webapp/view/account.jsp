@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -26,7 +27,9 @@
                 <p class="form-control border-success rounded-pill form-control form-control-lg">${applicationScope.user.surname}</p>
             </div>
             <div class="col-md-5">
-                <p class="form-control border-success rounded-pill form-control form-control-lg">${applicationScope.user.birthday}</p>
+                <fmt:parseDate value="${applicationScope.user.birthday}" type="date" pattern="yyyy-MM-dd" var="parsedDate"/>
+                <fmt:formatDate value="${parsedDate}" type="date" pattern="dd MMMM yyyy" var="date"/>
+                <p class="form-control border-success rounded-pill form-control form-control-lg">${date}</p>
             </div>
         </div>
     </div>
