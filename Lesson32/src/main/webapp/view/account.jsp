@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -58,12 +59,21 @@
                                 <c:forEach var="product" items="${ordering.products}">
                                     <div class="col">
                                         <div class="card h-100">
-                                            <div class="card-body">
-                                                <h5 class="card-title">${product.name}</h5>
-                                                <p class="card-text">${product.info}</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <h5>${product.price}</h5>
+                                            <div class="row g-0">
+                                                <div class="col-md-4">
+                                                    <img class="card-img-top" style="max-height: 20rem"
+                                                         src="/img/${fn:toLowerCase(product.type)}/${product.name}.jpg"
+                                                         alt="${product.name}">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">${product.name}</h5>
+                                                        <p class="card-text">${product.info}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <h5>${product.price}</h5>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

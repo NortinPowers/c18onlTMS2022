@@ -1,7 +1,10 @@
 package by.tms.repository.impl;
 
+import static by.tms.model.ProductType.getProductType;
+
 import by.tms.model.Order;
 import by.tms.model.Product;
+import by.tms.model.ProductType;
 import by.tms.repository.ConnectionPool;
 import by.tms.repository.JdbcOrderRepository;
 import java.sql.Connection;
@@ -21,7 +24,7 @@ public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
 
     private static final String CREATE_ORDER = "insert into orders (id, date, user_id) values (?, ?, ?)";
     private static final String SAVE_PRODUCT_IN_ORDER = "insert into order_configurations (order_id, product_id) values (?, ?)";
-    private static final String GET_ORDERS_BY_ID = "select o.id, o.date, p.name, p.info, p.price from orders o join order_configurations oc on o.id = oc.order_id join products p on p.id = oc.product_id where user_id=?";
+    private static final String GET_ORDERS_BY_ID = "select o.id, o.date, p.name, p.info, p.price, p.type from orders o join order_configurations oc on o.id = oc.order_id join products p on p.id = oc.product_id where user_id=?";
 
     @Override
     public void createOrder(String order, Long id) {
@@ -78,6 +81,8 @@ public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
+                String type = resultSet.getString("type");
+                ProductType productType = getProductType(type);
                 orders.add(Order.builder()
                                 .id(resultSet.getString("id"))
                                 .date(LocalDate.parse(resultSet.getString("date")))
@@ -85,6 +90,7 @@ public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
                                                 .name(resultSet.getString("name"))
                                                 .info(resultSet.getString("info"))
                                                 .price(resultSet.getBigDecimal("price"))
+                                                .type(productType)
                                                 .build())
                                 .build());
             }
