@@ -2,7 +2,7 @@ package by.tms.servlet;
 
 import static by.tms.utils.ServletUtils.forwardToAddress;
 import static by.tms.utils.ServletUtils.getOrderService;
-import static by.tms.utils.ServletUtils.getOrderViews;
+import static by.tms.utils.ServletUtils.getOrderings;
 import static by.tms.utils.ServletUtils.getUserService;
 
 import by.tms.model.Order;
@@ -40,8 +40,12 @@ public class AccountServlet extends HttpServlet {
         req.getServletContext().setAttribute("user", user);
         Long userId = userService.getUserId(login);
         List<Order> orders = orderService.getOrdersById(userId);
-        List<Ordering> orderings = getOrderViews(orders);
-        req.getServletContext().setAttribute("orderings", orderings);
+        if (!orders.isEmpty()) {
+            List<Ordering> orderings = getOrderings(orders);
+            req.getServletContext().setAttribute("orderings", orderings);
+        } else {
+            req.getServletContext().setAttribute("orderings", null);
+        }
         forwardToAddress(req, resp, "/view/account.jsp");
     }
 }

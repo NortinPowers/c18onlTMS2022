@@ -35,35 +35,46 @@
         <h2 style="color: #e3e1da; text-shadow: #FC0 1px 0 10px;">Order history</h2>
     </div>
 </div>
-<div class="accordion" id="accordionPanelsStayOpenExample">
-    <c:forEach var="ordering" items="${applicationScope.orderings}">
-        <div class="accordion-item" style="background: #314b6c">
-            <h2 class="accordion-header" id="panelsStayOpen-heading" style="background: #406491">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse" aria-expanded="true" aria-controls="panelsStayOpen-collapse">
-                    Order: ${ordering.order} Date: ${ordering.date}
-                </button>
-            </h2>
-            <div id="panelsStayOpen-collapse" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-heading">
-                <div class="accordion-body">
-                    <div class="row row-cols-1 row-cols-md-3 g-4 text-center">
-                        <c:forEach var="product" items="${ordering.products}">
-                            <div class="col">
-                                <div class="card h-100">
-                                    <div class="card-body">
-                                        <h5 class="card-title">${product.name}</h5>
-                                        <p class="card-text">${product.info}</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        <h5>${product.price}</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </c:forEach>
-                    </div>
-                </div>
+<c:choose>
+    <c:when test="${applicationScope.orderings == null}">
+        <div class="card text-center" style="background: #2a415e">
+            <div class="card-header text-center">
+                <h3 style="color: #e3e1da; text-shadow: #FC0 1px 0 10px;">the order history is empty</h3>
             </div>
         </div>
-    </c:forEach>
-</div>
+    </c:when>
+    <c:otherwise>
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+            <c:forEach var="ordering" items="${applicationScope.orderings}">
+                <div class="accordion-item" style="background: #314b6c">
+                    <h2 class="accordion-header" id="panelsStayOpen-heading" style="background: #406491">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse" aria-expanded="true" aria-controls="panelsStayOpen-collapse">
+                            Order: ${ordering.order} Date: ${ordering.date}
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapse" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-heading">
+                        <div class="accordion-body">
+                            <div class="row row-cols-1 row-cols-md-3 g-4 text-center">
+                                <c:forEach var="product" items="${ordering.products}">
+                                    <div class="col">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <h5 class="card-title">${product.name}</h5>
+                                                <p class="card-text">${product.info}</p>
+                                            </div>
+                                            <div class="card-footer">
+                                                <h5>${product.price}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+    </c:otherwise>
+</c:choose>
 </body>
 </html>

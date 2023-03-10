@@ -61,7 +61,7 @@ public class ServletUtils {
         return (OrderService) config.getServletContext().getAttribute("orderService");
     }
 
-    public static List<Ordering> getOrderViews(List<Order> orders) {
+    public static List<Ordering> getOrderings(List<Order> orders) {
         List<Ordering> orderings = new ArrayList<>();
         Order singleOrder = orders.get(0);
         List<Product> singleOrderList = new ArrayList<>();
