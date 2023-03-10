@@ -72,7 +72,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="card-footer">
-                                                    <h5>${product.price}</h5>
+                                                    <h5>${product.price}$</h5>
                                                 </div>
                                             </div>
                                         </div>
