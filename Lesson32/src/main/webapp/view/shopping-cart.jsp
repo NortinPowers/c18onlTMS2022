@@ -6,7 +6,7 @@
     <title>Shopping-cart</title>
     <jsp:include page="bootstrap.jsp"/>
 </head>
-<body style="background: #dee4ec;">
+<body style="background: #dee4ec">
 <jsp:include page="/view/navigate.jsp"/>
 <table class="table table-sm table-dark w-75 ml-5 mt-5" style="text-align: center">
     <thead>

@@ -11,7 +11,7 @@
 <jsp:include page="/view/navigate.jsp"/>
 <div class="row row-cols-1 row-cols-md-3 mr-5 ml-5 mt-5">
     <c:forEach var="product" items="${applicationScope.favoriteProducts}">
-        <div class="card mr-5 ml-5 mt-5" style="max-width: 14rem">
+        <div class="card mr-5 ml-5 mt-5 shadow bg-body-tertiary rounded" style="max-width: 14rem">
             <img class="card-img-top" style="max-height: 20rem"
                  src="/img/${fn:toLowerCase(product.type)}/${product.name}.jpg"
                  alt="${product.name}">
@@ -20,7 +20,7 @@
                 <p class="card-text font-italic">${product.info}.</p>
             </div>
             <div class="card-footer text-center">
-                <small class="text-muted" style="font-size: 20px">${product.price}</small>
+                <small class="text-muted" style="font-size: 20px">${product.price}$</small>
             </div>
             <c:set var="access" value="${sessionScope.get('accessPermission')}"/>
             <c:if test="${access != null}">

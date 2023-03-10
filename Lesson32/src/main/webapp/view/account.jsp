@@ -58,7 +58,7 @@
                             <div class="row row-cols-1 row-cols-md-3 g-4 text-center">
                                 <c:forEach var="product" items="${ordering.products}">
                                     <div class="col">
-                                        <div class="card h-100">
+                                        <div class="card h-100 shadow bg-body-tertiary rounded">
                                             <div class="row g-0">
                                                 <div class="col-md-4">
                                                     <img class="card-img-top" style="max-height: 20rem"

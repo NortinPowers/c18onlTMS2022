@@ -25,8 +25,8 @@
             </a>
         </c:when>
         <c:otherwise>
-            <p style="text-align: center; font-size: 1.2em; color: #e5a0a4; margin-right: 5%; text-shadow: 1px 1px 2px red, 0 0 1em #ff004d, 0 0 0.2em #ff0062;">
-                Welcome ${sessionScope.get('userName')}</p>
+            <h2 style="text-align: center; color: #e5a0a4; margin-right: 11%; text-shadow: 1px 1px 2px red, 0 0 1em #ff004d, 0 0 0.2em #ff0062;">
+                Welcome ${sessionScope.get('userName')}</h2>
             <ul class="nav nav-pills ">
                 <li class="nav-item">
                     <a id="accountButton"
