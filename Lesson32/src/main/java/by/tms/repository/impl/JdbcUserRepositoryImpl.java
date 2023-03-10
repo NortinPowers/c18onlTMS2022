@@ -1,6 +1,7 @@
 package by.tms.repository.impl;
 
 import by.tms.model.User;
+import by.tms.repository.ConnectionPool;
 import by.tms.repository.JdbcUserRepository;
 import java.sql.Connection;
 import java.sql.Date;
@@ -13,14 +14,16 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class JdbcUserRepositoryImpl implements JdbcUserRepository {
 
-    private Connection connection;
+    private ConnectionPool connectionPool;
     private static final String ADD_USER = "insert into users (login, password, name, surname, email, birthday) values (?, ?, ?, ?, ?, ?)";
     private static final String GET_USER_BY_LOGIN = "select * from users where login=?";
     private static final String GET_USER_ID = "select id from users where login=?";
 
     @Override
     public void addUser(User user) {
+        Connection connection = null;
         try {
+            connection = connectionPool.getConnection();
             PreparedStatement statement = connection.prepareStatement(ADD_USER);
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
@@ -30,14 +33,24 @@ public class JdbcUserRepositoryImpl implements JdbcUserRepository {
             statement.setDate(6, Date.valueOf(user.getBirthday()));
             statement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("SQLException (addUser): " + e.getMessage());
+            System.out.println("SQLException (addUser()): " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Exception (addUser().connectionPool.getConnection): " + e.getMessage());
+        } finally {
+            try {
+                connectionPool.closeConnection(connection);
+            } catch (Exception e) {
+                System.out.println("Exception (addUser().connectionPool): " + e.getMessage());
+            }
         }
     }
 
     @Override
     public User getUserByLogin(String login) {
         User user = null;
+        Connection connection = null;
         try {
+            connection = connectionPool.getConnection();
             PreparedStatement statement = connection.prepareStatement(GET_USER_BY_LOGIN);
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
@@ -59,7 +72,15 @@ public class JdbcUserRepositoryImpl implements JdbcUserRepository {
                            .build();
             }
         } catch (SQLException e) {
-            System.out.println("SQLException (getUser): " + e.getMessage());
+            System.out.println("SQLException (getUser()): " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Exception (getUser().connectionPool.getConnection): " + e.getMessage());
+        } finally {
+            try {
+                connectionPool.closeConnection(connection);
+            } catch (Exception e) {
+                System.out.println("Exception (getUser().connectionPool): " + e.getMessage());
+            }
         }
         return user;
     }
@@ -67,7 +88,9 @@ public class JdbcUserRepositoryImpl implements JdbcUserRepository {
     @Override
     public Long getUserId(String login) {
         Long id = null;
+        Connection connection = null;
         try {
+            connection = connectionPool.getConnection();
             PreparedStatement statement = connection.prepareStatement(GET_USER_ID);
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
@@ -75,7 +98,15 @@ public class JdbcUserRepositoryImpl implements JdbcUserRepository {
                 id = resultSet.getLong("id");
             }
         } catch (SQLException e) {
-            System.out.println("SQLException (getUserId): " + e.getMessage());
+            System.out.println("SQLException (getUserId()): " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Exception (getUserId().connectionPool.getConnection): " + e.getMessage());
+        } finally {
+            try {
+                connectionPool.closeConnection(connection);
+            } catch (Exception e) {
+                System.out.println("Exception (getUserId().connectionPool): " + e.getMessage());
+            }
         }
         return id;
     }
