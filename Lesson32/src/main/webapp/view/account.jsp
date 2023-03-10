@@ -16,7 +16,7 @@
         <h2 style="color: #e3e1da; text-shadow: #FC0 1px 0 10px;">Personal data</h2>
     </div>
     <div class="card-body">
-        <div class="row g-3">
+        <div class="row g-3" style="text-shadow: 1px 1px 2px #0a0a33;">
             <div class="col-md-5">
                 <p class="form-control border-success rounded-pill form-control form-control-lg">${applicationScope.user.name}</p>
             </div>
@@ -36,14 +36,14 @@
 </div>
 <div class="card text-center" style="background: #2a415e">
     <div class="card-header text-center">
-        <h2 style="color: #e3e1da; text-shadow: #FC0 1px 0 10px;">Order history</h2>
+        <h2 style="color: #e3e1da; text-shadow: #FC0 1px 0 10px;">Order history:</h2>
     </div>
 </div>
 <c:choose>
     <c:when test="${applicationScope.orderings == null}">
         <div class="card text-center" style="background: #2a415e">
             <div class="card-header text-center">
-                <h3 style="color: #e3e1da; text-shadow: #FC0 1px 0 10px;">the order history is empty</h3>
+                <h4 style="color: #e3e1da; text-shadow: #FC0 1px 0 10px;">The order history is empty</h4>
             </div>
         </div>
     </c:when>
