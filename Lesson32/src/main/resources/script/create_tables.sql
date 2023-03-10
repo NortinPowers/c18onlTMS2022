@@ -58,3 +58,36 @@ create table public.carts
 
 alter table public.carts
     owner to postgres;
+
+create table public.orders
+(
+    id      varchar(50) not null
+        constraint orders_pk
+            primary key,
+    date    date        not null,
+    user_id bigint      not null
+        constraint orders_users_id_fk
+            references public.users
+            on update cascade on delete cascade
+);
+
+alter table public.orders
+    owner to postgres;
+
+create table public.order_configurations
+(
+    id         bigserial
+        constraint order_configurations_pk
+            primary key,
+    order_id   varchar(50) not null
+        constraint order_configurations_orders_id_fk
+            references public.orders
+            on update cascade on delete cascade,
+    product_id bigint      not null
+        constraint order_configurations_products_id_fk
+            references public.products
+            on update cascade on delete cascade
+);
+
+alter table public.order_configurations
+    owner to postgres;
