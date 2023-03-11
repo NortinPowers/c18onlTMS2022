@@ -31,7 +31,7 @@ public class DbInitContextListener implements ServletContextListener {
             sce.getServletContext().setAttribute("connection", connection);
             UserRepository userRepository = new JdbcCustomerRepositoryImpl(connection);
             UserService userService = new UserServiceImpl(userRepository);
-            sce.getServletContext().setAttribute("customerService", userService);
+            sce.getServletContext().setAttribute("userService", userService);
             Map<String, String> accessMap = new HashMap<>();
             Authenticator authenticator = new Authenticator(accessMap);
             AuthenticatorService authenticatorService = new AuthenticatorServiceImpl(userService, authenticator);

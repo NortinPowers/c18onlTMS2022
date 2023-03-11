@@ -47,7 +47,7 @@ public class DbInitContextListener implements ServletContextListener {
             sce.getServletContext().setAttribute("cartService", cartService);
             JdbcCustomerRepositoryAware jdbcCustomerRepository = new JdbcCustomerRepository(connection);
             CustomerServiceAware customerService = new CustomerService(jdbcCustomerRepository);
-            sce.getServletContext().setAttribute("customerService", customerService);
+            sce.getServletContext().setAttribute("userService", customerService);
             Map<String, String> accessMap = new HashMap<>();
             Authenticator authenticator = new Authenticator(accessMap);
             AuthenticatorServiceAware authenticatorService = new AuthenticatorService(customerService, authenticator);
