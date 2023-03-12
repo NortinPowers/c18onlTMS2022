@@ -64,7 +64,7 @@
                                         <div class="card h-100 shadow bg-body-tertiary rounded">
                                             <div class="row g-0">
                                                 <div class="col-md-4">
-                                                    <img class="card-img-top" style="max-height: 20rem"
+                                                    <img class="card-img-top"
                                                          src="/img/${fn:toLowerCase(product.type)}/${product.name}.jpg"
                                                          alt="${product.name}">
                                                 </div>
