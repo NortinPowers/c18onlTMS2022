@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 
@@ -32,15 +31,15 @@ public class JdbcUserRepositoryImpl implements JdbcUserRepository {
             statement.setString(5, user.getEmail());
             statement.setDate(6, Date.valueOf(user.getBirthday()));
             statement.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("SQLException (addUser()): " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("Exception (addUser().connectionPool.getConnection): " + e.getMessage());
+            System.out.println("Exception (addUser()): " + e.getMessage());
         } finally {
-            try {
-                connectionPool.closeConnection(connection);
-            } catch (Exception e) {
-                System.out.println("Exception (addUser().connectionPool): " + e.getMessage());
+            if (connectionPool != null) {
+                try {
+                    connectionPool.closeConnection(connection);
+                } catch (Exception e) {
+                    System.out.println("Exception (addUser().connectionPool): " + e.getMessage());
+                }
             }
         }
     }
@@ -71,15 +70,15 @@ public class JdbcUserRepositoryImpl implements JdbcUserRepository {
                            .birthday(birthday)
                            .build();
             }
-        } catch (SQLException e) {
-            System.out.println("SQLException (getUser()): " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("Exception (getUser().connectionPool.getConnection): " + e.getMessage());
+            System.out.println("Exception (getUser()): " + e.getMessage());
         } finally {
-            try {
-                connectionPool.closeConnection(connection);
-            } catch (Exception e) {
-                System.out.println("Exception (getUser().connectionPool): " + e.getMessage());
+            if (connectionPool != null) {
+                try {
+                    connectionPool.closeConnection(connection);
+                } catch (Exception e) {
+                    System.out.println("Exception (getUser().connectionPool): " + e.getMessage());
+                }
             }
         }
         return user;
@@ -97,15 +96,15 @@ public class JdbcUserRepositoryImpl implements JdbcUserRepository {
             while (resultSet.next()) {
                 id = resultSet.getLong("id");
             }
-        } catch (SQLException e) {
-            System.out.println("SQLException (getUserId()): " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("Exception (getUserId().connectionPool.getConnection): " + e.getMessage());
+            System.out.println("Exception (getUserId()): " + e.getMessage());
         } finally {
-            try {
-                connectionPool.closeConnection(connection);
-            } catch (Exception e) {
-                System.out.println("Exception (getUserId().connectionPool): " + e.getMessage());
+            if (connectionPool != null) {
+                try {
+                    connectionPool.closeConnection(connection);
+                } catch (Exception e) {
+                    System.out.println("Exception (getUserId().connectionPool): " + e.getMessage());
+                }
             }
         }
         return id;

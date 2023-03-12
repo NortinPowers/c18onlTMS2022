@@ -187,8 +187,8 @@
                     <failOnViolation>false</failOnViolation>
                     <printFailingErrors>true</printFailingErrors>
                     <rulesets>
-                        <ruleset>D:\TMS\c18onlTMS2022\codequality\pmd-ruleset.xml</ruleset>
-                        <ruleset>D:\TMS\c18onlTMS2022\codequality\rulesets.xml</ruleset>
+                        <ruleset>../codequality/pmd-ruleset.xml</ruleset>
+                        <ruleset>../codequality/rulesets.xml</ruleset>
                     </rulesets>
                     <targetJdk>${maven.compiler.target}</targetJdk>
                     <linkXRef>false</linkXRef>

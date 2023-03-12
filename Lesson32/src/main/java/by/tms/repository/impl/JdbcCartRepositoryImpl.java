@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -58,15 +57,15 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
             statement.setLong(2, userId);
             statement.setLong(3, productId);
             statement.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("SQLException (deleteProductCartCount()): " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("Exception (deleteProductCartCount().connectionPool.getConnection): " + e.getMessage());
+            System.out.println("Exception (deleteProductCartCount()): " + e.getMessage());
         } finally {
-            try {
-                connectionPool.closeConnection(connection);
-            } catch (Exception e) {
-                System.out.println("Exception (getProductTypeValue().connectionPool): " + e.getMessage());
+            if (connectionPool != null) {
+                try {
+                    connectionPool.closeConnection(connection);
+                } catch (Exception e) {
+                    System.out.println("Exception (getProductTypeValue().connectionPool): " + e.getMessage());
+                }
             }
         }
     }
@@ -93,15 +92,15 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
             statement.setLong(1, userId);
             statement.setLong(2, productId);
             statement.execute();
-        } catch (SQLException e) {
-            System.out.println("SQLException (deleteProductByMark()): " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("Exception (deleteProductByMark().connectionPool.getConnection): " + e.getMessage());
+            System.out.println("Exception (deleteProductByMark()): " + e.getMessage());
         } finally {
-            try {
-                connectionPool.closeConnection(connection);
-            } catch (Exception e) {
-                System.out.println("Exception (deleteProductByMark().connectionPool): " + e.getMessage());
+            if (connectionPool != null) {
+                try {
+                    connectionPool.closeConnection(connection);
+                } catch (Exception e) {
+                    System.out.println("Exception (deleteProductByMark().connectionPool): " + e.getMessage());
+                }
             }
         }
     }
@@ -116,15 +115,15 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
             statement.setBoolean(3, cart);
             statement.setBoolean(4, favorite);
             statement.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("SQLException (addProductToCart()): " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("Exception (addProductToCart().connectionPool.getConnection): " + e.getMessage());
+            System.out.println("Exception (addProductToCart()): " + e.getMessage());
         } finally {
-            try {
-                connectionPool.closeConnection(connection);
-            } catch (Exception e) {
-                System.out.println("Exception (addProductToCart().connectionPool): " + e.getMessage());
+            if (connectionPool != null) {
+                try {
+                    connectionPool.closeConnection(connection);
+                } catch (Exception e) {
+                    System.out.println("Exception (addProductToCart().connectionPool): " + e.getMessage());
+                }
             }
         }
     }
@@ -149,15 +148,15 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
                 Integer count = resultSet.getInt("count");
                 products.add(new ImmutablePair<>(new Product(id, name, price, productType, info), count));
             }
-        } catch (SQLException e) {
-            System.out.println("SQLException (getProductsFromCart()): " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("Exception (getProductsFromCart().connectionPool.getConnection): " + e.getMessage());
+            System.out.println("Exception (getProductsFromCart()): " + e.getMessage());
         } finally {
-            try {
-                connectionPool.closeConnection(connection);
-            } catch (Exception e) {
-                System.out.println("Exception (getProductsFromCart().connectionPool): " + e.getMessage());
+            if (connectionPool != null) {
+                try {
+                    connectionPool.closeConnection(connection);
+                } catch (Exception e) {
+                    System.out.println("Exception (getProductsFromCart().connectionPool): " + e.getMessage());
+                }
             }
         }
         return products;
@@ -188,15 +187,15 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
             while (resultSet.next()) {
                 count = resultSet.getInt("count");
             }
-        } catch (SQLException e) {
-            System.out.println("SQLException (getCartProductCount()): " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("Exception (getCartProductCount().connectionPool.getConnection): " + e.getMessage());
+            System.out.println("Exception (getCartProductCount()): " + e.getMessage());
         } finally {
-            try {
-                connectionPool.closeConnection(connection);
-            } catch (Exception e) {
-                System.out.println("Exception (getCartProductCount().connectionPool): " + e.getMessage());
+            if (connectionPool != null) {
+                try {
+                    connectionPool.closeConnection(connection);
+                } catch (Exception e) {
+                    System.out.println("Exception (getCartProductCount().connectionPool): " + e.getMessage());
+                }
             }
         }
         return count;
@@ -210,15 +209,15 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
             PreparedStatement statement = connection.prepareStatement(DELETE_CART_PRODUCT_AFTER_BUY);
             statement.setLong(1, userId);
             statement.execute();
-        } catch (SQLException e) {
-            System.out.println("SQLException (deleteCartProductsAfterBuy()): " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("Exception (deleteCartProductsAfterBuy().connectionPool.getConnection): " + e.getMessage());
+            System.out.println("Exception (deleteCartProductsAfterBuy()): " + e.getMessage());
         } finally {
-            try {
-                connectionPool.closeConnection(connection);
-            } catch (Exception e) {
-                System.out.println("Exception (deleteCartProductsAfterBuy().connectionPool): " + e.getMessage());
+            if (connectionPool != null) {
+                try {
+                    connectionPool.closeConnection(connection);
+                } catch (Exception e) {
+                    System.out.println("Exception (deleteCartProductsAfterBuy().connectionPool): " + e.getMessage());
+                }
             }
         }
     }

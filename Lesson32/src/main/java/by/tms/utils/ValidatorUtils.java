@@ -27,19 +27,19 @@ public class ValidatorUtils {
     }
 
     public static List<String> isVerifyUserData(User user) {
-        List<String> message = new ArrayList<>();
+        List<String> errorMessages = new ArrayList<>();
         if (!isLoginPasswordVerify(user.getLogin(), user.getPassword())) {
-            message.add("Incorrect login or password");
+            errorMessages.add("Incorrect login or password");
         }
         if (!isNameSurnameVerify(user.getName(), user.getSurname())) {
-            message.add("Incorrect name or surname");
+            errorMessages.add("Incorrect name or surname");
         }
         if (!isEmailVerify(user.getEmail())) {
-            message.add("Incorrect email");
+            errorMessages.add("Incorrect email");
         }
         if (!isAgeVerify(user.getBirthday())) {
-            message.add("Registration is available from the age of 18");
+            errorMessages.add("Registration is available from the age of 18");
         }
-        return message;
+        return errorMessages;
     }
 }
