@@ -1,23 +1,23 @@
 package by.tms.repository.impl;
 
-import static by.tms.model.ProductType.getProductType;
 import static by.tms.utils.RepositoryJdbcUtils.getModifyCount;
+import static by.tms.utils.RepositoryJdbcUtils.getProduct;
 import static by.tms.utils.RepositoryJdbcUtils.isEmpty;
 
 import by.tms.model.Product;
-import by.tms.model.ProductType;
 import by.tms.repository.ConnectionPool;
+import by.tms.repository.ConnectionWrapper;
 import by.tms.repository.JdbcCartRepository;
-import java.math.BigDecimal;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
+@Slf4j
 @AllArgsConstructor
 public class JdbcCartRepositoryImpl implements JdbcCartRepository {
 
@@ -46,30 +46,6 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
         }
     }
 
-    private void modifyProductCount(Long userId, Long productId, boolean up) {
-        Integer productCount = getCartProductCount(userId, productId);
-        productCount = getModifyCount(up, productCount);
-        Connection connection = null;
-        try {
-            connection = connectionPool.getConnection();
-            PreparedStatement statement = connection.prepareStatement(UPDATE_CURRENT_PRODUCT_COUNT);
-            statement.setInt(1, productCount);
-            statement.setLong(2, userId);
-            statement.setLong(3, productId);
-            statement.executeUpdate();
-        } catch (Exception e) {
-            System.out.println("Exception (deleteProductCartCount()): " + e.getMessage());
-        } finally {
-            if (connectionPool != null) {
-                try {
-                    connectionPool.closeConnection(connection);
-                } catch (Exception e) {
-                    System.out.println("Exception (getProductTypeValue().connectionPool): " + e.getMessage());
-                }
-            }
-        }
-    }
-
     @Override
     public void deleteProduct(Long userId, Long productId, boolean cart, boolean favorite) {
         if (favorite) {
@@ -84,80 +60,21 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
         }
     }
 
-    private void deleteProductByMark(Long userId, Long productId, String query) {
-        Connection connection = null;
-        try {
-            connection = connectionPool.getConnection();
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setLong(1, userId);
-            statement.setLong(2, productId);
-            statement.execute();
-        } catch (Exception e) {
-            System.out.println("Exception (deleteProductByMark()): " + e.getMessage());
-        } finally {
-            if (connectionPool != null) {
-                try {
-                    connectionPool.closeConnection(connection);
-                } catch (Exception e) {
-                    System.out.println("Exception (deleteProductByMark().connectionPool): " + e.getMessage());
-                }
-            }
-        }
-    }
-
-    private void addProductToCart(Long userId, Long productId, boolean cart, boolean favorite) {
-        Connection connection = null;
-        try {
-            connection = connectionPool.getConnection();
-            PreparedStatement statement = connection.prepareStatement(ADD_PRODUCT_TO_CART);
-            statement.setLong(1, userId);
-            statement.setLong(2, productId);
-            statement.setBoolean(3, cart);
-            statement.setBoolean(4, favorite);
-            statement.executeUpdate();
-        } catch (Exception e) {
-            System.out.println("Exception (addProductToCart()): " + e.getMessage());
-        } finally {
-            if (connectionPool != null) {
-                try {
-                    connectionPool.closeConnection(connection);
-                } catch (Exception e) {
-                    System.out.println("Exception (addProductToCart().connectionPool): " + e.getMessage());
-                }
-            }
-        }
-    }
-
     @Override
     public List<Pair<Product, Integer>> getProductsFromCart(Long userId, boolean cart, boolean favorite) {
         List<Pair<Product, Integer>> products = new ArrayList<>();
         String query = cart ? GET_CART_PRODUCTS_BY_USER_ID : GET_FAVORITE_PRODUCTS_BY_USER_ID;
-        Connection connection = null;
-        try {
-            connection = connectionPool.getConnection();
-            PreparedStatement statement = connection.prepareStatement(query);
+        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+                PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(query)) {
             statement.setLong(1, userId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Long id = resultSet.getLong("id");
-                String name = resultSet.getString("name");
-                BigDecimal price = resultSet.getBigDecimal("price");
-                String type = resultSet.getString("type");
-                ProductType productType = getProductType(type);
-                String info = resultSet.getString("info");
+                Product product = getProduct(resultSet);
                 Integer count = resultSet.getInt("count");
-                products.add(new ImmutablePair<>(new Product(id, name, price, productType, info), count));
+                products.add(new ImmutablePair<>(product, count));
             }
         } catch (Exception e) {
-            System.out.println("Exception (getProductsFromCart()): " + e.getMessage());
-        } finally {
-            if (connectionPool != null) {
-                try {
-                    connectionPool.closeConnection(connection);
-                } catch (Exception e) {
-                    System.out.println("Exception (getProductsFromCart().connectionPool): " + e.getMessage());
-                }
-            }
+            log.error("Exception (getProductsFromCart()): " + e);
         }
         return products;
     }
@@ -168,19 +85,25 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
         return isEmpty(productId, products);
     }
 
-    private List<Product> getProducts(Long userId, boolean cart, boolean favorite) {
-        return getProductsFromCart(userId, cart, favorite).stream()
-                                                          .map(Pair::getLeft)
-                                                          .toList();
+    private void modifyProductCount(Long userId, Long productId, boolean up) {
+        Integer productCount = getCartProductCount(userId, productId);
+        productCount = getModifyCount(up, productCount);
+        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+                PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(UPDATE_CURRENT_PRODUCT_COUNT)) {
+            statement.setInt(1, productCount);
+            statement.setLong(2, userId);
+            statement.setLong(3, productId);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            log.error("Exception (deleteProductCartCount()): " + e);
+        }
     }
 
     @Override
     public Integer getCartProductCount(Long userId, Long productId) {
         int count = 0;
-        Connection connection = null;
-        try {
-            connection = connectionPool.getConnection();
-            PreparedStatement statement = connection.prepareStatement(GET_CURRENT_PRODUCT_COUNT);
+        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+                PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(GET_CURRENT_PRODUCT_COUNT)) {
             statement.setLong(1, userId);
             statement.setLong(2, productId);
             ResultSet resultSet = statement.executeQuery();
@@ -188,37 +111,19 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
                 count = resultSet.getInt("count");
             }
         } catch (Exception e) {
-            System.out.println("Exception (getCartProductCount()): " + e.getMessage());
-        } finally {
-            if (connectionPool != null) {
-                try {
-                    connectionPool.closeConnection(connection);
-                } catch (Exception e) {
-                    System.out.println("Exception (getCartProductCount().connectionPool): " + e.getMessage());
-                }
-            }
+            log.error("Exception (getCartProductCount()): " + e);
         }
         return count;
     }
 
     @Override
     public void deleteCartProductsAfterBuy(Long userId) {
-        Connection connection = null;
-        try {
-            connection = connectionPool.getConnection();
-            PreparedStatement statement = connection.prepareStatement(DELETE_CART_PRODUCT_AFTER_BUY);
+        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+                PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(DELETE_CART_PRODUCT_AFTER_BUY)) {
             statement.setLong(1, userId);
             statement.execute();
         } catch (Exception e) {
-            System.out.println("Exception (deleteCartProductsAfterBuy()): " + e.getMessage());
-        } finally {
-            if (connectionPool != null) {
-                try {
-                    connectionPool.closeConnection(connection);
-                } catch (Exception e) {
-                    System.out.println("Exception (deleteCartProductsAfterBuy().connectionPool): " + e.getMessage());
-                }
-            }
+            log.error("Exception (deleteCartProductsAfterBuy()): " + e);
         }
     }
 
@@ -234,5 +139,35 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
             }
         }
         return products;
+    }
+
+    private void addProductToCart(Long userId, Long productId, boolean cart, boolean favorite) {
+        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+                PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(ADD_PRODUCT_TO_CART)) {
+            statement.setLong(1, userId);
+            statement.setLong(2, productId);
+            statement.setBoolean(3, cart);
+            statement.setBoolean(4, favorite);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            log.error("Exception (addProductToCart()): " + e);
+        }
+    }
+
+    private List<Product> getProducts(Long userId, boolean cart, boolean favorite) {
+        return getProductsFromCart(userId, cart, favorite).stream()
+                                                          .map(Pair::getLeft)
+                                                          .toList();
+    }
+
+    private void deleteProductByMark(Long userId, Long productId, String query) {
+        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+                PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(query)) {
+            statement.setLong(1, userId);
+            statement.setLong(2, productId);
+            statement.execute();
+        } catch (Exception e) {
+            log.error("Exception (deleteProductByMark()): " + e);
+        }
     }
 }

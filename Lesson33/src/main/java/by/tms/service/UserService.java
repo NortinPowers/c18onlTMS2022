@@ -9,4 +9,6 @@ public interface UserService {
     User getUserByLogin(String login);
 
     Long getUserId(String login);
+
+    boolean isVerifiedUser(String login, String password);
 }

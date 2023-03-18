@@ -9,7 +9,7 @@
 <div class="login-box">
     <h2>Sorry</h2>
     <p style="color: #eeeeee; text-align: center">${requestScope.invalid}</p>
-    <a href="<c:url value="/login"/>" class="button">Re-login</a>
+    <a href="<c:url value="/eshop?command=login"/>" class="button">Re-login</a>
 </div>
 </body>
 </html>

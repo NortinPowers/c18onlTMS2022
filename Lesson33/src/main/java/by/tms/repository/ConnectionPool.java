@@ -1,13 +1,14 @@
 package by.tms.repository;
 
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class ConnectionPool {
 
     private static volatile ConnectionPool instance;
@@ -31,7 +32,7 @@ public class ConnectionPool {
     }
 
     private final AtomicInteger currentConnectionNumber = new AtomicInteger(MIN_CONNECTION_COUNT);
-    private final BlockingQueue<Connection> pool = new ArrayBlockingQueue<>(MAX_CONNECTION_COUNT, true);
+    private final BlockingQueue<ConnectionWrapper> pool = new ArrayBlockingQueue<>(MAX_CONNECTION_COUNT, true);
 
     public static ConnectionPool getInstance() {
         if (instance == null) {
@@ -47,44 +48,43 @@ public class ConnectionPool {
     private ConnectionPool() {
         for (int i = 0; i < MIN_CONNECTION_COUNT; i++) {
             try {
-                pool.add(DriverManager.getConnection(URL, LOGIN, PASS));
+                pool.add(new ConnectionWrapper(this, DriverManager.getConnection(URL, LOGIN, PASS)));
             } catch (SQLException e) {
-                System.out.println("SQLException ConnectionPool(): " + e.getMessage());
+                log.error("SQLException ConnectionPool(): " + e);
             }
         }
     }
 
     private void openAdditionalConnection() throws Exception {
         try {
-            pool.add(DriverManager.getConnection(URL, LOGIN, PASS));
+            pool.add(new ConnectionWrapper(this, DriverManager.getConnection(URL, LOGIN, PASS)));
             currentConnectionNumber.incrementAndGet();
         } catch (SQLException e) {
             throw new Exception("New connection wasn't add in the connection pool", e);
         }
     }
 
-    public Connection getConnection() throws Exception {
-        Connection connection;
+    public ConnectionWrapper getConnectionWrapper() throws Exception {
+        ConnectionWrapper connectionWrapper;
         try {
             if (pool.isEmpty() && currentConnectionNumber.get() < MAX_CONNECTION_COUNT) {
                 openAdditionalConnection();
             }
-            connection = pool.take();
+            connectionWrapper = pool.take();
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
             throw new Exception("Max count of connections was reached!");
         }
-
-        return connection;
+        return connectionWrapper;
     }
 
-    public void closeConnection(Connection connection) throws Exception {
-        if (connection != null) {
+    public void closeConnection(ConnectionWrapper connectionWrapper) throws Exception {
+        if (connectionWrapper != null) {
             if (currentConnectionNumber.get() > MIN_CONNECTION_COUNT) {
                 currentConnectionNumber.decrementAndGet();
             }
             try {
-                pool.put(connection);
+                pool.put(connectionWrapper);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 throw new Exception("Connection wasn't returned into pool properly");
@@ -93,13 +93,13 @@ public class ConnectionPool {
     }
 
     public void closeAllConnection() {
-        for (Connection connection : pool) {
+        for (ConnectionWrapper connectionWrapper : pool) {
             try {
-                if (connection != null) {
-                    connection.close();
+                if (connectionWrapper != null) {
+                    connectionWrapper.getConnection().close();
                 }
             } catch (Exception e) {
-                System.out.println("Some connection cannot be closed");
+                log.error("Some connection cannot be closed: " + e);
             }
         }
     }

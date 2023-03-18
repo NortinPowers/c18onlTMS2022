@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="LOG_FILE" value="${LOG_FILE:-../logs/tms/tmsLog.log}"/>
+    <property name="COMMON_PATTERN" value="%d{ISO8601} %-5p [%t] %X{conversation} [client:%X{username:--}] [extras:[%X{extras:--}]] [%logger{40}] : %m%n%ex"/>
+    <property name="DEFAULT_PATTERN" value="%d{ISO8601} %-5p [%t] [%logger{40}] [%X{conversation}] : %m%n%ex"/>
+    <property name="CONSOLE_PATTERN" value="${CONSOLE_PATTERN:-${DEFAULT_PATTERN}}"/>
+    <property name="CONSOLE_CHARSET" value="${CONSOLE_CHARSET:-UTF8}"/>
+    <property name="LOG_FILE_PATTERN" value="${LOG_FILE_PATTERN:-${COMMON_PATTERN}}"/>
+    <property name="LOG_FILE_FILE_NAME_PATTERN" value="${LOG_FILE_FILE_NAME_PATTERN:-${LOG_FILE}.%d{yyyy-MM-dd}.%i.log}"/>
+    <property name="LOG_FILE_CHARSET" value="${LOG_FILE_CHARSET:-UTF8}"/>
+    <property name="LOG_FILE_MAX_SIZE" value="${LOG_FILE_MAX_SIZE:-50MB}"/>
+    <property name="LOG_FILE_MAX_HISTORY" value="${LOG_FILE_MAX_HISTORY:-10}"/>
+    <property name="LOG_FILE_DISCARDING_THRESHOLD" value="${LOG_FILE_DISCARDING_THRESHOLD:-0}"/>
+    <property name="LOG_FILE_ASYNC_QUEUE_SIZE" value="${LOG_FILE_ASYNC_QUEUE_SIZE:-10000}"/>
+    <property name="LOG_FILE_ASYNC_MAX_FLUSH_TIME" value="${LOG_FILE_ASYNC_MAX_FLUSH_TIME:-5000}"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_PATTERN}</pattern>
+            <charset>${CONSOLE_CHARSET}</charset>
+        </encoder>
+    </appender>
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE_FILE_NAME_PATTERN}</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${LOG_FILE_MAX_SIZE}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>${LOG_FILE_MAX_HISTORY}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_FILE_PATTERN}</pattern>
+            <charset>${LOG_FILE_CHARSET}</charset>
+        </encoder>
+    </appender>
+    <appender name="FILE_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>${LOG_FILE_DISCARDING_THRESHOLD}</discardingThreshold>
+        <queueSize>${LOG_FILE_ASYNC_QUEUE_SIZE}</queueSize>
+        <maxFlushTime>${LOG_FILE_ASYNC_MAX_FLUSH_TIME}</maxFlushTime>
+        <appender-ref ref="FILE"/>
+    </appender>
+    <appender name="CONSOLE_JSON" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+    </appender>
+    <appender name="CONSOLE_JSON_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>${LOG_FILE_DISCARDING_THRESHOLD}</discardingThreshold>
+        <queueSize>${LOG_FILE_ASYNC_QUEUE_SIZE}</queueSize>
+        <maxFlushTime>${LOG_FILE_ASYNC_MAX_FLUSH_TIME}</maxFlushTime>
+        <appender-ref ref="CONSOLE_JSON"/>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>

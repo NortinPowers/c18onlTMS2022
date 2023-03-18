@@ -1,5 +1,8 @@
 package by.tms.filter;
 
+import static by.tms.model.Attribute.ACCESS_PERMISSION;
+import static by.tms.model.PagesPath.HOME_PAGE;
+
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -19,8 +22,8 @@ public class SecurityFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpSession session = req.getSession();
-        if (session.getAttribute("accessPermission") == null) {
-            RequestDispatcher requestDispatcher = req.getServletContext().getRequestDispatcher("/index.jsp");
+        if (session.getAttribute(ACCESS_PERMISSION.getAttribute()) == null) {
+            RequestDispatcher requestDispatcher = req.getServletContext().getRequestDispatcher(HOME_PAGE.getPath());
             requestDispatcher.forward(servletRequest, servletResponse);
         } else {
             filterChain.doFilter(servletRequest, servletResponse);

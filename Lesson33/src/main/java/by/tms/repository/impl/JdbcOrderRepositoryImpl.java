@@ -1,13 +1,11 @@
 package by.tms.repository.impl;
 
-import static by.tms.model.ProductType.getProductType;
-
 import by.tms.model.Order;
 import by.tms.model.Product;
-import by.tms.model.ProductType;
 import by.tms.repository.ConnectionPool;
+import by.tms.repository.ConnectionWrapper;
 import by.tms.repository.JdbcOrderRepository;
-import java.sql.Connection;
+import by.tms.utils.RepositoryJdbcUtils;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +13,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @AllArgsConstructor
 public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
 
@@ -27,82 +27,41 @@ public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
 
     @Override
     public void createOrder(String order, Long id) {
-        Connection connection = null;
-        try {
-            connection = connectionPool.getConnection();
-            PreparedStatement statement = connection.prepareStatement(CREATE_ORDER);
+        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+                PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(CREATE_ORDER)) {
             statement.setString(1, order);
             statement.setDate(2, Date.valueOf(LocalDate.now()));
             statement.setLong(3, id);
             statement.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Exception (createOrder()): " + e.getMessage());
-        } finally {
-            if (connectionPool != null) {
-                try {
-                    connectionPool.closeConnection(connection);
-                } catch (Exception e) {
-                    System.out.println("Exception (createOrder().connectionPool): " + e.getMessage());
-                }
-            }
+            log.error("Exception (createOrder()): " + e);
         }
     }
 
     @Override
     public void saveProductInOrderConfigurations(String order, Product product) {
-        Connection connection = null;
-        try {
-            connection = connectionPool.getConnection();
-            PreparedStatement statement = connection.prepareStatement(SAVE_PRODUCT_IN_ORDER);
+        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+                PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(SAVE_PRODUCT_IN_ORDER)) {
             statement.setString(1, order);
             statement.setLong(2, product.getId());
             statement.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Exception (saveProductInOrderConfigurations()): " + e.getMessage());
-        } finally {
-            if (connectionPool != null) {
-                try {
-                    connectionPool.closeConnection(connection);
-                } catch (Exception e) {
-                    System.out.println("Exception (saveProductInOrderConfigurations().connectionPool): " + e.getMessage());
-                }
-            }
+            log.error("Exception (saveProductInOrderConfigurations()): " + e);
         }
     }
 
     @Override
     public List<Order> getOrdersById(Long id) {
         List<Order> orders = new ArrayList<>();
-        Connection connection = null;
-        try {
-            connection = connectionPool.getConnection();
-            PreparedStatement statement = connection.prepareStatement(GET_ORDERS_BY_ID);
+        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+                PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(GET_ORDERS_BY_ID)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                String type = resultSet.getString("type");
-                ProductType productType = getProductType(type);
-                orders.add(Order.builder()
-                                .id(resultSet.getString("id"))
-                                .date(LocalDate.parse(resultSet.getString("date")))
-                                .product(Product.builder()
-                                                .name(resultSet.getString("name"))
-                                                .info(resultSet.getString("info"))
-                                                .price(resultSet.getBigDecimal("price"))
-                                                .type(productType)
-                                                .build())
-                                .build());
+                orders.add(RepositoryJdbcUtils.getOrderBuild(resultSet));
             }
         } catch (Exception e) {
-            System.out.println("Exception (getOrdersById()): " + e.getMessage());
-        } finally {
-            if (connectionPool != null) {
-                try {
-                    connectionPool.closeConnection(connection);
-                } catch (Exception e) {
-                    System.out.println("Exception (getOrdersById().connectionPool): " + e.getMessage());
-                }
-            }
+            log.error("Exception (getOrdersById()): " + e);
         }
         return orders;
     }

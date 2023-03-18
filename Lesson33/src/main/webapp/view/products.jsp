@@ -25,16 +25,16 @@
             <c:set var="access" value="${sessionScope.get('accessPermission')}"/>
             <c:if test="${access != null}">
                 <div class="btn-group btn-group-sm">
-                    <a href="<c:url value="/add-cart?id=${product.id}&shop=true&location=none"/>"
+                    <a href="<c:url value="/eshop?command=add-cart&id=${product.id}&shop=true&location=none"/>"
                        class="btn btn-success active w-75"
                        aria-current="page">Buy</a>
-                    <a href="<c:url value="/add-cart?id=${product.id}&shop=none&location=none"/>"
+                    <a href="<c:url value="/eshop?command=add-cart&id=${product.id}&shop=none&location=none"/>"
                        class="btn btn-success">
                         <div class="text-center mt-1">
                             <i class="bi bi-cart-plus"></i>
                         </div>
                     </a>
-                    <a href="<c:url value="/add-favorite?id=${product.id}&shop=none&location=none"/>"
+                    <a href="<c:url value="/eshop?command=add-favorite&id=${product.id}&shop=none&location=none"/>"
                        class="btn btn-success">
                         <div class="text-center mt-1">
                             <i class="bi bi-heart"></i>

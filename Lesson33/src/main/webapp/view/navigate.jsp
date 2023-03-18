@@ -9,10 +9,10 @@
         <c:set var="access" value="${sessionScope.get('accessPermission')}"/>
         <c:if test="${access != null}">
             <li class="nav-item">
-                <a class="btn btn-outline-info ml-2" href="<c:url value="/view/favorites"/>">Favorites</a>
+                <a class="btn btn-outline-info ml-2" href="<c:url value="/eshop?command=favorites"/>">Favorites</a>
             </li>
             <li class="nav-item">
-                <a class="btn btn-outline-info ml-2" href="<c:url value="/view/shopping-cart"/>">Shopping cart</a>
+                <a class="btn btn-outline-info ml-2" href="<c:url value="/eshop?command=shopping-cart"/>">Shopping cart</a>
             </li>
         </c:if>
     </ul>
@@ -20,7 +20,7 @@
     <c:choose>
         <c:when test="${access == null}">
             <a id="loginButton" class="form-inline my-2 my-lg-0" style="text-decoration: none"
-               href="<c:url value="/login"/>">
+               href="<c:url value="/eshop?command=login"/>">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
             </a>
         </c:when>
@@ -30,13 +30,13 @@
             <ul class="nav nav-pills ">
                 <li class="nav-item">
                     <a id="accountButton"
-                       href="<c:url value="/account"/>">
+                       href="<c:url value="/eshop?command=account"/>">
                         <button class="btn btn-outline-success mr-2" type="submit">Account</button>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a id="exitButton"
-                       href="<c:url value="/exit"/>">
+                       href="<c:url value="/eshop?command=exit"/>">
                         <button class="btn btn-outline-success" type="submit">Exit</button>
                     </a>
                 </li>

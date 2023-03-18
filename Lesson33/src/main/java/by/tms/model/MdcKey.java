@@ -1,12 +1,13 @@
 package by.tms.model;
 
-import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class Authenticator {
+public enum MdcKey {
 
-    private Map<String, String> authenticators;
+    CONVERSATION("conversation");
+
+    private final String key;
 }

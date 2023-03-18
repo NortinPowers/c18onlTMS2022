@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="login-box">
-    <form action="<c:url value="/create-user"/>" method="post" class="registration">
+    <form action="<c:url value="/eshop?command=create-user"/>" method="post" class="registration">
         <h1>Register form</h1>
         <div class="user-box">
             <label for="login">
@@ -81,7 +81,7 @@
         <div style="margin-top: 15px">
             <input type="submit" value="Register" class='validateBtn'/>
         </div>
-        <a href="<c:url value="/login"/>" class="buttonType">Back</a>
+        <a href="<c:url value="/eshop?command=login"/>" class="buttonType">Back</a>
     </form>
 </div>
 <script type="text/javascript" src="<c:url value="/js/validate.js"/>"></script>

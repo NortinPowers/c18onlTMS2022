@@ -19,8 +19,4 @@ public class User {
     private String surname;
     private String email;
     private LocalDate birthday;
-
-    public User(String login) {
-        this.login = login;
-    }
 }

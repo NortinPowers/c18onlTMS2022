@@ -24,4 +24,9 @@ public class UserServiceImpl implements UserService {
     public Long getUserId(String login) {
         return jdbcUserRepository.getUserId(login);
     }
+
+    @Override
+    public boolean isVerifiedUser(String login, String password) {
+        return getUserByLogin(login) != null;
+    }
 }
