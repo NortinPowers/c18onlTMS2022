@@ -11,7 +11,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,15 +35,15 @@ public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
             statement.setDate(2, Date.valueOf(LocalDate.now()));
             statement.setLong(3, id);
             statement.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("SQLException (createOrder()): " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("Exception (createOrder().connectionPool.getConnection): " + e.getMessage());
+            System.out.println("Exception (createOrder()): " + e.getMessage());
         } finally {
-            try {
-                connectionPool.closeConnection(connection);
-            } catch (Exception e) {
-                System.out.println("Exception (createOrder().connectionPool): " + e.getMessage());
+            if (connectionPool != null) {
+                try {
+                    connectionPool.closeConnection(connection);
+                } catch (Exception e) {
+                    System.out.println("Exception (createOrder().connectionPool): " + e.getMessage());
+                }
             }
         }
     }
@@ -58,15 +57,15 @@ public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
             statement.setString(1, order);
             statement.setLong(2, product.getId());
             statement.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("SQLException (saveProductInOrderConfigurations()): " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("Exception (saveProductInOrderConfigurations().connectionPool.getConnection): " + e.getMessage());
+            System.out.println("Exception (saveProductInOrderConfigurations()): " + e.getMessage());
         } finally {
-            try {
-                connectionPool.closeConnection(connection);
-            } catch (Exception e) {
-                System.out.println("Exception (saveProductInOrderConfigurations().connectionPool): " + e.getMessage());
+            if (connectionPool != null) {
+                try {
+                    connectionPool.closeConnection(connection);
+                } catch (Exception e) {
+                    System.out.println("Exception (saveProductInOrderConfigurations().connectionPool): " + e.getMessage());
+                }
             }
         }
     }
@@ -94,15 +93,15 @@ public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
                                                 .build())
                                 .build());
             }
-        } catch (SQLException e) {
-            System.out.println("SQLException (getOrdersById()): " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("Exception (getOrdersById().connectionPool.getConnection): " + e.getMessage());
+            System.out.println("Exception (getOrdersById()): " + e.getMessage());
         } finally {
-            try {
-                connectionPool.closeConnection(connection);
-            } catch (Exception e) {
-                System.out.println("Exception (getOrdersById().connectionPool): " + e.getMessage());
+            if (connectionPool != null) {
+                try {
+                    connectionPool.closeConnection(connection);
+                } catch (Exception e) {
+                    System.out.println("Exception (getOrdersById().connectionPool): " + e.getMessage());
+                }
             }
         }
         return orders;

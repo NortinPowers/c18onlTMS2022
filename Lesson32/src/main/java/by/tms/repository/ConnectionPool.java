@@ -91,4 +91,16 @@ public class ConnectionPool {
             }
         }
     }
+
+    public void closeAllConnection() {
+        for (Connection connection : pool) {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (Exception e) {
+                System.out.println("Some connection cannot be closed");
+            }
+        }
+    }
 }

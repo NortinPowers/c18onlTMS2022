@@ -20,8 +20,6 @@ import by.tms.service.impl.CartServiceImpl;
 import by.tms.service.impl.OrderServiceImpl;
 import by.tms.service.impl.ProductServiceImpl;
 import by.tms.service.impl.UserServiceImpl;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletContextEvent;
@@ -34,9 +32,9 @@ public class DbInitContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ConnectionPool connectionPool = ConnectionPool.getInstance();
+        sce.getServletContext().setAttribute("connectionPool", connectionPool);
         JdbcProductRepository jdbcProductRepository = new JdbcProductRepositoryImpl(connectionPool);
         ProductService productService = new ProductServiceImpl(jdbcProductRepository);
-        sce.getServletContext().setAttribute("connection", connectionPool);
         sce.getServletContext().setAttribute("productService", productService);
         JdbcCartRepository jdbcCartRepository = new JdbcCartRepositoryImpl(connectionPool);
         CartService cartService = new CartServiceImpl(jdbcCartRepository);
@@ -55,12 +53,7 @@ public class DbInitContextListener implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        Connection connection = (Connection) sce.getServletContext().getAttribute("connection");
-        try {
-            sce.getServletContext().setAttribute("security", null);
-            connection.close();
-        } catch (SQLException e) {
-            System.out.println("Exception: " + e.getMessage());
-        }
+        ConnectionPool connectionPool = (ConnectionPool) sce.getServletContext().getAttribute("connectionPool");
+        connectionPool.closeAllConnection();
     }
 }

@@ -45,6 +45,7 @@
         <module>Lesson30</module>
         <module>Lesson31</module>
         <module>Lesson32</module>
+        <module>Lesson33</module>
     </modules>
 
     <properties>
@@ -68,6 +69,9 @@
         <checkstyle.version>10.7.0</checkstyle.version>
         <pmd.maven.plugin.version>3.14.0</pmd.maven.plugin.version>
         <pmd.version>6.53.0</pmd.version>
+        <modelmapper.version>3.1.1</modelmapper.version>
+        <logback-classic.version>1.4.5</logback-classic.version>
+        <logstash-logback-encoder.version>7.3</logstash-logback-encoder.version>
     </properties>
 
     <dependencies>
@@ -120,6 +124,23 @@
             <version>${jsp-api.version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>${modelmapper.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback-classic.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>${logstash-logback-encoder.version}</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -187,8 +208,8 @@
                     <failOnViolation>false</failOnViolation>
                     <printFailingErrors>true</printFailingErrors>
                     <rulesets>
-                        <ruleset>D:\TMS\c18onlTMS2022\codequality\pmd-ruleset.xml</ruleset>
-                        <ruleset>D:\TMS\c18onlTMS2022\codequality\rulesets.xml</ruleset>
+                        <ruleset>../codequality/pmd-ruleset.xml</ruleset>
+                        <ruleset>../codequality/rulesets.xml</ruleset>
                     </rulesets>
                     <targetJdk>${maven.compiler.target}</targetJdk>
                     <linkXRef>false</linkXRef>
