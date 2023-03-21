@@ -2,7 +2,6 @@ package by.tms.repository.impl;
 
 import by.tms.model.Order;
 import by.tms.model.Product;
-import by.tms.repository.ConnectionPool;
 import by.tms.repository.ConnectionWrapper;
 import by.tms.repository.JdbcOrderRepository;
 import by.tms.utils.RepositoryJdbcUtils;
@@ -19,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
 
-    private ConnectionPool connectionPool;
+//    private ConnectionPool CONNECTION_POOL;
 
     private static final String CREATE_ORDER = "insert into orders (id, date, user_id) values (?, ?, ?)";
     private static final String SAVE_PRODUCT_IN_ORDER = "insert into order_configurations (order_id, product_id) values (?, ?)";
@@ -27,7 +26,7 @@ public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
 
     @Override
     public void createOrder(String order, Long id) {
-        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
                 PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(CREATE_ORDER)) {
             statement.setString(1, order);
             statement.setDate(2, Date.valueOf(LocalDate.now()));
@@ -40,7 +39,7 @@ public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
 
     @Override
     public void saveProductInOrderConfigurations(String order, Product product) {
-        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
                 PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(SAVE_PRODUCT_IN_ORDER)) {
             statement.setString(1, order);
             statement.setLong(2, product.getId());
@@ -53,7 +52,7 @@ public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
     @Override
     public List<Order> getOrdersById(Long id) {
         List<Order> orders = new ArrayList<>();
-        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
                 PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(GET_ORDERS_BY_ID)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();

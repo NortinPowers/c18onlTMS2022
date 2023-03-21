@@ -4,7 +4,7 @@ import by.tms.model.Product;
 import java.util.List;
 import org.apache.commons.lang3.tuple.Pair;
 
-public interface JdbcCartRepository {
+public interface JdbcCartRepository extends BaseRepository {
 
     void addProduct(Long userId, Long productId, boolean cart, boolean favorite);
 

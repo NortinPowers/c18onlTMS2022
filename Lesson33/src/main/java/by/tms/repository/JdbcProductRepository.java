@@ -3,7 +3,7 @@ package by.tms.repository;
 import by.tms.model.Product;
 import java.util.List;
 
-public interface JdbcProductRepository {
+public interface JdbcProductRepository extends BaseRepository {
 
     List<Product> getProducts();
 

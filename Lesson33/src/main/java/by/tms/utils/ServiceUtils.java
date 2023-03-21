@@ -1,6 +1,5 @@
 package by.tms.utils;
 
-import by.tms.repository.ConnectionPool;
 import by.tms.repository.impl.JdbcCartRepositoryImpl;
 import by.tms.repository.impl.JdbcOrderRepositoryImpl;
 import by.tms.repository.impl.JdbcProductRepositoryImpl;
@@ -15,18 +14,18 @@ import lombok.experimental.UtilityClass;
 public class ServiceUtils {
 
     public static ProductServiceImpl getProductService() {
-        return new ProductServiceImpl(new JdbcProductRepositoryImpl(ConnectionPool.getInstance()));
+        return new ProductServiceImpl(new JdbcProductRepositoryImpl());
     }
 
     public static UserServiceImpl getUserService() {
-        return new UserServiceImpl(new JdbcUserRepositoryImpl(ConnectionPool.getInstance()));
+        return new UserServiceImpl(new JdbcUserRepositoryImpl());
     }
 
     public static OrderServiceImpl getOrderService() {
-        return new OrderServiceImpl(new JdbcOrderRepositoryImpl(ConnectionPool.getInstance()));
+        return new OrderServiceImpl(new JdbcOrderRepositoryImpl());
     }
 
     public static CartServiceImpl getCartService() {
-        return new CartServiceImpl(new JdbcCartRepositoryImpl(ConnectionPool.getInstance()));
+        return new CartServiceImpl(new JdbcCartRepositoryImpl());
     }
 }

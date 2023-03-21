@@ -1,10 +1,10 @@
 package by.tms.servlet;
 
 import static by.tms.model.PagesPath.HOME_PAGE;
+import static by.tms.utils.CommandFactory.defineCommand;
 
 import by.tms.controller.Command;
 import by.tms.exception.CommandException;
-import by.tms.utils.CommandFactory;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,7 +29,7 @@ public class ApplicationServlet extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Command requestCommand = CommandFactory.defineCommand(req);
+        Command requestCommand = defineCommand(req);
         try {
             String path = requestCommand.execute(req, resp);
             RequestDispatcher dispatcher = req.getRequestDispatcher(path);

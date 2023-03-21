@@ -5,7 +5,6 @@ import static by.tms.utils.RepositoryJdbcUtils.getProduct;
 import static by.tms.utils.RepositoryJdbcUtils.isEmpty;
 
 import by.tms.model.Product;
-import by.tms.repository.ConnectionPool;
 import by.tms.repository.ConnectionWrapper;
 import by.tms.repository.JdbcCartRepository;
 import java.sql.PreparedStatement;
@@ -21,7 +20,7 @@ import org.apache.commons.lang3.tuple.Pair;
 @AllArgsConstructor
 public class JdbcCartRepositoryImpl implements JdbcCartRepository {
 
-    private ConnectionPool connectionPool;
+//    private ConnectionPool CONNECTION_POOL;
     private static final String ADD_PRODUCT_TO_CART = "insert into carts (user_id, product_id, cart, favorite) VALUES (?, ?, ?, ?)";
     private static final String GET_CART_PRODUCTS_BY_USER_ID = "select p.id, p.name, p.price, p.type, p.info, c.count from carts c join products p on p.id = c.product_id where c.user_id=? and c.cart=true";
     private static final String GET_FAVORITE_PRODUCTS_BY_USER_ID = "select p.id, p.name, p.price, p.type, p.info, c.count from carts c join products p on p.id = c.product_id where c.user_id=? and c.favorite=true";
@@ -64,7 +63,7 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
     public List<Pair<Product, Integer>> getProductsFromCart(Long userId, boolean cart, boolean favorite) {
         List<Pair<Product, Integer>> products = new ArrayList<>();
         String query = cart ? GET_CART_PRODUCTS_BY_USER_ID : GET_FAVORITE_PRODUCTS_BY_USER_ID;
-        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
                 PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(query)) {
             statement.setLong(1, userId);
             ResultSet resultSet = statement.executeQuery();
@@ -88,7 +87,7 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
     private void modifyProductCount(Long userId, Long productId, boolean up) {
         Integer productCount = getCartProductCount(userId, productId);
         productCount = getModifyCount(up, productCount);
-        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
                 PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(UPDATE_CURRENT_PRODUCT_COUNT)) {
             statement.setInt(1, productCount);
             statement.setLong(2, userId);
@@ -102,7 +101,7 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
     @Override
     public Integer getCartProductCount(Long userId, Long productId) {
         int count = 0;
-        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
                 PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(GET_CURRENT_PRODUCT_COUNT)) {
             statement.setLong(1, userId);
             statement.setLong(2, productId);
@@ -118,7 +117,7 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
 
     @Override
     public void deleteCartProductsAfterBuy(Long userId) {
-        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
                 PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(DELETE_CART_PRODUCT_AFTER_BUY)) {
             statement.setLong(1, userId);
             statement.execute();
@@ -142,7 +141,7 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
     }
 
     private void addProductToCart(Long userId, Long productId, boolean cart, boolean favorite) {
-        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
                 PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(ADD_PRODUCT_TO_CART)) {
             statement.setLong(1, userId);
             statement.setLong(2, productId);
@@ -161,7 +160,7 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
     }
 
     private void deleteProductByMark(Long userId, Long productId, String query) {
-        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
                 PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(query)) {
             statement.setLong(1, userId);
             statement.setLong(2, productId);

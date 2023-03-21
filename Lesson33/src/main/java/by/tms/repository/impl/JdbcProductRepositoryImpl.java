@@ -3,7 +3,6 @@ package by.tms.repository.impl;
 import static by.tms.utils.RepositoryJdbcUtils.fillsValues;
 
 import by.tms.model.Product;
-import by.tms.repository.ConnectionPool;
 import by.tms.repository.ConnectionWrapper;
 import by.tms.repository.JdbcProductRepository;
 import java.sql.PreparedStatement;
@@ -17,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class JdbcProductRepositoryImpl implements JdbcProductRepository {
 
-    private ConnectionPool connectionPool;
+//    private ConnectionPool CONNECTION_POOL;
     private static final String GET_ALL_PRODUCTS = "select * from products";
     private static final String GET_PRODUCTS_BY_TYPE = "select * from products where type=?";
     private static final String GET_PRODUCT_TYPE = "select type from products where id=?";
@@ -25,7 +24,7 @@ public class JdbcProductRepositoryImpl implements JdbcProductRepository {
     @Override
     public List<Product> getProducts() {
         List<Product> products = new ArrayList<>();
-        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
                 PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(GET_ALL_PRODUCTS)) {
             fillsValues(products, statement);
         } catch (Exception e) {
@@ -37,7 +36,7 @@ public class JdbcProductRepositoryImpl implements JdbcProductRepository {
     @Override
     public List<Product> getProductsByType(String type) {
         List<Product> products = new ArrayList<>();
-        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
                 PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(GET_PRODUCTS_BY_TYPE)) {
             statement.setString(1, type);
             fillsValues(products, statement);
@@ -50,7 +49,7 @@ public class JdbcProductRepositoryImpl implements JdbcProductRepository {
     @Override
     public String getProductTypeValue(Long productId) {
         String type = "";
-        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
                 PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(GET_PRODUCT_TYPE)) {
             statement.setLong(1, productId);
             ResultSet resultSet = statement.executeQuery();
