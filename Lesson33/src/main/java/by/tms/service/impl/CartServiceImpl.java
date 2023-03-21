@@ -1,16 +1,19 @@
 package by.tms.service.impl;
 
+import by.tms.model.Inject;
 import by.tms.model.Product;
 import by.tms.repository.JdbcCartRepository;
 import by.tms.service.CartService;
 import java.math.BigDecimal;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.Setter;
 import org.apache.commons.lang3.tuple.Pair;
 
-@AllArgsConstructor
+//@AllArgsConstructor
+@Setter
 public class CartServiceImpl implements CartService {
 
+    @Inject
     private JdbcCartRepository jdbcCartRepository;
 
     @Override

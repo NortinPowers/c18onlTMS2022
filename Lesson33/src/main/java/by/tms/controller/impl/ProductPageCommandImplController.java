@@ -3,18 +3,22 @@ package by.tms.controller.impl;
 import static by.tms.model.Attribute.PRODUCTS;
 import static by.tms.model.PagesPath.PRODUCTS_PAGE;
 import static by.tms.model.RequestParameters.TYPE;
-import static by.tms.utils.ServiceUtils.getProductService;
 
-import by.tms.controller.Command;
+import by.tms.controller.CommandController;
+import by.tms.model.Inject;
 import by.tms.model.Product;
 import by.tms.service.ProductService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.Setter;
 
-public class ProductPageCommandImpl implements Command {
+@Setter
+public class ProductPageCommandImplController implements CommandController {
 
-    private final ProductService productService = getProductService();
+    @Inject
+    private ProductService productService;
+//    private final ProductService productService = getProductService();
 
     @Override
     public String getStringByGET(HttpServletRequest request, HttpServletResponse response) {

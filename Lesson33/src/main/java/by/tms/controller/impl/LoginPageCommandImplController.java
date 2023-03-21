@@ -5,20 +5,24 @@ import static by.tms.model.PagesPath.LOGIN_JSP_PAGE;
 import static by.tms.model.RequestParameters.NAME;
 import static by.tms.model.RequestParameters.PASSWORD;
 import static by.tms.utils.ControllerUtils.getHomePagePath;
-import static by.tms.utils.ServiceUtils.getUserService;
 import static by.tms.utils.ServletUtils.saveUserSession;
 
-import by.tms.controller.Command;
+import by.tms.controller.CommandController;
+import by.tms.model.Inject;
 import by.tms.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class LoginPageCommandImpl implements Command {
+@Setter
+public class LoginPageCommandImplController implements CommandController {
 
-    private final UserService userService = getUserService();
+    @Inject
+    private UserService userService;
+//    private final UserService userService = getUserService();
 
     @Override
     public String getStringByPOST(HttpServletRequest request, HttpServletResponse response) {

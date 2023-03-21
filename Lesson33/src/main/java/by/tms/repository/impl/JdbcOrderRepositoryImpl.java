@@ -33,7 +33,7 @@ public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
             statement.setLong(3, id);
             statement.executeUpdate();
         } catch (Exception e) {
-            log.error("Exception (createOrder()): " + e);
+            log.error("Exception (createOrder()): ", e);
         }
     }
 
@@ -45,7 +45,7 @@ public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
             statement.setLong(2, product.getId());
             statement.executeUpdate();
         } catch (Exception e) {
-            log.error("Exception (saveProductInOrderConfigurations()): " + e);
+            log.error("Exception (saveProductInOrderConfigurations()): ", e);
         }
     }
 
@@ -60,7 +60,7 @@ public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
                 orders.add(RepositoryJdbcUtils.getOrderBuild(resultSet));
             }
         } catch (Exception e) {
-            log.error("Exception (getOrdersById()): " + e);
+            log.error("Exception (getOrdersById()): ", e);
         }
         return orders;
     }

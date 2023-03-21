@@ -73,7 +73,7 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
                 products.add(new ImmutablePair<>(product, count));
             }
         } catch (Exception e) {
-            log.error("Exception (getProductsFromCart()): " + e);
+            log.error("Exception (getProductsFromCart()): ", e);
         }
         return products;
     }
@@ -94,7 +94,7 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
             statement.setLong(3, productId);
             statement.executeUpdate();
         } catch (Exception e) {
-            log.error("Exception (deleteProductCartCount()): " + e);
+            log.error("Exception (deleteProductCartCount()): ", e);
         }
     }
 
@@ -110,7 +110,7 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
                 count = resultSet.getInt("count");
             }
         } catch (Exception e) {
-            log.error("Exception (getCartProductCount()): " + e);
+            log.error("Exception (getCartProductCount()): ", e);
         }
         return count;
     }
@@ -122,7 +122,7 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
             statement.setLong(1, userId);
             statement.execute();
         } catch (Exception e) {
-            log.error("Exception (deleteCartProductsAfterBuy()): " + e);
+            log.error("Exception (deleteCartProductsAfterBuy()): ", e);
         }
     }
 
@@ -149,7 +149,7 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
             statement.setBoolean(4, favorite);
             statement.executeUpdate();
         } catch (Exception e) {
-            log.error("Exception (addProductToCart()): " + e);
+            log.error("Exception (addProductToCart()): ", e);
         }
     }
 
@@ -166,7 +166,7 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
             statement.setLong(2, productId);
             statement.execute();
         } catch (Exception e) {
-            log.error("Exception (deleteProductByMark()): " + e);
+            log.error("Exception (deleteProductByMark()): ", e);
         }
     }
 }

@@ -17,18 +17,21 @@ public class ConnectionPool {
     private static final String DB_URL = "db.url";
     private static final String DB_LOGIN = "db.login";
     private static final String DB_PASS = "db.pass";
+    private static final String DB_DRIVER = "db_driver";
     private static final int MAX_CONNECTION_COUNT = 20;
     private static final int MIN_CONNECTION_COUNT = 10;
 
     private static final String URL;
     private static final String LOGIN;
     private static final String PASS;
+    private static final String DRIVER;
 
     static {
         ResourceBundle resourceBundle = ResourceBundle.getBundle(DB_PROPERTY_FILE);
         URL = resourceBundle.getString(DB_URL);
         LOGIN = resourceBundle.getString(DB_LOGIN);
         PASS = resourceBundle.getString(DB_PASS);
+        DRIVER = resourceBundle.getString(DB_DRIVER);
     }
 
     private final AtomicInteger currentConnectionNumber = new AtomicInteger(MIN_CONNECTION_COUNT);
@@ -48,15 +51,17 @@ public class ConnectionPool {
     private ConnectionPool() {
         for (int i = 0; i < MIN_CONNECTION_COUNT; i++) {
             try {
+                Class.forName(DRIVER);
                 pool.add(new ConnectionWrapper(this, DriverManager.getConnection(URL, LOGIN, PASS)));
-            } catch (SQLException e) {
-                log.error("SQLException ConnectionPool(): " + e);
+            } catch (Exception e) {
+                log.error("SQLException ConnectionPool(): ", e);
             }
         }
     }
 
     private void openAdditionalConnection() throws Exception {
         try {
+            Class.forName(DRIVER);
             pool.add(new ConnectionWrapper(this, DriverManager.getConnection(URL, LOGIN, PASS)));
             currentConnectionNumber.incrementAndGet();
         } catch (SQLException e) {
@@ -99,7 +104,7 @@ public class ConnectionPool {
                     connectionWrapper.getConnection().close();
                 }
             } catch (Exception e) {
-                log.error("Some connection cannot be closed: " + e);
+                log.error("Some connection cannot be closed: ", e);
             }
         }
     }

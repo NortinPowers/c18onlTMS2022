@@ -7,7 +7,7 @@ import by.tms.exception.CommandException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public interface Command {
+public interface CommandController {
 
     default String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
         if (request.getMethod().equalsIgnoreCase(GET.getValue())) {

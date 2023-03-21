@@ -10,11 +10,11 @@ import static by.tms.model.RequestParameters.LOGIN;
 import static by.tms.model.RequestParameters.PASSWORD;
 import static by.tms.model.RequestParameters.SURNAME;
 import static by.tms.model.RequestParameters.VERIFY_PASSWORD;
-import static by.tms.utils.ServiceUtils.getUserService;
 import static by.tms.utils.ServletUtils.saveUserSession;
 import static by.tms.utils.ValidatorUtils.isVerifyUserData;
 
-import by.tms.controller.Command;
+import by.tms.controller.CommandController;
+import by.tms.model.Inject;
 import by.tms.model.User;
 import by.tms.service.UserService;
 import java.time.LocalDate;
@@ -22,10 +22,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.Setter;
 
-public class CreateUserPageCommandImpl implements Command {
+@Setter
+public class CreateUserPageCommandImplController implements CommandController {
 
-    private final UserService userService = getUserService();
+    @Inject
+    private UserService userService;
+//    private final UserService userService = getUserService();
 
     @Override
     public String getStringByPOST(HttpServletRequest request, HttpServletResponse response) {

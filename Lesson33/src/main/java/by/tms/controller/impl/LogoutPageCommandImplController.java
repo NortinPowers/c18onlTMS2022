@@ -4,7 +4,7 @@ import static by.tms.model.Attribute.ACCESS_PERMISSION;
 import static by.tms.model.Attribute.USER_UUID;
 import static by.tms.utils.ControllerUtils.getHomePagePath;
 
-import by.tms.controller.Command;
+import by.tms.controller.CommandController;
 import by.tms.model.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class LogoutPageCommandImpl implements Command {
+public class LogoutPageCommandImplController implements CommandController {
 
     @Override
     public String getStringByGET(HttpServletRequest request, HttpServletResponse response) {

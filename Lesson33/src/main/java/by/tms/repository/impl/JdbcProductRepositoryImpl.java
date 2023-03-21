@@ -28,7 +28,7 @@ public class JdbcProductRepositoryImpl implements JdbcProductRepository {
                 PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(GET_ALL_PRODUCTS)) {
             fillsValues(products, statement);
         } catch (Exception e) {
-            log.error("Exception (getProducts()): " + e);
+            log.error("Exception (getProducts()): ", e);
         }
         return products;
     }
@@ -41,7 +41,7 @@ public class JdbcProductRepositoryImpl implements JdbcProductRepository {
             statement.setString(1, type);
             fillsValues(products, statement);
         } catch (Exception e) {
-            log.error("Exception (getProductsByType()): " + e);
+            log.error("Exception (getProductsByType()): ", e);
         }
         return products;
     }
@@ -57,7 +57,7 @@ public class JdbcProductRepositoryImpl implements JdbcProductRepository {
                 type = resultSet.getString("type");
             }
         } catch (Exception e) {
-            log.error("Exception (getProductTypeValue): " + e);
+            log.error("Exception (getProductTypeValue): ", e);
         }
         return type;
     }

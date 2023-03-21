@@ -31,7 +31,7 @@ public class JdbcUserRepositoryImpl implements JdbcUserRepository {
             statement.setDate(6, Date.valueOf(user.getBirthday()));
             statement.executeUpdate();
         } catch (Exception e) {
-            log.error("Exception (addUser()): " + e);
+            log.error("Exception (addUser()): ", e);
         }
     }
 
@@ -54,7 +54,7 @@ public class JdbcUserRepositoryImpl implements JdbcUserRepository {
                            .build();
             }
         } catch (Exception e) {
-            log.error("Exception (getUser()): " + e);
+            log.error("Exception (getUser()): ", e);
         }
         return user;
     }
@@ -70,7 +70,7 @@ public class JdbcUserRepositoryImpl implements JdbcUserRepository {
                 id = resultSet.getLong("id");
             }
         } catch (Exception e) {
-            log.error("Exception (getUserId()): " + e);
+            log.error("Exception (getUserId()): ", e);
         }
         return id;
     }

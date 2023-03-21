@@ -2,23 +2,28 @@ package by.tms.controller.impl;
 
 import static by.tms.model.Attribute.FAVORITE_PRODUCTS;
 import static by.tms.model.PagesPath.FAVORITES_JSP_PAGE;
-import static by.tms.utils.ServiceUtils.getCartService;
-import static by.tms.utils.ServiceUtils.getUserService;
 import static by.tms.utils.ServletUtils.getLogin;
 
-import by.tms.controller.Command;
+import by.tms.controller.CommandController;
+import by.tms.model.Inject;
 import by.tms.model.Product;
 import by.tms.service.CartService;
 import by.tms.service.UserService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.Setter;
 import org.apache.commons.lang3.tuple.Pair;
 
-public class FavoritesCommandImpl implements Command {
+@Setter
+public class FavoritesCommandImplController implements CommandController {
 
-    private final CartService cartService = getCartService();
-    private final UserService userService = getUserService();
+    @Inject
+    private CartService cartService;
+    @Inject
+    private UserService userService;
+//    private final CartService cartService = getCartService();
+//    private final UserService userService = getUserService();
 
     @Override
     public String getStringByGET(HttpServletRequest request, HttpServletResponse response) {

@@ -9,26 +9,32 @@ import static by.tms.model.RequestParameters.SHOP;
 import static by.tms.model.RequestParameters.TRUE;
 import static by.tms.utils.ControllerUtils.getHomePagePath;
 import static by.tms.utils.ControllerUtils.getPathByType;
-import static by.tms.utils.ServiceUtils.getCartService;
-import static by.tms.utils.ServiceUtils.getProductService;
-import static by.tms.utils.ServiceUtils.getUserService;
 import static by.tms.utils.ServletUtils.getLogin;
 
-import by.tms.controller.Command;
+import by.tms.controller.CommandController;
+import by.tms.model.Inject;
 import by.tms.service.CartService;
 import by.tms.service.ProductService;
 import by.tms.service.UserService;
 import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class AddCartPageCommandImpl implements Command {
+@Setter
+public class AddCartPageCommandImplController implements CommandController {
 
-    private final ProductService productService = getProductService();
-    private final CartService cartService = getCartService();
-    private final UserService userService = getUserService();
+    @Inject
+    private ProductService productService;
+    //    private final ProductService productService = getProductService();
+    @Inject
+    private CartService cartService;
+    //    private final CartService cartService = getCartService();
+    @Inject
+    private UserService userService;
+//    private final UserService userService = getUserService();
 
     @Override
     public String getStringByGET(HttpServletRequest request, HttpServletResponse response) {
@@ -47,7 +53,7 @@ public class AddCartPageCommandImpl implements Command {
                 path = getPathByType(productService.getProductTypeValue(id));
             }
         } catch (Exception e) {
-            log.error("Exception (get-AddCPS): " + e);
+            log.error("Exception (get-AddCPS): ", e);
             return getHomePagePath();
         }
         return path;

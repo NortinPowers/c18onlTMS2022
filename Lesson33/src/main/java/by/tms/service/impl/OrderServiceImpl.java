@@ -1,15 +1,18 @@
 package by.tms.service.impl;
 
+import by.tms.model.Inject;
 import by.tms.model.Order;
 import by.tms.model.Product;
 import by.tms.repository.JdbcOrderRepository;
 import by.tms.service.OrderService;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.Setter;
 
-@AllArgsConstructor
+//@AllArgsConstructor
+@Setter
 public class OrderServiceImpl implements OrderService {
 
+    @Inject
     private JdbcOrderRepository jdbcOrderRepository;
 
     @Override

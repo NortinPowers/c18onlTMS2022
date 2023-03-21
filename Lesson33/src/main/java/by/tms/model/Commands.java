@@ -1,5 +1,8 @@
 package by.tms.model;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -21,4 +24,16 @@ public enum Commands {
     SHOPPING_CART_PAGE_COMMAND("shopping-cart");
 
     private final String command;
+    private static final Map<String, Commands> commandsMapping = new HashMap<>();
+
+    static {
+        for (Commands command : values()) {
+            commandsMapping.put(command.getCommand(), command);
+        }
+    }
+
+    public static Commands fromString(String type) {
+        return Optional.ofNullable(commandsMapping.get(type))
+                       .orElseThrow(() -> new IllegalStateException("Unknown command type"));
+    }
 }

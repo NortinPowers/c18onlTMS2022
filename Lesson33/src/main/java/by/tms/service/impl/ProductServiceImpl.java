@@ -1,19 +1,19 @@
 package by.tms.service.impl;
 
+import by.tms.model.Inject;
 import by.tms.model.Product;
 import by.tms.repository.JdbcProductRepository;
 import by.tms.service.ProductService;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.Setter;
 
-@AllArgsConstructor
-@Getter
-@ToString
-
+//@AllArgsConstructor
+//@Getter
+//@ToString
+@Setter
 public class ProductServiceImpl implements ProductService {
 
+    @Inject
     private JdbcProductRepository jdbcProductRepository;
 
     @Override
