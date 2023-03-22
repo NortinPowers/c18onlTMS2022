@@ -16,12 +16,15 @@ public enum Commands {
     ADD_CART_PAGE_COMMAND("add-cart"),
     ADD_FAVORITE_PAGE_COMMAND("add-favorite"),
     LOGIN_PAGE_COMMAND("login"),
+    LOGIN_PAGE_POST_COMMAND("login-post"),
     CREATE_USER_PAGE_COMMAND("create-user"),
+    CREATE_USER_PAGE_POST_COMMAND("create-user-post"),
     DELETE_CART_PRODUCT_PAGE_COMMAND("delete-cart-product"),
     DELETE_FAVORITE_PRODUCT_PAGE_COMMAND("delete-favorite-product"),
     FAVORITES_PAGE_COMMAND("favorites"),
     LOGOUT_PAGE_COMMAND("exit"),
-    SHOPPING_CART_PAGE_COMMAND("shopping-cart");
+    SHOPPING_CART_PAGE_COMMAND("shopping-cart"),
+    SHOPPING_CART_PAGE_POST_COMMAND("shopping-cart-post");
 
     private final String command;
     private static final Map<String, Commands> commandsMapping = new HashMap<>();

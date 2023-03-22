@@ -5,13 +5,14 @@ import static by.tms.model.PagesPath.FAVORITES_JSP_PAGE;
 import static by.tms.utils.ServletUtils.getLogin;
 
 import by.tms.controller.CommandController;
+import by.tms.exception.CommandException;
 import by.tms.model.Inject;
+import by.tms.model.PagesPath;
 import by.tms.model.Product;
 import by.tms.service.CartService;
 import by.tms.service.UserService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import lombok.Setter;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -25,14 +26,25 @@ public class FavoritesCommandImplController implements CommandController {
 //    private final CartService cartService = getCartService();
 //    private final UserService userService = getUserService();
 
+//    @Override
+//    public String getStringByGET(HttpServletRequest request, HttpServletResponse response) {
+//        String login = getLogin(request);
+//        Long userId = userService.getUserId(login);
+//        List<Product> favoriteProducts = cartService.getProductsFromCart(userId, false, true).stream()
+//                                                    .map(Pair::getLeft)
+//                                                    .toList();
+//        request.getServletContext().setAttribute(FAVORITE_PRODUCTS.getAttribute(), favoriteProducts);
+//        return FAVORITES_JSP_PAGE.getPath();
+//    }
+
     @Override
-    public String getStringByGET(HttpServletRequest request, HttpServletResponse response) {
+    public PagesPath execute(HttpServletRequest request) throws CommandException {
         String login = getLogin(request);
         Long userId = userService.getUserId(login);
         List<Product> favoriteProducts = cartService.getProductsFromCart(userId, false, true).stream()
                                                     .map(Pair::getLeft)
                                                     .toList();
         request.getServletContext().setAttribute(FAVORITE_PRODUCTS.getAttribute(), favoriteProducts);
-        return FAVORITES_JSP_PAGE.getPath();
+        return FAVORITES_JSP_PAGE;
     }
 }

@@ -1,5 +1,6 @@
 package by.tms.model;
 
+import by.tms.utils.ControllerUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -10,6 +11,8 @@ public enum PagesPath {
     HOME_PAGE("eshop.jsp"),
     ESHOP_PAGE("eshop"),
     PRODUCTS_PAGE("view/products.jsp"),
+    TV_PRODUCTS_PAGE(ControllerUtils.getPathByType(ProductType.TV.getValue())),
+    PHONE_PRODUCTS_PAGE(ControllerUtils.getPathByType(ProductType.PHONE.getValue())),
     ACCOUNT_PAGE("view/account.jsp"),
     SHOPPING_CART_PAGE("eshop?command=shopping-cart"),
     SHOPPING_CART_JSP_PAGE("view/shopping-cart.jsp"),

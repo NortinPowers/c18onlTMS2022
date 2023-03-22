@@ -7,14 +7,17 @@ import by.tms.controller.impl.AccountPageCommandImplController;
 import by.tms.controller.impl.AddCartPageCommandImplController;
 import by.tms.controller.impl.AddFavoritePageCommandImplController;
 import by.tms.controller.impl.CreateUserPageCommandImplController;
+import by.tms.controller.impl.CreateUserPagePostCommandImplController;
 import by.tms.controller.impl.DeleteCartProductPageCommandImplController;
 import by.tms.controller.impl.DeleteFavoriteCommandImplController;
 import by.tms.controller.impl.FavoritesCommandImplController;
 import by.tms.controller.impl.HomePageCommandImplController;
 import by.tms.controller.impl.LoginPageCommandImplController;
+import by.tms.controller.impl.LoginPagePostCommandImplController;
 import by.tms.controller.impl.LogoutPageCommandImplController;
 import by.tms.controller.impl.ProductPageCommandImplController;
-import by.tms.controller.impl.ShoppingCartPageImpl;
+import by.tms.controller.impl.ShoppingCartPageCommandImpl;
+import by.tms.controller.impl.ShoppingCartPagePostCommandImpl;
 import by.tms.model.Commands;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,7 +27,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class ControllerCommandFactory {
 
-    private final static Map<String, CommandController> COMMANDS = new ConcurrentHashMap<>();
+    private static final Map<String, CommandController> COMMANDS = new ConcurrentHashMap<>();
 
     public static CommandController defineCommand(Commands command) throws Exception {
         return putIfAbsent(command.getCommand(), createController(command));
@@ -38,12 +41,15 @@ public class ControllerCommandFactory {
             case ADD_CART_PAGE_COMMAND -> AddCartPageCommandImplController::new;
             case ADD_FAVORITE_PAGE_COMMAND -> AddFavoritePageCommandImplController::new;
             case LOGIN_PAGE_COMMAND -> LoginPageCommandImplController::new;
+            case LOGIN_PAGE_POST_COMMAND -> LoginPagePostCommandImplController::new;
             case CREATE_USER_PAGE_COMMAND -> CreateUserPageCommandImplController::new;
+            case CREATE_USER_PAGE_POST_COMMAND -> CreateUserPagePostCommandImplController::new;
             case DELETE_CART_PRODUCT_PAGE_COMMAND -> DeleteCartProductPageCommandImplController::new;
             case DELETE_FAVORITE_PRODUCT_PAGE_COMMAND -> DeleteFavoriteCommandImplController::new;
             case FAVORITES_PAGE_COMMAND -> FavoritesCommandImplController::new;
             case LOGOUT_PAGE_COMMAND -> LogoutPageCommandImplController::new;
-            case SHOPPING_CART_PAGE_COMMAND -> ShoppingCartPageImpl::new;
+            case SHOPPING_CART_PAGE_COMMAND -> ShoppingCartPageCommandImpl::new;
+            case SHOPPING_CART_PAGE_POST_COMMAND -> ShoppingCartPagePostCommandImpl::new;
         };
     }
 

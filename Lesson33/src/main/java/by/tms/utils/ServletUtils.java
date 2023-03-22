@@ -9,11 +9,15 @@ import by.tms.model.Order;
 import by.tms.model.Ordering;
 import by.tms.model.Product;
 import by.tms.model.User;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
@@ -75,5 +79,11 @@ public class ServletUtils {
     public static String createOrderNumber(Long id, List<Product> products) {
         Order order = new Order(LocalDate.now(), id, products.size());
         return String.valueOf(order.hashCode());
+    }
+
+    public static void forwardToAddress(HttpServletRequest request, HttpServletResponse response, String address) throws ServletException, IOException {
+//        req.getServletContext().getRequestDispatcher(address).forward(req, resp);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+        dispatcher.forward(request, response);
     }
 }

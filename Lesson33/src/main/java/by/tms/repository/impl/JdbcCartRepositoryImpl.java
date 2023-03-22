@@ -20,7 +20,7 @@ import org.apache.commons.lang3.tuple.Pair;
 @AllArgsConstructor
 public class JdbcCartRepositoryImpl implements JdbcCartRepository {
 
-//    private ConnectionPool CONNECTION_POOL;
+    //    private ConnectionPool CONNECTION_POOL;
     private static final String ADD_PRODUCT_TO_CART = "insert into carts (user_id, product_id, cart, favorite) VALUES (?, ?, ?, ?)";
     private static final String GET_CART_PRODUCTS_BY_USER_ID = "select p.id, p.name, p.price, p.type, p.info, c.count from carts c join products p on p.id = c.product_id where c.user_id=? and c.cart=true";
     private static final String GET_FAVORITE_PRODUCTS_BY_USER_ID = "select p.id, p.name, p.price, p.type, p.info, c.count from carts c join products p on p.id = c.product_id where c.user_id=? and c.favorite=true";

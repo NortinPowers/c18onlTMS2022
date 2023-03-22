@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class JdbcProductRepositoryImpl implements JdbcProductRepository {
 
-//    private ConnectionPool CONNECTION_POOL;
+    //    private ConnectionPool CONNECTION_POOL;
     private static final String GET_ALL_PRODUCTS = "select * from products";
     private static final String GET_PRODUCTS_BY_TYPE = "select * from products where type=?";
     private static final String GET_PRODUCT_TYPE = "select type from products where id=?";

@@ -1,27 +1,26 @@
 package by.tms.controller;
 
-import static by.tms.model.RequestParameters.GET;
-import static by.tms.utils.ControllerUtils.getHomePagePath;
-
 import by.tms.exception.CommandException;
+import by.tms.model.PagesPath;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public interface CommandController {
 
-    default String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
-        if (request.getMethod().equalsIgnoreCase(GET.getValue())) {
-            return getStringByGET(request, response);
-        } else {
-            return getStringByPOST(request, response);
-        }
-    }
+//    default String execute(HttpServletRequest request, HttpServletResponse response) throws CommandException {
+//        if (request.getMethod().equalsIgnoreCase(GET.getValue())) {
+//            return getStringByGET(request, response);
+//        } else {
+//            return getStringByPOST(request, response);
+//        }
+//    }
 
-    default String getStringByPOST(HttpServletRequest request, HttpServletResponse response) {
-        return getHomePagePath();
-    }
+    PagesPath execute(HttpServletRequest request) throws CommandException;
 
-    default String getStringByGET(HttpServletRequest request, HttpServletResponse response) {
-        return getHomePagePath();
-    }
+//    default String getStringByPOST(HttpServletRequest request, HttpServletResponse response) {
+//        return getHomePagePath();
+//    }
+//
+//    default String getStringByGET(HttpServletRequest request, HttpServletResponse response) {
+//        return getHomePagePath();
+//    }
 }

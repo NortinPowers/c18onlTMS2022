@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class JdbcUserRepositoryImpl implements JdbcUserRepository {
 
-//    private ConnectionPool CONNECTION_POOL;
+    //    private ConnectionPool CONNECTION_POOL;
     private static final String ADD_USER = "insert into users (login, password, name, surname, email, birthday) values (?, ?, ?, ?, ?, ?)";
     private static final String GET_USER_BY_LOGIN = "select * from users where login=?";
     private static final String GET_USER_ID = "select id from users where login=?";
