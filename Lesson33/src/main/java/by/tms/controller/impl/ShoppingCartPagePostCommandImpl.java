@@ -2,7 +2,7 @@ package by.tms.controller.impl;
 
 import static by.tms.model.PagesPath.SHOPPING_CART_PAGE;
 import static by.tms.model.PagesPath.SUCCESS_BUY_JSP_PAGE;
-import static by.tms.model.RequestParameters.BUY;
+import static by.tms.utils.Constants.RequestParameters.BUY;
 import static by.tms.utils.ServletUtils.createOrderNumber;
 import static by.tms.utils.ServletUtils.getLogin;
 
@@ -53,7 +53,7 @@ public class ShoppingCartPagePostCommandImpl implements CommandController {
 
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {
-        String buyButton = request.getParameter(BUY.getValue());
+        String buyButton = request.getParameter(BUY);
         String login = getLogin(request);
         Long userId = userService.getUserId(login);
         PagesPath path;

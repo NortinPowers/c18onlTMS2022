@@ -1,8 +1,8 @@
 package by.tms.controller.impl;
 
-import static by.tms.model.Attribute.PRODUCTS;
 import static by.tms.model.PagesPath.PRODUCTS_PAGE;
-import static by.tms.model.RequestParameters.TYPE;
+import static by.tms.utils.Constants.Attributes.PRODUCTS;
+import static by.tms.utils.Constants.RequestParameters.TYPE;
 
 import by.tms.controller.CommandController;
 import by.tms.exception.CommandException;
@@ -30,8 +30,8 @@ public class ProductPageCommandImplController implements CommandController {
 
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {
-        List<Product> products = productService.getProductsByType(request.getParameter(TYPE.getValue()));
-        request.getServletContext().setAttribute(PRODUCTS.getAttribute(), products);
+        List<Product> products = productService.getProductsByType(request.getParameter(TYPE));
+        request.getServletContext().setAttribute(PRODUCTS, products);
         return PRODUCTS_PAGE;
     }
 }

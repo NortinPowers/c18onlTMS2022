@@ -1,8 +1,9 @@
 package by.tms.controller.impl;
 
-import static by.tms.model.Attribute.ORDERINGS;
-import static by.tms.model.Attribute.USER;
+
 import static by.tms.model.PagesPath.ACCOUNT_PAGE;
+import static by.tms.utils.Constants.Attributes.ORDERINGS;
+import static by.tms.utils.Constants.Attributes.USER;
 import static by.tms.utils.ServletUtils.getLogin;
 import static by.tms.utils.ServletUtils.getOrderings;
 
@@ -33,14 +34,14 @@ public class AccountPageCommandImplController implements CommandController {
     public PagesPath execute(HttpServletRequest request) throws CommandException {
         String login = getLogin(request);
         User user = userService.getUserByLogin(login);
-        request.getServletContext().setAttribute(USER.getAttribute(), user);
+        request.getServletContext().setAttribute(USER, user);
         Long userId = userService.getUserId(login);
         List<Order> orders = orderService.getOrdersById(userId);
         if (!orders.isEmpty()) {
             List<Ordering> orderings = getOrderings(orders);
-            request.getServletContext().setAttribute(ORDERINGS.getAttribute(), orderings);
+            request.getServletContext().setAttribute(ORDERINGS, orderings);
         } else {
-            request.removeAttribute(ORDERINGS.getAttribute());
+            request.removeAttribute(ORDERINGS);
         }
         return ACCOUNT_PAGE;
     }

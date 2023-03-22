@@ -1,7 +1,7 @@
 package by.tms.controller.impl;
 
 import static by.tms.model.PagesPath.FAVORITES_PAGE;
-import static by.tms.model.RequestParameters.ID;
+import static by.tms.utils.Constants.RequestParameters.ID;
 import static by.tms.utils.ControllerUtils.throwCommandException;
 import static by.tms.utils.ServletUtils.getLogin;
 
@@ -42,7 +42,7 @@ public class DeleteFavoriteCommandImplController implements CommandController {
     public PagesPath execute(HttpServletRequest request) throws CommandException {
         String login = getLogin(request);
         try {
-            Long id = Long.parseLong(request.getParameter(ID.getValue()));
+            Long id = Long.parseLong(request.getParameter(ID));
             cartService.deleteProduct(userService.getUserId(login), id, false, true);
         } catch (Exception e) {
             throwCommandException(request, e, this.getClass());

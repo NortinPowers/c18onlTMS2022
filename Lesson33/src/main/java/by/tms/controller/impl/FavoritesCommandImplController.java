@@ -1,7 +1,7 @@
 package by.tms.controller.impl;
 
-import static by.tms.model.Attribute.FAVORITE_PRODUCTS;
 import static by.tms.model.PagesPath.FAVORITES_JSP_PAGE;
+import static by.tms.utils.Constants.Attributes.FAVORITE_PRODUCTS;
 import static by.tms.utils.ServletUtils.getLogin;
 
 import by.tms.controller.CommandController;
@@ -44,7 +44,7 @@ public class FavoritesCommandImplController implements CommandController {
         List<Product> favoriteProducts = cartService.getProductsFromCart(userId, false, true).stream()
                                                     .map(Pair::getLeft)
                                                     .toList();
-        request.getServletContext().setAttribute(FAVORITE_PRODUCTS.getAttribute(), favoriteProducts);
+        request.getServletContext().setAttribute(FAVORITE_PRODUCTS, favoriteProducts);
         return FAVORITES_JSP_PAGE;
     }
 }

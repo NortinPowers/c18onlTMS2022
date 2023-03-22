@@ -65,12 +65,13 @@ public class ConnectionPool {
             pool.add(new ConnectionWrapper(this, DriverManager.getConnection(URL, LOGIN, PASS)));
             currentConnectionNumber.incrementAndGet();
         } catch (SQLException e) {
-            throw new Exception("New connection wasn't add in the connection pool", e);
+            log.error("New connection wasn't add in the connection pool", e);
+//            throw new Exception("New connection wasn't add in the connection pool", e);
         }
     }
 
     public ConnectionWrapper getConnectionWrapper() throws Exception {
-        ConnectionWrapper connectionWrapper;
+        ConnectionWrapper connectionWrapper = null;
         try {
             if (pool.isEmpty() && currentConnectionNumber.get() < MAX_CONNECTION_COUNT) {
                 openAdditionalConnection();
@@ -78,12 +79,13 @@ public class ConnectionPool {
             connectionWrapper = pool.take();
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
-            throw new Exception("Max count of connections was reached!");
+            log.error("Max count of connections was reached!");
+//            throw new Exception("Max count of connections was reached!");
         }
         return connectionWrapper;
     }
 
-    public void closeConnection(ConnectionWrapper connectionWrapper) throws Exception {
+    public void closeConnection(ConnectionWrapper connectionWrapper) {
         if (connectionWrapper != null) {
             if (currentConnectionNumber.get() > MIN_CONNECTION_COUNT) {
                 currentConnectionNumber.decrementAndGet();
@@ -92,7 +94,8 @@ public class ConnectionPool {
                 pool.put(connectionWrapper);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-                throw new Exception("Connection wasn't returned into pool properly");
+                log.error("Connection wasn't returned into pool properly");
+//                throw new Exception("Connection wasn't returned into pool properly");
             }
         }
     }
@@ -100,7 +103,7 @@ public class ConnectionPool {
     public void closeAllConnection() {
         for (ConnectionWrapper connectionWrapper : pool) {
             try {
-                if (connectionWrapper != null) {
+                if (connectionWrapper != null && connectionWrapper.getConnection() != null) {
                     connectionWrapper.getConnection().close();
                 }
             } catch (Exception e) {

@@ -2,11 +2,11 @@ package by.tms.controller.impl;
 
 import static by.tms.model.PagesPath.FAVORITES_PAGE;
 import static by.tms.model.PagesPath.SHOPPING_CART_PAGE;
-import static by.tms.model.RequestParameters.FAVORITE;
-import static by.tms.model.RequestParameters.ID;
-import static by.tms.model.RequestParameters.LOCATION;
-import static by.tms.model.RequestParameters.SHOP;
-import static by.tms.model.RequestParameters.TRUE;
+import static by.tms.utils.Constants.RequestParameters.FAVORITE;
+import static by.tms.utils.Constants.RequestParameters.ID;
+import static by.tms.utils.Constants.RequestParameters.LOCATION;
+import static by.tms.utils.Constants.RequestParameters.SHOP;
+import static by.tms.utils.Constants.RequestParameters.TRUE;
 import static by.tms.utils.ControllerUtils.getHomePagePath;
 import static by.tms.utils.ControllerUtils.getPagePathByType;
 import static by.tms.utils.ControllerUtils.throwCommandException;
@@ -47,13 +47,13 @@ public class AddCartPageCommandImplController implements CommandController {
         String login = getLogin(request);
         PagesPath path = getHomePagePath();
         try {
-            Long id = Long.parseLong(request.getParameter(ID.getValue()));
-            String shopFlag = request.getParameter(SHOP.getValue());
-            String location = request.getParameter(LOCATION.getValue());
+            Long id = Long.parseLong(request.getParameter(ID));
+            String shopFlag = request.getParameter(SHOP);
+            String location = request.getParameter(LOCATION);
             cartService.addProductToCart(userService.getUserId(login), id, true, false);
-            if (Objects.equals(shopFlag, TRUE.getValue())) {
+            if (Objects.equals(shopFlag, TRUE)) {
                 path = SHOPPING_CART_PAGE;
-            } else if (Objects.equals(location, FAVORITE.getValue())) {
+            } else if (Objects.equals(location, FAVORITE)) {
                 path = FAVORITES_PAGE;
             } else {
 //                String pathByType = getPathByType(productService.getProductTypeValue(id));

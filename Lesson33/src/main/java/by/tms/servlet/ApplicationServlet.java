@@ -1,7 +1,7 @@
 package by.tms.servlet;
 
 import static by.tms.model.Commands.HOME_PAGE_COMMAND;
-import static by.tms.model.RequestParameters.COMMAND;
+import static by.tms.utils.Constants.RequestParameters.COMMAND;
 import static by.tms.utils.ServletUtils.forwardToAddress;
 
 import by.tms.controller.CommandController;
@@ -65,7 +65,7 @@ public class ApplicationServlet extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String commandKey = request.getParameter(COMMAND.getValue());
+        String commandKey = request.getParameter(COMMAND);
         if (commandKey == null || commandKey.isEmpty()) {
             commandKey = HOME_PAGE_COMMAND.getCommand();
         }
@@ -81,7 +81,7 @@ public class ApplicationServlet extends HttpServlet {
 //       !!!! логируем сообщение а потом должны перенаправить на страницу с ошибкой("Извините что-то поломалось!!!"),
 //        https://blog.hubspot.com/marketing/http-500-internal-server-error
 //            также можно конверсейшен в URL запроса поместить
-            //forward
+            //change forward!
             forwardToAddress(request, response, "/404.jsp");
 //            request.getRequestDispatcher("/404.jsp").forward(request, response);
         }

@@ -10,7 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
-@WebFilter("/view/navigate.jsp")
+@WebFilter(urlPatterns = {"/view/navigate.jsp", "/view/bootstrap.jsp"})
 public class LockPageFilter implements Filter {
 
     @Override

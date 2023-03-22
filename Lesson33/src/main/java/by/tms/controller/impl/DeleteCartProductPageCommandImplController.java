@@ -1,7 +1,7 @@
 package by.tms.controller.impl;
 
 import static by.tms.model.PagesPath.SHOPPING_CART_PAGE;
-import static by.tms.model.RequestParameters.ID;
+import static by.tms.utils.Constants.RequestParameters.ID;
 import static by.tms.utils.ServletUtils.getLogin;
 
 import by.tms.controller.CommandController;
@@ -34,7 +34,7 @@ public class DeleteCartProductPageCommandImplController implements CommandContro
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {
         String login = getLogin(request);
-        Long id = Long.parseLong(request.getParameter(ID.getValue()));
+        Long id = Long.parseLong(request.getParameter(ID));
         cartService.deleteProduct(userService.getUserId(login), id, true, false);
         return SHOPPING_CART_PAGE;
     }

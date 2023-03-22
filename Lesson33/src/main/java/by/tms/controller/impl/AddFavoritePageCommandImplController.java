@@ -1,6 +1,6 @@
 package by.tms.controller.impl;
 
-import static by.tms.model.RequestParameters.ID;
+import static by.tms.utils.Constants.RequestParameters.ID;
 import static by.tms.utils.ControllerUtils.getHomePagePath;
 import static by.tms.utils.ControllerUtils.getPagePathByType;
 import static by.tms.utils.ControllerUtils.throwCommandException;
@@ -51,7 +51,7 @@ public class AddFavoritePageCommandImplController implements CommandController {
         String login = getLogin(request);
         PagesPath path = getHomePagePath();
         try {
-            Long id = Long.parseLong(request.getParameter(ID.getValue()));
+            Long id = Long.parseLong(request.getParameter(ID));
             cartService.addProductToCart(userService.getUserId(login), id, false, true);
 //            path = getPathByType(productService.getProductTypeValue(id));
             String productType = productService.getProductTypeValue(id);

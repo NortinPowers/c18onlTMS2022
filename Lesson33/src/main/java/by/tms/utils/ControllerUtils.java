@@ -1,17 +1,14 @@
 package by.tms.utils;
 
-import static by.tms.model.Attribute.USER_UUID;
-import static by.tms.model.Commands.PRODUCTS_PAGE_COMMAND;
-import static by.tms.model.PagesPath.ESHOP_PAGE;
 import static by.tms.model.PagesPath.HOME_PAGE;
 import static by.tms.model.PagesPath.PHONE_PRODUCTS_PAGE;
 import static by.tms.model.PagesPath.TV_PRODUCTS_PAGE;
-import static by.tms.model.RequestParameters.COMMAND;
+import static by.tms.utils.Constants.Attributes.USER_UUID;
+import static by.tms.utils.Constants.PATH_TO_PRODUCT_TYPE;
 
 import by.tms.exception.CommandException;
 import by.tms.model.PagesPath;
 import by.tms.model.ProductType;
-import by.tms.model.RequestParameters;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.experimental.UtilityClass;
@@ -27,12 +24,15 @@ public class ControllerUtils {
         return HOME_PAGE;
     }
 
+    //    public static String getPathByType(String type) {
+//        String path;
+//        path = "/" + ESHOP_PAGE.getPath() + "?" + COMMAND + "="
+//                + PRODUCTS_PAGE_COMMAND.getCommand() + "&" + TYPE
+//                + "=" + type;
+//        return path;
+//    }
     public static String getPathByType(String type) {
-        String path;
-        path = "/" + ESHOP_PAGE.getPath() + "?" + COMMAND.getValue() + "="
-                + PRODUCTS_PAGE_COMMAND.getCommand() + "&" + RequestParameters.TYPE.getValue()
-                + "=" + type;
-        return path;
+        return PATH_TO_PRODUCT_TYPE + type;
     }
 
     public static PagesPath getPagePathByType(String pathByType) {
@@ -50,7 +50,7 @@ public class ControllerUtils {
     public static <T> void throwCommandException(HttpServletRequest request, Exception e, Class<T> commandController) throws CommandException {
         String errorMessage = "Exception! It is impossible to go to the address from controller: " + commandController.getSimpleName() + ": ";
         HttpSession session = request.getSession(false);
-        String userUUID = "[" + session.getAttribute(USER_UUID.getAttribute()) + "] ";
+        String userUUID = "[" + session.getAttribute(USER_UUID) + "] ";
         throw new CommandException(userUUID + errorMessage + e.getMessage());
     }
 

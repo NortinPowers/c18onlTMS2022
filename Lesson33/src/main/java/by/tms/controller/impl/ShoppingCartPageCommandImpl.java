@@ -1,9 +1,9 @@
 package by.tms.controller.impl;
 
-import static by.tms.model.Attribute.CART_PRODUCTS;
-import static by.tms.model.Attribute.FULL_PRICE;
-import static by.tms.model.Attribute.USER_NAME;
 import static by.tms.model.PagesPath.SHOPPING_CART_JSP_PAGE;
+import static by.tms.utils.Constants.Attributes.CART_PRODUCTS;
+import static by.tms.utils.Constants.Attributes.FULL_PRICE;
+import static by.tms.utils.Constants.Attributes.USER_NAME;
 
 import by.tms.controller.CommandController;
 import by.tms.exception.CommandException;
@@ -61,11 +61,11 @@ public class ShoppingCartPageCommandImpl implements CommandController {
 
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {
-        String login = request.getSession().getAttribute(USER_NAME.getAttribute()).toString();
+        String login = request.getSession().getAttribute(USER_NAME).toString();
         Long userId = userService.getUserId(login);
         List<Pair<Product, Integer>> cartProducts = cartService.getProductsFromCart(userId, true, false);
-        request.getServletContext().setAttribute(CART_PRODUCTS.getAttribute(), cartProducts);
-        request.getServletContext().setAttribute(FULL_PRICE.getAttribute(), cartService.getProductsPrice(cartProducts));
+        request.getServletContext().setAttribute(CART_PRODUCTS, cartProducts);
+        request.getServletContext().setAttribute(FULL_PRICE, cartService.getProductsPrice(cartProducts));
         return SHOPPING_CART_JSP_PAGE;
     }
 }

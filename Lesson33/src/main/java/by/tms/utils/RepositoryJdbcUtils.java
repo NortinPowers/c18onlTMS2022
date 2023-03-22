@@ -48,12 +48,13 @@ public class RepositoryJdbcUtils {
     }
 
     public static Integer getModifyCount(boolean up, Integer productCount) {
-        if (up) {
-            productCount++;
-        } else {
-            productCount--;
-        }
-        return productCount;
+//        if (up) {
+//            productCount++;
+//        } else {
+//            productCount--;
+//        }
+//        return productCount;
+        return up ? ++productCount : --productCount;
     }
 
     public static boolean isEmpty(Long productId, List<Product> products) {

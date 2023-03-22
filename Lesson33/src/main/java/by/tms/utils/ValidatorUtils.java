@@ -15,7 +15,7 @@ public class ValidatorUtils {
     }
 
     public static boolean isEmailVerify(String email) {
-        return email.matches("[a-zA-z0-9]{1,20}[@][a-zA-Z]{3,10}[\\.][a-zA-Z]{2,6}");
+        return email.matches("[a-zA-z0-9]{1,20}[@][a-zA-Z]{3,10}[.][a-zA-Z]{2,6}");
     }
 
     public static boolean isNameSurnameVerify(String name, String surname) {

@@ -1,6 +1,6 @@
 package by.tms.listener;
 
-import static by.tms.model.Attribute.USER_UUID;
+import static by.tms.utils.Constants.Attributes.USER_UUID;
 
 import by.tms.model.Commands;
 import by.tms.repository.ConnectionPool;
@@ -34,6 +34,6 @@ public class DbInitContextListener implements ServletContextListener {
 //        connectionPool.closeAllConnection();
 //        sce.getServletContext().removeAttribute(CONNECTION_POOL.getAttribute());
         ConnectionPool.getInstance().closeAllConnection();
-        sce.getServletContext().removeAttribute(USER_UUID.getAttribute());
+        sce.getServletContext().removeAttribute(USER_UUID);
     }
 }

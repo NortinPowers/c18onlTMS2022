@@ -1,7 +1,7 @@
 package by.tms.controller.impl;
 
-import static by.tms.model.Attribute.ACCESS_PERMISSION;
 import static by.tms.model.PagesPath.LOGIN_JSP_PAGE;
+import static by.tms.utils.Constants.Attributes.ACCESS_PERMISSION;
 import static by.tms.utils.ControllerUtils.getHomePagePath;
 
 import by.tms.controller.CommandController;
@@ -49,7 +49,7 @@ public class LoginPageCommandImplController implements CommandController {
     public PagesPath execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
         PagesPath path;
-        if (session.getAttribute(ACCESS_PERMISSION.getAttribute()) != null) {
+        if (session.getAttribute(ACCESS_PERMISSION) != null) {
             path = getHomePagePath();
         } else {
             path = LOGIN_JSP_PAGE;
