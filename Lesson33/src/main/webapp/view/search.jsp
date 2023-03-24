@@ -26,8 +26,6 @@
         </div>
     </div>
 </div>
-
-
 <div class="container mt-3 min-vw-100 p-0">
     <div class="row grid gap-3">
         <div class="col-5">
