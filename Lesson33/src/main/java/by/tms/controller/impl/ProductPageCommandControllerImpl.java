@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import lombok.Setter;
 
 @Setter
-public class ProductPageCommandImplController implements CommandController {
+public class ProductPageCommandControllerImpl implements CommandController {
 
     @Inject
     private ProductService productService;

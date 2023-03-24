@@ -1,10 +1,12 @@
 package by.tms.controller.impl;
 
 import static by.tms.model.PagesPath.FAVORITES_PAGE;
+import static by.tms.model.PagesPath.SEARCH_PAGE;
 import static by.tms.model.PagesPath.SHOPPING_CART_PAGE;
 import static by.tms.utils.Constants.RequestParameters.FAVORITE;
 import static by.tms.utils.Constants.RequestParameters.ID;
 import static by.tms.utils.Constants.RequestParameters.LOCATION;
+import static by.tms.utils.Constants.RequestParameters.SEARCH;
 import static by.tms.utils.Constants.RequestParameters.SHOP;
 import static by.tms.utils.Constants.RequestParameters.TRUE;
 import static by.tms.utils.ControllerUtils.getHomePagePath;
@@ -25,7 +27,7 @@ import lombok.Setter;
 
 //@Slf4j
 @Setter
-public class AddCartPageCommandImplController implements CommandController {
+public class AddCartPageCommandControllerImpl implements CommandController {
 
     @Inject
     private ProductService productService;
@@ -55,6 +57,8 @@ public class AddCartPageCommandImplController implements CommandController {
                 path = SHOPPING_CART_PAGE;
             } else if (Objects.equals(location, FAVORITE)) {
                 path = FAVORITES_PAGE;
+            } else if (Objects.equals(location, SEARCH)) {
+                path = SEARCH_PAGE;
             } else {
 //                String pathByType = getPathByType(productService.getProductTypeValue(id));
                 String productType = productService.getProductTypeValue(id);

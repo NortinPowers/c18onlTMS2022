@@ -16,7 +16,7 @@ import lombok.Setter;
 
 //@Slf4j
 @Setter
-public class LoginPagePostCommandImplController implements CommandController {
+public class LoginPagePostCommandControllerImpl implements CommandController {
 
     @Inject
     private UserService userService;

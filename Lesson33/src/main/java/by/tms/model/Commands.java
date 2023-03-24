@@ -24,7 +24,9 @@ public enum Commands {
     FAVORITES_PAGE_COMMAND("favorites"),
     LOGOUT_PAGE_COMMAND("exit"),
     SHOPPING_CART_PAGE_COMMAND("shopping-cart"),
-    SHOPPING_CART_PAGE_POST_COMMAND("shopping-cart-post");
+    SHOPPING_CART_PAGE_POST_COMMAND("shopping-cart-post"),
+    SEARCH_PAGE_COMMAND("search"),
+    SEARCH_PAGE_POST_COMMAND("search-post");
 
     private final String command;
     private static final Map<String, Commands> commandsMapping = new HashMap<>();

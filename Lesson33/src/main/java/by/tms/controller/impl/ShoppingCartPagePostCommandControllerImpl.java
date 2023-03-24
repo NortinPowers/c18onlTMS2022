@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import lombok.Setter;
 
 @Setter
-public class ShoppingCartPagePostCommandImpl implements CommandController {
+public class ShoppingCartPagePostCommandControllerImpl implements CommandController {
 
     @Inject
     private OrderService orderService;

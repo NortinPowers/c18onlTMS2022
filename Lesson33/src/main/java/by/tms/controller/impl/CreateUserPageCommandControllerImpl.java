@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import lombok.Setter;
 
 @Setter
-public class CreateUserPageCommandImplController implements CommandController {
+public class CreateUserPageCommandControllerImpl implements CommandController {
 
 //    @Inject
 //    private UserService userService;

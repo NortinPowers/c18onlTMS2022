@@ -1,6 +1,9 @@
 package by.tms.controller.impl;
 
+import static by.tms.model.PagesPath.SEARCH_PAGE;
 import static by.tms.utils.Constants.RequestParameters.ID;
+import static by.tms.utils.Constants.RequestParameters.LOCATION;
+import static by.tms.utils.Constants.RequestParameters.SEARCH;
 import static by.tms.utils.ControllerUtils.getHomePagePath;
 import static by.tms.utils.ControllerUtils.getPagePathByType;
 import static by.tms.utils.ControllerUtils.throwCommandException;
@@ -13,12 +16,13 @@ import by.tms.model.PagesPath;
 import by.tms.service.CartService;
 import by.tms.service.ProductService;
 import by.tms.service.UserService;
+import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import lombok.Setter;
 
 //@Slf4j
 @Setter
-public class AddFavoritePageCommandImplController implements CommandController {
+public class AddFavoritePageCommandControllerImpl implements CommandController {
 
     @Inject
     private ProductService productService;
@@ -50,12 +54,17 @@ public class AddFavoritePageCommandImplController implements CommandController {
     public PagesPath execute(HttpServletRequest request) throws CommandException {
         String login = getLogin(request);
         PagesPath path = getHomePagePath();
+        String location = request.getParameter(LOCATION);
         try {
             Long id = Long.parseLong(request.getParameter(ID));
             cartService.addProductToCart(userService.getUserId(login), id, false, true);
 //            path = getPathByType(productService.getProductTypeValue(id));
             String productType = productService.getProductTypeValue(id);
-            path = getPagePathByType(productType);
+            if (Objects.equals(location, SEARCH)) {
+                path = SEARCH_PAGE;
+            } else {
+                path = getPagePathByType(productType);
+            }
         } catch (Exception e) {
             throwCommandException(request, e, this.getClass());
 //            log.error("Exception (get-AddFPS): ", e);

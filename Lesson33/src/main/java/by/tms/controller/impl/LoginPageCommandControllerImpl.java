@@ -13,7 +13,7 @@ import lombok.Setter;
 
 //@Slf4j
 @Setter
-public class LoginPageCommandImplController implements CommandController {
+public class LoginPageCommandControllerImpl implements CommandController {
 
 //    @Inject
 //    private UserService userService;

@@ -25,7 +25,9 @@ public enum PagesPath {
     FAIL_REGISTER_PAGE("view/fail-register.jsp"),
     LOGIN_PAGE("login"),
     LOGIN_JSP_PAGE("login.jsp"),
-    SUCCESS_BUY_JSP_PAGE("view/success-buy.jsp");
+    SUCCESS_BUY_JSP_PAGE("view/success-buy.jsp"),
+    SEARCH_JSP_PAGE("view/search.jsp"),
+    SEARCH_PAGE("eshop?command=search");
 
     private final String path;
 }

@@ -3,21 +3,23 @@ package by.tms.utils;
 import static by.tms.utils.InjectObjectsFactory.createAndInjectInstances;
 
 import by.tms.controller.CommandController;
-import by.tms.controller.impl.AccountPageCommandImplController;
-import by.tms.controller.impl.AddCartPageCommandImplController;
-import by.tms.controller.impl.AddFavoritePageCommandImplController;
-import by.tms.controller.impl.CreateUserPageCommandImplController;
-import by.tms.controller.impl.CreateUserPagePostCommandImplController;
-import by.tms.controller.impl.DeleteCartProductPageCommandImplController;
-import by.tms.controller.impl.DeleteFavoriteCommandImplController;
-import by.tms.controller.impl.FavoritesCommandImplController;
-import by.tms.controller.impl.HomePageCommandImplController;
-import by.tms.controller.impl.LoginPageCommandImplController;
-import by.tms.controller.impl.LoginPagePostCommandImplController;
-import by.tms.controller.impl.LogoutPageCommandImplController;
-import by.tms.controller.impl.ProductPageCommandImplController;
-import by.tms.controller.impl.ShoppingCartPageCommandImpl;
-import by.tms.controller.impl.ShoppingCartPagePostCommandImpl;
+import by.tms.controller.impl.AccountPageCommandControllerImpl;
+import by.tms.controller.impl.AddCartPageCommandControllerImpl;
+import by.tms.controller.impl.AddFavoritePageCommandControllerImpl;
+import by.tms.controller.impl.CreateUserPageCommandControllerImpl;
+import by.tms.controller.impl.CreateUserPagePostCommandControllerImpl;
+import by.tms.controller.impl.DeleteCartProductPageCommandControllerImpl;
+import by.tms.controller.impl.DeleteFavoriteCommandControllerImpl;
+import by.tms.controller.impl.FavoritesCommandControllerImpl;
+import by.tms.controller.impl.HomePageCommandControllerImpl;
+import by.tms.controller.impl.LoginPageCommandControllerImpl;
+import by.tms.controller.impl.LoginPagePostCommandControllerImpl;
+import by.tms.controller.impl.LogoutPageCommandControllerImpl;
+import by.tms.controller.impl.ProductPageCommandControllerImpl;
+import by.tms.controller.impl.SearchPageCommandControllerImpl;
+import by.tms.controller.impl.SearchPagePostCommandControllerImpl;
+import by.tms.controller.impl.ShoppingCartPageCommandControllerImpl;
+import by.tms.controller.impl.ShoppingCartPagePostCommandControllerImpl;
 import by.tms.model.Commands;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -35,21 +37,23 @@ public class ControllerCommandFactory {
 
     private static Supplier<CommandController> createController(Commands command) {
         return switch (command) {
-            case HOME_PAGE_COMMAND -> HomePageCommandImplController::new;
-            case PRODUCTS_PAGE_COMMAND -> ProductPageCommandImplController::new;
-            case ACCOUNT_PAGE_COMMAND -> AccountPageCommandImplController::new;
-            case ADD_CART_PAGE_COMMAND -> AddCartPageCommandImplController::new;
-            case ADD_FAVORITE_PAGE_COMMAND -> AddFavoritePageCommandImplController::new;
-            case LOGIN_PAGE_COMMAND -> LoginPageCommandImplController::new;
-            case LOGIN_PAGE_POST_COMMAND -> LoginPagePostCommandImplController::new;
-            case CREATE_USER_PAGE_COMMAND -> CreateUserPageCommandImplController::new;
-            case CREATE_USER_PAGE_POST_COMMAND -> CreateUserPagePostCommandImplController::new;
-            case DELETE_CART_PRODUCT_PAGE_COMMAND -> DeleteCartProductPageCommandImplController::new;
-            case DELETE_FAVORITE_PRODUCT_PAGE_COMMAND -> DeleteFavoriteCommandImplController::new;
-            case FAVORITES_PAGE_COMMAND -> FavoritesCommandImplController::new;
-            case LOGOUT_PAGE_COMMAND -> LogoutPageCommandImplController::new;
-            case SHOPPING_CART_PAGE_COMMAND -> ShoppingCartPageCommandImpl::new;
-            case SHOPPING_CART_PAGE_POST_COMMAND -> ShoppingCartPagePostCommandImpl::new;
+            case HOME_PAGE_COMMAND -> HomePageCommandControllerImpl::new;
+            case PRODUCTS_PAGE_COMMAND -> ProductPageCommandControllerImpl::new;
+            case ACCOUNT_PAGE_COMMAND -> AccountPageCommandControllerImpl::new;
+            case ADD_CART_PAGE_COMMAND -> AddCartPageCommandControllerImpl::new;
+            case ADD_FAVORITE_PAGE_COMMAND -> AddFavoritePageCommandControllerImpl::new;
+            case LOGIN_PAGE_COMMAND -> LoginPageCommandControllerImpl::new;
+            case LOGIN_PAGE_POST_COMMAND -> LoginPagePostCommandControllerImpl::new;
+            case CREATE_USER_PAGE_COMMAND -> CreateUserPageCommandControllerImpl::new;
+            case CREATE_USER_PAGE_POST_COMMAND -> CreateUserPagePostCommandControllerImpl::new;
+            case DELETE_CART_PRODUCT_PAGE_COMMAND -> DeleteCartProductPageCommandControllerImpl::new;
+            case DELETE_FAVORITE_PRODUCT_PAGE_COMMAND -> DeleteFavoriteCommandControllerImpl::new;
+            case FAVORITES_PAGE_COMMAND -> FavoritesCommandControllerImpl::new;
+            case LOGOUT_PAGE_COMMAND -> LogoutPageCommandControllerImpl::new;
+            case SHOPPING_CART_PAGE_COMMAND -> ShoppingCartPageCommandControllerImpl::new;
+            case SHOPPING_CART_PAGE_POST_COMMAND -> ShoppingCartPagePostCommandControllerImpl::new;
+            case SEARCH_PAGE_COMMAND -> SearchPageCommandControllerImpl::new;
+            case SEARCH_PAGE_POST_COMMAND -> SearchPagePostCommandControllerImpl::new;
         };
     }
 

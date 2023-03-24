@@ -19,6 +19,7 @@ public class Constants {
         public static final String FAVORITE_PRODUCTS = "favoriteProducts";
         public static final String ACCESS_PERMISSION = "accessPermission";
         public static final String PRODUCTS = "products";
+        public static final String FOUND_PRODUCTS = "foundProducts";
         public static final String CART_PRODUCTS = "cartProducts";
         public static final String FULL_PRICE = "fullPrice";
 //        public static final String CONNECTION_POOL = "connectionPool";
@@ -30,6 +31,7 @@ public class Constants {
         public static final String COMMAND = "command";
         public static final String TYPE = "type";
         public static final String FAVORITE = "favorite";
+        public static final String SEARCH = "search";
         public static final String TRUE = "true";
         public static final String ID = "id";
         public static final String SHOP = "shop";
@@ -42,5 +44,6 @@ public class Constants {
         public static final String EMAIL = "email";
         public static final String BIRTHDAY = "birthday";
         public static final String BUY = "buy";
+        public static final String SEARCH_CONDITION = "searchCondition";
     }
 }

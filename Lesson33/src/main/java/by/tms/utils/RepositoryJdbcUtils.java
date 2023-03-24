@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import lombok.experimental.UtilityClass;
@@ -15,7 +16,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class RepositoryJdbcUtils {
 
-    public static void fillsValues(List<Product> products, PreparedStatement statement) throws SQLException {
+    public static void fillsValues(Collection<Product> products, PreparedStatement statement) throws SQLException {
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
             Product product = getProduct(resultSet);
