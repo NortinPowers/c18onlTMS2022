@@ -21,6 +21,12 @@
             <img class="card-img-top" src="<c:url value="/img/phone.jpg"/>" alt="Phone">
         </a>
     </div>
+    <div class="card">
+        <div class="card-header bg-danger text-white text-center text-nowrap">Search</div>
+        <a href="<c:url value="/view/search.jsp"/>">
+            <img class="card-img-top" src="<c:url value="/img/search.jpg"/>" alt="Phone">
+        </a>
+    </div>
 </div>
 </body>
 </html>
