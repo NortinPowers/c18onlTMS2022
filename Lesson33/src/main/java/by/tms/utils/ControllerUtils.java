@@ -4,16 +4,21 @@ import static by.tms.model.PagesPath.HOME_PAGE;
 import static by.tms.model.PagesPath.PHONE_PRODUCTS_PAGE;
 import static by.tms.model.PagesPath.TV_PRODUCTS_PAGE;
 import static by.tms.utils.Constants.Attributes.USER_UUID;
+import static by.tms.utils.Constants.CONVERSATION;
 import static by.tms.utils.Constants.PATH_TO_PRODUCT_TYPE;
 
 import by.tms.exception.CommandException;
 import by.tms.model.PagesPath;
 import by.tms.model.ProductType;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.experimental.UtilityClass;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 
 @UtilityClass
+@Slf4j
 public class ControllerUtils {
 
 //    public static String getHomePagePath() {
@@ -54,4 +59,19 @@ public class ControllerUtils {
         throw new CommandException(userUUID + errorMessage + e.getMessage());
     }
 
+    public static String checkAndGetUserUUID(HttpServletRequest request, HttpSession session) {
+        String userUUID;
+        if (session == null) {
+            session = request.getSession();
+        }
+        if (session.getAttribute(USER_UUID) != null) {
+            userUUID = (String) session.getAttribute(USER_UUID);
+        } else {
+            userUUID = UUID.randomUUID().toString();
+            MDC.put(CONVERSATION, userUUID);
+            request.getSession().setAttribute(USER_UUID, userUUID);
+            log.info("Not logged in user with UUID " + userUUID + " searches for products");
+        }
+        return userUUID;
+    }
 }

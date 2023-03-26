@@ -27,7 +27,8 @@ public enum PagesPath {
     LOGIN_JSP_PAGE("login.jsp"),
     SUCCESS_BUY_JSP_PAGE("view/success-buy.jsp"),
     SEARCH_JSP_PAGE("view/search.jsp"),
-    SEARCH_PAGE("eshop?command=search");
+    SEARCH_PAGE("eshop?command=search"),
+    SEARCH_SAVED_RESULT_PAGE("eshop?command=search&result=save");
 
     private final String path;
 }

@@ -1,6 +1,6 @@
 package by.tms.controller.impl;
 
-import static by.tms.model.PagesPath.SEARCH_PAGE;
+import static by.tms.model.PagesPath.SEARCH_SAVED_RESULT_PAGE;
 import static by.tms.utils.Constants.RequestParameters.ID;
 import static by.tms.utils.Constants.RequestParameters.LOCATION;
 import static by.tms.utils.Constants.RequestParameters.SEARCH;
@@ -61,7 +61,7 @@ public class AddFavoritePageCommandControllerImpl implements CommandController {
 //            path = getPathByType(productService.getProductTypeValue(id));
             String productType = productService.getProductTypeValue(id);
             if (Objects.equals(location, SEARCH)) {
-                path = SEARCH_PAGE;
+                path = SEARCH_SAVED_RESULT_PAGE;
             } else {
                 path = getPagePathByType(productType);
             }

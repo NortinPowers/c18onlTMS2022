@@ -66,24 +66,29 @@
                             <c:set var="access" value="${sessionScope.get('accessPermission')}"/>
                             <c:choose>
                                 <c:when test="${access == null}">
-                                    <div class="col-sm-12 btn btn-success">
+                                    <%--                                    <div class="col-sm-12 btn btn-success">--%>
+                                    <div class="col-sm-12">
                                             <%--                                    in process--%>
-                                        <a href="#" class="text-light text-decoration-none" aria-current="page">
+                                        <a href="#" class="text-light text-decoration-none btn btn-success btn-block w-auto" aria-current="page">
                                             To product
                                         </a>
                                     </div>
                                 </c:when>
                                 <c:otherwise>
-                                    <div class="col-sm-4 btn btn-success">
-                                        <a href="#" class="text-light text-decoration-none" aria-current="page">
+                                    <%--                                    <div class="col-sm-4 btn btn-success">--%>
+                                    <div class="col-sm-4">
+                                        <a href="#" class="text-light text-decoration-none btn btn-success btn-block w-auto" aria-current="page">
                                             To product
                                         </a>
                                     </div>
-                                    <div class="col-sm-4 btn btn-success">
-                                        <a href="<c:url value="/eshop?command=add-cart&id=${product.id}&shop=true&location=none"/>" class="text-light text-decoration-none" aria-current="page">
+                                    <div class="col-sm-4">
+                                            <%--                                    <div class="col-sm-4 btn btn-success">--%>
+                                        <a href="<c:url value="/eshop?command=add-cart&id=${product.id}&shop=true&location=none"/>" class="text-light text-decoration-none btn btn-success btn-block w-auto" aria-current="page">
                                             Buy
                                         </a>
+
                                     </div>
+                                    <%--                                    <div class="col-sm-2">--%>
                                     <div class="col-sm-2 btn btn-success">
                                         <a href="<c:url value="/eshop?command=add-cart&id=${product.id}&shop=none&location=search"/>">
                                             <div class="text-center text-light text-decoration-none p-1">
@@ -92,6 +97,7 @@
                                         </a>
                                     </div>
                                     <div class="col-sm-2 btn btn-success">
+                                            <%--                                    <div class="col-sm-2">--%>
                                         <a href="<c:url value="/eshop?command=add-favorite&id=${product.id}&shop=none&location=search"/>">
                                             <div class="text-center text-light text-decoration-none p-1">
                                                 <i class="bi bi-heart"></i>

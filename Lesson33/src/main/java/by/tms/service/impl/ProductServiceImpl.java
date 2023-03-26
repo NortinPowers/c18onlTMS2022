@@ -41,4 +41,9 @@ public class ProductServiceImpl implements ProductService {
     public Set<Product> getProductsByUserSearchCondition(String userUUID) {
         return jdbcProductRepository.getProductsByUserSearchCondition(userUUID);
     }
+
+    @Override
+    public void deleteFoundProducts(String userUUID) {
+        jdbcProductRepository.deleteFoundProducts(userUUID);
+    }
 }

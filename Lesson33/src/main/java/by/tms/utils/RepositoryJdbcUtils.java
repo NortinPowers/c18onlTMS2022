@@ -16,7 +16,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class RepositoryJdbcUtils {
 
-    public static void fillsValues(Collection<Product> products, PreparedStatement statement) throws SQLException {
+    public static void fillsCollectionValues(Collection<Product> products, PreparedStatement statement) throws SQLException {
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
             Product product = getProduct(resultSet);

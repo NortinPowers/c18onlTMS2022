@@ -17,4 +17,6 @@ public interface JdbcProductRepository extends BaseRepository {
     void saveFoundedProducts(Set<Product> products, String userUUID);
 
     Set<Product> getProductsByUserSearchCondition(String userUUID);
+
+    void deleteFoundProducts(String userUUID);
 }

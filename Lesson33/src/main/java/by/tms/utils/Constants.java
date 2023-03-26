@@ -8,6 +8,7 @@ public class Constants {
     public static final String BUY = "buy";
     public static final String CONVERSATION = "conversation";
     public static final String PATH_TO_PRODUCT_TYPE = "/eshop?command=products&type=";
+    public static final String SAVE = "save";
 
     public class Attributes {
 
@@ -45,5 +46,6 @@ public class Constants {
         public static final String BIRTHDAY = "birthday";
         public static final String BUY = "buy";
         public static final String SEARCH_CONDITION = "searchCondition";
+        public static final String RESULT = "result";
     }
 }
