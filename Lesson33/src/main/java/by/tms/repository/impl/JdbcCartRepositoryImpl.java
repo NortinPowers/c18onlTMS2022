@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -156,7 +157,7 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
     private List<Product> getProducts(Long userId, boolean cart, boolean favorite) {
         return getProductsFromCart(userId, cart, favorite).stream()
                                                           .map(Pair::getLeft)
-                                                          .toList();
+                                                          .collect(Collectors.toList());
     }
 
     private void deleteProductByMark(Long userId, Long productId, String query) {

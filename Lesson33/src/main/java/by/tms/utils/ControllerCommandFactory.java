@@ -11,10 +11,12 @@ import by.tms.controller.impl.CreateUserPagePostCommandControllerImpl;
 import by.tms.controller.impl.DeleteCartProductPageCommandControllerImpl;
 import by.tms.controller.impl.DeleteFavoriteCommandControllerImpl;
 import by.tms.controller.impl.FavoritesCommandControllerImpl;
+import by.tms.controller.impl.FilterPageCommandControllerImpl;
 import by.tms.controller.impl.HomePageCommandControllerImpl;
 import by.tms.controller.impl.LoginPageCommandControllerImpl;
 import by.tms.controller.impl.LoginPagePostCommandControllerImpl;
 import by.tms.controller.impl.LogoutPageCommandControllerImpl;
+import by.tms.controller.impl.OneProductPageCommandControllerImpl;
 import by.tms.controller.impl.ProductPageCommandControllerImpl;
 import by.tms.controller.impl.SearchPageCommandControllerImpl;
 import by.tms.controller.impl.SearchPagePostCommandControllerImpl;
@@ -54,6 +56,8 @@ public class ControllerCommandFactory {
             case SHOPPING_CART_PAGE_POST_COMMAND -> ShoppingCartPagePostCommandControllerImpl::new;
             case SEARCH_PAGE_COMMAND -> SearchPageCommandControllerImpl::new;
             case SEARCH_PAGE_POST_COMMAND -> SearchPagePostCommandControllerImpl::new;
+            case PRODUCT_PAGE_COMMAND -> OneProductPageCommandControllerImpl::new;
+            case FILTER_PAGE_COMMAND -> FilterPageCommandControllerImpl::new;
         };
     }
 

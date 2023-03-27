@@ -1,11 +1,13 @@
 package by.tms.controller.impl;
 
 import static by.tms.model.PagesPath.FAVORITES_PAGE;
+import static by.tms.model.PagesPath.PRODUCT_JSP_PAGE;
 import static by.tms.model.PagesPath.SEARCH_SAVED_RESULT_PAGE;
 import static by.tms.model.PagesPath.SHOPPING_CART_PAGE;
 import static by.tms.utils.Constants.RequestParameters.FAVORITE;
 import static by.tms.utils.Constants.RequestParameters.ID;
 import static by.tms.utils.Constants.RequestParameters.LOCATION;
+import static by.tms.utils.Constants.RequestParameters.PRODUCT_PAGE;
 import static by.tms.utils.Constants.RequestParameters.SEARCH;
 import static by.tms.utils.Constants.RequestParameters.SHOP;
 import static by.tms.utils.Constants.RequestParameters.TRUE;
@@ -59,6 +61,8 @@ public class AddCartPageCommandControllerImpl implements CommandController {
                 path = FAVORITES_PAGE;
             } else if (Objects.equals(location, SEARCH)) {
                 path = SEARCH_SAVED_RESULT_PAGE;
+            } else if (Objects.equals(location, PRODUCT_PAGE)) {
+                path = PRODUCT_JSP_PAGE;
             } else {
 //                String pathByType = getPathByType(productService.getProductTypeValue(id));
                 String productType = productService.getProductTypeValue(id);

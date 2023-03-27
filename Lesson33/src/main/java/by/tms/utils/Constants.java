@@ -9,6 +9,7 @@ public class Constants {
     public static final String CONVERSATION = "conversation";
     public static final String PATH_TO_PRODUCT_TYPE = "/eshop?command=products&type=";
     public static final String SAVE = "save";
+    public static final String ALL = "all";
 
     public class Attributes {
 
@@ -21,6 +22,7 @@ public class Constants {
         public static final String ACCESS_PERMISSION = "accessPermission";
         public static final String PRODUCTS = "products";
         public static final String FOUND_PRODUCTS = "foundProducts";
+        public static final String FILTER_FOUND_PRODUCTS = "filterFoundProducts";
         public static final String CART_PRODUCTS = "cartProducts";
         public static final String FULL_PRICE = "fullPrice";
 //        public static final String CONNECTION_POOL = "connectionPool";
@@ -33,6 +35,7 @@ public class Constants {
         public static final String TYPE = "type";
         public static final String FAVORITE = "favorite";
         public static final String SEARCH = "search";
+        public static final String PRODUCT_PAGE = "product-page";
         public static final String TRUE = "true";
         public static final String ID = "id";
         public static final String SHOP = "shop";

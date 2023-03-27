@@ -1,4 +1,4 @@
-//package by.tms.utils;
+package by.tms.utils;//package by.tms.utils;
 //
 //import static by.tms.model.Commands.ACCOUNT_PAGE_COMMAND;
 //import static by.tms.model.Commands.ADD_CART_PAGE_COMMAND;

@@ -28,6 +28,7 @@ public class SearchPagePostCommandControllerImpl implements CommandController {
             Set<Product> products = productService.getFoundProducts(searchCondition);
             HttpSession session = request.getSession(false);
             String userUUID = checkAndGetUserUUID(request, session);
+            productService.deleteFoundProducts(userUUID);
             productService.saveFoundedProducts(products, userUUID);
 //            Set<Product> productsByUserSearchCondition = productService.getProductsByUserSearchCondition(userUUID);
 //            request.getServletContext().setAttribute(FOUND_PRODUCTS, productsByUserSearchCondition);

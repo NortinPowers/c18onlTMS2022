@@ -12,6 +12,7 @@ import by.tms.model.Product;
 import by.tms.service.CartService;
 import by.tms.service.UserService;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import lombok.Setter;
 import org.apache.commons.lang3.tuple.Pair;
@@ -43,7 +44,7 @@ public class FavoritesCommandControllerImpl implements CommandController {
         Long userId = userService.getUserId(login);
         List<Product> favoriteProducts = cartService.getProductsFromCart(userId, false, true).stream()
                                                     .map(Pair::getLeft)
-                                                    .toList();
+                                                    .collect(Collectors.toList());
         request.getServletContext().setAttribute(FAVORITE_PRODUCTS, favoriteProducts);
         return FAVORITES_JSP_PAGE;
     }

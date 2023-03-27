@@ -4,6 +4,7 @@ import by.tms.model.Inject;
 import by.tms.model.Product;
 import by.tms.repository.JdbcProductRepository;
 import by.tms.service.ProductService;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 import lombok.Setter;
@@ -45,5 +46,20 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteFoundProducts(String userUUID) {
         jdbcProductRepository.deleteFoundProducts(userUUID);
+    }
+
+    @Override
+    public Product getOneProduct(Long id) {
+        return jdbcProductRepository.getOneProduct(id);
+    }
+
+    @Override
+    public Set<Product> selectFoundedProductsByFilter(String type, BigDecimal minPrice, BigDecimal maxPrice, String userUUID) {
+        return jdbcProductRepository.selectFoundedProductsByFilter(type, minPrice, maxPrice, userUUID);
+    }
+
+    @Override
+    public Set<Product> selectAllProductsByFilter(String type, BigDecimal minPrice, BigDecimal maxPrice) {
+        return jdbcProductRepository.selectAllProductsByFilter(type, minPrice, maxPrice);
     }
 }

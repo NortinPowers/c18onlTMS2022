@@ -26,13 +26,29 @@ public class SearchPageCommandControllerImpl implements CommandController {
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {
         Set<Product> productsByUserSearchCondition = new LinkedHashSet<>();
-        if (request.getSession().getAttribute(USER_UUID) != null) {
-            String userUUID = request.getSession().getAttribute(USER_UUID).toString();
-            if (!SAVE.equals(request.getParameter(RESULT))) {
-                productService.deleteFoundProducts(userUUID);
+        request.getServletContext().removeAttribute("filter");
+        if ("true".equals(request.getParameter("filter"))) {
+            request.getServletContext().setAttribute("filter", new Object());
+        } else
+//        if ("true".equals(request.getParameter("filter"))) {
+//            request.getServletContext().setAttribute("filter", new Object());
+//        } else {
+            if (request.getSession().getAttribute(USER_UUID) != null) {
+                String userUUID = request.getSession().getAttribute(USER_UUID).toString();
+                if (!SAVE.equals(request.getParameter(RESULT))) {
+                    productService.deleteFoundProducts(userUUID);
+                }
+
+                productsByUserSearchCondition = productService.getProductsByUserSearchCondition(userUUID);
             }
-            productsByUserSearchCondition = productService.getProductsByUserSearchCondition(userUUID);
-        }
+//        }
+//        if (request.getSession().getAttribute(USER_UUID) != null) {
+//            String userUUID = request.getSession().getAttribute(USER_UUID).toString();
+//            if (!SAVE.equals(request.getParameter(RESULT))) {
+//                productService.deleteFoundProducts(userUUID);
+//            }
+//            productsByUserSearchCondition = productService.getProductsByUserSearchCondition(userUUID);
+//        }
         request.getServletContext().setAttribute(FOUND_PRODUCTS, productsByUserSearchCondition);
         return SEARCH_JSP_PAGE;
     }
