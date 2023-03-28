@@ -75,5 +75,4 @@ public class ControllerCommandFactory {
         createAndInjectInstances(baseController);
         return baseController;
     }
-
 }

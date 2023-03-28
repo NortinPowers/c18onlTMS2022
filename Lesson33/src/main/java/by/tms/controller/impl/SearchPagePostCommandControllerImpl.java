@@ -30,16 +30,7 @@ public class SearchPagePostCommandControllerImpl implements CommandController {
             String userUUID = checkAndGetUserUUID(request, session);
             productService.deleteFoundProducts(userUUID);
             productService.saveFoundedProducts(products, userUUID);
-//            Set<Product> productsByUserSearchCondition = productService.getProductsByUserSearchCondition(userUUID);
-//            request.getServletContext().setAttribute(FOUND_PRODUCTS, productsByUserSearchCondition);
-////            request.getServletContext().setAttribute(FOUND_PRODUCTS+userUUID, productsByUserSearchCondition);
-//            productService.deleteFoundProducts(userUUID);
-
-            //one for all - remake
-//            request.getServletContext().setAttribute(FOUND_PRODUCTS, products);
         }
         return SEARCH_SAVED_RESULT_PAGE;
     }
-
-
 }

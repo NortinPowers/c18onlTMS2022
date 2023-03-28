@@ -30,39 +30,6 @@ public class ApplicationServlet extends HttpServlet {
         processRequest(req, resp);
     }
 
-    //    private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        CommandController requestCommandController = defineCommand(req);
-//        try {
-//            String path = requestCommandController.execute(req, resp);
-//            RequestDispatcher dispatcher = req.getRequestDispatcher(path);
-//            dispatcher.forward(req, resp);
-//        } catch (CommandException e) {
-//            log.error("Exception (processRequest())", e);
-//            req.getRequestDispatcher(HOME_PAGE.getPath()).forward(req, resp);
-//        }
-//    }
-//    private void processRequest(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        String commandKey = request.getParameter(COMMAND.getValue());
-//        if (commandKey == null || commandKey.isEmpty()) {
-//            commandKey = HOME_PAGE_COMMAND.getCommand();
-//        }
-//        try {
-//            CommandController baseController = ControllerCommandFactory.defineCommand(Commands.fromString(commandKey));
-//            String pagesPath = baseController.execute(request, response);
-//            //forward
-//            RequestDispatcher dispatcher = request.getRequestDispatcher(pagesPath);
-//            dispatcher.forward(request, response);
-//        } catch (Exception e) {
-//            log.error("It is impossible to go to the address", e);
-////       !!!! логируем сообщение а потом должны перенаправить на страницу с ошибкой("Извините что-то поломалось!!!"),
-////        https://blog.hubspot.com/marketing/http-500-internal-server-error
-////            также можно конверсейшен в URL запроса поместить
-//            //forward
-//            request.getRequestDispatcher("/404.jsp").forward(request, response);
-//        }
-//    }
-
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String commandKey = request.getParameter(COMMAND);
@@ -72,18 +39,10 @@ public class ApplicationServlet extends HttpServlet {
         try {
             CommandController baseController = ControllerCommandFactory.defineCommand(Commands.fromString(commandKey));
             PagesPath pagesPath = baseController.execute(request);
-            //forward
             forwardToAddress(request, response, pagesPath.getPath());
-//            RequestDispatcher dispatcher = request.getRequestDispatcher(pagesPath.getPath());
-//            dispatcher.forward(request, response);
         } catch (Exception e) {
-//            log.error("It is impossible to go to the address", e);
-//       !!!! логируем сообщение а потом должны перенаправить на страницу с ошибкой("Извините что-то поломалось!!!"),
-//        https://blog.hubspot.com/marketing/http-500-internal-server-error
-//            также можно конверсейшен в URL запроса поместить
-            //change forward!
-            forwardToAddress(request, response, "/404.jsp");
-//            request.getRequestDispatcher("/404.jsp").forward(request, response);
+            log.error("It is impossible to go to the address", e);
+            forwardToAddress(request, response, "/500.jsp");
         }
     }
 }

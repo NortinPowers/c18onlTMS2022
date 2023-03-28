@@ -20,16 +20,6 @@ public class DeleteCartProductPageCommandControllerImpl implements CommandContro
     private CartService cartService;
     @Inject
     private UserService userService;
-//    private final CartService cartService = getCartService();
-//    private final UserService userService = getUserService();
-
-//    @Override
-//    public String getStringByGET(HttpServletRequest request, HttpServletResponse response) {
-//        String login = getLogin(request);
-//        Long id = Long.parseLong(request.getParameter(ID.getValue()));
-//        cartService.deleteProduct(userService.getUserId(login), id, true, false);
-//        return SHOPPING_CART_PAGE.getPath();
-//    }
 
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {

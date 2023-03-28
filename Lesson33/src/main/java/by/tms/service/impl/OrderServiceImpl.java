@@ -8,7 +8,6 @@ import by.tms.service.OrderService;
 import java.util.List;
 import lombok.Setter;
 
-//@AllArgsConstructor
 @Setter
 public class OrderServiceImpl implements OrderService {
 

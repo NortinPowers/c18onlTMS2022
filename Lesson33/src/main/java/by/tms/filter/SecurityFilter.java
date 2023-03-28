@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @WebFilter(urlPatterns = {"/view/success-buy.jsp", "/view/favorites.jsp", "/view/favorites", "/view/shopping-cart.jsp", "/view/shopping-cart", "/view/success-register.jsp", "/view/success-register", "/add-cart", "/add-favorite", "/delete-favorite", "/delete-cart-product", "/view/account.jsp",
-        "/view/account", "/account",})
+                          "/view/account", "/account",})
 public class SecurityFilter implements Filter {
 
     @Override

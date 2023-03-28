@@ -25,12 +25,10 @@ public class Constants {
         public static final String FILTER_FOUND_PRODUCTS = "filterFoundProducts";
         public static final String CART_PRODUCTS = "cartProducts";
         public static final String FULL_PRICE = "fullPrice";
-//        public static final String CONNECTION_POOL = "connectionPool";
     }
 
     public class RequestParameters {
 
-        //        public static final String GET = "GET";
         public static final String COMMAND = "command";
         public static final String TYPE = "type";
         public static final String FAVORITE = "favorite";

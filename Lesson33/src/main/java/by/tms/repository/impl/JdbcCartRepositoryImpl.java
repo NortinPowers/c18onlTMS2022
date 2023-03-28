@@ -21,7 +21,6 @@ import org.apache.commons.lang3.tuple.Pair;
 @AllArgsConstructor
 public class JdbcCartRepositoryImpl implements JdbcCartRepository {
 
-    //    private ConnectionPool CONNECTION_POOL;
     private static final String ADD_PRODUCT_TO_CART = "insert into carts (user_id, product_id, cart, favorite) VALUES (?, ?, ?, ?)";
     private static final String GET_CART_PRODUCTS_BY_USER_ID = "select p.id, p.name, p.price, p.type, p.info, c.count from carts c join products p on p.id = c.product_id where c.user_id=? and c.cart=true";
     private static final String GET_FAVORITE_PRODUCTS_BY_USER_ID = "select p.id, p.name, p.price, p.type, p.info, c.count from carts c join products p on p.id = c.product_id where c.user_id=? and c.favorite=true";
@@ -85,20 +84,6 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
         return isEmpty(productId, products);
     }
 
-    private void modifyProductCount(Long userId, Long productId, boolean up) {
-        Integer productCount = getCartProductCount(userId, productId);
-        productCount = getModifyCount(up, productCount);
-        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
-                PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(UPDATE_CURRENT_PRODUCT_COUNT)) {
-            statement.setInt(1, productCount);
-            statement.setLong(2, userId);
-            statement.setLong(3, productId);
-            statement.executeUpdate();
-        } catch (Exception e) {
-            log.error("Exception (deleteProductCartCount()): ", e);
-        }
-    }
-
     @Override
     public Integer getCartProductCount(Long userId, Long productId) {
         int count = 0;
@@ -151,6 +136,20 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
             statement.executeUpdate();
         } catch (Exception e) {
             log.error("Exception (addProductToCart()): ", e);
+        }
+    }
+
+    private void modifyProductCount(Long userId, Long productId, boolean up) {
+        Integer productCount = getCartProductCount(userId, productId);
+        productCount = getModifyCount(up, productCount);
+        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
+                PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(UPDATE_CURRENT_PRODUCT_COUNT)) {
+            statement.setInt(1, productCount);
+            statement.setLong(2, userId);
+            statement.setLong(3, productId);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            log.error("Exception (deleteProductCartCount()): ", e);
         }
     }
 

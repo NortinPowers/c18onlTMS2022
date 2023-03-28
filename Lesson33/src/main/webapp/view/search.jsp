@@ -25,7 +25,6 @@
     <div class="row grid gap-3">
         <div class="col-5 ml-4">
             <div class="row ml-3 mr-3">
-                <%--                <form action="<c:url value="/eshop?command=filter"/>" method="post">--%>
                 <div class="col-12 border border-secondary rounded rounded-5 shadow p-3 mb-5 bg-body-tertiary rounded">
                     <h3 class="text-start ml-5">Filter:</h3>
                     <form action="<c:url value="/eshop?command=filter"/>" method="post">
@@ -44,7 +43,6 @@
                                 <div class="form-outline">
                                     <input type="text" id="minPrice" name="min-price"
                                            class="form-control form-control-lg text-center"
-                                    <%--                                           />--%>
                                            placeholder="Min Price"/>
                                 </div>
                             </div>
@@ -52,7 +50,6 @@
                                 <div class="form-outline">
                                     <input type="text" id="maxPrice" name="max-price"
                                            class="form-control form-control-lg text-center"
-                                    <%--                                           />--%>
                                            placeholder="Max price"/>
                                 </div>
                             </div>
@@ -85,84 +82,84 @@
                     <c:set var="products" value="${applicationScope.filterFoundProducts}"/>
                 </c:otherwise>
             </c:choose>
-            <%--            <c:forEach var="product" items="${applicationScope.foundProducts}">--%>
-            <c:forEach var="product" items="${products}">
-                <div class="card mb-3 ml-1 border border-secondary rounded rounded-5 shadow-sm p-2 bg-body-tertiary rounded mr-1">
-                    <div class="container text-center mb-2">
-                        <div class="row">
-                            <c:set var="access" value="${sessionScope.get('accessPermission')}"/>
-                            <c:choose>
-                                <c:when test="${access == null}">
-                                    <%--                                    <div class="col-sm-12 btn btn-success">--%>
-                                    <div class="col-sm-12">
-                                            <%--                                    in process--%>
-                                        <a href="<c:url value="/eshop?command=product&id=${product.id}"/>"
-                                           class="text-light text-decoration-none btn btn-success btn-block w-auto"
-                                           aria-current="page">
-                                            To product
-                                        </a>
-                                    </div>
-                                </c:when>
-                                <c:otherwise>
-                                    <%--                                    <div class="col-sm-4 btn btn-success">--%>
-                                    <div class="col-sm-4">
-                                        <a href="<c:url value="/eshop?command=product&id=${product.id}"/>"
-                                           class="text-light text-decoration-none btn btn-success btn-block w-auto"
-                                           aria-current="page">
-                                            To product
-                                        </a>
-                                    </div>
-                                    <div class="col-sm-4">
-                                            <%--                                    <div class="col-sm-4 btn btn-success">--%>
-                                        <a href="<c:url value="/eshop?command=add-cart&id=${product.id}&shop=true&location=none"/>"
-                                           class="text-light text-decoration-none btn btn-success btn-block w-auto"
-                                           aria-current="page">
-                                            Buy
-                                        </a>
 
-                                    </div>
-                                    <%--                                    <div class="col-sm-2">--%>
-                                    <div class="col-sm-2 btn btn-success">
-                                        <a href="<c:url value="/eshop?command=add-cart&id=${product.id}&shop=none&location=search"/>">
-                                            <div class="text-center text-light text-decoration-none p-1">
-                                                <i class="bi bi-cart-plus"></i>
+            <c:choose>
+                <c:when test="${products.size()==0}">
+                    <h5 class="text-center">No suitable products found. Enter or change the search terms!</h5>
+                </c:when>
+                <c:otherwise>
+                    <c:forEach var="product" items="${products}">
+                        <div class="card mb-3 ml-1 border border-secondary rounded rounded-5 shadow-sm p-2 bg-body-tertiary rounded mr-1">
+                            <div class="container text-center mb-2">
+                                <div class="row">
+                                    <c:set var="access" value="${sessionScope.get('accessPermission')}"/>
+                                    <c:choose>
+                                        <c:when test="${access == null}">
+                                            <div class="col-sm-12">
+                                                <a href="<c:url value="/eshop?command=product&id=${product.id}"/>"
+                                                   class="text-light text-decoration-none btn btn-success btn-block w-auto"
+                                                   aria-current="page">
+                                                    To product
+                                                </a>
                                             </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-sm-2 btn btn-success">
-                                            <%--                                    <div class="col-sm-2">--%>
-                                        <a href="<c:url value="/eshop?command=add-favorite&id=${product.id}&shop=none&location=search"/>">
-                                            <div class="text-center text-light text-decoration-none p-1">
-                                                <i class="bi bi-heart"></i>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="col-sm-4">
+                                                <a href="<c:url value="/eshop?command=product&id=${product.id}"/>"
+                                                   class="text-light text-decoration-none btn btn-success btn-block w-auto"
+                                                   aria-current="page">
+                                                    To product
+                                                </a>
                                             </div>
-                                        </a>
+                                            <div class="col-sm-4">
+                                                <a href="<c:url value="/eshop?command=add-cart&id=${product.id}&shop=true&location=none"/>"
+                                                   class="text-light text-decoration-none btn btn-success btn-block w-auto"
+                                                   aria-current="page">
+                                                    Buy
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-2 btn btn-success">
+                                                <a href="<c:url value="/eshop?command=add-cart&id=${product.id}&shop=none&location=search"/>">
+                                                    <div class="text-center text-light text-decoration-none p-1">
+                                                        <i class="bi bi-cart-plus"></i>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-2 btn btn-success">
+                                                <a href="<c:url value="/eshop?command=add-favorite&id=${product.id}&shop=none&location=search"/>">
+                                                    <div class="text-center text-light text-decoration-none p-1">
+                                                        <i class="bi bi-heart"></i>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                            </div>
+                            <div class="row g-0">
+                                <div class="col-md-3">
+                                    <img src="<c:url value="/img/${fn:toLowerCase(product.type)}/${product.name}.jpg"/>"
+                                         class="img-fluid rounded-start w-100 p-3"
+                                         alt="${product.name}">
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center">${product.name}</h5>
+                                        <p class="card-text font-italic p-1">${product.info}.</p>
                                     </div>
-                                </c:otherwise>
-                            </c:choose>
-                        </div>
-                    </div>
-                    <div class="row g-0">
-                        <div class="col-md-3">
-                            <img src="<c:url value="/img/${fn:toLowerCase(product.type)}/${product.name}.jpg"/>"
-                                 class="img-fluid rounded-start w-100 p-3"
-                                 alt="${product.name}">
-                        </div>
-                        <div class="col-md-9">
-                            <div class="card-body">
-                                <h5 class="card-title text-center">${product.name}</h5>
-                                <p class="card-text font-italic p-1">${product.info}.</p>
+                                </div>
+                            </div>
+                            <div class="container text-center m-0 p-0">
+                                <div class="row">
+                                    <div class="col-sm-12 fst-italic">
+                                        <p>${product.price}$</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="container text-center m-0 p-0">
-                        <div class="row">
-                            <div class="col-sm-12 fst-italic">
-                                <p>${product.price}$</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </c:forEach>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
 </div>

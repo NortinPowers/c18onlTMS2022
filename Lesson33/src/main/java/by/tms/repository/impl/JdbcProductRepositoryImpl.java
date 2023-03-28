@@ -1,7 +1,8 @@
 package by.tms.repository.impl;
 
-import static by.tms.utils.Constants.ALL;
 import static by.tms.utils.RepositoryJdbcUtils.fillsCollectionValues;
+import static by.tms.utils.RepositoryJdbcUtils.fillsSet;
+import static by.tms.utils.RepositoryJdbcUtils.getQueryDependType;
 
 import by.tms.model.Product;
 import by.tms.repository.ConnectionWrapper;
@@ -10,7 +11,6 @@ import by.tms.utils.RepositoryJdbcUtils;
 import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -22,12 +22,9 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class JdbcProductRepositoryImpl implements JdbcProductRepository {
 
-    //    private ConnectionPool CONNECTION_POOL;
     private static final String GET_ALL_PRODUCTS = "select * from products";
     private static final String GET_PRODUCTS_BY_TYPE = "select * from products where type=?";
     private static final String GET_PRODUCT_TYPE = "select type from products where id=?";
-    //    private static final String GET_PRODUCT_BY_SEARCH_CONDITION_IN_NAME = "select * from products where lower(name) like lower(?)";
-//    private static final String GET_PRODUCT_BY_SEARCH_CONDITION_IN_INFO = "select * from products where lower(info) like lower(?)";
     private static final String ADD_PRODUCT_TO_FOUNDED_PRODUCTS = "insert into founded_products (user_uuid, product_id) VALUES (?, ?)";
     private static final String GET_PRODUCTS_BY_SEARCH_CONDITION_IN_NAME = "select id from products where lower(name) like lower(?)";
     private static final String GET_PRODUCTS_BY_SEARCH_CONDITION_IN_INFO = "select id from products where lower(info) like lower(?)";
@@ -36,7 +33,8 @@ public class JdbcProductRepositoryImpl implements JdbcProductRepository {
     private static final String GET_PRODUCT = "select * from products where id=?";
     private static final String SELECT_PRODUCTS_BY_FILTER = "select p.id, p.name, p.price, p.type, p.info from founded_products fp join products p on fp.product_id = p.id where user_uuid = ? and p.price>=? and p.price<=?";
     private static final String SELECT_ALL_PRODUCTS_BY_FILTER = "select * from products p where p.price>=? and p.price<=?";
-//    private static final String ORDER_BY_FP_ID = " order by fp.id";
+    private static final String PRODUCTS_BASE_MARK = "p";
+    private static final String FOUNDED_PRODUCTS_BASE_MARK = "fp";
 
     @Override
     public List<Product> getProducts() {
@@ -81,19 +79,6 @@ public class JdbcProductRepositoryImpl implements JdbcProductRepository {
 
     @Override
     public Set<Product> getFoundProducts(String searchCondition) {
-//        Set<Product> products = new LinkedHashSet<>();
-//        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
-//                PreparedStatement statementByName = connectionWrapper.getConnection().prepareStatement(GET_PRODUCT_BY_SEARCH_CONDITION_IN_NAME);
-//                PreparedStatement statementByInfo = connectionWrapper.getConnection().prepareStatement(GET_PRODUCT_BY_SEARCH_CONDITION_IN_INFO)) {
-//            statementByName.setString(1, "%" + searchCondition + "%");
-//            fillsCollectionValues(products, statementByName);
-//            statementByInfo.setString(1, "%" + searchCondition + "%");
-//            fillsCollectionValues(products, statementByInfo);
-//        } catch (Exception e) {
-//            log.error("Exception (getFoundProducts()): ", e);
-//        }
-//        return products;
-
         Set<Product> products = new LinkedHashSet<>();
         try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
                 PreparedStatement statementByName = connectionWrapper.getConnection().prepareStatement(GET_PRODUCTS_BY_SEARCH_CONDITION_IN_NAME);
@@ -104,17 +89,6 @@ public class JdbcProductRepositoryImpl implements JdbcProductRepository {
             log.error("Exception (getFoundProducts()): ", e);
         }
         return products;
-    }
-
-    private void fillsSet(String searchCondition, Set<Product> products, PreparedStatement statement) throws SQLException {
-        statement.setString(1, "%" + searchCondition + "%");
-        ResultSet resultSetByName = statement.executeQuery();
-        while (resultSetByName.next()) {
-            Product product = Product.builder()
-                                     .id(resultSetByName.getLong("id"))
-                                     .build();
-            products.add(product);
-        }
     }
 
     @Override
@@ -134,8 +108,6 @@ public class JdbcProductRepositoryImpl implements JdbcProductRepository {
         } catch (Exception e) {
             log.error("Exception (getProductsByUserSearchCondition()): ", e);
         }
-
-        //join for search
         return products;
     }
 
@@ -169,14 +141,12 @@ public class JdbcProductRepositoryImpl implements JdbcProductRepository {
     @Override
     public Set<Product> selectFoundedProductsByFilter(String type, BigDecimal minPrice, BigDecimal maxPrice, String userUUID) {
         Set<Product> products = new LinkedHashSet<>();
-        String query = getQueryDependType(type, SELECT_PRODUCTS_BY_FILTER, "fp");
-//        boolean isTypeAll = isTypeAll(type);
+        String query = getQueryDependType(type, SELECT_PRODUCTS_BY_FILTER, FOUNDED_PRODUCTS_BASE_MARK);
         try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
                 PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(query)) {
             statement.setString(1, userUUID);
             statement.setBigDecimal(2, minPrice);
             statement.setBigDecimal(3, maxPrice);
-//            setStatementPriceAndType(type, minPrice, maxPrice, statement);
             fillsCollectionValues(products, statement);
         } catch (Exception e) {
             log.error("Exception (selectProductsByFilter()): ", e);
@@ -184,54 +154,14 @@ public class JdbcProductRepositoryImpl implements JdbcProductRepository {
         return products;
     }
 
-//    private void setStatementPriceAndType(String type, BigDecimal minPrice, BigDecimal maxPrice, PreparedStatement statement) throws SQLException {
-//        statement.setBigDecimal(2, minPrice);
-//        statement.setBigDecimal(3, maxPrice);
-////        if (isTypeAll) {
-////            statement.setString(4, type);
-////        }
-//    }
-
-    //    private boolean isTypeAll(String type) {
-//        boolean isAllType = false;
-//        if (!ALL.equals(type)) {
-//            isAllType = true;
-//        }
-//        return isAllType;
-//    }
-//del
-    private String getQueryDependType(String type, String query, String baseMark) {
-        String fullQuery;
-        if (!ALL.equals(type)) {
-//            fullQuery = query + " and p.type='" + type + "'" + ORDER_BY_FP_ID;
-            fullQuery = query + " and p.type='" + type + "' order by " + baseMark + ".id";
-        } else {
-//            fullQuery = query + ORDER_BY_FP_ID;
-            fullQuery = query + " order by " + baseMark + ".id";
-        }
-        return fullQuery;
-    }
-
     @Override
     public Set<Product> selectAllProductsByFilter(String type, BigDecimal minPrice, BigDecimal maxPrice) {
         Set<Product> products = new LinkedHashSet<>();
-//        String query;
-        String query = getQueryDependType(type, SELECT_ALL_PRODUCTS_BY_FILTER, "p");
-//        if (!ALL.equals(type)) {
-//            query = SELECT_ALL_PRODUCTS_BY_FILTER + " and p.type='" + type + "' order by p.id";
-//        } else {
-//            query = SELECT_ALL_PRODUCTS_BY_FILTER +" order by p.id";
-//        }
-//        String query = getQueryDependType(type, SELECT_ALL_PRODUCTS_BY_FILTER);
-//        boolean isTypeAll = isTypeAll(type);
+        String query = getQueryDependType(type, SELECT_ALL_PRODUCTS_BY_FILTER, PRODUCTS_BASE_MARK);
         try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
                 PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(query)) {
             statement.setBigDecimal(1, minPrice);
             statement.setBigDecimal(2, maxPrice);
-//            if (isTypeAll) {
-//                statement.setString(3, type);
-//            }
-//            setStatementPriceAndType(type, minPrice, maxPrice, isTypeAll, statement);
             fillsCollectionValues(products, statement);
         } catch (Exception e) {
             log.error("Exception (selectAllProductsByFilter()): ", e);

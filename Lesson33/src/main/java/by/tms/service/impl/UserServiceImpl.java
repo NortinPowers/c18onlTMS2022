@@ -6,7 +6,6 @@ import by.tms.repository.JdbcUserRepository;
 import by.tms.service.UserService;
 import lombok.Setter;
 
-//@AllArgsConstructor
 @Setter
 public class UserServiceImpl implements UserService {
 

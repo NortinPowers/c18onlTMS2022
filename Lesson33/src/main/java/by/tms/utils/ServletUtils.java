@@ -4,13 +4,13 @@ import static by.tms.utils.Constants.Attributes.ACCESS_PERMISSION;
 import static by.tms.utils.Constants.Attributes.USER_NAME;
 import static by.tms.utils.Constants.Attributes.USER_UUID;
 import static by.tms.utils.Constants.CONVERSATION;
+import static by.tms.utils.ControllerUtils.checkAndGetUserUUID;
 
 import by.tms.model.Order;
 import by.tms.model.Ordering;
 import by.tms.model.Product;
 import by.tms.model.User;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -76,13 +76,13 @@ public class ServletUtils {
         }
     }
 
-    public static String createOrderNumber(Long id, List<Product> products) {
-        Order order = new Order(LocalDate.now(), id, products.size());
-        return String.valueOf(order.hashCode());
+    public static String createOrderNumber(Long id, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        String userUUID = checkAndGetUserUUID(request, session);
+        return "#" + id + "-" + userUUID;
     }
 
     public static void forwardToAddress(HttpServletRequest request, HttpServletResponse response, String address) throws ServletException, IOException {
-//        req.getServletContext().getRequestDispatcher(address).forward(req, resp);
         RequestDispatcher dispatcher = request.getRequestDispatcher(address);
         dispatcher.forward(request, response);
     }

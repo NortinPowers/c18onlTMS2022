@@ -14,27 +14,11 @@ import by.tms.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import lombok.Setter;
 
-//@Slf4j
 @Setter
 public class LoginPagePostCommandControllerImpl implements CommandController {
 
     @Inject
     private UserService userService;
-//    private final UserService userService = getUserService();
-
-//    @Override
-//    public String getStringByPOST(HttpServletRequest request, HttpServletResponse response) {
-//        String login = request.getParameter(NAME.getValue());
-//        String password = request.getParameter(PASSWORD.getValue());
-//        String path;
-//        if (userService.isVerifiedUser(login, password)) {
-//            saveUserSession(request, login);
-//            path = getHomePagePath();
-//        } else {
-//            path = LOGIN_JSP_PAGE.getPath();
-//        }
-//        return path;
-//    }
 
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {
@@ -49,16 +33,4 @@ public class LoginPagePostCommandControllerImpl implements CommandController {
         }
         return path;
     }
-
-//    @Override
-//    public String getStringByGET(HttpServletRequest request, HttpServletResponse response) {
-//        HttpSession session = request.getSession();
-//        String path;
-//        if (session.getAttribute(ACCESS_PERMISSION.getAttribute()) != null) {
-//            path = getHomePagePath();
-//        } else {
-//            path = LOGIN_JSP_PAGE.getPath();
-//        }
-//        return path;
-//    }
 }

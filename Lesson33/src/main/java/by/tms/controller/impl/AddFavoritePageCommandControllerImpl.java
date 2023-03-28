@@ -22,7 +22,6 @@ import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import lombok.Setter;
 
-//@Slf4j
 @Setter
 public class AddFavoritePageCommandControllerImpl implements CommandController {
 
@@ -33,25 +32,6 @@ public class AddFavoritePageCommandControllerImpl implements CommandController {
     @Inject
     private UserService userService;
 
-//    private final ProductService productService = getProductService();
-//    private final CartService cartService = getCartService();
-//    private final UserService userService = getUserService();
-
-//    @Override
-//    public String getStringByGET(HttpServletRequest request, HttpServletResponse response) {
-//        String login = getLogin(request);
-//        String path;
-//        try {
-//            Long id = Long.parseLong(request.getParameter(ID.getValue()));
-//            cartService.addProductToCart(userService.getUserId(login), id, false, true);
-//            path = getPathByType(productService.getProductTypeValue(id));
-//        } catch (Exception e) {
-//            log.error("Exception (get-AddFPS): ", e);
-//            return getHomePagePath();
-//        }
-//        return path;
-//    }
-
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {
         String login = getLogin(request);
@@ -60,7 +40,6 @@ public class AddFavoritePageCommandControllerImpl implements CommandController {
         try {
             Long id = Long.parseLong(request.getParameter(ID));
             cartService.addProductToCart(userService.getUserId(login), id, false, true);
-//            path = getPathByType(productService.getProductTypeValue(id));
             String productType = productService.getProductTypeValue(id);
             if (Objects.equals(location, SEARCH)) {
                 path = SEARCH_SAVED_RESULT_PAGE;
@@ -71,8 +50,6 @@ public class AddFavoritePageCommandControllerImpl implements CommandController {
             }
         } catch (Exception e) {
             throwCommandException(request, e, this.getClass());
-//            log.error("Exception (get-AddFPS): ", e);
-//            return getHomePagePath();
         }
         return path;
     }

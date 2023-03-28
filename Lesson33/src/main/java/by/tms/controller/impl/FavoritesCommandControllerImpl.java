@@ -24,19 +24,6 @@ public class FavoritesCommandControllerImpl implements CommandController {
     private CartService cartService;
     @Inject
     private UserService userService;
-//    private final CartService cartService = getCartService();
-//    private final UserService userService = getUserService();
-
-//    @Override
-//    public String getStringByGET(HttpServletRequest request, HttpServletResponse response) {
-//        String login = getLogin(request);
-//        Long userId = userService.getUserId(login);
-//        List<Product> favoriteProducts = cartService.getProductsFromCart(userId, false, true).stream()
-//                                                    .map(Pair::getLeft)
-//                                                    .toList();
-//        request.getServletContext().setAttribute(FAVORITE_PRODUCTS.getAttribute(), favoriteProducts);
-//        return FAVORITES_JSP_PAGE.getPath();
-//    }
 
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {

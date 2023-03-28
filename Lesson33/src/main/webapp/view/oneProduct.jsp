@@ -8,7 +8,6 @@
     <jsp:include page="bootstrap.jsp"/>
 </head>
 <body>
-<%--<c:set var="product" value="${applicationScope.get('oneProduct')}"/>--%>
 <jsp:include page="/view/navigate.jsp"/>
 <div class="card mr-5 ml-5 mt-5 shadow bg-body-tertiary rounded" style="max-width: 14rem">
     <img class="card-img-top" style="max-height: 20rem"

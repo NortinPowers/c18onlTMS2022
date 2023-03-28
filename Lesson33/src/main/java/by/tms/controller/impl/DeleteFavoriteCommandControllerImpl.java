@@ -14,7 +14,6 @@ import by.tms.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import lombok.Setter;
 
-//@Slf4j
 @Setter
 public class DeleteFavoriteCommandControllerImpl implements CommandController {
 
@@ -22,21 +21,6 @@ public class DeleteFavoriteCommandControllerImpl implements CommandController {
     private CartService cartService;
     @Inject
     private UserService userService;
-//    private final CartService cartService = getCartService();
-//    private final UserService userService = getUserService();
-
-//    @Override
-//    public String getStringByGET(HttpServletRequest request, HttpServletResponse response) {
-//        String login = getLogin(request);
-//        try {
-//            Long id = Long.parseLong(request.getParameter(ID.getValue()));
-//            cartService.deleteProduct(userService.getUserId(login), id, false, true);
-//        } catch (Exception e) {
-//            throwCommandException(request, e, this.getClass());
-//            log.error("Exception (get-DelFPS): ", e);
-//        }
-//        return FAVORITES_PAGE.getPath();
-//    }
 
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {
@@ -46,7 +30,6 @@ public class DeleteFavoriteCommandControllerImpl implements CommandController {
             cartService.deleteProduct(userService.getUserId(login), id, false, true);
         } catch (Exception e) {
             throwCommandException(request, e, this.getClass());
-//            log.error("Exception (get-DelFPS): ", e);
         }
         return FAVORITES_PAGE;
     }

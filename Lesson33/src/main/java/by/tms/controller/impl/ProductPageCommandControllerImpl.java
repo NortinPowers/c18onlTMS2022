@@ -19,14 +19,6 @@ public class ProductPageCommandControllerImpl implements CommandController {
 
     @Inject
     private ProductService productService;
-//    private final ProductService productService = getProductService();
-
-//    @Override
-//    public String getStringByGET(HttpServletRequest request, HttpServletResponse response) {
-//        List<Product> products = productService.getProductsByType(request.getParameter(TYPE.getValue()));
-//        request.getServletContext().setAttribute(PRODUCTS.getAttribute(), products);
-//        return PRODUCTS_PAGE.getPath();
-//    }
 
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {

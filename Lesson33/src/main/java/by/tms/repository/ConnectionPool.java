@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 public class ConnectionPool {
 
     private static volatile ConnectionPool instance;
-
     private static final String DB_PROPERTY_FILE = "application";
     private static final String DB_URL = "db.url";
     private static final String DB_LOGIN = "db.login";
@@ -20,7 +19,6 @@ public class ConnectionPool {
     private static final String DB_DRIVER = "db_driver";
     private static final int MAX_CONNECTION_COUNT = 20;
     private static final int MIN_CONNECTION_COUNT = 10;
-
     private static final String URL;
     private static final String LOGIN;
     private static final String PASS;
@@ -66,7 +64,6 @@ public class ConnectionPool {
             currentConnectionNumber.incrementAndGet();
         } catch (SQLException e) {
             log.error("New connection wasn't add in the connection pool", e);
-//            throw new Exception("New connection wasn't add in the connection pool", e);
         }
     }
 
@@ -80,7 +77,6 @@ public class ConnectionPool {
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
             log.error("Max count of connections was reached!");
-//            throw new Exception("Max count of connections was reached!");
         }
         return connectionWrapper;
     }
@@ -95,7 +91,6 @@ public class ConnectionPool {
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 log.error("Connection wasn't returned into pool properly");
-//                throw new Exception("Connection wasn't returned into pool properly");
             }
         }
     }

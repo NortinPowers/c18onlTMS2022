@@ -21,21 +21,10 @@ import org.slf4j.MDC;
 @Slf4j
 public class ControllerUtils {
 
-//    public static String getHomePagePath() {
-//        return HOME_PAGE.getPath();
-//    }
-
     public static PagesPath getHomePagePath() {
         return HOME_PAGE;
     }
 
-    //    public static String getPathByType(String type) {
-//        String path;
-//        path = "/" + ESHOP_PAGE.getPath() + "?" + COMMAND + "="
-//                + PRODUCTS_PAGE_COMMAND.getCommand() + "&" + TYPE
-//                + "=" + type;
-//        return path;
-//    }
     public static String getPathByType(String type) {
         return PATH_TO_PRODUCT_TYPE + type;
     }

@@ -15,18 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LogoutPageCommandControllerImpl implements CommandController {
 
-//    @Override
-//    public String getStringByGET(HttpServletRequest request, HttpServletResponse response) {
-//        HttpSession session = request.getSession(false);
-//        User user = (User) session.getAttribute(ACCESS_PERMISSION.getAttribute());
-//        String userUUID = (String) session.getAttribute(USER_UUID.getAttribute());
-//        log.info("User [" + userUUID + "] with a login " + user.getLogin() + " logged out of the system");
-//        session.removeAttribute(ACCESS_PERMISSION.getAttribute());
-//        session.removeAttribute(USER_UUID.getAttribute());
-//        session.invalidate();
-//        return getHomePagePath();
-//    }
-
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession(false);
