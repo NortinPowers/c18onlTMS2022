@@ -1,12 +1,14 @@
 package by.tms.servlet;
 
-import static by.tms.model.PagesPath.HOME_PAGE;
+import static by.tms.model.Commands.HOME_PAGE_COMMAND;
+import static by.tms.utils.Constants.RequestParameters.COMMAND;
+import static by.tms.utils.ServletUtils.forwardToAddress;
 
-import by.tms.controller.Command;
-import by.tms.exception.CommandException;
-import by.tms.utils.CommandFactory;
+import by.tms.controller.CommandController;
+import by.tms.model.Commands;
+import by.tms.model.PagesPath;
+import by.tms.utils.ControllerCommandFactory;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,15 +30,19 @@ public class ApplicationServlet extends HttpServlet {
         processRequest(req, resp);
     }
 
-    private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Command requestCommand = CommandFactory.defineCommand(req);
+    private void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String commandKey = request.getParameter(COMMAND);
+        if (commandKey == null || commandKey.isEmpty()) {
+            commandKey = HOME_PAGE_COMMAND.getCommand();
+        }
         try {
-            String path = requestCommand.execute(req, resp);
-            RequestDispatcher dispatcher = req.getRequestDispatcher(path);
-            dispatcher.forward(req, resp);
-        } catch (CommandException e) {
-            log.error("Exception (processRequest())" + e);
-            req.getRequestDispatcher(HOME_PAGE.getPath()).forward(req, resp);
+            CommandController baseController = ControllerCommandFactory.defineCommand(Commands.fromString(commandKey));
+            PagesPath pagesPath = baseController.execute(request);
+            forwardToAddress(request, response, pagesPath.getPath());
+        } catch (Exception e) {
+            log.error("It is impossible to go to the address", e);
+            forwardToAddress(request, response, "/500.jsp");
         }
     }
 }

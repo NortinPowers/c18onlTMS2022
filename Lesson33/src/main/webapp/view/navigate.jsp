@@ -6,6 +6,14 @@
             <a class="btn btn-outline-warning"
                href="<c:url value="/"/>">Home</a>
         </li>
+        <li class="nav-item">
+            <a class="btn btn-outline-warning ml-2"
+               href="<c:url value="/eshop?command=search"/>">
+                <div class="text-center p-1">
+                    <i class="bi bi-search"></i>
+                </div>
+            </a>
+        </li>
         <c:set var="access" value="${sessionScope.get('accessPermission')}"/>
         <c:if test="${access != null}">
             <li class="nav-item">

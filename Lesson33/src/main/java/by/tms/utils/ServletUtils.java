@@ -1,19 +1,23 @@
 package by.tms.utils;
 
-import static by.tms.model.Attribute.ACCESS_PERMISSION;
-import static by.tms.model.Attribute.USER_NAME;
-import static by.tms.model.Attribute.USER_UUID;
-import static by.tms.model.MdcKey.CONVERSATION;
+import static by.tms.utils.Constants.Attributes.ACCESS_PERMISSION;
+import static by.tms.utils.Constants.Attributes.USER_NAME;
+import static by.tms.utils.Constants.Attributes.USER_UUID;
+import static by.tms.utils.Constants.CONVERSATION;
+import static by.tms.utils.ControllerUtils.checkAndGetUserUUID;
 
 import by.tms.model.Order;
 import by.tms.model.Ordering;
 import by.tms.model.Product;
 import by.tms.model.User;
-import java.time.LocalDate;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
@@ -28,18 +32,18 @@ public class ServletUtils {
         User user = User.builder()
                         .login(login)
                         .build();
-        session.setAttribute(ACCESS_PERMISSION.getAttribute(), user);
+        session.setAttribute(ACCESS_PERMISSION, user);
         log.info("The user with a login " + user.getLogin() + " is logged in");
-        session.setAttribute(USER_NAME.getAttribute(), login);
+        session.setAttribute(USER_NAME, login);
         String userUUID = UUID.randomUUID().toString();
-        MDC.put(CONVERSATION.getKey(), userUUID);
-        session.setAttribute(USER_UUID.getAttribute(), userUUID);
+        MDC.put(CONVERSATION, userUUID);
+        session.setAttribute(USER_UUID, userUUID);
         log.info("User with the login " + user.getLogin() + " has been assigned a UUID");
     }
 
     public static String getLogin(HttpServletRequest req) {
-        if (req.getSession().getAttribute(USER_NAME.getAttribute()) != null) {
-            return req.getSession().getAttribute(USER_NAME.getAttribute()).toString();
+        if (req.getSession().getAttribute(USER_NAME) != null) {
+            return req.getSession().getAttribute(USER_NAME).toString();
         } else {
             return null;
         }
@@ -72,8 +76,14 @@ public class ServletUtils {
         }
     }
 
-    public static String createOrderNumber(Long id, List<Product> products) {
-        Order order = new Order(LocalDate.now(), id, products.size());
-        return String.valueOf(order.hashCode());
+    public static String createOrderNumber(Long id, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        String userUUID = checkAndGetUserUUID(request, session);
+        return "#" + id + "-" + userUUID;
+    }
+
+    public static void forwardToAddress(HttpServletRequest request, HttpServletResponse response, String address) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+        dispatcher.forward(request, response);
     }
 }

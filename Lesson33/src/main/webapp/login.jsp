@@ -8,7 +8,7 @@
 <body>
 <div class="login-box">
     <h2>Login</h2>
-    <form action="<c:url value="/eshop?command=login"/>" method="post">
+    <form action="<c:url value="/eshop?command=login-post"/>" method="post">
         <div class="user-box">
             <input type="text" name="name" required="">
             <label>Username</label>

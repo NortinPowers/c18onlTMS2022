@@ -3,9 +3,10 @@
 <html>
 <head>
     <title>Not Found</title>
-    <link rel="stylesheet" href="<c:url value="/css/glitch.css"/>">
+    <jsp:include page="/view/bootstrap.jsp"/>
 </head>
 <body>
-<h1>Resource not found!</h1>
+<jsp:include page="/view/navigate.jsp"/>
+<h1 class="text-center mt-5">Resource not found!</h1>
 </body>
 </html>

@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="login-box">
-    <form action="<c:url value="/eshop?command=create-user"/>" method="post" class="registration">
+    <form action="<c:url value="/eshop?command=create-user-post"/>" method="post" class="registration">
         <h1>Register form</h1>
         <div class="user-box">
             <label for="login">

@@ -1,7 +1,6 @@
 package by.tms.repository.impl;
 
 import by.tms.model.User;
-import by.tms.repository.ConnectionPool;
 import by.tms.repository.ConnectionWrapper;
 import by.tms.repository.JdbcUserRepository;
 import java.sql.Date;
@@ -15,14 +14,13 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class JdbcUserRepositoryImpl implements JdbcUserRepository {
 
-    private ConnectionPool connectionPool;
     private static final String ADD_USER = "insert into users (login, password, name, surname, email, birthday) values (?, ?, ?, ?, ?, ?)";
     private static final String GET_USER_BY_LOGIN = "select * from users where login=?";
     private static final String GET_USER_ID = "select id from users where login=?";
 
     @Override
     public void addUser(User user) {
-        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
                 PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(ADD_USER)) {
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
@@ -32,14 +30,14 @@ public class JdbcUserRepositoryImpl implements JdbcUserRepository {
             statement.setDate(6, Date.valueOf(user.getBirthday()));
             statement.executeUpdate();
         } catch (Exception e) {
-            log.error("Exception (addUser()): " + e);
+            log.error("Exception (addUser()): ", e);
         }
     }
 
     @Override
     public User getUserByLogin(String login) {
         User user = null;
-        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
                 PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(GET_USER_BY_LOGIN)) {
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
@@ -55,7 +53,7 @@ public class JdbcUserRepositoryImpl implements JdbcUserRepository {
                            .build();
             }
         } catch (Exception e) {
-            log.error("Exception (getUser()): " + e);
+            log.error("Exception (getUser()): ", e);
         }
         return user;
     }
@@ -63,7 +61,7 @@ public class JdbcUserRepositoryImpl implements JdbcUserRepository {
     @Override
     public Long getUserId(String login) {
         Long id = null;
-        try (ConnectionWrapper connectionWrapper = connectionPool.getConnectionWrapper();
+        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
                 PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(GET_USER_ID)) {
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
@@ -71,7 +69,7 @@ public class JdbcUserRepositoryImpl implements JdbcUserRepository {
                 id = resultSet.getLong("id");
             }
         } catch (Exception e) {
-            log.error("Exception (getUserId()): " + e);
+            log.error("Exception (getUserId()): ", e);
         }
         return id;
     }

@@ -1,13 +1,15 @@
 package by.tms.service.impl;
 
+import by.tms.model.Inject;
 import by.tms.model.User;
 import by.tms.repository.JdbcUserRepository;
 import by.tms.service.UserService;
-import lombok.AllArgsConstructor;
+import lombok.Setter;
 
-@AllArgsConstructor
+@Setter
 public class UserServiceImpl implements UserService {
 
+    @Inject
     private JdbcUserRepository jdbcUserRepository;
 
     @Override
