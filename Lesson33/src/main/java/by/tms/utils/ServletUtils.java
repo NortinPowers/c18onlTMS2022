@@ -4,7 +4,6 @@ import static by.tms.utils.Constants.Attributes.ACCESS_PERMISSION;
 import static by.tms.utils.Constants.Attributes.USER_NAME;
 import static by.tms.utils.Constants.Attributes.USER_UUID;
 import static by.tms.utils.Constants.CONVERSATION;
-import static by.tms.utils.ControllerUtils.checkAndGetUserUUID;
 
 import by.tms.model.Order;
 import by.tms.model.Ordering;
@@ -76,10 +75,9 @@ public class ServletUtils {
         }
     }
 
-    public static String createOrderNumber(Long id, HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        String userUUID = checkAndGetUserUUID(request, session);
-        return "#" + id + "-" + userUUID;
+    public static String createOrderNumber(Long id) {
+        String UUID = java.util.UUID.randomUUID().toString();
+        return "#" + id + "-" + UUID;
     }
 
     public static void forwardToAddress(HttpServletRequest request, HttpServletResponse response, String address) throws ServletException, IOException {

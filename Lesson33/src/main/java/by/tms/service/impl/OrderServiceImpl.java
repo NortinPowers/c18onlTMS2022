@@ -28,4 +28,9 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getOrdersById(Long id) {
         return jdbcOrderRepository.getOrdersById(id);
     }
+
+    @Override
+    public boolean checkOrderNumber(String number) {
+        return jdbcOrderRepository.checkOrderNumber(number);
+    }
 }

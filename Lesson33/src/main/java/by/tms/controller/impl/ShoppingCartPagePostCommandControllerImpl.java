@@ -37,9 +37,13 @@ public class ShoppingCartPagePostCommandControllerImpl implements CommandControl
         PagesPath path;
         if (Constants.BUY.equals(buyButton)) {
             List<Product> products = cartService.getPurchasedProducts(userId, true, false);
-            String number = createOrderNumber(userId, request);
-            orderService.createOrder(number, userId);
-            products.forEach(product -> orderService.saveProductInOrderConfigurations(number, product));
+            String orderNumber = "";
+            while (!orderService.checkOrderNumber(orderNumber) || orderNumber.equals("")) {
+                orderNumber = createOrderNumber(userId);
+            }
+            orderService.createOrder(orderNumber, userId);
+            String finalOrderNumber = orderNumber;
+            products.forEach(product -> orderService.saveProductInOrderConfigurations(finalOrderNumber, product));
             cartService.deleteCartProductsAfterBuy(userId);
             path = SUCCESS_BUY_JSP_PAGE;
         } else {
