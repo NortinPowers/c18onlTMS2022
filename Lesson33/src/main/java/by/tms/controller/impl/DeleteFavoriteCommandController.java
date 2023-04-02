@@ -1,6 +1,6 @@
 package by.tms.controller.impl;
 
-import static by.tms.model.PagesPath.SHOPPING_CART_PAGE;
+import static by.tms.model.PagesPath.FAVORITES_PAGE;
 import static by.tms.utils.Constants.RequestParameters.ID;
 import static by.tms.utils.ServletUtils.getLogin;
 
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import lombok.Setter;
 
 @Setter
-public class DeleteCartProductPageCommandControllerImpl implements CommandController {
+public class DeleteFavoriteCommandController implements CommandController {
 
     @Inject
     private CartService cartService;
@@ -24,8 +24,12 @@ public class DeleteCartProductPageCommandControllerImpl implements CommandContro
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {
         String login = getLogin(request);
+//        try {
         Long id = Long.parseLong(request.getParameter(ID));
-        cartService.deleteProduct(userService.getUserId(login), id, true, false);
-        return SHOPPING_CART_PAGE;
+        cartService.deleteProduct(userService.getUserId(login), id, false, true);
+//        } catch (Exception e) {
+//            throwCommandException(request, e, this.getClass());
+//        }
+        return FAVORITES_PAGE;
     }
 }

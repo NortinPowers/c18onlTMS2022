@@ -18,7 +18,7 @@ import lombok.Setter;
 import org.apache.commons.lang3.tuple.Pair;
 
 @Setter
-public class ShoppingCartPageCommandControllerImpl implements CommandController {
+public class ShoppingCartPageCommandController implements CommandController {
 
     @Inject
     private CartService cartService;

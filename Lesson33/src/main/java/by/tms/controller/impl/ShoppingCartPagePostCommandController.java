@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import lombok.Setter;
 
 @Setter
-public class ShoppingCartPagePostCommandControllerImpl implements CommandController {
+public class ShoppingCartPagePostCommandController implements CommandController {
 
     @Inject
     private OrderService orderService;
@@ -31,14 +31,16 @@ public class ShoppingCartPagePostCommandControllerImpl implements CommandControl
 
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {
-        String buyButton = request.getParameter(BUY);
+//        if (Constants.BUY.equals(buyButton)) {
         String login = getLogin(request);
         Long userId = userService.getUserId(login);
         PagesPath path;
-        if (Constants.BUY.equals(buyButton)) {
+        String buyButton = request.getParameter(BUY);
+        if (buyButton.equals(Constants.BUY)) {
             List<Product> products = cartService.getPurchasedProducts(userId, true, false);
             String orderNumber = "";
-            while (!orderService.checkOrderNumber(orderNumber) || orderNumber.equals("")) {
+//            while (!orderService.checkOrderNumber(orderNumber) || orderNumber.equals("")) {
+            while (!orderService.checkOrderNumber(orderNumber) || "".equals(orderNumber)) {
                 orderNumber = createOrderNumber(userId);
             }
             orderService.createOrder(orderNumber, userId);

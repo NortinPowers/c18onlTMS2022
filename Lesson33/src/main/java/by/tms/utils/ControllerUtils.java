@@ -6,15 +6,24 @@ import static by.tms.model.PagesPath.TV_PRODUCTS_PAGE;
 import static by.tms.utils.Constants.Attributes.USER_UUID;
 import static by.tms.utils.Constants.CONVERSATION;
 import static by.tms.utils.Constants.PATH_TO_PRODUCT_TYPE;
+import static by.tms.utils.Constants.RequestParameters.BIRTHDAY;
+import static by.tms.utils.Constants.RequestParameters.EMAIL;
+import static by.tms.utils.Constants.RequestParameters.NAME;
+import static by.tms.utils.Constants.RequestParameters.PASSWORD;
+import static by.tms.utils.Constants.RequestParameters.SURNAME;
 
 import by.tms.exception.CommandException;
 import by.tms.model.PagesPath;
 import by.tms.model.ProductType;
+import by.tms.model.User;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.MDC;
 
 @UtilityClass
@@ -62,5 +71,21 @@ public class ControllerUtils {
             log.info("Not logged in user with UUID " + userUUID + " searches for products");
         }
         return userUUID;
+    }
+
+    public static User getUser(HttpServletRequest request, String login) {
+        return User.builder()
+                   .login(login)
+                   .password(request.getParameter(PASSWORD))
+                   .name(request.getParameter(NAME))
+                   .surname(request.getParameter(SURNAME))
+                   .email(request.getParameter(EMAIL))
+                   .birthday(LocalDate.parse(request.getParameter(BIRTHDAY)))
+                   .build();
+    }
+
+    public static BigDecimal getPrice(HttpServletRequest request, String param, BigDecimal defaultValue) {
+        String value = request.getParameter(param);
+        return StringUtils.isNotBlank(value) ? new BigDecimal(value) : defaultValue;
     }
 }

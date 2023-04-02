@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class LogoutPageCommandControllerImpl implements CommandController {
+public class LogoutPageCommandController implements CommandController {
 
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {

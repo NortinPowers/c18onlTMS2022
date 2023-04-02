@@ -11,9 +11,7 @@ import static by.tms.utils.Constants.RequestParameters.PRODUCT_PAGE;
 import static by.tms.utils.Constants.RequestParameters.SEARCH;
 import static by.tms.utils.Constants.RequestParameters.SHOP;
 import static by.tms.utils.Constants.RequestParameters.TRUE;
-import static by.tms.utils.ControllerUtils.getHomePagePath;
 import static by.tms.utils.ControllerUtils.getPagePathByType;
-import static by.tms.utils.ControllerUtils.throwCommandException;
 import static by.tms.utils.ServletUtils.getLogin;
 
 import by.tms.controller.CommandController;
@@ -28,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import lombok.Setter;
 
 @Setter
-public class AddCartPageCommandControllerImpl implements CommandController {
+public class AddCartPageCommandController implements CommandController {
 
     @Inject
     private ProductService productService;
@@ -39,28 +37,29 @@ public class AddCartPageCommandControllerImpl implements CommandController {
 
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {
+        PagesPath path;
+//        PagesPath path = getHomePagePath();
+//        try {
+        Long id = Long.parseLong(request.getParameter(ID));
+        String shopFlag = request.getParameter(SHOP);
+        String location = request.getParameter(LOCATION);
         String login = getLogin(request);
-        PagesPath path = getHomePagePath();
-        try {
-            Long id = Long.parseLong(request.getParameter(ID));
-            String shopFlag = request.getParameter(SHOP);
-            String location = request.getParameter(LOCATION);
-            cartService.addProductToCart(userService.getUserId(login), id, true, false);
-            if (Objects.equals(shopFlag, TRUE)) {
-                path = SHOPPING_CART_PAGE;
-            } else if (Objects.equals(location, FAVORITE)) {
-                path = FAVORITES_PAGE;
-            } else if (Objects.equals(location, SEARCH)) {
-                path = SEARCH_SAVED_RESULT_PAGE;
-            } else if (Objects.equals(location, PRODUCT_PAGE)) {
-                path = PRODUCT_JSP_PAGE;
-            } else {
-                String productType = productService.getProductTypeValue(id);
-                path = getPagePathByType(productType);
-            }
-        } catch (Exception e) {
-            throwCommandException(request, e, this.getClass());
+        cartService.addProductToCart(userService.getUserId(login), id, true, false);
+        if (Objects.equals(shopFlag, TRUE)) {
+            path = SHOPPING_CART_PAGE;
+        } else if (Objects.equals(location, FAVORITE)) {
+            path = FAVORITES_PAGE;
+        } else if (Objects.equals(location, SEARCH)) {
+            path = SEARCH_SAVED_RESULT_PAGE;
+        } else if (Objects.equals(location, PRODUCT_PAGE)) {
+            path = PRODUCT_JSP_PAGE;
+        } else {
+            String productType = productService.getProductTypeValue(id);
+            path = getPagePathByType(productType);
         }
+//        } catch (Exception e) {
+//            throwCommandException(request, e, this.getClass());
+//        }
         return path;
     }
 }

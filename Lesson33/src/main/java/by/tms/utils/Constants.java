@@ -11,6 +11,7 @@ public class Constants {
     public static final String SAVE = "save";
     public static final String ALL = "all";
 
+    @UtilityClass
     public class Attributes {
 
         public static final String USER = "user";
@@ -27,6 +28,7 @@ public class Constants {
         public static final String FULL_PRICE = "fullPrice";
     }
 
+    @UtilityClass
     public class RequestParameters {
 
         public static final String COMMAND = "command";

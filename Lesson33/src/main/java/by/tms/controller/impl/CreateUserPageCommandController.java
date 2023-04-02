@@ -1,16 +1,18 @@
 package by.tms.controller.impl;
 
-import static by.tms.utils.ControllerUtils.getHomePagePath;
+import static by.tms.model.PagesPath.LOGIN_PAGE;
 
 import by.tms.controller.CommandController;
 import by.tms.exception.CommandException;
 import by.tms.model.PagesPath;
 import javax.servlet.http.HttpServletRequest;
+import lombok.Setter;
 
-public class HomePageCommandControllerImpl implements CommandController {
+@Setter
+public class CreateUserPageCommandController implements CommandController {
 
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {
-        return getHomePagePath();
+        return LOGIN_PAGE;
     }
 }

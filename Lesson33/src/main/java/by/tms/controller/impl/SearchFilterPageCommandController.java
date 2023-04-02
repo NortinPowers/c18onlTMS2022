@@ -3,6 +3,7 @@ package by.tms.controller.impl;
 import static by.tms.model.PagesPath.SEARCH_FILTER_RESULT_PAGE;
 import static by.tms.utils.Constants.Attributes.FILTER_FOUND_PRODUCTS;
 import static by.tms.utils.ControllerUtils.checkAndGetUserUUID;
+import static by.tms.utils.ControllerUtils.getPrice;
 
 import by.tms.controller.CommandController;
 import by.tms.exception.CommandException;
@@ -15,29 +16,30 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.Setter;
-import org.apache.commons.lang3.StringUtils;
 
 @Setter
-public class FilterPageCommandControllerImpl implements CommandController {
+public class SearchFilterPageCommandController implements CommandController {
 
     @Inject
     private ProductService productService;
 
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {
-        BigDecimal minPrice;
-        BigDecimal maxPrice;
+        BigDecimal minPrice = getPrice(request, "min-price", BigDecimal.ZERO);
+//        BigDecimal minPrice;
+        BigDecimal maxPrice = getPrice(request, "max-price", new BigDecimal(Long.MAX_VALUE));
+//        BigDecimal maxPrice;
         Set<Product> products;
-        if (!StringUtils.isAllBlank(request.getParameter("min-price"))) {
-            minPrice = new BigDecimal(request.getParameter("min-price"));
-        } else {
-            minPrice = BigDecimal.ZERO;
-        }
-        if (!StringUtils.isAllBlank(request.getParameter("max-price"))) {
-            maxPrice = new BigDecimal(request.getParameter("max-price"));
-        } else {
-            maxPrice = new BigDecimal(Long.MAX_VALUE);
-        }
+//        if (!StringUtils.isAllBlank(request.getParameter("min-price"))) {
+//            minPrice = new BigDecimal(request.getParameter("min-price"));
+//        } else {
+//            minPrice = BigDecimal.ZERO;
+//        }
+//        if (!StringUtils.isAllBlank(request.getParameter("max-price"))) {
+//            maxPrice = new BigDecimal(request.getParameter("max-price"));
+//        } else {
+//            maxPrice = new BigDecimal(Long.MAX_VALUE);
+//        }
         String type = request.getParameter("select");
         HttpSession session = request.getSession(false);
         String userUUID = checkAndGetUserUUID(request, session);

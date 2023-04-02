@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import lombok.Setter;
 
 @Setter
-public class AccountPageCommandControllerImpl implements CommandController {
+public class AccountPageCommandController implements CommandController {
 
     @Inject
     private UserService userService;

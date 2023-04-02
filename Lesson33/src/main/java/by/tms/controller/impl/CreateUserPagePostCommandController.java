@@ -3,13 +3,9 @@ package by.tms.controller.impl;
 import static by.tms.model.PagesPath.FAIL_REGISTER_PAGE;
 import static by.tms.model.PagesPath.SUCCESS_REGISTER_PAGE;
 import static by.tms.utils.Constants.Attributes.INVALID;
-import static by.tms.utils.Constants.RequestParameters.BIRTHDAY;
-import static by.tms.utils.Constants.RequestParameters.EMAIL;
 import static by.tms.utils.Constants.RequestParameters.LOGIN;
-import static by.tms.utils.Constants.RequestParameters.NAME;
-import static by.tms.utils.Constants.RequestParameters.PASSWORD;
-import static by.tms.utils.Constants.RequestParameters.SURNAME;
 import static by.tms.utils.Constants.RequestParameters.VERIFY_PASSWORD;
+import static by.tms.utils.ControllerUtils.getUser;
 import static by.tms.utils.ServletUtils.saveUserSession;
 import static by.tms.utils.ValidatorUtils.isVerifyUserData;
 
@@ -19,14 +15,13 @@ import by.tms.model.Inject;
 import by.tms.model.PagesPath;
 import by.tms.model.User;
 import by.tms.service.UserService;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import lombok.Setter;
 
 @Setter
-public class CreateUserPagePostCommandControllerImpl implements CommandController {
+public class CreateUserPagePostCommandController implements CommandController {
 
     @Inject
     private UserService userService;
@@ -35,18 +30,9 @@ public class CreateUserPagePostCommandControllerImpl implements CommandControlle
     public PagesPath execute(HttpServletRequest request) throws CommandException {
         String login = request.getParameter(LOGIN);
         String verifyPassword = request.getParameter(VERIFY_PASSWORD);
-        User user = User.builder()
-                        .login(login)
-                        .password(request.getParameter(PASSWORD))
-                        .name(request.getParameter(NAME))
-                        .surname(request.getParameter(SURNAME))
-                        .email(request.getParameter(EMAIL))
-                        .birthday(LocalDate.parse(request.getParameter(BIRTHDAY)))
-                        .build();
+        User user = getUser(request, login);
         List<String> errorMessages = isVerifyUserData(user);
-        if (!isNewUserVerify(user.getLogin(), user.getPassword(), verifyPassword)) {
-            errorMessages.add("This user already exist");
-        }
+        checkUniqueUser(verifyPassword, user, errorMessages);
         PagesPath path;
         if (errorMessages.isEmpty()) {
             userService.addUser(user);
@@ -59,6 +45,12 @@ public class CreateUserPagePostCommandControllerImpl implements CommandControlle
             path = FAIL_REGISTER_PAGE;
         }
         return path;
+    }
+
+    private void checkUniqueUser(String verifyPassword, User user, List<String> errorMessages) {
+        if (!isNewUserVerify(user.getLogin(), user.getPassword(), verifyPassword)) {
+            errorMessages.add("This user already exist");
+        }
     }
 
     private boolean isNewUserVerify(String login, String password, String verifyPassword) {
