@@ -6,8 +6,8 @@ import by.tms.controller.CommandController;
 import by.tms.controller.impl.AccountPageCommandController;
 import by.tms.controller.impl.AddCartPageCommandController;
 import by.tms.controller.impl.AddFavoritePageCommandController;
+import by.tms.controller.impl.CreateUserInputPageCommandController;
 import by.tms.controller.impl.CreateUserPageCommandController;
-import by.tms.controller.impl.CreateUserPagePostCommandController;
 import by.tms.controller.impl.DeleteCartProductPageCommandController;
 import by.tms.controller.impl.DeleteFavoriteCommandController;
 import by.tms.controller.impl.FavoritesCommandController;
@@ -47,7 +47,7 @@ public class ControllerCommandFactory {
             case LOGIN_PAGE_COMMAND -> LoginPageCommandController::new;
             case LOGIN_PAGE_POST_COMMAND -> LoginVerifyPageCommandController::new;
             case CREATE_USER_PAGE_COMMAND -> CreateUserPageCommandController::new;
-            case CREATE_USER_PAGE_POST_COMMAND -> CreateUserPagePostCommandController::new;
+            case CREATE_USER_PAGE_POST_COMMAND -> CreateUserInputPageCommandController::new;
             case DELETE_CART_PRODUCT_PAGE_COMMAND -> DeleteCartProductPageCommandController::new;
             case DELETE_FAVORITE_PRODUCT_PAGE_COMMAND -> DeleteFavoriteCommandController::new;
             case FAVORITES_PAGE_COMMAND -> FavoritesCommandController::new;

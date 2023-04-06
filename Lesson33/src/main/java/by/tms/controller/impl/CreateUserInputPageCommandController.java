@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import lombok.Setter;
 
 @Setter
-public class CreateUserPagePostCommandController implements CommandController {
+public class CreateUserInputPageCommandController implements CommandController {
 
     @Inject
     private UserService userService;
