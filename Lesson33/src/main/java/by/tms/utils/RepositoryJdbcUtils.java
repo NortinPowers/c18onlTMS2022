@@ -72,7 +72,6 @@ public class RepositoryJdbcUtils {
     }
 
     public static void fillsSet(String searchCondition, Set<Product> products, PreparedStatement statement) throws SQLException {
-//        statement.setString(1, String.format("%s searchCondition %s", "%", "%"));
         statement.setString(1, "%" + searchCondition + "%");
         ResultSet resultSetByName = statement.executeQuery();
         while (resultSetByName.next()) {

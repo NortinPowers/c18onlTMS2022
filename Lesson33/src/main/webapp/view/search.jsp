@@ -82,7 +82,6 @@
                     <c:set var="products" value="${applicationScope.filterFoundProducts}"/>
                 </c:otherwise>
             </c:choose>
-
             <c:choose>
                 <c:when test="${products.size()==0}">
                     <h5 class="text-center">No suitable products found. Enter or change the search terms!</h5>

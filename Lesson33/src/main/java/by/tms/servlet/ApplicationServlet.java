@@ -24,34 +24,29 @@ public class ApplicationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
             processRequest(req, resp);
-        } catch (CommandException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
             processRequest(req, resp);
-        } catch (CommandException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, CommandException {
+            throws ServletException, IOException {
         String commandKey = request.getParameter(COMMAND);
         if (commandKey == null || commandKey.isEmpty()) {
             commandKey = HOME_PAGE_COMMAND.getCommand();
         }
         try {
             CommandController baseController = ControllerCommandFactory.defineCommand(Commands.fromString(commandKey));
-            PagesPath pagesPath = baseController.execute(request);
-            forwardToAddress(request, response, pagesPath.getPath());
+            try {
+                PagesPath pagesPath = baseController.execute(request);
+                forwardToAddress(request, response, pagesPath.getPath());
+            } catch (CommandException e) {
+                throwCommandException(request, e, this.getClass());
+            }
         } catch (Exception e) {
-            throwCommandException(request, e, this.getClass());
             log.error("It is impossible to go to the address", e);
             forwardToAddress(request, response, "/500.jsp");
         }

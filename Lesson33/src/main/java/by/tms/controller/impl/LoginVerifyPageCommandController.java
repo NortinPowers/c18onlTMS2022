@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import lombok.Setter;
 
 @Setter
-public class LoginPagePostCommandController implements CommandController {
+public class LoginVerifyPageCommandController implements CommandController {
 
     @Inject
     private UserService userService;

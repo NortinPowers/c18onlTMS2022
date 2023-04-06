@@ -38,8 +38,6 @@ public class AddCartPageCommandController implements CommandController {
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {
         PagesPath path;
-//        PagesPath path = getHomePagePath();
-//        try {
         Long id = Long.parseLong(request.getParameter(ID));
         String shopFlag = request.getParameter(SHOP);
         String location = request.getParameter(LOCATION);
@@ -57,9 +55,6 @@ public class AddCartPageCommandController implements CommandController {
             String productType = productService.getProductTypeValue(id);
             path = getPagePathByType(productType);
         }
-//        } catch (Exception e) {
-//            throwCommandException(request, e, this.getClass());
-//        }
         return path;
     }
 }

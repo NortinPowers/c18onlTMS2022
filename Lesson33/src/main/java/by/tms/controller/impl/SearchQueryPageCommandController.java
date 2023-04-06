@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import lombok.Setter;
 
 @Setter
-public class SearchPagePostCommandController implements CommandController {
+public class SearchQueryPageCommandController implements CommandController {
 
     @Inject
     private ProductService productService;

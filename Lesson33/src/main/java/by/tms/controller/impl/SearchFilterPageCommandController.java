@@ -26,20 +26,8 @@ public class SearchFilterPageCommandController implements CommandController {
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {
         BigDecimal minPrice = getPrice(request, "min-price", BigDecimal.ZERO);
-//        BigDecimal minPrice;
         BigDecimal maxPrice = getPrice(request, "max-price", new BigDecimal(Long.MAX_VALUE));
-//        BigDecimal maxPrice;
         Set<Product> products;
-//        if (!StringUtils.isAllBlank(request.getParameter("min-price"))) {
-//            minPrice = new BigDecimal(request.getParameter("min-price"));
-//        } else {
-//            minPrice = BigDecimal.ZERO;
-//        }
-//        if (!StringUtils.isAllBlank(request.getParameter("max-price"))) {
-//            maxPrice = new BigDecimal(request.getParameter("max-price"));
-//        } else {
-//            maxPrice = new BigDecimal(Long.MAX_VALUE);
-//        }
         String type = request.getParameter("select");
         HttpSession session = request.getSession(false);
         String userUUID = checkAndGetUserUUID(request, session);

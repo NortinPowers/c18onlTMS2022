@@ -34,9 +34,7 @@ public class AddFavoritePageCommandController implements CommandController {
     public PagesPath execute(HttpServletRequest request) throws CommandException {
         String login = getLogin(request);
         PagesPath path;
-//        PagesPath path = getHomePagePath();
         String location = request.getParameter(LOCATION);
-//        try {
         Long id = Long.parseLong(request.getParameter(ID));
         cartService.addProductToCart(userService.getUserId(login), id, false, true);
         String productType = productService.getProductTypeValue(id);
@@ -47,9 +45,6 @@ public class AddFavoritePageCommandController implements CommandController {
         } else {
             path = getPagePathByType(productType);
         }
-//        } catch (Exception e) {
-//            throwCommandException(request, e, this.getClass());
-//        }
         return path;
     }
 }

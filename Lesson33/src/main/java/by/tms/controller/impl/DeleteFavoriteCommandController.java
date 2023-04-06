@@ -24,12 +24,8 @@ public class DeleteFavoriteCommandController implements CommandController {
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {
         String login = getLogin(request);
-//        try {
         Long id = Long.parseLong(request.getParameter(ID));
         cartService.deleteProduct(userService.getUserId(login), id, false, true);
-//        } catch (Exception e) {
-//            throwCommandException(request, e, this.getClass());
-//        }
         return FAVORITES_PAGE;
     }
 }
