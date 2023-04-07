@@ -1,6 +1,8 @@
 package by.tms.controller.impl;
 
 import static by.tms.model.PagesPath.PRODUCT_JSP_PAGE;
+import static by.tms.utils.Constants.Attributes.ONE_PRODUCT;
+import static by.tms.utils.Constants.RequestParameters.ID;
 
 import by.tms.controller.CommandController;
 import by.tms.exception.CommandException;
@@ -19,10 +21,10 @@ public class OneProductPageCommandController implements CommandController {
 
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {
-        if (request.getParameter("id") != null) {
-            Long id = Long.parseLong(request.getParameter("id"));
+        if (request.getParameter(ID) != null) {
+            Long id = Long.parseLong(request.getParameter(ID));
             Product product = productService.getOneProduct(id);
-            request.getServletContext().setAttribute("oneProduct", product);
+            request.getServletContext().setAttribute(ONE_PRODUCT, product);
         }
         return PRODUCT_JSP_PAGE;
     }

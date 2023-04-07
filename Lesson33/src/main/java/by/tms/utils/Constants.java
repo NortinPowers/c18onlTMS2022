@@ -10,6 +10,7 @@ public class Constants {
     public static final String PATH_TO_PRODUCT_TYPE = "/eshop?command=products&type=";
     public static final String SAVE = "save";
     public static final String ALL = "all";
+    public static final String TRUE = "true";
 
     @UtilityClass
     public class Attributes {
@@ -26,6 +27,7 @@ public class Constants {
         public static final String FILTER_FOUND_PRODUCTS = "filterFoundProducts";
         public static final String CART_PRODUCTS = "cartProducts";
         public static final String FULL_PRICE = "fullPrice";
+        public static final String ONE_PRODUCT = "oneProduct";
     }
 
     @UtilityClass
@@ -50,5 +52,9 @@ public class Constants {
         public static final String BUY = "buy";
         public static final String SEARCH_CONDITION = "searchCondition";
         public static final String RESULT = "result";
+        public static final String FILTER = "filter";
+        public static final String MIN_PRICE = "min-price";
+        public static final String MAX_PRICE = "max-price";
+        public static final String SELECT = "select";
     }
 }

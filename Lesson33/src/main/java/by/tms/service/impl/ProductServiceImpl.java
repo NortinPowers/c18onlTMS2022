@@ -31,28 +31,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void saveFoundedProducts(Set<Product> products, String userUUID) {
-        jdbcProductRepository.saveFoundedProducts(products, userUUID);
-    }
-
-    @Override
-    public Set<Product> getProductsByUserSearchCondition(String userUUID) {
-        return jdbcProductRepository.getProductsByUserSearchCondition(userUUID);
-    }
-
-    @Override
-    public void deleteFoundProducts(String userUUID) {
-        jdbcProductRepository.deleteFoundProducts(userUUID);
-    }
-
-    @Override
     public Product getOneProduct(Long id) {
         return jdbcProductRepository.getOneProduct(id);
-    }
-
-    @Override
-    public Set<Product> selectFoundedProductsByFilter(String type, BigDecimal minPrice, BigDecimal maxPrice, String userUUID) {
-        return jdbcProductRepository.selectFoundedProductsByFilter(type, minPrice, maxPrice, userUUID);
     }
 
     @Override
