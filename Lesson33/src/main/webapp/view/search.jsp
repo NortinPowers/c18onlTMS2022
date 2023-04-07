@@ -76,10 +76,10 @@
             <c:set var="filter" value="${applicationScope.get('filter')}"/>
             <c:choose>
                 <c:when test="${filter == null}">
-                    <c:set var="products" value="${applicationScope.foundProducts}"/>
+                    <c:set var="products" value="${sessionScope.foundProducts}"/>
                 </c:when>
                 <c:otherwise>
-                    <c:set var="products" value="${applicationScope.filterFoundProducts}"/>
+                    <c:set var="products" value="${sessionScope.filterFoundProducts}"/>
                 </c:otherwise>
             </c:choose>
             <c:choose>

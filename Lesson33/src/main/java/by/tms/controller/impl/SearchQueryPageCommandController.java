@@ -1,8 +1,9 @@
 package by.tms.controller.impl;
 
-import static by.tms.model.PagesPath.SEARCH_SAVED_RESULT_PAGE;
+import static by.tms.model.PagesPath.SEARCH_JSP_PAGE;
+import static by.tms.utils.Constants.Attributes.FOUND_PRODUCTS;
+import static by.tms.utils.Constants.RequestParameters.FILTER;
 import static by.tms.utils.Constants.RequestParameters.SEARCH_CONDITION;
-import static by.tms.utils.ControllerUtils.checkAndGetUserUUID;
 
 import by.tms.controller.CommandController;
 import by.tms.exception.CommandException;
@@ -24,13 +25,12 @@ public class SearchQueryPageCommandController implements CommandController {
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {
         String searchCondition = request.getParameter(SEARCH_CONDITION);
+        request.getServletContext().removeAttribute(FILTER);
         if (!searchCondition.isEmpty()) {
             Set<Product> products = productService.getFoundProducts(searchCondition);
-            HttpSession session = request.getSession(false);
-            String userUUID = checkAndGetUserUUID(request, session);
-            productService.deleteFoundProducts(userUUID);
-            productService.saveFoundedProducts(products, userUUID);
+            HttpSession session = request.getSession();
+            session.setAttribute(FOUND_PRODUCTS, products);
         }
-        return SEARCH_SAVED_RESULT_PAGE;
+        return SEARCH_JSP_PAGE;
     }
 }

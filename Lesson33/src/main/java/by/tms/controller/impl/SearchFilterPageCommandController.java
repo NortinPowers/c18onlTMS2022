@@ -1,8 +1,14 @@
 package by.tms.controller.impl;
 
+import static by.tms.model.PagesPath.SEARCH_ALL_RESULT_PAGE;
 import static by.tms.model.PagesPath.SEARCH_FILTER_RESULT_PAGE;
 import static by.tms.utils.Constants.Attributes.FILTER_FOUND_PRODUCTS;
-import static by.tms.utils.ControllerUtils.checkAndGetUserUUID;
+import static by.tms.utils.Constants.Attributes.FOUND_PRODUCTS;
+import static by.tms.utils.Constants.RequestParameters.MAX_PRICE;
+import static by.tms.utils.Constants.RequestParameters.MIN_PRICE;
+import static by.tms.utils.Constants.RequestParameters.SELECT;
+import static by.tms.utils.ControllerUtils.applyPriceFilterOnProducts;
+import static by.tms.utils.ControllerUtils.applyTypeFilterOnProducts;
 import static by.tms.utils.ControllerUtils.getPrice;
 
 import by.tms.controller.CommandController;
@@ -18,6 +24,7 @@ import javax.servlet.http.HttpSession;
 import lombok.Setter;
 
 @Setter
+@SuppressWarnings("unchecked")
 public class SearchFilterPageCommandController implements CommandController {
 
     @Inject
@@ -25,20 +32,29 @@ public class SearchFilterPageCommandController implements CommandController {
 
     @Override
     public PagesPath execute(HttpServletRequest request) throws CommandException {
-        BigDecimal minPrice = getPrice(request, "min-price", BigDecimal.ZERO);
-        BigDecimal maxPrice = getPrice(request, "max-price", new BigDecimal(Long.MAX_VALUE));
+        BigDecimal minPrice = getPrice(request, MIN_PRICE, BigDecimal.ZERO);
+        BigDecimal maxPrice = getPrice(request, MAX_PRICE, new BigDecimal(Long.MAX_VALUE));
+        String type = request.getParameter(SELECT);
+        PagesPath searchFilterResultPage;
+        searchFilterResultPage = getSearchFilterResultPagePath(request, minPrice, maxPrice, type);
+        return searchFilterResultPage;
+    }
+
+    private PagesPath getSearchFilterResultPagePath(HttpServletRequest request, BigDecimal minPrice, BigDecimal maxPrice, String type) {
+        PagesPath searchFilterResultPage;
         Set<Product> products;
-        String type = request.getParameter("select");
         HttpSession session = request.getSession(false);
-        String userUUID = checkAndGetUserUUID(request, session);
-        if (productService.getProductsByUserSearchCondition(userUUID).size() > 0) {
-            products = productService.selectFoundedProductsByFilter(type, minPrice, maxPrice, userUUID);
+        if (session.getAttribute(FOUND_PRODUCTS) != null) {
+            products = (Set<Product>) session.getAttribute(FOUND_PRODUCTS);
+            products = applyPriceFilterOnProducts(minPrice, maxPrice, products);
+            products = applyTypeFilterOnProducts(type, products);
+            session.setAttribute(FILTER_FOUND_PRODUCTS, products);
+            searchFilterResultPage = SEARCH_FILTER_RESULT_PAGE;
         } else {
             products = productService.selectAllProductsByFilter(type, minPrice, maxPrice);
-            productService.deleteFoundProducts(userUUID);
-            productService.saveFoundedProducts(products, userUUID);
+            session.setAttribute(FOUND_PRODUCTS, products);
+            searchFilterResultPage = SEARCH_ALL_RESULT_PAGE;
         }
-        request.getServletContext().setAttribute(FILTER_FOUND_PRODUCTS, products);
-        return SEARCH_FILTER_RESULT_PAGE;
+        return searchFilterResultPage;
     }
 }
