@@ -13,7 +13,7 @@
         <div class="col">
             <div class="container-fluid">
                 <form class="d-flex" role="search" action="<c:url value="/eshop?command=search-post"/>" method="post">
-                    <input class="form-control me-2" type="search" name="searchCondition" placeholder="Search"
+                    <input class="form-control me-2" type="search" name="search-condition" placeholder="Search"
                            aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>

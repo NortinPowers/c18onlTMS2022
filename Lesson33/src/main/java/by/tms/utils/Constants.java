@@ -44,13 +44,13 @@ public class Constants {
         public static final String LOCATION = "location";
         public static final String LOGIN = "login";
         public static final String PASSWORD = "password";
-        public static final String VERIFY_PASSWORD = "verifyPassword";
+        public static final String VERIFY_PASSWORD = "verify-password";
         public static final String NAME = "name";
         public static final String SURNAME = "surname";
         public static final String EMAIL = "email";
         public static final String BIRTHDAY = "birthday";
         public static final String BUY = "buy";
-        public static final String SEARCH_CONDITION = "searchCondition";
+        public static final String SEARCH_CONDITION = "search-condition";
         public static final String RESULT = "result";
         public static final String FILTER = "filter";
         public static final String MIN_PRICE = "min-price";
