@@ -2,7 +2,7 @@ package by.tms.repository.impl;
 
 import static by.tms.utils.RepositoryJdbcUtils.getModifyCount;
 import static by.tms.utils.RepositoryJdbcUtils.getProduct;
-import static by.tms.utils.RepositoryJdbcUtils.isEmpty;
+import static by.tms.utils.RepositoryJdbcUtils.isProductNotIncluded;
 
 import by.tms.model.Product;
 import by.tms.repository.ConnectionWrapper;
@@ -81,7 +81,7 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
     @Override
     public boolean checkProduct(Long userId, Long productId, boolean cart, boolean favorite) {
         List<Product> products = getProducts(userId, cart, favorite);
-        return isEmpty(productId, products);
+        return isProductNotIncluded(productId, products);
     }
 
     @Override

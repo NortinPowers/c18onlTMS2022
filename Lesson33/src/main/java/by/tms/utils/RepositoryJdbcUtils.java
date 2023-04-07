@@ -54,7 +54,7 @@ public class RepositoryJdbcUtils {
         return up ? ++productCount : --productCount;
     }
 
-    public static boolean isEmpty(Long productId, List<Product> products) {
+    public static boolean isProductNotIncluded(Long productId, List<Product> products) {
         return products.stream()
                        .filter(product -> Objects.equals(product.getId(), productId))
                        .findAny()
