@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConf.class)) {
             User user = context.getBean("user", User.class);
-            System.out.println(user.getName());
+            System.out.println(user);
         }
     }
 }
