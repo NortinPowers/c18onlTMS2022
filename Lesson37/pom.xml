@@ -11,11 +11,15 @@
 
     <artifactId>Lesson37</artifactId>
 
+    <properties>
+        <spring-context>6.0.7</spring-context>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>6.0.7</version>
+            <version>${spring-context}</version>
         </dependency>
     </dependencies>
 
