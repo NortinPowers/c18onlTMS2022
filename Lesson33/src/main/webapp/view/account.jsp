@@ -74,8 +74,8 @@
                                                         <p class="card-text">${product.info}</p>
                                                     </div>
                                                 </div>
-                                                <div class="card-footer">
-                                                    <h5>${product.price}$</h5>
+                                                <div class="card-body position-relative">
+                                                    <h5 class="position-absolute bottom-0 start-50 translate-middle-x">${product.price}$</h5>
                                                 </div>
                                             </div>
                                         </div>

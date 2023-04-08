@@ -6,7 +6,7 @@
     <title>EShop</title>
     <jsp:include page="/view/bootstrap.jsp"/>
 </head>
-<body style="background: linear-gradient(#0d1723, #243855)">
+<body style="background: #243855">
 <jsp:include page="/view/navigate.jsp"/>
 <div class="card-deck w-25 ml-5 mt-5">
     <div class="card">

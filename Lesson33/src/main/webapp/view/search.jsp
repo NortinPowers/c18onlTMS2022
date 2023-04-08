@@ -58,10 +58,10 @@
                             <div class="col-6"></div>
                             <div class="col-6 col-sm-6">
                                 <div>
-                                    <input class="col-sm-12 btn btn-info" type="submit" value="Filter"/>
+                                    <input class="col-sm-12 btn btn-dark" type="submit" value="Filter"/>
                                 </div>
                                 <div>
-                                    <a class="col-sm-12 btn btn-info mt-2"
+                                    <a class="col-sm-12 btn btn-dark mt-2"
                                        href="<c:url value="/eshop?command=search"/>">
                                         Reset filter
                                     </a>
@@ -103,28 +103,28 @@
                                             </div>
                                         </c:when>
                                         <c:otherwise>
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-3 ml-4 mr-2">
                                                 <a href="<c:url value="/eshop?command=product&id=${product.id}"/>"
-                                                   class="text-light text-decoration-none btn btn-success btn-block w-auto"
+                                                   class="text-light text-decoration-none btn btn-success btn-block w-100"
                                                    aria-current="page">
                                                     To product
                                                 </a>
                                             </div>
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-3">
                                                 <a href="<c:url value="/eshop?command=add-cart&id=${product.id}&shop=true&location=none"/>"
-                                                   class="text-light text-decoration-none btn btn-success btn-block w-auto"
+                                                   class="text-light text-decoration-none btn btn-success btn-block w-100"
                                                    aria-current="page">
                                                     Buy
                                                 </a>
                                             </div>
-                                            <div class="col-sm-2 btn btn-success">
+                                            <div class="col-sm-2 btn btn-success ml-3 mr-3">
                                                 <a href="<c:url value="/eshop?command=add-cart&id=${product.id}&shop=none&location=search"/>">
                                                     <div class="text-center text-light text-decoration-none p-1">
                                                         <i class="bi bi-cart-plus"></i>
                                                     </div>
                                                 </a>
                                             </div>
-                                            <div class="col-sm-2 btn btn-success">
+                                            <div class="col-sm-2 btn btn-success ml-3 mr-3">
                                                 <a href="<c:url value="/eshop?command=add-favorite&id=${product.id}&shop=none&location=search"/>">
                                                     <div class="text-center text-light text-decoration-none p-1">
                                                         <i class="bi bi-heart"></i>

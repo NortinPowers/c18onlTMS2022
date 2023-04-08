@@ -9,7 +9,7 @@
 </head>
 <body style="background: #243855">
 <jsp:include page="/view/navigate.jsp"/>
-<div class="row row-cols-1 row-cols-md-3 mr-5 ml-5 mt-5">
+<div class="row row-cols-1 row-cols-md-3 g-4 mr-5 ml-5 mt-5">
     <c:forEach var="product" items="${applicationScope.products}">
         <div class="card mr-5 ml-5 mt-5 shadow bg-body-tertiary rounded" style="max-width: 14rem">
             <img class="card-img-top" style="max-height: 20rem"
@@ -24,7 +24,7 @@
             </div>
             <c:set var="access" value="${sessionScope.get('accessPermission')}"/>
             <c:if test="${access != null}">
-                <div class="btn-group btn-group-sm">
+                <div class="btn-group btn-group-sm mb-1">
                     <a href="<c:url value="/eshop?command=add-cart&id=${product.id}&shop=true&location=none"/>"
                        class="btn btn-success active w-75"
                        aria-current="page">Buy</a>

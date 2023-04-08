@@ -35,7 +35,7 @@
         </tr>
     </c:forEach>
     <tr style="border-top: chartreuse solid 2px">
-        <td colspan="4" style="text-align: right; font-weight: bold">Full price:</td>
+        <td colspan="5" style="text-align: right; font-weight: bold">Full price:</td>
         <td class="font-weight-bold" style="text-align: center">${applicationScope.fullPrice}</td>
     </tr>
     </tbody>
@@ -45,7 +45,7 @@
     <c:set var="price" value="${applicationScope.fullPrice}"/>
     <c:if test="${(access != null) and (price > 0)}">
         <form method="post" action="<c:url value="/eshop?command=shopping-cart-post"/>">
-            <input type="submit" name="buy" value="buy" class="btn btn-lg btn-success btn-block w-75 ml-5 mt-5"/>
+            <input type="submit" name="buy" value="Buy" class="btn btn-lg btn-success btn-block w-75 ml-5 mt-5"/>
         </form>
     </c:if>
 </c:if>
