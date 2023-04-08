@@ -8,19 +8,15 @@
         <artifactId>c18onlTMS2022</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-
     <artifactId>Lesson37</artifactId>
-
     <properties>
-        <spring-context>6.0.7</spring-context>
+        <spring-version>6.0.7</spring-version>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>${spring-context}</version>
+            <version>${spring-version}</version>
         </dependency>
     </dependencies>
-
 </project>
