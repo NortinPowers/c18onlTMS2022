@@ -16,6 +16,7 @@
     <properties>
         <spring-version>6.0.7</spring-version>
         <jakarta.servlet-api-version>6.0.0</jakarta.servlet-api-version>
+        <jakarta.servlet.jsp.jstl-api-version>3.0.0</jakarta.servlet.jsp.jstl-api-version>
     </properties>
     <dependencies>
         <dependency>
@@ -44,6 +45,17 @@
             <version>${jakarta.servlet-api-version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>jakarta.servlet.jsp.jstl</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+            <version>${jakarta.servlet.jsp.jstl-api-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
