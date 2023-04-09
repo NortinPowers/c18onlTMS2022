@@ -7,6 +7,8 @@ public interface ProductService {
 
     List<ProductDto> getProductsByType(String type);
 
+    ProductDto getProduct(Long id);
+
 //    String getProductTypeValue(Long productId);
 //
 //    Set<Product> getFoundProducts(String searchCondition);

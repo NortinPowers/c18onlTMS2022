@@ -2,5 +2,5 @@ package by.tms.repository;
 
 public interface BaseRepository {
 
-    ConnectionPool CONNECTION_POOL = ConnectionPool.getInstance();
+//    ConnectionPool CONNECTION_POOL = ConnectionPool.getInstance();
 }

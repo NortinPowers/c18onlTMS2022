@@ -11,15 +11,17 @@
 <div class="card-deck w-25 ml-5 mt-5">
     <div class="card">
         <div class="card-header bg-danger text-white text-center text-nowrap">TV</div>
-        <a href=/products-page?type=tv">
+        <a href="/products-page?type=tv">
             <%--        <a href="<c:url value="/eshop?command=products&type=tv"/>">--%>
-            <img class="card-img-top" src="<c:url value="/img/tv.jpg"/>" alt="TV">
+            <img class="card-img-top" src="${pageContext.request.contextPath}/images/tv.jpg" alt="TV">
+            <%--            <img class="card-img-top" src="<c:url value="/images/tv.jpg"/>" alt="TV">--%>
         </a>
     </div>
     <div class="card">
         <div class="card-header bg-danger text-white text-center text-nowrap">Phone</div>
         <a href="/products-page?type=phone">
-            <img class="card-img-top" src="<c:url value="/img/phone.jpg"/>" alt="Phone">
+            <img class="card-img-top" src="${pageContext.request.contextPath}/images/phone.jpg" alt="Phone">
+            <%--            <img class="card-img-top" src="<c:url value="/images/phone.jpg"/>" alt="Phone">--%>
         </a>
     </div>
 </div>

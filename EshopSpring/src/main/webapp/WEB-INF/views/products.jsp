@@ -12,9 +12,15 @@
 <div class="row row-cols-1 row-cols-md-3 g-4 mr-5 ml-5 mt-5">
     <c:forEach var="product" items="${products}">
         <div class="card mr-5 ml-5 mt-5 shadow bg-body-tertiary rounded" style="max-width: 14rem">
-            <img class="card-img-top" style="max-height: 20rem"
-                 src="/img/${fn:toLowerCase(product.type)}/${product.name}.jpg"
-                 alt="${product.name}">
+
+            <a href="/product/${product.id}">
+
+                <img class="card-img-top" style="max-height: 20rem"
+                     src="${pageContext.request.contextPath}/images/${fn:toLowerCase(product.type)}/${product.name}.jpg"
+                     alt="${product.name}">
+
+            </a>
+
             <div class="card-body">
                 <h5 class="card-title text-nowrap" style="text-align: -webkit-center">${product.name}</h5>
                 <p class="card-text font-italic">${product.info}.</p>

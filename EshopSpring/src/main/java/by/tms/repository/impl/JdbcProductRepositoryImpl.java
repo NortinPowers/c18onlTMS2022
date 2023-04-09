@@ -1,29 +1,52 @@
 package by.tms.repository.impl;
 
-import static by.tms.utils.RepositoryJdbcUtils.fillsCollectionValues;
-
 import by.tms.dto.ProductDto;
-import by.tms.repository.ConnectionWrapper;
+import by.tms.mapper.ProductMapper;
 import by.tms.repository.JdbcProductRepository;
-import java.sql.PreparedStatement;
-import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@AllArgsConstructor
+//@AllArgsConstructor
 @Component
 public class JdbcProductRepositoryImpl implements JdbcProductRepository {
 
-    private static final String GET_ALL_PRODUCTS = "select * from products";
-    private static final String GET_PRODUCTS_BY_TYPE = "select p.id, p.name, pt.type, p.info, p.price from products p join product_type pt on pt.id = p.product_type_id where type=?";
-    private static final String GET_PRODUCT_TYPE = "select type from products where id=?";
-    private static final String GET_PRODUCTS_BY_SEARCH_CONDITION_IN_NAME = "select * from products where lower(name) like lower(?)";
-    private static final String GET_PRODUCTS_BY_SEARCH_CONDITION_IN_INFO = "select * from products where lower(info) like lower(?)";
-    private static final String GET_PRODUCT = "select * from products where id=?";
-    private static final String SELECT_ALL_PRODUCTS_BY_FILTER = "select * from products p where p.price>=? and p.price<=?";
+    private final JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public JdbcProductRepositoryImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    //    private static final String GET_ALL_PRODUCTS = "select * from products";
+    private static final String GET_PRODUCTS_BY_TYPE = "select p.id, p.name, pt.type, p.info, p.price from products p join product_type pt on pt.id = p.product_type_id where pt.type=?";
+    //    private static final String GET_PRODUCT_TYPE = "select type from products where id=?";
+//    private static final String GET_PRODUCTS_BY_SEARCH_CONDITION_IN_NAME = "select * from products where lower(name) like lower(?)";
+//    private static final String GET_PRODUCTS_BY_SEARCH_CONDITION_IN_INFO = "select * from products where lower(info) like lower(?)";
+    private static final String GET_PRODUCT = "select p.id, p.name, pt.type, p.info, p.price from products p join product_type pt on pt.id = p.product_type_id where p.id=?";
+//    private static final String SELECT_ALL_PRODUCTS_BY_FILTER = "select * from products p where p.price>=? and p.price<=?";
+
+    @Override
+    public List<ProductDto> getProductsByType(String type) {
+//        return jdbcTemplate.query(GET_PRODUCTS_BY_TYPE, new PreparedStatementSetter() {
+//            public void setValues(PreparedStatement preparedStatement) throws SQLException {
+//                preparedStatement.setString(1, type);
+//            }
+//        }, new ProductMapper());
+        return jdbcTemplate.query(GET_PRODUCTS_BY_TYPE, new Object[]{type}, new ProductMapper());
+
+    }
+
+    @Override
+    public ProductDto getProduct(Long id) {
+//            return jdbcTemplate.query(GET_PRODUCT, new Object[]{id}, new BeanPropertyRowMapper<>(ProductDto.class)).stream()
+        return jdbcTemplate.query(GET_PRODUCT, new Object[]{id}, new ProductMapper()).stream()
+                           .findAny()
+                           .orElse(null);
+    }
 
 //    @Override
 //    public List<ProductDto> getProducts() {
@@ -37,18 +60,18 @@ public class JdbcProductRepositoryImpl implements JdbcProductRepository {
 //        return products;
 //    }
 
-    @Override
-    public List<ProductDto> getProductsByType(String type) {
-        List<ProductDto> products = new ArrayList<>();
-        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
-                PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(GET_PRODUCTS_BY_TYPE)) {
-            statement.setString(1, type);
-            fillsCollectionValues(products, statement);
-        } catch (Exception e) {
-            log.error("Exception (getProductsByType()): ", e);
-        }
-        return products;
-    }
+//    @Override
+//    public List<ProductDto> getProductsByType(String type) {
+//        List<ProductDto> products = new ArrayList<>();
+//        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
+//                PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(GET_PRODUCTS_BY_TYPE)) {
+//            statement.setString(1, type);
+//            fillsCollectionValues(products, statement);
+//        } catch (Exception e) {
+//            log.error("Exception (getProductsByType()): ", e);
+//        }
+//        return products;
+//    }
 //
 //    @Override
 //    public String getProductTypeValue(Long productId) {

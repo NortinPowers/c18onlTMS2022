@@ -11,18 +11,43 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductServiceImpl implements ProductService {
 
-    @Autowired
-    private JdbcProductRepository jdbcProductRepository;
+    private final JdbcProductRepository jdbcProductRepository;
 
+    @Autowired
+    public ProductServiceImpl(JdbcProductRepository jdbcProductRepository) {
+        this.jdbcProductRepository = jdbcProductRepository;
+    }
 
     //Статическая инициализация pool-?????
     @Override
-//    public List<ProductDto> getProductsByType(String type) {
-//        return jdbcProductRepository.getProductsByType(type);
-//    }
     public List<ProductDto> getProductsByType(String type) {
-        return List.of(ProductDto.builder().name("Test").build());
+        return jdbcProductRepository.getProductsByType(type);
     }
+
+    @Override
+    public ProductDto getProduct(Long id) {
+        return jdbcProductRepository.getProduct(id);
+    }
+//    public List<ProductDto> getProductsByType(String type) {
+//        return List.of(ProductDto.builder()
+//                                 .id(1L)
+//                                 .name("Test")
+//                                 .type("tv")
+//                                 .info("some info text")
+//                                 .price(new BigDecimal("800"))
+//                                 .build());
+//    }
+
+//    @Override
+//    public ProductDto getProduct(Long id) {
+//        return ProductDto.builder()
+//                         .id(1L)
+//                         .name("Test")
+//                         .type("tv")
+//                         .info("some info text")
+//                         .price(new BigDecimal("800"))
+//                         .build();
+//    }
 
 //    @Override
 //    public String getProductTypeValue(Long productId) {

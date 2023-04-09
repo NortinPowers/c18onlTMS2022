@@ -8,12 +8,13 @@ public interface JdbcProductRepository extends BaseRepository {
 //    List<Product> getProducts();
 
     List<ProductDto> getProductsByType(String type);
-//
+
+    //
 //    String getProductTypeValue(Long productId);
 //
 //    Set<Product> getFoundProducts(String searchCondition);
 //
-//    Product getOneProduct(Long id);
+    ProductDto getProduct(Long id);
 //
 //    Set<Product> selectAllProductsByFilter(String type, BigDecimal minPrice, BigDecimal maxPrice);
 }
