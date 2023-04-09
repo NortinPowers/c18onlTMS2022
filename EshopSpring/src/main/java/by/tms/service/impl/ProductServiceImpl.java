@@ -21,7 +21,7 @@ public class ProductServiceImpl implements ProductService {
 //        return jdbcProductRepository.getProductsByType(type);
 //    }
     public List<ProductDto> getProductsByType(String type) {
-        return List.of(ProductDto.builder().id(1L).build());
+        return List.of(ProductDto.builder().name("Test").build());
     }
 
 //    @Override

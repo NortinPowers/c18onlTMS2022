@@ -20,6 +20,6 @@ public class ProductDto implements Serializable {
     private Long id;
     private String name;
     private BigDecimal price;
-    private ProductTypeDto type;
+    private String type;
     private String info;
 }

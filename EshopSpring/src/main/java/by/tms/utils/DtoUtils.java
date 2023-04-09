@@ -1,9 +1,7 @@
 package by.tms.utils;
 
 import by.tms.dto.ProductDto;
-import by.tms.dto.ProductTypeDto;
 import by.tms.model.Product;
-import by.tms.model.ProductType;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
@@ -15,11 +13,12 @@ public class DtoUtils {
                          .price(product.getPrice())
                          .info(product.getInfo())
                          .name(product.getName())
-                         .type(makeProductTypeModelTransfer(product.getType()))
+//                         .type(makeProductTypeModelTransfer(product.getType()))
+                         .type(product.getType().getValue())
                          .build();
     }
 
-    public static ProductTypeDto makeProductTypeModelTransfer(ProductType product) {
-        return ProductTypeDto.valueOf(product.getValue());
-    }
+//    public static ProductTypeDto makeProductTypeModelTransfer(ProductType product) {
+//        return ProductTypeDto.valueOf(product.getValue());
+//    }
 }
