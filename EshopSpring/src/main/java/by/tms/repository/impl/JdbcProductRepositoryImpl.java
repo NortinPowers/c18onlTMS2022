@@ -1,8 +1,15 @@
 package by.tms.repository.impl;
 
+import static by.tms.utils.DtoUtils.makeProductModelTransfer;
+
 import by.tms.dto.ProductDto;
 import by.tms.mapper.ProductMapper;
+import by.tms.model.Product;
+import by.tms.repository.ConnectionWrapper;
 import by.tms.repository.JdbcProductRepository;
+import by.tms.utils.RepositoryJdbcUtils;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 //@AllArgsConstructor
 @Component
-public class JdbcProductRepositoryImpl implements JdbcProductRepository {
+public class JdbcProductRepositoryImpl extends BaseRep implements JdbcProductRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -41,11 +48,28 @@ public class JdbcProductRepositoryImpl implements JdbcProductRepository {
     }
 
     @Override
+//    public ProductDto getProduct(Long id) {
+////            return jdbcTemplate.query(GET_PRODUCT, new Object[]{id}, new BeanPropertyRowMapper<>(ProductDto.class)).stream()
+//        return jdbcTemplate.query(GET_PRODUCT, new Object[]{id}, new ProductMapper()).stream()
+//                           .findAny()
+//                           .orElse(null);
+//    }
+
+//        @Override
     public ProductDto getProduct(Long id) {
-//            return jdbcTemplate.query(GET_PRODUCT, new Object[]{id}, new BeanPropertyRowMapper<>(ProductDto.class)).stream()
-        return jdbcTemplate.query(GET_PRODUCT, new Object[]{id}, new ProductMapper()).stream()
-                           .findAny()
-                           .orElse(null);
+        ProductDto product = null;
+        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
+                PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(GET_PRODUCT)) {
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Product productOne = RepositoryJdbcUtils.getProduct(resultSet);
+                product = makeProductModelTransfer(productOne);
+            }
+        } catch (Exception e) {
+            log.error("Exception (getOneProduct()): ", e);
+        }
+        return product;
     }
 
 //    @Override

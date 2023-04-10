@@ -1,5 +1,7 @@
 package by.tms.config;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.Objects;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,5 +59,19 @@ public class SpringConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/images/**")
                 .addResourceLocations("classpath:/images/");
+    }
+
+    @Bean
+    public Connection connection() {
+        String dbURl = environment.getProperty("db.url");
+        String dbUser = environment.getProperty("db.login");
+        String dbPassword = environment.getProperty("db.password");
+        String dbDriver = environment.getProperty("db.driver");
+        try {
+            Class.forName(dbDriver);
+            return DriverManager.getConnection(dbURl, dbUser, dbPassword);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

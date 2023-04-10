@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ProductsPageController {
 
+    private final ProductService productService;
+
     @Autowired
-    private ProductService productService;
+    public ProductsPageController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping("/products-page")
     public String products(@RequestParam("type") String type, Model model) {
@@ -24,7 +28,7 @@ public class ProductsPageController {
     @GetMapping("/product/{id}")
     public String product(@PathVariable("id") Long id, Model model) {
         model.addAttribute("product", productService.getProduct(id));
-        return "oneProduct";
+        return "product";
     }
 
 }

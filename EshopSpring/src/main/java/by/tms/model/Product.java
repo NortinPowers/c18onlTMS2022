@@ -1,6 +1,5 @@
 package by.tms.model;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +14,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 @Builder
-public class Product implements Serializable {
+public class Product {
 
     private Long id;
     private String name;

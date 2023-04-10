@@ -14,7 +14,7 @@
         <a href="/products-page?type=tv">
             <%--        <a href="<c:url value="/eshop?command=products&type=tv"/>">--%>
             <img class="card-img-top" src="${pageContext.request.contextPath}/images/tv.jpg" alt="TV">
-            <%--            <img class="card-img-top" src="<c:url value="/images/tv.jpg"/>" alt="TV">--%>
+<%--                        <img class="card-img-top" src="<c:url value="/images/tv.jpg"/>" alt="TV">--%>
         </a>
     </div>
     <div class="card">
