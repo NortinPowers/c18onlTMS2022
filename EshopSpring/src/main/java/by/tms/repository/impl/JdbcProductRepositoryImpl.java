@@ -43,7 +43,8 @@ public class JdbcProductRepositoryImpl extends BaseRep implements JdbcProductRep
 //                preparedStatement.setString(1, type);
 //            }
 //        }, new ProductMapper());
-        return jdbcTemplate.query(GET_PRODUCTS_BY_TYPE, new Object[]{type}, new ProductMapper());
+//        return jdbcTemplate.query(GET_PRODUCTS_BY_TYPE, new Object[]{type}, new ProductMapper());
+        return jdbcTemplate.query(GET_PRODUCTS_BY_TYPE, new ProductMapper(), type);
 
     }
 
