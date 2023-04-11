@@ -21,7 +21,8 @@
             <input type="submit" value="Submit"/>
         </div>
     </form>
-    <a href="<c:url value="/view/create-user.jsp"/>" class="button">Register</a>
+    <a href="/create-user" class="button">Register</a>
+    <%--    <a href="<c:url value="create-user.jsp"/>" class="button">Register</a>--%>
     <a href="/eshop" class="button">Back</a>
 </div>
 </body>

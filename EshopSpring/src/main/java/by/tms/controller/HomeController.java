@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import static by.tms.utils.Constants.Mapping.ESHOP;
 
 @Controller
-public class HomePageController {
+public class HomeController {
 
     @GetMapping(value = "/", produces = "text/html")
     public String home() {

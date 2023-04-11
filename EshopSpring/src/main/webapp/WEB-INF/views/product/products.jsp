@@ -5,10 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Products</title>
-    <jsp:include page="bootstrap.jsp"/>
+    <jsp:include page="../include/bootstrap.jsp"/>
 </head>
 <body style="background: #243855">
-<jsp:include page="navigate.jsp"/>
+<jsp:include page="../include/navigate.jsp"/>
 <div class="row row-cols-1 row-cols-md-3 g-4 mr-5 ml-5 mt-5">
     <c:forEach var="product" items="${products}">
         <div class="card mr-5 ml-5 mt-5 shadow bg-body-tertiary rounded" style="max-width: 14rem">

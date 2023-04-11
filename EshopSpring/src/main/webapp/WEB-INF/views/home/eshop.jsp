@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>EShop</title>
-    <jsp:include page="bootstrap.jsp"/>
+    <jsp:include page="../include/bootstrap.jsp"/>
 </head>
 <body style="background: #243855">
-<jsp:include page="navigate.jsp"/>
+<jsp:include page="../include/navigate.jsp"/>
 <div class="card-deck w-25 ml-5 mt-5">
     <div class="card">
         <div class="card-header bg-danger text-white text-center text-nowrap">TV</div>

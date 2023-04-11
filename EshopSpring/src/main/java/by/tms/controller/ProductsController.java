@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
-public class ProductsPageController {
+public class ProductsController {
 
     private final ProductService productService;
 
@@ -22,13 +22,13 @@ public class ProductsPageController {
     public String products(@RequestParam("type") String type, Model model) {
 //        List<ProductDto> products = productService.getProductsByType(type);
         model.addAttribute("products", productService.getProductsByType(type));
-        return "products";
+        return "product/products";
     }
 
     @GetMapping("/product/{id}")
     public String product(@PathVariable("id") Long id, Model model) {
         model.addAttribute("product", productService.getProduct(id));
-        return "product";
+        return "product/product";
     }
 
 }

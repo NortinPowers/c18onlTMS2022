@@ -17,21 +17,25 @@ public class UserServiceImpl implements UserService {
 
     private final JdbcUserRepository jdbcUserRepository;
 
-    @Override
-    public boolean isVerifiedUser(String login, String password) {
-        return getUserByLogin(login) != null && getUserByLogin(login).getPassword().equals(password);
-    }
+//    @Override
+//    public boolean isVerifiedUser(String login, String password) {
+//        return getUserByLogin(login) != null && getUserByLogin(login).getPassword().equals(password);
+//    }
 
     @Override
     public User getUserByLogin(String login) {
         return jdbcUserRepository.getUserByLogin(login);
     }
 
-//
-//    @Override
-//    public void addUser(User user) {
-//        jdbcUserRepository.addUser(user);
-//    }
+    @Override
+    public void addUser(User user) {
+        jdbcUserRepository.addUser(user);
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return jdbcUserRepository.getUserByEmail(email);
+    }
 //
 //    @Override
 //    public Long getUserId(String login) {

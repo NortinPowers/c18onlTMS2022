@@ -3,6 +3,7 @@ package by.tms.controller;
 import by.tms.dto.UserDto;
 import by.tms.model.User;
 import by.tms.service.UserService;
+import by.tms.service.ValidatorService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -10,11 +11,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import static by.tms.utils.Constants.Attributes.USER_ACCESS_PERMISSION;
-import static by.tms.utils.Constants.Attributes.USER_UUID;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static by.tms.utils.Constants.Attributes.*;
 import static by.tms.utils.Constants.Mapping.ESHOP;
 import static by.tms.utils.Constants.Mapping.LOGIN;
 import static by.tms.utils.ControllerUtils.isVerifyUser;
@@ -25,9 +29,10 @@ import static by.tms.utils.DtoUtils.makeUserModelTransfer;
 @RequiredArgsConstructor
 @Lazy
 @Slf4j
-public class LoginPageController {
+public class LoginController {
 
     private final UserService userService;
+    private final ValidatorService validateService;
 
     @GetMapping("/login")
     public String login(HttpServletRequest request) {
@@ -69,5 +74,50 @@ public class LoginPageController {
         session.removeAttribute(USER_UUID);
         session.invalidate();
         return ESHOP;
+    }
+
+    @GetMapping("/create-user")
+    public String create() {
+        return "login/create-user";
+    }
+
+    @PostMapping("/create-user")
+    public String createUser(HttpServletRequest request,
+//                         @RequestParam String login,
+//                         @RequestParam String password,
+                             @RequestParam String verifyPassword,
+//                         @RequestParam String name,
+//                         @RequestParam String surname,
+//                         @RequestParam String email,
+//                         @RequestParam String birthday,
+                             @ModelAttribute("user") User user) {
+//        String login = request.getParameter(Constants.RequestParameters.LOGIN);
+//        String verifyPassword = request.getParameter(VERIFY_PASSWORD);
+//        User user = getUser(request, login);
+        List<String> errorMessages = validateService.getValidationErrorMessage(user, verifyPassword);
+        String path;
+        if (errorMessages.isEmpty()) {
+            userService.addUser(user);
+            UserDto userDto = makeUserModelTransfer(user);
+            saveUserSession(request, userDto);
+//            saveUserSession(request, login);
+            path = "success-register";
+        } else {
+            request.setAttribute(INVALID, errorMessages.stream()
+                    .map(Object::toString)
+                    .collect(Collectors.joining(". ")));
+            path = "fail-register";
+        }
+        return path;
+    }
+
+    @GetMapping("/success-register")
+    public String successRegister() {
+        return "login/success-register";
+    }
+
+    @PostMapping("/fail-register")
+    public String failRegister() {
+        return "login/fail-register";
     }
 }

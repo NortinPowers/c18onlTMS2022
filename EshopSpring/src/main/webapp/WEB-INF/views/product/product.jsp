@@ -4,10 +4,10 @@
 <html>
 <head>
     <title>${product.name}</title>
-    <jsp:include page="bootstrap.jsp"/>
+    <jsp:include page="../include/bootstrap.jsp"/>
 </head>
 <body>
-<jsp:include page="navigate.jsp"/>
+<jsp:include page="../include/navigate.jsp"/>
 <div class="card mr-5 ml-5 mt-5 shadow bg-body-tertiary rounded" style="max-width: 14rem">
     <img class="card-img-top" style="max-height: 20rem"
          src="${pageContext.request.contextPath}/images/${fn:toLowerCase(product.type)}/${product.name}.jpg"

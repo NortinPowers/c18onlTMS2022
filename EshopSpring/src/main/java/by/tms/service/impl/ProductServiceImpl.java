@@ -20,7 +20,6 @@ public class ProductServiceImpl implements ProductService {
 //        this.jdbcProductRepository = jdbcProductRepository;
 //    }
 
-    //Статическая инициализация pool-?????
     @Override
     public List<ProductDto> getProductsByType(String type) {
         return jdbcProductRepository.getProductsByType(type);
