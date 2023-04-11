@@ -1,17 +1,16 @@
 package by.tms.controller.impl;
 
+import by.tms.controller.CommandController;
+import by.tms.exception.CommandException;
+import by.tms.model.PagesPath;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import static by.tms.model.PagesPath.LOGIN_JSP_PAGE;
 import static by.tms.utils.Constants.Attributes.ACCESS_PERMISSION;
 import static by.tms.utils.ControllerUtils.getHomePagePath;
 
-import by.tms.controller.CommandController;
-import by.tms.exception.CommandException;
-import by.tms.model.PagesPath;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import lombok.Setter;
-
-@Setter
 public class LoginPageCommandController implements CommandController {
 
     @Override

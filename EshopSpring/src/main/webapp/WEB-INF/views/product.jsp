@@ -20,7 +20,7 @@
     <div class="card-footer text-center">
         <small class="text-muted" style="font-size: 20px">${product.price}$</small>
     </div>
-    <c:set var="access" value="${sessionScope.get('accessPermission')}"/>
+    <c:set var="access" value="${sessionScope.get('userAccessPermission')}"/>
     <c:if test="${access != null}">
         <div class="btn-group btn-group-sm">
             <a href="<c:url value="/eshop?command=add-cart&id=${product.id}&shop=true&location=none"/>"

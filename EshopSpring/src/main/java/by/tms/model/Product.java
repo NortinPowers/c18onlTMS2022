@@ -1,18 +1,17 @@
 package by.tms.model;
 
-import java.math.BigDecimal;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
-@AllArgsConstructor
+import java.math.BigDecimal;
+
+//@AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
-@ToString
+//@ToString
 @Builder
 public class Product {
 

@@ -1,10 +1,6 @@
 package by.tms.config;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.util.Objects;
-import javax.sql.DataSource;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -18,18 +14,22 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import javax.sql.DataSource;
+import java.util.Objects;
+
 @Configuration
 @ComponentScan("by.tms")
 @EnableWebMvc
 @PropertySource("classpath:application.properties")
+@RequiredArgsConstructor
 public class SpringConfig implements WebMvcConfigurer {
 
     private final Environment environment;
 
-    @Autowired
-    public SpringConfig(Environment environment) {
-        this.environment = environment;
-    }
+//    @Autowired
+//    public SpringConfig(Environment environment) {
+//        this.environment = environment;
+//    }
 
     @Bean
     public InternalResourceViewResolver resolver() {
@@ -59,19 +59,22 @@ public class SpringConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/images/**")
                 .addResourceLocations("classpath:/images/");
+        registry.addResourceHandler("/css/**")
+                .addResourceLocations("classpath:/css/");
     }
 
-    @Bean
-    public Connection connection() {
-        String dbURl = environment.getProperty("db.url");
-        String dbUser = environment.getProperty("db.login");
-        String dbPassword = environment.getProperty("db.password");
-        String dbDriver = environment.getProperty("db.driver");
-        try {
-            Class.forName(dbDriver);
-            return DriverManager.getConnection(dbURl, dbUser, dbPassword);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+    //to connectionPoll
+//    @Bean
+//    public Connection connection() {
+//        String dbURl = environment.getProperty("db.url");
+//        String dbUser = environment.getProperty("db.login");
+//        String dbPassword = environment.getProperty("db.password");
+//        String dbDriver = environment.getProperty("db.driver");
+//        try {
+//            Class.forName(dbDriver);
+//            return DriverManager.getConnection(dbURl, dbUser, dbPassword);
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 }

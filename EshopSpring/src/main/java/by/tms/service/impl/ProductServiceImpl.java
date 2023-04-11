@@ -4,19 +4,21 @@ package by.tms.service.impl;
 import by.tms.dto.ProductDto;
 import by.tms.repository.JdbcProductRepository;
 import by.tms.service.ProductService;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-@Component
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
     private final JdbcProductRepository jdbcProductRepository;
 
-    @Autowired
-    public ProductServiceImpl(JdbcProductRepository jdbcProductRepository) {
-        this.jdbcProductRepository = jdbcProductRepository;
-    }
+//    @Autowired
+//    public ProductServiceImpl(JdbcProductRepository jdbcProductRepository) {
+//        this.jdbcProductRepository = jdbcProductRepository;
+//    }
 
     //Статическая инициализация pool-?????
     @Override
@@ -28,6 +30,7 @@ public class ProductServiceImpl implements ProductService {
     public ProductDto getProduct(Long id) {
         return jdbcProductRepository.getProduct(id);
     }
+
 //    public List<ProductDto> getProductsByType(String type) {
 //        return List.of(ProductDto.builder()
 //                                 .id(1L)

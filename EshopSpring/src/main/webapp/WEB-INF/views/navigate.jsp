@@ -4,7 +4,7 @@
     <ul class="nav nav-pills ">
         <li class="nav-item">
             <a class="btn btn-outline-warning"
-               href="<c:url value="/"/>">Home</a>
+               href="/eshop">Home</a>
         </li>
         <li class="nav-item">
             <a class="btn btn-outline-warning ml-2"
@@ -14,7 +14,7 @@
                 </div>
             </a>
         </li>
-        <c:set var="access" value="${sessionScope.get('accessPermission')}"/>
+        <c:set var="access" value="${userAccessPermission}"/>
         <c:if test="${access != null}">
             <li class="nav-item">
                 <a class="btn btn-outline-info ml-2" href="<c:url value="/eshop?command=favorites"/>">Favorites</a>
@@ -24,17 +24,18 @@
             </li>
         </c:if>
     </ul>
-    <c:set var="access" value="${sessionScope.get('accessPermission')}"/>
+    <c:set var="access" value="${sessionScope.get('userAccessPermission')}"/>
     <c:choose>
         <c:when test="${access == null}">
             <a id="loginButton" class="form-inline my-2 my-lg-0" style="text-decoration: none"
-               href="<c:url value="/eshop?command=login"/>">
+               href="/login">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
             </a>
         </c:when>
         <c:otherwise>
             <h2 style="text-align: center; color: #e5a0a4; margin-right: 11%; text-shadow: 1px 1px 2px red, 0 0 1em #ff004d, 0 0 0.2em #ff0062;">
-                Welcome ${sessionScope.get('userName')}</h2>
+                Welcome ${userAccessPermission.name}</h2>
+            <%--                Welcome ${sessionScope.get('userName')}</h2>--%>
             <ul class="nav nav-pills ">
                 <li class="nav-item">
                     <a id="accountButton"
@@ -44,7 +45,7 @@
                 </li>
                 <li class="nav-item">
                     <a id="exitButton"
-                       href="<c:url value="/eshop?command=exit"/>">
+                       href="/logout">
                         <button class="btn btn-outline-success" type="submit">Exit</button>
                     </a>
                 </li>

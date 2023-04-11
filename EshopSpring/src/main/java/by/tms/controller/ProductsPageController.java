@@ -1,7 +1,7 @@
 package by.tms.controller;
 
 import by.tms.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequiredArgsConstructor
 public class ProductsPageController {
 
     private final ProductService productService;
 
-    @Autowired
-    public ProductsPageController(ProductService productService) {
-        this.productService = productService;
-    }
+//    public ProductsPageController(ProductService productService) {
+//        this.productService = productService;
+//    }
 
     @GetMapping("/products-page")
     public String products(@RequestParam("type") String type, Model model) {
