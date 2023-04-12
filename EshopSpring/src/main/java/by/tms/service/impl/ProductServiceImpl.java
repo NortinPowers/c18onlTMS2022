@@ -51,10 +51,10 @@ public class ProductServiceImpl implements ProductService {
 //                         .build();
 //    }
 
-//    @Override
-//    public String getProductTypeValue(Long productId) {
-//        return jdbcProductRepository.getProductTypeValue(productId);
-//    }
+    @Override
+    public String getProductTypeValue(Long id) {
+        return jdbcProductRepository.getProductTypeValue(id);
+    }
 //
 //    @Override
 //    public Set<Product> getFoundProducts(String searchCondition) {

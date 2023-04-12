@@ -14,10 +14,10 @@ public class Constants {
 
     @UtilityClass
     public class Mapping {
-        public static final String ESHOP = "eshop";
-        public static final String PRODUCTS = "products";
-        public static final String PRODUCT = "product";
-        public static final String LOGIN = "login";
+        public static final String ESHOP = "home/eshop";
+        public static final String PRODUCTS = "product/products";
+        public static final String PRODUCT = "product/product";
+        public static final String LOGIN = "login/login";
 
 
     }

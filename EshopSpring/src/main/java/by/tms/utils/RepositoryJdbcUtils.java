@@ -1,15 +1,18 @@
 package by.tms.utils;
 
-import static by.tms.model.ProductType.getProductType;
-import static by.tms.utils.DtoUtils.makeProductModelTransfer;
-
 import by.tms.dto.ProductDto;
 import by.tms.model.Product;
+import lombok.experimental.UtilityClass;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
-import lombok.experimental.UtilityClass;
+import java.util.List;
+import java.util.Objects;
+
+import static by.tms.model.ProductType.getProductType;
+import static by.tms.utils.DtoUtils.makeProductModelTransfer;
 
 @UtilityClass
 public class RepositoryJdbcUtils {
@@ -38,7 +41,8 @@ public class RepositoryJdbcUtils {
         product.setInfo(resultSet.getString("info"));
         return product;
     }
-//
+
+    //
 //    public static Order getOrderBuild(ResultSet resultSet) throws SQLException {
 //        return Order.builder()
 //                    .id(resultSet.getString("id"))
@@ -47,16 +51,16 @@ public class RepositoryJdbcUtils {
 //                    .build();
 //    }
 //
-//    public static Integer getModifyCount(boolean up, Integer productCount) {
-//        return up ? ++productCount : --productCount;
-//    }
-//
-//    public static boolean isProductNotIncluded(Long productId, List<Product> products) {
-//        return products.stream()
-//                       .filter(product -> Objects.equals(product.getId(), productId))
-//                       .findAny()
-//                       .isEmpty();
-//    }
+    public static Integer getModifyCount(boolean up, Integer productCount) {
+        return up ? ++productCount : --productCount;
+    }
+
+    public static boolean isProductNotIncluded(Long productId, List<Product> products) {
+        return products.stream()
+                .filter(product -> Objects.equals(product.getId(), productId))
+                .findAny()
+                .isEmpty();
+    }
 //
 //    public static String getQueryDependType(String type, String query) {
 //        String fullQuery;

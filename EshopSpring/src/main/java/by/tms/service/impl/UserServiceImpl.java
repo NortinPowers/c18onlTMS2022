@@ -4,11 +4,9 @@ import by.tms.model.User;
 import by.tms.repository.JdbcUserRepository;
 import by.tms.service.UserService;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-@Setter
 @Service
 @RequiredArgsConstructor
 @Lazy
