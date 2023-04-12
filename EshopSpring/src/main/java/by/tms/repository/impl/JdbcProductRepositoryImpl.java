@@ -1,7 +1,7 @@
 package by.tms.repository.impl;
 
 import by.tms.dto.ProductDto;
-import by.tms.mapper.ProductMapper;
+import by.tms.mapper.ProductDtoMapper;
 import by.tms.repository.JdbcProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,13 +40,13 @@ public class JdbcProductRepositoryImpl extends BaseRep implements JdbcProductRep
 //            }
 //        }, new ProductMapper());
 //        return jdbcTemplate.query(GET_PRODUCTS_BY_TYPE, new Object[]{type}, new ProductMapper());
-        return jdbcTemplate.query(GET_PRODUCTS_BY_TYPE, new ProductMapper(), type);
+        return jdbcTemplate.query(GET_PRODUCTS_BY_TYPE, new ProductDtoMapper(), type);
 
     }
 
     @Override
     public ProductDto getProduct(Long id) {
-        return jdbcTemplate.query(GET_PRODUCT, new ProductMapper(), id).stream()
+        return jdbcTemplate.query(GET_PRODUCT, new ProductDtoMapper(), id).stream()
                 .findAny()
                 .orElse(null);
 
@@ -96,7 +96,7 @@ public class JdbcProductRepositoryImpl extends BaseRep implements JdbcProductRep
 //
     @Override
     public String getProductTypeValue(Long id) {
-        return jdbcTemplate.query(GET_PRODUCT_TYPE, new ProductMapper(), id).stream()
+        return jdbcTemplate.query(GET_PRODUCT_TYPE, new ProductDtoMapper(), id).stream()
                 .findAny()
                 .map(ProductDto::getType)
                 .orElse(null);

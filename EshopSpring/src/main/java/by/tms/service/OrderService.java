@@ -1,9 +1,6 @@
 package by.tms.service;
 
-import by.tms.model.Order;
 import by.tms.model.Product;
-
-import java.util.List;
 
 public interface OrderService {
 
@@ -11,7 +8,7 @@ public interface OrderService {
 
     void saveProductInOrderConfigurations(String order, Product product);
 
-    List<Order> getOrdersById(Long id);
+//    List<Order> getOrdersById(Long id);
 
     boolean checkOrderNumber(String number);
 }

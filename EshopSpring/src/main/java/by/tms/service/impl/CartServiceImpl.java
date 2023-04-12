@@ -1,6 +1,6 @@
 package by.tms.service.impl;
 
-import by.tms.model.Product;
+import by.tms.dto.ProductDto;
 import by.tms.repository.JdbcCartRepository;
 import by.tms.service.CartService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public List<ImmutablePair<Product, Integer>> getProductsFromCart(Long userId, boolean cart, boolean favorite) {
+    public List<ImmutablePair<ProductDto, Integer>> getProductsFromCart(Long userId, boolean cart, boolean favorite) {
         return jdbcCartRepository.getProductsFromCart(userId, cart, favorite);
     }
 //
@@ -39,9 +39,9 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public BigDecimal getProductsPrice(List<ImmutablePair<Product, Integer>> productWithCount) {
+    public BigDecimal getProductsPrice(List<ImmutablePair<ProductDto, Integer>> productWithCount) {
         BigDecimal fullPrice = BigDecimal.ZERO;
-        for (ImmutablePair<Product, Integer> product : productWithCount) {
+        for (ImmutablePair<ProductDto, Integer> product : productWithCount) {
             BigDecimal totalPrice = product.getLeft().getPrice().multiply(new BigDecimal(product.getRight()));
             fullPrice = fullPrice.add(totalPrice);
         }
@@ -49,7 +49,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public List<Product> getPurchasedProducts(Long userId, boolean cart, boolean favorite) {
+    public List<ProductDto> getPurchasedProducts(Long userId, boolean cart, boolean favorite) {
         return jdbcCartRepository.getPurchasedProducts(userId, cart, favorite);
     }
 }

@@ -23,7 +23,7 @@ import static by.tms.utils.Constants.Mapping.ESHOP;
 import static by.tms.utils.Constants.Mapping.LOGIN;
 import static by.tms.utils.ControllerUtils.isVerifyUser;
 import static by.tms.utils.ControllerUtils.saveUserSession;
-import static by.tms.utils.DtoUtils.makeUserModelTransfer;
+import static by.tms.utils.DtoUtils.makeUserDtoModelTransfer;
 
 @Controller
 @RequiredArgsConstructor
@@ -55,7 +55,7 @@ public class LoginController {
         String path;
         User user = userService.getUserByLogin(login);
         if (user != null && isVerifyUser(user, password)) {
-            UserDto userDto = makeUserModelTransfer(user);
+            UserDto userDto = makeUserDtoModelTransfer(user);
             saveUserSession(request, userDto);
             path = ESHOP;
         } else {
@@ -98,7 +98,7 @@ public class LoginController {
         String path;
         if (errorMessages.isEmpty()) {
             userService.addUser(user);
-            UserDto userDto = makeUserModelTransfer(user);
+            UserDto userDto = makeUserDtoModelTransfer(user);
             saveUserSession(request, userDto);
 //            saveUserSession(request, login);
             path = "success-register";

@@ -31,7 +31,7 @@
             <c:set var="access" value="${sessionScope.get('userAccessPermission')}"/>
             <c:if test="${access != null}">
                 <div class="btn-group btn-group-sm mb-1">
-                    <a href="<c:url value="/eshop?command=add-cart&id=${product.id}&shop=true&location=none"/>"
+                    <a href="/add-cart?id=${product.id}&shop=true&location=none"
                        class="btn btn-success active w-75"
                        aria-current="page">Buy</a>
                     <a href="<c:url value="/eshop?command=add-cart&id=${product.id}&shop=none&location=none"/>"

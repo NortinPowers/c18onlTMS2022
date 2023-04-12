@@ -1,14 +1,14 @@
 package by.tms.repository.impl;
 
+import by.tms.dto.ProductDto;
+import by.tms.mapper.CartMapper;
 import by.tms.model.Cart;
-import by.tms.model.Product;
 import by.tms.repository.JdbcCartRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -68,7 +68,7 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
 
     @Override
 //    public List<Pair<Product, Integer>> getProductsFromCart(Long userId, boolean cart, boolean favorite) {
-    public List<ImmutablePair<Product, Integer>> getProductsFromCart(Long userId, boolean cart, boolean favorite) {
+    public List<ImmutablePair<ProductDto, Integer>> getProductsFromCart(Long userId, boolean cart, boolean favorite) {
 //        List<Pair<Product, Integer>> products = new ArrayList<>();
         String query = cart ? GET_CART_PRODUCTS_BY_USER_ID : GET_FAVORITE_PRODUCTS_BY_USER_ID;
         //        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
@@ -83,22 +83,23 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
 //        } catch (Exception e) {
 //            log.error("Exception (getProductsFromCart()): ", e);
 //        }
-        return jdbcTemplate.query(query, (rs, i) -> new ImmutablePair<>(getProduct(rs), rs.getInt("count")));
+        return jdbcTemplate.query(query, (rs, i) -> new ImmutablePair<>(getProductDto(rs), rs.getInt("count")), userId);
     }
 
     @Override
     public boolean checkProduct(Long userId, Long productId, boolean cart, boolean favorite) {
-        List<Product> products = getProducts(userId, cart, favorite);
-        return isProductNotIncluded(productId, products);
+        List<ProductDto> productsDto = getProducts(userId, cart, favorite);
+        return isProductNotIncluded(productId, productsDto);
     }
 
     @Override
     public Integer getCartProductCount(Long userId, Long productId) {
-        return jdbcTemplate.query(GET_CURRENT_PRODUCT_COUNT, new BeanPropertyRowMapper<>(Cart.class),
+//        return jdbcTemplate.query(GET_CURRENT_PRODUCT_COUNT, new BeanPropertyRowMapper<>(Cart.class),
+        return jdbcTemplate.query(GET_CURRENT_PRODUCT_COUNT, new CartMapper(),
                         userId, productId).stream()
                 .findAny()
                 .map(Cart::getCount)
-                .orElse(null);
+                .orElse(0);
 
 //        int count = 0;
 //        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
@@ -128,10 +129,10 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
     }
 
     @Override
-    public List<Product> getPurchasedProducts(Long userId, boolean cart, boolean favorite) {
-        List<Product> products = new ArrayList<>();
-        List<ImmutablePair<Product, Integer>> productWithCount = getProductsFromCart(userId, cart, favorite);
-        for (Pair<Product, Integer> productIntegerPair : productWithCount) {
+    public List<ProductDto> getPurchasedProducts(Long userId, boolean cart, boolean favorite) {
+        List<ProductDto> products = new ArrayList<>();
+        List<ImmutablePair<ProductDto, Integer>> productWithCount = getProductsFromCart(userId, cart, favorite);
+        for (Pair<ProductDto, Integer> productIntegerPair : productWithCount) {
             Integer count = productIntegerPair.getRight();
             while (count > 0) {
                 products.add(productIntegerPair.getLeft());
@@ -170,7 +171,7 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
 //        }
     }
 
-    private List<Product> getProducts(Long userId, boolean cart, boolean favorite) {
+    private List<ProductDto> getProducts(Long userId, boolean cart, boolean favorite) {
         return getProductsFromCart(userId, cart, favorite).stream()
                 .map(Pair::getLeft)
                 .collect(Collectors.toList());

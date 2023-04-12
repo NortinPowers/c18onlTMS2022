@@ -1,4 +1,4 @@
-package by.tms.model;
+package by.tms.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,11 +11,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @Getter
-public class Order {
+public class OrderDto {
 
     private String id;
     private LocalDate date;
     private Long userId;
-//    private Product product;
-//    private Integer productsCount;
 }

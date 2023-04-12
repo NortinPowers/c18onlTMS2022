@@ -1,6 +1,6 @@
 package by.tms.service;
 
-import by.tms.model.Product;
+import by.tms.dto.ProductDto;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.math.BigDecimal;
@@ -10,7 +10,7 @@ public interface CartService {
 
     void addProductToCart(Long userId, Long productId, boolean cart, boolean favorite);
 
-    List<ImmutablePair<Product, Integer>> getProductsFromCart(Long userId, boolean cart, boolean favorite);
+    List<ImmutablePair<ProductDto, Integer>> getProductsFromCart(Long userId, boolean cart, boolean favorite);
 
     //
 //    void deleteProduct(Long userId, Long productId, boolean cart, boolean favorite);
@@ -18,8 +18,8 @@ public interface CartService {
     void deleteCartProductsAfterBuy(Long userId);
 
     //
-    BigDecimal getProductsPrice(List<ImmutablePair<Product, Integer>> productWithCount);
+    BigDecimal getProductsPrice(List<ImmutablePair<ProductDto, Integer>> productWithCount);
 
     //
-    List<Product> getPurchasedProducts(Long userId, boolean cart, boolean favorite);
+    List<ProductDto> getPurchasedProducts(Long userId, boolean cart, boolean favorite);
 }

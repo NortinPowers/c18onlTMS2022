@@ -20,7 +20,7 @@
                 <a class="btn btn-outline-info ml-2" href="<c:url value="/eshop?command=favorites"/>">Favorites</a>
             </li>
             <li class="nav-item">
-                <a class="btn btn-outline-info ml-2" href="<c:url value="/eshop?command=shopping-cart"/>">Shopping cart</a>
+                <a class="btn btn-outline-info ml-2" href="/cart">Shopping cart</a>
             </li>
         </c:if>
     </ul>

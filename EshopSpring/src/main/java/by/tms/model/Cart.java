@@ -1,12 +1,14 @@
 package by.tms.model;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
-@AllArgsConstructor
+//@AllArgsConstructor
 @Getter
 @EqualsAndHashCode
+//@NoArgsConstructor
+@Builder
 public class Cart {
 
     private Long id;

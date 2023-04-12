@@ -4,42 +4,40 @@ import by.tms.dto.ProductDto;
 import by.tms.model.Product;
 import lombok.experimental.UtilityClass;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
 import static by.tms.model.ProductType.getProductType;
-import static by.tms.utils.DtoUtils.makeProductModelTransfer;
 
 @UtilityClass
 public class RepositoryJdbcUtils {
 
-    public static void fillsCollectionValues(Collection<ProductDto> products, PreparedStatement statement) throws SQLException {
-        ResultSet resultSet = statement.executeQuery();
-        while (resultSet.next()) {
-            Product product = getProduct(resultSet);
-            ProductDto productDto = makeProductModelTransfer(product);
-            products.add(productDto);
-        }
+//    public static void fillsCollectionValues(Collection<ProductDto> products, PreparedStatement statement) throws SQLException {
+//        ResultSet resultSet = statement.executeQuery();
+//        while (resultSet.next()) {
+//            Product product = getProduct(resultSet);
+//            ProductDto productDto = makeProductDtoModelTransfer(product);
+//            products.add(productDto);
+//        }
+//    }
+
+    public static ProductDto getProductSimpleBuild(ResultSet resultSet) throws SQLException {
+        Product product = Product.builder()
+                .name(resultSet.getString("name"))
+                .info(resultSet.getString("info"))
+                .price(resultSet.getBigDecimal("price"))
+                .type(getProductType(resultSet.getString("type")))
+                .build();
+        return DtoUtils.makeProductDtoModelTransfer(product);
     }
 
-    public static Product getProductSimpleBuild(ResultSet resultSet) throws SQLException {
-        return Product.builder()
-                      .name(resultSet.getString("name"))
-                      .info(resultSet.getString("info"))
-                      .price(resultSet.getBigDecimal("price"))
-                      .type(getProductType(resultSet.getString("type")))
-                      .build();
-    }
-
-    public static Product getProduct(ResultSet resultSet) throws SQLException {
-        Product product = getProductSimpleBuild(resultSet);
-        product.setId(resultSet.getLong("id"));
-        product.setInfo(resultSet.getString("info"));
-        return product;
+    public static ProductDto getProductDto(ResultSet resultSet) throws SQLException {
+        ProductDto productDto = getProductSimpleBuild(resultSet);
+        productDto.setId(resultSet.getLong("id"));
+        productDto.setInfo(resultSet.getString("info"));
+        return productDto;
     }
 
     //
@@ -55,7 +53,7 @@ public class RepositoryJdbcUtils {
         return up ? ++productCount : --productCount;
     }
 
-    public static boolean isProductNotIncluded(Long productId, List<Product> products) {
+    public static boolean isProductNotIncluded(Long productId, List<ProductDto> products) {
         return products.stream()
                 .filter(product -> Objects.equals(product.getId(), productId))
                 .findAny()

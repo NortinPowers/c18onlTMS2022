@@ -1,6 +1,6 @@
 package by.tms.repository;
 
-import by.tms.model.Product;
+import by.tms.dto.ProductDto;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.List;
@@ -11,7 +11,7 @@ public interface JdbcCartRepository extends BaseRepository {
 
 //    void deleteProduct(Long userId, Long productId, boolean cart, boolean favorite);
 
-    List<ImmutablePair<Product, Integer>> getProductsFromCart(Long userId, boolean cart, boolean favorite);
+    List<ImmutablePair<ProductDto, Integer>> getProductsFromCart(Long userId, boolean cart, boolean favorite);
 
     boolean checkProduct(Long userId, Long productId, boolean cart, boolean favorite);
 
@@ -19,5 +19,5 @@ public interface JdbcCartRepository extends BaseRepository {
 
     void deleteCartProductsAfterBuy(Long userId);
 
-    List<Product> getPurchasedProducts(Long userId, boolean cart, boolean favorite);
+    List<ProductDto> getPurchasedProducts(Long userId, boolean cart, boolean favorite);
 }

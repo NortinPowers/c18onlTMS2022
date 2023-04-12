@@ -1,10 +1,8 @@
 package by.tms.repository.impl;
 
-import by.tms.model.Order;
+import by.tms.mapper.OrderMapper;
 import by.tms.model.Product;
-import by.tms.repository.ConnectionWrapper;
 import by.tms.repository.JdbcOrderRepository;
-import by.tms.utils.RepositoryJdbcUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
@@ -12,11 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Slf4j
 @Repository
@@ -48,45 +42,50 @@ public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
 
     @Override
     public void saveProductInOrderConfigurations(String order, Product product) {
-        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
-             PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(SAVE_PRODUCT_IN_ORDER)) {
-            statement.setString(1, order);
-            statement.setLong(2, product.getId());
-            statement.executeUpdate();
-        } catch (Exception e) {
-            log.error("Exception (saveProductInOrderConfigurations()): ", e);
-        }
+        jdbcTemplate.update(SAVE_PRODUCT_IN_ORDER, order, product.getId());
+
+//        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
+//             PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(SAVE_PRODUCT_IN_ORDER)) {
+//            statement.setString(1, order);
+//            statement.setLong(2, product.getId());
+//            statement.executeUpdate();
+//        } catch (Exception e) {
+//            log.error("Exception (saveProductInOrderConfigurations()): ", e);
+//        }
     }
 
-    @Override
-    public List<Order> getOrdersById(Long id) {
-        List<Order> orders = new ArrayList<>();
-        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
-             PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(GET_ORDERS_BY_ID)) {
-            statement.setLong(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                orders.add(RepositoryJdbcUtils.getOrderBuild(resultSet));
-            }
-        } catch (Exception e) {
-            log.error("Exception (getOrdersById()): ", e);
-        }
-        return orders;
-    }
+//    @Override
+//    public List<Order> getOrdersById(Long id) {
+//        List<Order> orders = new ArrayList<>();
+//        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
+//             PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(GET_ORDERS_BY_ID)) {
+//            statement.setLong(1, id);
+//            ResultSet resultSet = statement.executeQuery();
+//            while (resultSet.next()) {
+//                orders.add(RepositoryJdbcUtils.getOrderBuild(resultSet));
+//            }
+//        } catch (Exception e) {
+//            log.error("Exception (getOrdersById()): ", e);
+//        }
+//        return orders;
+//    }
 
     @Override
     public boolean checkOrderNumber(String number) {
-        boolean unique = false;
-        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
-             PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(GET_ORDERS_NUMBER)) {
-            statement.setString(1, number);
-            ResultSet resultSet = statement.executeQuery();
-            if (!resultSet.next()) {
-                unique = true;
-            }
-        } catch (Exception e) {
-            log.error("Exception (checkOrderNumber()): ", e);
-        }
-        return unique;
+        return jdbcTemplate.query(GET_ORDERS_NUMBER, new OrderMapper(), number).stream()
+                .findAny()
+                .isPresent();
+//        boolean unique = false;
+//        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
+//             PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(GET_ORDERS_NUMBER)) {
+//            statement.setString(1, number);
+//            ResultSet resultSet = statement.executeQuery();
+//            if (!resultSet.next()) {
+//                unique = true;
+//            }
+//        } catch (Exception e) {
+//            log.error("Exception (checkOrderNumber()): ", e);
+//        }
+//        return unique;
     }
 }
