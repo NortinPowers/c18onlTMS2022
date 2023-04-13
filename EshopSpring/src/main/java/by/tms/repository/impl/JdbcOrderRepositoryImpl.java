@@ -73,8 +73,7 @@ public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
     @Override
     public boolean checkOrderNumber(String number) {
         return jdbcTemplate.query(GET_ORDERS_NUMBER, new OrderMapper(), number).stream()
-                .findAny()
-                .isPresent();
+                .anyMatch(order -> order.getId().equals(number));
 //        boolean unique = false;
 //        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
 //             PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(GET_ORDERS_NUMBER)) {
