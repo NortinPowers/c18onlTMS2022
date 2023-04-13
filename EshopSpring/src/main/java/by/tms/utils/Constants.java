@@ -25,10 +25,10 @@ public class Constants {
     @UtilityClass
     public class Attributes {
 
-        public static final String USER = "user";
+        public static final String USER_DTO = "userDto";
         public static final String USER_NAME = "userName";
         public static final String USER_UUID = "userUUID";
-        public static final String ORDERINGS = "orderings";
+        public static final String USER_ORDER = "userOrder";
         public static final String INVALID = "invalid";
         public static final String FAVORITE_PRODUCTS = "favoriteProducts";
         public static final String USER_ACCESS_PERMISSION = "userAccessPermission";

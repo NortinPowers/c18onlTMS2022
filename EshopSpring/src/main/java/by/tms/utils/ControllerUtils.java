@@ -1,5 +1,8 @@
 package by.tms.utils;
 
+import by.tms.dto.OrderFullParamDto;
+import by.tms.dto.OrderWithListDto;
+import by.tms.dto.ProductDto;
 import by.tms.dto.UserDto;
 import by.tms.model.User;
 import jakarta.servlet.http.HttpServletRequest;
@@ -7,6 +10,9 @@ import jakarta.servlet.http.HttpSession;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static by.tms.utils.Constants.Attributes.*;
 import static by.tms.utils.Constants.CONVERSATION;
@@ -41,36 +47,41 @@ public class ControllerUtils {
         }
     }
 
-//    public static List<Ordering> getOrderings(List<Order> orders) {
-//        List<Ordering> orderings = new ArrayList<>();
-//        Order singleOrder = orders.get(0);
-//        List<Product> singleOrderList = new ArrayList<>();
-//        addOrdering(orderings, singleOrder, singleOrderList);
-//        separateOrders(orders, orderings, singleOrder, singleOrderList);
-//        return orderings;
-//    }
-//
-//    private void addOrdering(List<Ordering> orderings, Order singleOrder, List<Product> singleOrderList) {
-//        orderings.add(new Ordering(singleOrder.getId(), singleOrder.getDate(), singleOrderList));
-//        singleOrderList.add(singleOrder.getProduct());
-//    }
-//
-//    private void separateOrders(List<Order> orders, List<Ordering> orderings, Order singleOrder, List<Product> singleOrderList) {
-//        for (int i = 1; i < orders.size(); i++) {
-//            Order order = orders.get(i);
-//            if (singleOrder.getId().equals(order.getId())) {
-//                singleOrderList.add(order.getProduct());
-//            } else {
-//                singleOrder = order;
-//                singleOrderList = new ArrayList<>();
-//                addOrdering(orderings, singleOrder, singleOrderList);
-//            }
-//        }
-//    }
+    public static List<OrderWithListDto> getOrders(List<OrderFullParamDto> orders) {
+        List<OrderWithListDto> orderings = new ArrayList<>();
+        OrderFullParamDto singleOrder = orders.get(0);
+        List<ProductDto> singleOrderList = new ArrayList<>();
+        addOrdering(orderings, singleOrder, singleOrderList);
+        separateOrders(orders, orderings, singleOrder, singleOrderList);
+        return orderings;
+    }
+
+    private void addOrdering(List<OrderWithListDto> order, OrderFullParamDto singleOrder, List<ProductDto> singleOrderList) {
+        order.add(new OrderWithListDto(singleOrder.getId(), singleOrder.getDate(), singleOrderList));
+        singleOrderList.add(singleOrder.getProductDto());
+    }
+
+    private void separateOrders(List<OrderFullParamDto> orders, List<OrderWithListDto> orderings, OrderFullParamDto singleOrder, List<ProductDto> singleOrderList) {
+        for (int i = 1; i < orders.size(); i++) {
+            OrderFullParamDto order = orders.get(i);
+            if (singleOrder.getId().equals(order.getId())) {
+                singleOrderList.add(order.getProductDto());
+            } else {
+                singleOrder = order;
+                singleOrderList = new ArrayList<>();
+                addOrdering(orderings, singleOrder, singleOrderList);
+            }
+        }
+    }
 
     public static String createOrderNumber(Long id) {
         String uuid = randomUUID().toString();
         return "#" + id + "-" + uuid;
+    }
+
+    public static Long getUserId(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        return ((UserDto) session.getAttribute(USER_ACCESS_PERMISSION)).getId();
     }
 
 //    public static void forwardToAddress(HttpServletRequest request, HttpServletResponse response, String address) throws ServletException, IOException {

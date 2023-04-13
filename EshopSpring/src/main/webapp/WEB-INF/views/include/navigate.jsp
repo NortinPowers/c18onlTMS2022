@@ -17,7 +17,8 @@
         <c:set var="access" value="${userAccessPermission}"/>
         <c:if test="${access != null}">
             <li class="nav-item">
-                <a class="btn btn-outline-info ml-2" href="<c:url value="/eshop?command=favorites"/>">Favorites</a>
+                <a class="btn btn-outline-info ml-2" href="/favorites">Favorites</a>
+                    <%--                <a class="btn btn-outline-info ml-2" href="<c:url value="/eshop?command=favorites"/>">Favorites</a>--%>
             </li>
             <li class="nav-item">
                 <a class="btn btn-outline-info ml-2" href="/cart">Shopping cart</a>
@@ -39,7 +40,7 @@
             <ul class="nav nav-pills ">
                 <li class="nav-item">
                     <a id="accountButton"
-                       href="<c:url value="/eshop?command=account"/>">
+                       href="/account">
                         <button class="btn btn-outline-success mr-2" type="submit">Account</button>
                     </a>
                 </li>

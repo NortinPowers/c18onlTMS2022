@@ -1,10 +1,12 @@
 package by.tms.utils;
 
 import by.tms.dto.OrderDto;
-import by.tms.dto.OrderFullParamDto;
 import by.tms.dto.ProductDto;
 import by.tms.dto.UserDto;
-import by.tms.model.*;
+import by.tms.model.Order;
+import by.tms.model.Product;
+import by.tms.model.ProductType;
+import by.tms.model.User;
 import lombok.experimental.UtilityClass;
 
 import java.util.List;
@@ -45,10 +47,10 @@ public class DtoUtils {
                 .build();
     }
 
-    public static OrderFullParamDto makeOrderDtoFullParamMadelTransfer(Order order, OrderConfig orderConfig,
-                                                                       Product product, Integer productsCount) {
-        return null;
-    }
+//    public static OrderFullParamDto makeOrderDtoFullParamMadelTransfer(Order order, OrderConfig orderConfig,
+//                                                                       Product product, Integer productsCount) {
+//        return null;
+//    }
 
     public static OrderDto makeOrderDtoModelTransfer(Order order) {
         return OrderDto.builder()

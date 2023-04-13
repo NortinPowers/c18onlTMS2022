@@ -1,6 +1,9 @@
 package by.tms.service;
 
+import by.tms.dto.OrderFullParamDto;
 import by.tms.model.Product;
+
+import java.util.List;
 
 public interface OrderService {
 
@@ -8,7 +11,7 @@ public interface OrderService {
 
     void saveProductInOrderConfigurations(String order, Product product);
 
-//    List<Order> getOrdersById(Long id);
+    List<OrderFullParamDto> getOrdersById(Long id);
 
     boolean checkOrderNumber(String number);
 }

@@ -28,7 +28,8 @@
             <td class="font-italic">${product.right}</td>
             <td class="font-italic">${product.left.price*product.right}</td>
             <td class="font-italic">
-                <a href="<c:url value="/eshop?command=delete-cart-product&id=${product.left.id}"/>">
+                <a href="/delete-cart?id=${product.left.id}">
+                        <%--                <a href="<c:url value="/eshop?command=delete-cart-product&id=${product.left.id}"/>">--%>
                     Delete
                 </a>
             </td>

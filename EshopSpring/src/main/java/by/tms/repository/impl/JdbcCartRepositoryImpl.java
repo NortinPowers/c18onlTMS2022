@@ -1,7 +1,7 @@
 package by.tms.repository.impl;
 
 import by.tms.dto.ProductDto;
-import by.tms.mapper.CartMapper;
+import by.tms.mapper.CartCountMapper;
 import by.tms.model.Cart;
 import by.tms.repository.JdbcCartRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,8 +31,8 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
     //    private static final String GET_CART_PRODUCTS_BY_USER_ID = "select p.id, p.name, p.price, p.type, p.info, c.count from carts c join products p on p.id = c.product_id where c.user_id=? and c.cart=true";
     private static final String GET_FAVORITE_PRODUCTS_BY_USER_ID = "select p.id, p.name, p.price, pt.type, p.info, c.count from carts c join products p on p.id = c.product_id join product_type pt on pt.id = p.product_type_id where c.user_id=? and c.favorite=true";
     //    private static final String GET_FAVORITE_PRODUCTS_BY_USER_ID = "select p.id, p.name, p.price, p.type, p.info, c.count from carts c join products p on p.id = c.product_id where c.user_id=? and c.favorite=true";
-//    private static final String DELETE_FAVORITE_PRODUCT = "delete from carts where user_id=? and product_id=? and favorite=true";
-//    private static final String DELETE_CART_PRODUCT = "delete from carts where user_id=? and product_id=? and cart=true";
+    private static final String DELETE_FAVORITE_PRODUCT = "delete from carts where user_id=? and product_id=? and favorite=true";
+    private static final String DELETE_CART_PRODUCT = "delete from carts where user_id=? and product_id=? and cart=true";
     private static final String GET_CURRENT_PRODUCT_COUNT = "select count from carts where user_id=? and product_id=? and cart=true";
     private static final String UPDATE_CURRENT_PRODUCT_COUNT = "update carts set count=? where user_id=? and product_id=? and cart=true";
     private static final String DELETE_CART_PRODUCT_AFTER_BUY = "delete from carts where user_id=? and cart=true";
@@ -52,19 +52,19 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
         }
     }
 
-//    @Override
-//    public void deleteProduct(Long userId, Long productId, boolean cart, boolean favorite) {
-//        if (favorite) {
-//            deleteProductByMark(userId, productId, DELETE_FAVORITE_PRODUCT);
-//        } else {
-//            Integer productCount = getCartProductCount(userId, productId);
-//            if (productCount > 1) {
-//                modifyProductCount(userId, productId, false);
-//            } else {
-//                deleteProductByMark(userId, productId, DELETE_CART_PRODUCT);
-//            }
-//        }
-//    }
+    @Override
+    public void deleteProduct(Long userId, Long productId, boolean cart, boolean favorite) {
+        if (favorite) {
+            deleteProductByMark(userId, productId, DELETE_FAVORITE_PRODUCT);
+        } else {
+            Integer productCount = getCartProductCount(userId, productId);
+            if (productCount > 1) {
+                modifyProductCount(userId, productId, false);
+            } else {
+                deleteProductByMark(userId, productId, DELETE_CART_PRODUCT);
+            }
+        }
+    }
 
     @Override
 //    public List<Pair<Product, Integer>> getProductsFromCart(Long userId, boolean cart, boolean favorite) {
@@ -95,7 +95,7 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
     @Override
     public Integer getCartProductCount(Long userId, Long productId) {
 //        return jdbcTemplate.query(GET_CURRENT_PRODUCT_COUNT, new BeanPropertyRowMapper<>(Cart.class),
-        return jdbcTemplate.query(GET_CURRENT_PRODUCT_COUNT, new CartMapper(),
+        return jdbcTemplate.query(GET_CURRENT_PRODUCT_COUNT, new CartCountMapper(),
                         userId, productId).stream()
                 .findAny()
                 .map(Cart::getCount)
@@ -176,8 +176,9 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
                 .map(Pair::getLeft)
                 .collect(Collectors.toList());
     }
-//
-//    private void deleteProductByMark(Long userId, Long productId, String query) {
+
+    private void deleteProductByMark(Long userId, Long productId, String query) {
+        jdbcTemplate.update(query, userId, productId);
 //        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
 //                PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(query)) {
 //            statement.setLong(1, userId);
@@ -186,5 +187,5 @@ public class JdbcCartRepositoryImpl implements JdbcCartRepository {
 //        } catch (Exception e) {
 //            log.error("Exception (deleteProductByMark()): ", e);
 //        }
-//    }
+    }
 }

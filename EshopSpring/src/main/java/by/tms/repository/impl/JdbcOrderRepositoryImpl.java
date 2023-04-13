@@ -1,6 +1,8 @@
 package by.tms.repository.impl;
 
-import by.tms.mapper.OrderMapper;
+import by.tms.dto.OrderFullParamDto;
+import by.tms.mapper.OrderFullParamDtoMapper;
+import by.tms.mapper.OrderIdMapper;
 import by.tms.model.Product;
 import by.tms.repository.JdbcOrderRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 @Slf4j
 @Repository
@@ -22,7 +25,10 @@ public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
 
     private static final String CREATE_ORDER = "insert into orders (id, date, user_id) values (?, ?, ?)";
     private static final String SAVE_PRODUCT_IN_ORDER = "insert into order_configurations (order_id, product_id) values (?, ?)";
-    private static final String GET_ORDERS_BY_ID = "select o.id, o.date, p.name, p.info, p.price, p.type from orders o join order_configurations oc on o.id = oc.order_id join products p on p.id = oc.product_id where user_id=?";
+    private static final String GET_ORDERS_BY_ID = "select o.id, o.date, p.name, p.info, p.price, pt.type from orders o " +
+            "join order_configurations oc on o.id = oc.order_id " +
+            "join products p on p.id = oc.product_id " +
+            "join product_type pt on pt.id = p.product_type_id where user_id=?";
     private static final String GET_ORDERS_NUMBER = "select id from orders where id=?";
 
     @Override
@@ -54,8 +60,9 @@ public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
 //        }
     }
 
-//    @Override
-//    public List<Order> getOrdersById(Long id) {
+    @Override
+    public List<OrderFullParamDto> getOrdersById(Long id) {
+        return jdbcTemplate.query(GET_ORDERS_BY_ID, new OrderFullParamDtoMapper(), id);
 //        List<Order> orders = new ArrayList<>();
 //        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
 //             PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(GET_ORDERS_BY_ID)) {
@@ -68,11 +75,11 @@ public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
 //            log.error("Exception (getOrdersById()): ", e);
 //        }
 //        return orders;
-//    }
+    }
 
     @Override
     public boolean checkOrderNumber(String number) {
-        return jdbcTemplate.query(GET_ORDERS_NUMBER, new OrderMapper(), number).stream()
+        return jdbcTemplate.query(GET_ORDERS_NUMBER, new OrderIdMapper(), number).stream()
                 .anyMatch(order -> order.getId().equals(number));
 //        boolean unique = false;
 //        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();

@@ -1,6 +1,5 @@
 package by.tms.dto;
 
-import by.tms.model.Product;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -13,6 +12,6 @@ public class OrderFullParamDto {
     private String id;
     private LocalDate date;
     private Long userId;
-    private Product product;
+    private ProductDto productDto;
     private Integer productsCount;
 }

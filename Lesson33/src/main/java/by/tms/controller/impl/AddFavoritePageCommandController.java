@@ -1,14 +1,5 @@
 package by.tms.controller.impl;
 
-import static by.tms.model.PagesPath.PRODUCT_JSP_PAGE;
-import static by.tms.model.PagesPath.SEARCH_SAVED_RESULT_PAGE;
-import static by.tms.utils.Constants.RequestParameters.ID;
-import static by.tms.utils.Constants.RequestParameters.LOCATION;
-import static by.tms.utils.Constants.RequestParameters.PRODUCT_PAGE;
-import static by.tms.utils.Constants.RequestParameters.SEARCH;
-import static by.tms.utils.ControllerUtils.getPagePathByType;
-import static by.tms.utils.ServletUtils.getLogin;
-
 import by.tms.controller.CommandController;
 import by.tms.exception.CommandException;
 import by.tms.model.Inject;
@@ -16,9 +7,16 @@ import by.tms.model.PagesPath;
 import by.tms.service.CartService;
 import by.tms.service.ProductService;
 import by.tms.service.UserService;
-import java.util.Objects;
-import javax.servlet.http.HttpServletRequest;
 import lombok.Setter;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
+
+import static by.tms.model.PagesPath.PRODUCT_JSP_PAGE;
+import static by.tms.model.PagesPath.SEARCH_SAVED_RESULT_PAGE;
+import static by.tms.utils.Constants.RequestParameters.*;
+import static by.tms.utils.ControllerUtils.getPagePathByType;
+import static by.tms.utils.ServletUtils.getLogin;
 
 @Setter
 public class AddFavoritePageCommandController implements CommandController {

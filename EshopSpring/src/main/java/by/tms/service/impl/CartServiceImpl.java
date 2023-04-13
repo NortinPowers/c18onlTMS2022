@@ -27,11 +27,11 @@ public class CartServiceImpl implements CartService {
     public List<ImmutablePair<ProductDto, Integer>> getProductsFromCart(Long userId, boolean cart, boolean favorite) {
         return jdbcCartRepository.getProductsFromCart(userId, cart, favorite);
     }
-//
-//    @Override
-//    public void deleteProduct(Long userId, Long productId, boolean cart, boolean favorite) {
-//        jdbcCartRepository.deleteProduct(userId, productId, cart, favorite);
-//    }
+
+    @Override
+    public void deleteProduct(Long userId, Long productId, boolean cart, boolean favorite) {
+        jdbcCartRepository.deleteProduct(userId, productId, cart, favorite);
+    }
 
     @Override
     public void deleteCartProductsAfterBuy(Long userId) {

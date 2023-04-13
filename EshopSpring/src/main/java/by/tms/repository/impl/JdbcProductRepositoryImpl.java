@@ -2,6 +2,7 @@ package by.tms.repository.impl;
 
 import by.tms.dto.ProductDto;
 import by.tms.mapper.ProductDtoMapper;
+import by.tms.mapper.ProductTypeDtoMapper;
 import by.tms.repository.JdbcProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -96,7 +97,7 @@ public class JdbcProductRepositoryImpl extends BaseRep implements JdbcProductRep
 //
     @Override
     public String getProductTypeValue(Long id) {
-        return jdbcTemplate.query(GET_PRODUCT_TYPE, new ProductDtoMapper(), id).stream()
+        return jdbcTemplate.query(GET_PRODUCT_TYPE, new ProductTypeDtoMapper(), id).stream()
                 .findAny()
                 .map(ProductDto::getType)
                 .orElse(null);
