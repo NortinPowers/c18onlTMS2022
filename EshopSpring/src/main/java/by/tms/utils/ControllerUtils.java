@@ -9,11 +9,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.MDC;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import static by.tms.utils.Constants.ALL;
 import static by.tms.utils.Constants.Attributes.*;
 import static by.tms.utils.Constants.CONVERSATION;
 import static java.util.UUID.randomUUID;
@@ -88,4 +94,25 @@ public class ControllerUtils {
 //        RequestDispatcher dispatcher = request.getRequestDispatcher(address);
 //        dispatcher.forward(request, response);
 //    }
+
+    public static BigDecimal getPrice(HttpServletRequest request, String param, BigDecimal defaultValue) {
+        String value = request.getParameter(param);
+        return StringUtils.isNotBlank(value) ? new BigDecimal(value) : defaultValue;
+    }
+
+    public static Set<ProductDto> applyPriceFilterOnProducts(BigDecimal minPrice, BigDecimal maxPrice, Set<ProductDto> products) {
+        products = products.stream()
+                .filter(product -> product.getPrice().compareTo(minPrice) > 0 && product.getPrice().compareTo(maxPrice) < 0)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+        return products;
+    }
+
+    public static Set<ProductDto> applyTypeFilterOnProducts(String type, Set<ProductDto> products) {
+        if (!ALL.equals(type)) {
+            products = products.stream()
+                    .filter(product -> product.getType().equals(type))
+                    .collect(Collectors.toCollection(LinkedHashSet::new));
+        }
+        return products;
+    }
 }

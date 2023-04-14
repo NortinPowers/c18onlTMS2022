@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static by.tms.model.ProductType.getProductType;
+import static by.tms.utils.Constants.ALL;
 
 @UtilityClass
 public class RepositoryJdbcUtils {
@@ -59,16 +60,16 @@ public class RepositoryJdbcUtils {
                 .findAny()
                 .isEmpty();
     }
-//
-//    public static String getQueryDependType(String type, String query) {
-//        String fullQuery;
-//        if (!ALL.equals(type)) {
-//            fullQuery = query + " and p.type='" + type + "' order by p.id";
-//        } else {
-//            fullQuery = query + " order by p.id";
-//        }
-//        return fullQuery;
-//    }
+
+    public static String getQueryDependType(String type, String query) {
+        String fullQuery;
+        if (!ALL.equals(type)) {
+            fullQuery = query + " and pt.type='" + type + "' order by p.id";
+        } else {
+            fullQuery = query + " order by p.id";
+        }
+        return fullQuery;
+    }
 //
 //    public static void fillsSet(String searchCondition, Set<Product> products, PreparedStatement statement) throws SQLException {
 //        statement.setString(1, "%" + searchCondition + "%");

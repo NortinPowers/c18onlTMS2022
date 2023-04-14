@@ -8,7 +8,8 @@
         </li>
         <li class="nav-item">
             <a class="btn btn-outline-warning ml-2"
-               href="<c:url value="/eshop?command=search"/>">
+            <%--               href="<c:url value="/eshop?command=search"/>">--%>
+               href="/search">
                 <div class="text-center p-1">
                     <i class="bi bi-search"></i>
                 </div>

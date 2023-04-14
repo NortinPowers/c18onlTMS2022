@@ -2,7 +2,9 @@ package by.tms.repository;
 
 import by.tms.dto.ProductDto;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 public interface JdbcProductRepository extends BaseRepository {
 
@@ -13,10 +15,10 @@ public interface JdbcProductRepository extends BaseRepository {
     //
     String getProductTypeValue(Long id);
 
-    //
-//    Set<Product> getFoundProducts(String searchCondition);
-//
+
+    Set<ProductDto> getFoundProducts(String searchCondition);
+
     ProductDto getProduct(Long id);
-//
-//    Set<Product> selectAllProductsByFilter(String type, BigDecimal minPrice, BigDecimal maxPrice);
+
+    Set<ProductDto> selectAllProductsByFilter(String type, BigDecimal minPrice, BigDecimal maxPrice);
 }

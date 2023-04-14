@@ -1,18 +1,19 @@
 package by.tms.controller.impl;
 
-import static by.tms.model.PagesPath.SEARCH_JSP_PAGE;
+import by.tms.controller.CommandController;
+import by.tms.exception.CommandException;
+import by.tms.model.PagesPath;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import static by.tms.model.PagesPath.SEARCH_SAVED_RESULT_PAGE;
 import static by.tms.utils.Constants.Attributes.FILTER_FOUND_PRODUCTS;
 import static by.tms.utils.Constants.Attributes.FOUND_PRODUCTS;
 import static by.tms.utils.Constants.RequestParameters.FILTER;
 import static by.tms.utils.Constants.RequestParameters.RESULT;
 import static by.tms.utils.Constants.SAVE;
 import static by.tms.utils.Constants.TRUE;
-
-import by.tms.controller.CommandController;
-import by.tms.exception.CommandException;
-import by.tms.model.PagesPath;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 public class SearchPageCommandController implements CommandController {
 
@@ -27,6 +28,6 @@ public class SearchPageCommandController implements CommandController {
         if (TRUE.equals(request.getParameter(FILTER))) {
             request.getServletContext().setAttribute(FILTER, new Object());
         }
-        return SEARCH_JSP_PAGE;
+        return SEARCH_SAVED_RESULT_PAGE;
     }
 }

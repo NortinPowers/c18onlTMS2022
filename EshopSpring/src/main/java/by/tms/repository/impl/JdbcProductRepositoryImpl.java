@@ -9,7 +9,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
+
+import static by.tms.utils.RepositoryJdbcUtils.getQueryDependType;
 
 @Slf4j
 //@AllArgsConstructor
@@ -27,10 +32,13 @@ public class JdbcProductRepositoryImpl extends BaseRep implements JdbcProductRep
     //    private static final String GET_ALL_PRODUCTS = "select * from products";
     private static final String GET_PRODUCTS_BY_TYPE = "select p.id, p.name, pt.type, p.info, p.price from products p join product_type pt on pt.id = p.product_type_id where pt.type=?";
     private static final String GET_PRODUCT_TYPE = "select pt.type from products p join product_type pt on pt.id = p.product_type_id where p.id=?";
+    private static final String GET_PRODUCTS_BY_SEARCH_CONDITION_IN_NAME = "select p.id, p.name, pt.type, p.info, p.price from products p join product_type pt on pt.id = p.product_type_id where lower(name) like lower(?)";
     //    private static final String GET_PRODUCTS_BY_SEARCH_CONDITION_IN_NAME = "select * from products where lower(name) like lower(?)";
-//    private static final String GET_PRODUCTS_BY_SEARCH_CONDITION_IN_INFO = "select * from products where lower(info) like lower(?)";
+    private static final String GET_PRODUCTS_BY_SEARCH_CONDITION_IN_INFO = "select p.id, p.name, pt.type, p.info, p.price from products p join product_type pt on pt.id = p.product_type_id where lower(info) like lower(?)";
+    //    private static final String GET_PRODUCTS_BY_SEARCH_CONDITION_IN_INFO = "select * from products where lower(info) like lower(?)";
     private static final String GET_PRODUCT = "select p.id, p.name, pt.type, p.info, p.price from products p join product_type pt on pt.id = p.product_type_id where p.id=?";
 
+    private static final String SELECT_ALL_PRODUCTS_BY_FILTER = "select p.id, p.name, pt.type, p.info, p.price from products p join product_type pt on pt.id = p.product_type_id where p.price>=? and p.price<=?";
 //    private static final String SELECT_ALL_PRODUCTS_BY_FILTER = "select * from products p where p.price>=? and p.price<=?";
 
     @Override
@@ -114,9 +122,16 @@ public class JdbcProductRepositoryImpl extends BaseRep implements JdbcProductRep
 //        }
 //        return type;
     }
-//
-//    @Override
-//    public Set<Product> getFoundProducts(String searchCondition) {
+
+    //
+    @Override
+    public Set<ProductDto> getFoundProducts(String searchCondition) {
+        //        Set<ProductDto> productsNameSearch = new LinkedHashSet<>();
+        String condition = "%" + searchCondition + "%";
+        List<ProductDto> productNameSearch = jdbcTemplate.query(GET_PRODUCTS_BY_SEARCH_CONDITION_IN_NAME, new ProductDtoMapper(), condition);
+        List<ProductDto> productInfoSearch = jdbcTemplate.query(GET_PRODUCTS_BY_SEARCH_CONDITION_IN_INFO, new ProductDtoMapper(), condition);
+        Set<ProductDto> products = new LinkedHashSet<>(productNameSearch);
+        products.addAll(productInfoSearch);
 //        Set<Product> products = new LinkedHashSet<>();
 //        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
 //                PreparedStatement statementByName = connectionWrapper.getConnection().prepareStatement(GET_PRODUCTS_BY_SEARCH_CONDITION_IN_NAME);
@@ -126,8 +141,8 @@ public class JdbcProductRepositoryImpl extends BaseRep implements JdbcProductRep
 //        } catch (Exception e) {
 //            log.error("Exception (getFoundProducts()): ", e);
 //        }
-//        return products;
-//    }
+        return products;
+    }
 //
 //    @Override
 //    public Product getOneProduct(Long id) {
@@ -145,9 +160,11 @@ public class JdbcProductRepositoryImpl extends BaseRep implements JdbcProductRep
 //        return product;
 //    }
 //
-//    @Override
-//    public Set<Product> selectAllProductsByFilter(String type, BigDecimal minPrice, BigDecimal maxPrice) {
-//        Set<Product> products = new LinkedHashSet<>();
+@Override
+public Set<ProductDto> selectAllProductsByFilter(String type, BigDecimal minPrice, BigDecimal maxPrice) {
+    String query = getQueryDependType(type, SELECT_ALL_PRODUCTS_BY_FILTER);
+    List<ProductDto> searchProducts = jdbcTemplate.query(query, new ProductDtoMapper(), minPrice, maxPrice);
+    //        Set<Product> products = new LinkedHashSet<>();
 //        String query = getQueryDependType(type, SELECT_ALL_PRODUCTS_BY_FILTER);
 //        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
 //                PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(query)) {
@@ -157,6 +174,6 @@ public class JdbcProductRepositoryImpl extends BaseRep implements JdbcProductRep
 //        } catch (Exception e) {
 //            log.error("Exception (selectAllProductsByFilter()): ", e);
 //        }
-//        return products;
-//    }
+    return new LinkedHashSet<>(searchProducts);
+}
 }

@@ -106,7 +106,7 @@ public class CartController {
             path = "redirect:/favorites";
 //            path = FAVORITES_PAGE;
         } else if (Objects.equals(location, SEARCH)) {
-            path = "search?result=save";
+            path = "redirect:/search?result=save";
 //            path = SEARCH_SAVED_RESULT_PAGE;
         } else if (Objects.equals(location, PRODUCT_PAGE)) {
             path = "redirect:/product/" + productId;

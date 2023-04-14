@@ -7,7 +7,9 @@ import by.tms.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -55,19 +57,20 @@ public class ProductServiceImpl implements ProductService {
     public String getProductTypeValue(Long id) {
         return jdbcProductRepository.getProductTypeValue(id);
     }
-//
-//    @Override
-//    public Set<Product> getFoundProducts(String searchCondition) {
-//        return jdbcProductRepository.getFoundProducts(searchCondition);
-//    }
-//
+
+    @Override
+    public Set<ProductDto> getFoundProducts(String searchCondition) {
+        return jdbcProductRepository.getFoundProducts(searchCondition);
+    }
+
+    //
 //    @Override
 //    public Product getOneProduct(Long id) {
 //        return jdbcProductRepository.getOneProduct(id);
 //    }
 //
-//    @Override
-//    public Set<Product> selectAllProductsByFilter(String type, BigDecimal minPrice, BigDecimal maxPrice) {
-//        return jdbcProductRepository.selectAllProductsByFilter(type, minPrice, maxPrice);
-//    }
+    @Override
+    public Set<ProductDto> selectAllProductsByFilter(String type, BigDecimal minPrice, BigDecimal maxPrice) {
+        return jdbcProductRepository.selectAllProductsByFilter(type, minPrice, maxPrice);
+    }
 }

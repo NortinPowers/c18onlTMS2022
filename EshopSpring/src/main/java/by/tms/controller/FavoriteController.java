@@ -55,7 +55,7 @@ public class FavoriteController {
     private static String getPathFromAddFavoriteByParameters(Long productId, String location, String productType) {
         String path;
         if (Objects.equals(location, SEARCH)) {
-            path = "search/search?result=save";
+            path = "redirect:/search?result=save";
 //            path = SEARCH_SAVED_RESULT_PAGE;
         } else if (Objects.equals(location, PRODUCT_PAGE)) {
             path = "redirect:/product/" + productId;
