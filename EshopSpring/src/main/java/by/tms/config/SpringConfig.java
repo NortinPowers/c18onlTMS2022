@@ -1,10 +1,8 @@
 package by.tms.config;
 
+import by.tms.aspect.JdbcTemplateExceptionHandler;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -22,6 +20,7 @@ import java.util.Objects;
 @EnableWebMvc
 @PropertySource("classpath:application.properties")
 @RequiredArgsConstructor
+@EnableAspectJAutoProxy
 public class SpringConfig implements WebMvcConfigurer {
 
     private final Environment environment;
@@ -79,4 +78,8 @@ public class SpringConfig implements WebMvcConfigurer {
 //            throw new RuntimeException(e);
 //        }
 //    }
+    @Bean
+    public JdbcTemplateExceptionHandler jdbcTemplateExceptionHandler() {
+        return new JdbcTemplateExceptionHandler();
+    }
 }
