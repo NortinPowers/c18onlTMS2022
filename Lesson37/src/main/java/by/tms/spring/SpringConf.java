@@ -1,14 +1,12 @@
 package by.tms.spring;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 
 @Configuration
-@ComponentScan("by.tms.model")
+@ComponentScan("by.tms")
 @PropertySource("classpath:spring.properties")
+@EnableAspectJAutoProxy
 public class SpringConf {
 
     final

@@ -10,6 +10,15 @@ public class Main {
         try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConf.class)) {
             User user = context.getBean("user", User.class);
             System.out.println(user);
+            try {
+                user.printName();
+                System.out.println("Set value for Exception");
+                user.setName("FF");
+                user.printName();
+            } catch (Exception e) {
+                System.out.println("Exception in main");
+            }
+
         }
     }
 }
