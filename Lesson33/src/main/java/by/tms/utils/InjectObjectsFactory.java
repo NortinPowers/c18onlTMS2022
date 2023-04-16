@@ -13,10 +13,12 @@ import by.tms.service.CartService;
 import by.tms.service.OrderService;
 import by.tms.service.ProductService;
 import by.tms.service.UserService;
+import by.tms.service.ValidateService;
 import by.tms.service.impl.CartServiceImpl;
 import by.tms.service.impl.OrderServiceImpl;
 import by.tms.service.impl.ProductServiceImpl;
 import by.tms.service.impl.UserServiceImpl;
+import by.tms.service.impl.ValidateServiceImpl;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -80,6 +82,8 @@ public class InjectObjectsFactory {
             return new UserServiceImpl();
         } else if (JdbcUserRepository.class == serviceClass) {
             return new JdbcUserRepositoryImpl();
+        } else if (ValidateService.class == serviceClass) {
+            return new ValidateServiceImpl();
         }
         throw new IllegalArgumentException("Can not create instance of class " + serviceClass);
     }

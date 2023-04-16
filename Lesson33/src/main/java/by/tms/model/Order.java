@@ -1,10 +1,11 @@
 package by.tms.model;
 
-import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+
+import java.time.LocalDate;
 
 @EqualsAndHashCode
 @AllArgsConstructor
@@ -18,9 +19,9 @@ public class Order {
     private Product product;
     private Integer productsCount;
 
-    public Order(LocalDate date, Long userId, Integer productsCount) {
-        this.date = date;
-        this.userId = userId;
-        this.productsCount = productsCount;
-    }
+//    public Order(LocalDate date, Long userId, Integer productsCount) {
+//        this.date = date;
+//        this.userId = userId;
+//        this.productsCount = productsCount;
+//    }
 }

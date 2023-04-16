@@ -21,6 +21,7 @@ public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
     private static final String CREATE_ORDER = "insert into orders (id, date, user_id) values (?, ?, ?)";
     private static final String SAVE_PRODUCT_IN_ORDER = "insert into order_configurations (order_id, product_id) values (?, ?)";
     private static final String GET_ORDERS_BY_ID = "select o.id, o.date, p.name, p.info, p.price, p.type from orders o join order_configurations oc on o.id = oc.order_id join products p on p.id = oc.product_id where user_id=?";
+    private static final String GET_ORDERS_NUMBER = "select id from orders where id=?";
 
     @Override
     public void createOrder(String order, Long id) {
@@ -61,5 +62,21 @@ public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
             log.error("Exception (getOrdersById()): ", e);
         }
         return orders;
+    }
+
+    @Override
+    public boolean checkOrderNumber(String number) {
+        boolean unique = false;
+        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
+                PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(GET_ORDERS_NUMBER)) {
+            statement.setString(1, number);
+            ResultSet resultSet = statement.executeQuery();
+            if (!resultSet.next()) {
+                unique = true;
+            }
+        } catch (Exception e) {
+            log.error("Exception (checkOrderNumber()): ", e);
+        }
+        return unique;
     }
 }

@@ -13,7 +13,7 @@
         <div class="col">
             <div class="container-fluid">
                 <form class="d-flex" role="search" action="<c:url value="/eshop?command=search-post"/>" method="post">
-                    <input class="form-control me-2" type="search" name="searchCondition" placeholder="Search"
+                    <input class="form-control me-2" type="search" name="search-condition" placeholder="Search"
                            aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
@@ -58,10 +58,10 @@
                             <div class="col-6"></div>
                             <div class="col-6 col-sm-6">
                                 <div>
-                                    <input class="col-sm-12 btn btn-info" type="submit" value="Filter"/>
+                                    <input class="col-sm-12 btn btn-dark" type="submit" value="Filter"/>
                                 </div>
                                 <div>
-                                    <a class="col-sm-12 btn btn-info mt-2"
+                                    <a class="col-sm-12 btn btn-dark mt-2"
                                        href="<c:url value="/eshop?command=search"/>">
                                         Reset filter
                                     </a>
@@ -76,13 +76,12 @@
             <c:set var="filter" value="${applicationScope.get('filter')}"/>
             <c:choose>
                 <c:when test="${filter == null}">
-                    <c:set var="products" value="${applicationScope.foundProducts}"/>
+                    <c:set var="products" value="${sessionScope.foundProducts}"/>
                 </c:when>
                 <c:otherwise>
-                    <c:set var="products" value="${applicationScope.filterFoundProducts}"/>
+                    <c:set var="products" value="${sessionScope.filterFoundProducts}"/>
                 </c:otherwise>
             </c:choose>
-
             <c:choose>
                 <c:when test="${products.size()==0}">
                     <h5 class="text-center">No suitable products found. Enter or change the search terms!</h5>
@@ -104,28 +103,28 @@
                                             </div>
                                         </c:when>
                                         <c:otherwise>
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-3 ml-4 mr-2">
                                                 <a href="<c:url value="/eshop?command=product&id=${product.id}"/>"
-                                                   class="text-light text-decoration-none btn btn-success btn-block w-auto"
+                                                   class="text-light text-decoration-none btn btn-success btn-block w-100"
                                                    aria-current="page">
                                                     To product
                                                 </a>
                                             </div>
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-3">
                                                 <a href="<c:url value="/eshop?command=add-cart&id=${product.id}&shop=true&location=none"/>"
-                                                   class="text-light text-decoration-none btn btn-success btn-block w-auto"
+                                                   class="text-light text-decoration-none btn btn-success btn-block w-100"
                                                    aria-current="page">
                                                     Buy
                                                 </a>
                                             </div>
-                                            <div class="col-sm-2 btn btn-success">
+                                            <div class="col-sm-2 btn btn-success ml-3 mr-3">
                                                 <a href="<c:url value="/eshop?command=add-cart&id=${product.id}&shop=none&location=search"/>">
                                                     <div class="text-center text-light text-decoration-none p-1">
                                                         <i class="bi bi-cart-plus"></i>
                                                     </div>
                                                 </a>
                                             </div>
-                                            <div class="col-sm-2 btn btn-success">
+                                            <div class="col-sm-2 btn btn-success ml-3 mr-3">
                                                 <a href="<c:url value="/eshop?command=add-favorite&id=${product.id}&shop=none&location=search"/>">
                                                     <div class="text-center text-light text-decoration-none p-1">
                                                         <i class="bi bi-heart"></i>

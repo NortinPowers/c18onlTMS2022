@@ -49,17 +49,20 @@
     </c:when>
     <c:otherwise>
         <div class="accordion" id="accordionPanelsStayOpenExample">
-            <c:forEach var="ordering" items="${applicationScope.orderings}">
+            <c:forEach var="order" items="${applicationScope.orderings}">
                 <div class="accordion-item" style="background: #314b6c">
                     <h2 class="accordion-header" id="panelsStayOpen-heading" style="background: #406491">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse" aria-expanded="true" aria-controls="panelsStayOpen-collapse">
-                            Order: ${ordering.order} Date: ${ordering.date}
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#panelsStayOpen-collapse" aria-expanded="true"
+                                aria-controls="panelsStayOpen-collapse">
+                            Order: ${order.order} Date: ${order.date}
                         </button>
                     </h2>
-                    <div id="panelsStayOpen-collapse" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-heading">
+                    <div id="panelsStayOpen-collapse" class="accordion-collapse collapse show"
+                         aria-labelledby="panelsStayOpen-heading">
                         <div class="accordion-body">
                             <div class="row row-cols-1 row-cols-md-3 g-4 text-center">
-                                <c:forEach var="product" items="${ordering.products}">
+                                <c:forEach var="product" items="${order.products}">
                                     <div class="col">
                                         <div class="card h-100 shadow bg-body-tertiary rounded">
                                             <div class="row g-0">

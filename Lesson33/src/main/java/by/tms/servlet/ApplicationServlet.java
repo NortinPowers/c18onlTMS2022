@@ -2,9 +2,11 @@ package by.tms.servlet;
 
 import static by.tms.model.Commands.HOME_PAGE_COMMAND;
 import static by.tms.utils.Constants.RequestParameters.COMMAND;
+import static by.tms.utils.ControllerUtils.throwCommandException;
 import static by.tms.utils.ServletUtils.forwardToAddress;
 
 import by.tms.controller.CommandController;
+import by.tms.exception.CommandException;
 import by.tms.model.Commands;
 import by.tms.model.PagesPath;
 import by.tms.utils.ControllerCommandFactory;
@@ -38,8 +40,12 @@ public class ApplicationServlet extends HttpServlet {
         }
         try {
             CommandController baseController = ControllerCommandFactory.defineCommand(Commands.fromString(commandKey));
-            PagesPath pagesPath = baseController.execute(request);
-            forwardToAddress(request, response, pagesPath.getPath());
+            try {
+                PagesPath pagesPath = baseController.execute(request);
+                forwardToAddress(request, response, pagesPath.getPath());
+            } catch (CommandException e) {
+                throwCommandException(request, e, this.getClass());
+            }
         } catch (Exception e) {
             log.error("It is impossible to go to the address", e);
             forwardToAddress(request, response, "/500.jsp");

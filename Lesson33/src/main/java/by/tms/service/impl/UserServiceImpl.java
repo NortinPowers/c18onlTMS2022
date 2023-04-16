@@ -29,6 +29,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isVerifiedUser(String login, String password) {
-        return getUserByLogin(login) != null;
+        return getUserByLogin(login) != null && getUserByLogin(login).getPassword().equals(password);
     }
 }

@@ -54,19 +54,19 @@ public class RepositoryJdbcUtils {
         return up ? ++productCount : --productCount;
     }
 
-    public static boolean isEmpty(Long productId, List<Product> products) {
+    public static boolean isProductNotIncluded(Long productId, List<Product> products) {
         return products.stream()
                        .filter(product -> Objects.equals(product.getId(), productId))
                        .findAny()
                        .isEmpty();
     }
 
-    public static String getQueryDependType(String type, String query, String baseMark) {
+    public static String getQueryDependType(String type, String query) {
         String fullQuery;
         if (!ALL.equals(type)) {
-            fullQuery = query + " and p.type='" + type + "' order by " + baseMark + ".id";
+            fullQuery = query + " and p.type='" + type + "' order by p.id";
         } else {
-            fullQuery = query + " order by " + baseMark + ".id";
+            fullQuery = query + " order by p.id";
         }
         return fullQuery;
     }
@@ -75,9 +75,7 @@ public class RepositoryJdbcUtils {
         statement.setString(1, "%" + searchCondition + "%");
         ResultSet resultSetByName = statement.executeQuery();
         while (resultSetByName.next()) {
-            Product product = Product.builder()
-                                     .id(resultSetByName.getLong("id"))
-                                     .build();
+            Product product = getProduct(resultSetByName);
             products.add(product);
         }
     }

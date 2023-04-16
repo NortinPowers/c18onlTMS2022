@@ -4,7 +4,7 @@ import static by.tms.utils.Constants.Attributes.ACCESS_PERMISSION;
 import static by.tms.utils.Constants.Attributes.USER_NAME;
 import static by.tms.utils.Constants.Attributes.USER_UUID;
 import static by.tms.utils.Constants.CONVERSATION;
-import static by.tms.utils.ControllerUtils.checkAndGetUserUUID;
+import static java.util.UUID.randomUUID;
 
 import by.tms.model.Order;
 import by.tms.model.Ordering;
@@ -13,7 +13,6 @@ import by.tms.model.User;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +34,7 @@ public class ServletUtils {
         session.setAttribute(ACCESS_PERMISSION, user);
         log.info("The user with a login " + user.getLogin() + " is logged in");
         session.setAttribute(USER_NAME, login);
-        String userUUID = UUID.randomUUID().toString();
+        String userUUID = randomUUID().toString();
         MDC.put(CONVERSATION, userUUID);
         session.setAttribute(USER_UUID, userUUID);
         log.info("User with the login " + user.getLogin() + " has been assigned a UUID");
@@ -76,10 +75,9 @@ public class ServletUtils {
         }
     }
 
-    public static String createOrderNumber(Long id, HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        String userUUID = checkAndGetUserUUID(request, session);
-        return "#" + id + "-" + userUUID;
+    public static String createOrderNumber(Long id) {
+        String uuid = randomUUID().toString();
+        return "#" + id + "-" + uuid;
     }
 
     public static void forwardToAddress(HttpServletRequest request, HttpServletResponse response, String address) throws ServletException, IOException {
