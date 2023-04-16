@@ -15,17 +15,17 @@ public class TestAspect {
     }
 
 /*    @Before("doAspect()")
-    public void BeforeAspectDo() {
+    public void beforeAspectDo() {
         System.out.println("Aspect do something BEFORE printName()");
-    }*/
+    }
 
-/*    @After("doAspect()")
-    public void AfterAspectDo() {
+    @After("doAspect()")
+    public void afterAspectDo() {
         System.out.println("Aspect do something AFTER printName()");
     }*/
 
     @Around("doAspect()")
-    public void AroundAspectDo(ProceedingJoinPoint proceedingJoinPoint) {
+    public void aroundAspectDo(ProceedingJoinPoint proceedingJoinPoint) {
         System.out.println("AroundAspectDo do something BEFORE printName()");
         try {
             proceedingJoinPoint.proceed();

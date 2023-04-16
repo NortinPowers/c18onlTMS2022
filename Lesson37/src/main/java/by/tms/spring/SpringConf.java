@@ -1,5 +1,6 @@
 package by.tms.spring;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 
@@ -7,14 +8,10 @@ import org.springframework.core.env.Environment;
 @ComponentScan("by.tms")
 @PropertySource("classpath:spring.properties")
 @EnableAspectJAutoProxy
+@RequiredArgsConstructor
 public class SpringConf {
 
-    final
-    Environment environment;
-
-    public SpringConf(Environment environment) {
-        this.environment = environment;
-    }
+    private final Environment environment;
 
     @Bean
     public String name() {
