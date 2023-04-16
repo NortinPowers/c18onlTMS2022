@@ -7,11 +7,9 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
-//@AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
-//@ToString
 @Builder
 public class Product {
 

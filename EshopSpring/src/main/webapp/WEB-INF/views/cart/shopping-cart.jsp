@@ -29,7 +29,6 @@
             <td class="font-italic">${product.left.price*product.right}</td>
             <td class="font-italic">
                 <a href="/delete-cart?id=${product.left.id}">
-                        <%--                <a href="<c:url value="/eshop?command=delete-cart-product&id=${product.left.id}"/>">--%>
                     Delete
                 </a>
             </td>
@@ -41,7 +40,6 @@
     </tr>
     </tbody>
 </table>
-<%--<c:if test="${applicationScope.fullPrice != 0}">--%>
 <c:set var="access" value="${sessionScope.get('userAccessPermission')}"/>
 <c:set var="price" value="${applicationScope.fullPrice}"/>
 <c:if test="${(access != null) and (price > 0)}">
@@ -49,6 +47,5 @@
         <input type="submit" name="buy" value="Buy" class="btn btn-lg btn-success btn-block w-75 ml-5 mt-5"/>
     </form>
 </c:if>
-<%--</c:if>--%>
 </body>
 </html>

@@ -70,7 +70,6 @@
                                                 <div class="col-md-4">
                                                     <img class="card-img-top"
                                                          src="${pageContext.request.contextPath}/images/${fn:toLowerCase(product.type)}/${product.name}.jpg"
-                                                        <%--                                                         src="/img/${fn:toLowerCase(product.type)}/${product.name}.jpg"--%>
                                                          alt="${product.name}">
                                                 </div>
                                                 <div class="col-md-8">

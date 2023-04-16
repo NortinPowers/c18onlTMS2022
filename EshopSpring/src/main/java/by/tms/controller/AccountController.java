@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 import static by.tms.utils.Constants.Attributes.*;
+import static by.tms.utils.Constants.MappingPath.ACCOUNT;
 import static by.tms.utils.ControllerUtils.getOrders;
 import static by.tms.utils.ControllerUtils.getUserId;
 
@@ -26,11 +27,9 @@ public class AccountController {
 
     @GetMapping("/account")
     public String account(HttpServletRequest request) {
-//        String login = getLogin(request);
         HttpSession session = request.getSession(false);
         UserDto userDto = (UserDto) session.getAttribute(USER_ACCESS_PERMISSION);
         request.getServletContext().setAttribute(USER_DTO, userDto);
-//        Long userId = userService.getUserId(login);
         List<OrderFullParamDto> orders = orderService.getOrdersById(getUserId(request));
         if (!orders.isEmpty()) {
             List<OrderWithListDto> userOrder = getOrders(orders);
@@ -38,6 +37,6 @@ public class AccountController {
         } else {
             request.removeAttribute(USER_ORDER);
         }
-        return "account/account";
+        return ACCOUNT;
     }
 }

@@ -34,64 +34,21 @@ public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
     @Override
     public void createOrder(String order, Long id) {
         jdbcTemplate.update(CREATE_ORDER, order, Date.valueOf(LocalDate.now()), id);
-
-//        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
-//             PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(CREATE_ORDER)) {
-//            statement.setString(1, order);
-//            statement.setDate(2, Date.valueOf(LocalDate.now()));
-//            statement.setLong(3, id);
-//            statement.executeUpdate();
-//        } catch (Exception e) {
-//            log.error("Exception (createOrder()): ", e);
-//        }
     }
 
     @Override
     public void saveProductInOrderConfigurations(String order, Product product) {
         jdbcTemplate.update(SAVE_PRODUCT_IN_ORDER, order, product.getId());
-
-//        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
-//             PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(SAVE_PRODUCT_IN_ORDER)) {
-//            statement.setString(1, order);
-//            statement.setLong(2, product.getId());
-//            statement.executeUpdate();
-//        } catch (Exception e) {
-//            log.error("Exception (saveProductInOrderConfigurations()): ", e);
-//        }
     }
 
     @Override
     public List<OrderFullParamDto> getOrdersById(Long id) {
         return jdbcTemplate.query(GET_ORDERS_BY_ID, new OrderFullParamDtoMapper(), id);
-//        List<Order> orders = new ArrayList<>();
-//        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
-//             PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(GET_ORDERS_BY_ID)) {
-//            statement.setLong(1, id);
-//            ResultSet resultSet = statement.executeQuery();
-//            while (resultSet.next()) {
-//                orders.add(RepositoryJdbcUtils.getOrderBuild(resultSet));
-//            }
-//        } catch (Exception e) {
-//            log.error("Exception (getOrdersById()): ", e);
-//        }
-//        return orders;
     }
 
     @Override
     public boolean checkOrderNumber(String number) {
         return jdbcTemplate.query(GET_ORDERS_NUMBER, new OrderIdMapper(), number).stream()
                 .anyMatch(order -> order.getId().equals(number));
-//        boolean unique = false;
-//        try (ConnectionWrapper connectionWrapper = CONNECTION_POOL.getConnectionWrapper();
-//             PreparedStatement statement = connectionWrapper.getConnection().prepareStatement(GET_ORDERS_NUMBER)) {
-//            statement.setString(1, number);
-//            ResultSet resultSet = statement.executeQuery();
-//            if (!resultSet.next()) {
-//                unique = true;
-//            }
-//        } catch (Exception e) {
-//            log.error("Exception (checkOrderNumber()): ", e);
-//        }
-//        return unique;
     }
 }

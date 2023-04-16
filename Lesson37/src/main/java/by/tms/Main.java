@@ -13,12 +13,11 @@ public class Main {
             try {
                 user.printName();
                 System.out.println("Set value for Exception");
-                user.setName("FF");
+                user.setName("EX");
                 user.printName();
             } catch (Exception e) {
                 System.out.println("Exception in main");
             }
-
         }
     }
 }

@@ -7,11 +7,9 @@ import org.springframework.context.annotation.Scope;
 
 import java.time.LocalDate;
 
-//@AllArgsConstructor
 @Getter
 @EqualsAndHashCode
 @Builder
-//@ToString
 @Scope("session")
 public class UserDto {
 

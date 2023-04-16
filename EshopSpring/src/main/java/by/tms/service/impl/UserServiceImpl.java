@@ -15,11 +15,6 @@ public class UserServiceImpl implements UserService {
 
     private final JdbcUserRepository jdbcUserRepository;
 
-//    @Override
-//    public boolean isVerifiedUser(String login, String password) {
-//        return getUserByLogin(login) != null && getUserByLogin(login).getPassword().equals(password);
-//    }
-
     @Override
     public User getUserByLogin(String login) {
         return jdbcUserRepository.getUserByLogin(login);
@@ -34,9 +29,4 @@ public class UserServiceImpl implements UserService {
     public User getUserByEmail(String email) {
         return jdbcUserRepository.getUserByEmail(email);
     }
-//
-//    @Override
-//    public Long getUserId(String login) {
-//        return jdbcUserRepository.getUserId(login);
-//    }
 }

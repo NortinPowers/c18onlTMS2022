@@ -5,7 +5,7 @@ import by.tms.model.Product;
 
 import java.util.List;
 
-public interface JdbcOrderRepository extends BaseRepository {
+public interface JdbcOrderRepository {
 
     void createOrder(String order, Long id);
 

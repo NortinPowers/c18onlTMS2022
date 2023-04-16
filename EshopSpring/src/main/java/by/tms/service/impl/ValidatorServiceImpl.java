@@ -52,13 +52,6 @@ public class ValidatorServiceImpl implements ValidatorService {
         return errorMessages;
     }
 
-//    private boolean isNewUserVerify(String login, String password, String verifyPassword) {
-//        if (userService.getUserByLogin(login) == null) {
-//            return password.equals(verifyPassword);
-//        }
-//        return false;
-//    }
-
     private boolean isNewUserVerify(String login) {
         return userService.getUserByLogin(login) == null;
     }

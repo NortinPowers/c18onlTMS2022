@@ -8,7 +8,6 @@
         </li>
         <li class="nav-item">
             <a class="btn btn-outline-warning ml-2"
-            <%--               href="<c:url value="/eshop?command=search"/>">--%>
                href="/search">
                 <div class="text-center p-1">
                     <i class="bi bi-search"></i>
@@ -19,7 +18,6 @@
         <c:if test="${access != null}">
             <li class="nav-item">
                 <a class="btn btn-outline-info ml-2" href="/favorites">Favorites</a>
-                    <%--                <a class="btn btn-outline-info ml-2" href="<c:url value="/eshop?command=favorites"/>">Favorites</a>--%>
             </li>
             <li class="nav-item">
                 <a class="btn btn-outline-info ml-2" href="/cart">Shopping cart</a>
@@ -37,7 +35,6 @@
         <c:otherwise>
             <h2 style="text-align: center; color: #e5a0a4; margin-right: 11%; text-shadow: 1px 1px 2px red, 0 0 1em #ff004d, 0 0 0.2em #ff0062;">
                 Welcome ${userAccessPermission.name}</h2>
-            <%--                Welcome ${sessionScope.get('userName')}</h2>--%>
             <ul class="nav nav-pills ">
                 <li class="nav-item">
                     <a id="accountButton"

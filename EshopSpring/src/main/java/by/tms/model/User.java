@@ -6,12 +6,9 @@ import lombok.Getter;
 
 import java.time.LocalDate;
 
-//@AllArgsConstructor
 @Getter
 @EqualsAndHashCode
 @Builder
-//@ToString
-//@NoArgsConstructor
 public class User {
 
     private Long id;
@@ -21,5 +18,4 @@ public class User {
     private String surname;
     private String email;
     private LocalDate birthday;
-
 }

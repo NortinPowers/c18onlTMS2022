@@ -13,8 +13,6 @@
         <div class="col">
             <div class="container-fluid">
                 <form class="d-flex" role="search" action="/search-param" method="post">
-                    <%--                <form class="d-flex" role="search" action="<c:url value="/eshop?command=search-post"/>" method="post">--%>
-                    <%--                    <input class="form-control me-2" type="search" name="searchCondition" placeholder="Search"--%>
                     <input class="form-control me-2" type="search" name="search-condition" placeholder="Search"
                            aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
@@ -30,7 +28,6 @@
                 <div class="col-12 border border-secondary rounded rounded-5 shadow p-3 mb-5 bg-body-tertiary rounded">
                     <h3 class="text-start ml-5">Filter:</h3>
                     <form action="/search-filter" method="post">
-                        <%--                    <form action="<c:url value="/eshop?command=filter"/>" method="post">--%>
                         <div class="row text-center">
                             <div class="col-sm-12">
                                 <select class="form-select col-8 col-sm-12 p-2 text-center"
@@ -66,7 +63,6 @@
                                 <div>
                                     <a class="col-sm-12 btn btn-dark mt-2"
                                        href="/search">
-                                        <%--                                       href="<c:url value="/eshop?command=search"/>">--%>
                                         Reset filter
                                     </a>
                                 </div>
@@ -100,7 +96,6 @@
                                         <c:when test="${access == null}">
                                             <div class="col-sm-12">
                                                 <a href="/product/${product.id}"
-                                                    <%--                                                <a href="<c:url value="/eshop?command=product&id=${product.id}"/>"--%>
                                                    class="text-light text-decoration-none btn btn-success btn-block w-auto"
                                                    aria-current="page">
                                                     To product
@@ -110,7 +105,6 @@
                                         <c:otherwise>
                                             <div class="col-sm-3 ml-4 mr-2">
                                                 <a href="/product/${product.id}"
-                                                    <%--                                                <a href="<c:url value="/eshop?command=product&id=${product.id}"/>"--%>
                                                    class="text-light text-decoration-none btn btn-success btn-block w-100"
                                                    aria-current="page">
                                                     To product
@@ -118,7 +112,6 @@
                                             </div>
                                             <div class="col-sm-3">
                                                 <a href="/add-cart?id=${product.id}&shop=true&location=none"
-                                                    <%--                                                <a href="<c:url value="/eshop?command=add-cart&id=${product.id}&shop=true&location=none"/>"--%>
                                                    class="text-light text-decoration-none btn btn-success btn-block w-100"
                                                    aria-current="page">
                                                     Buy
@@ -126,7 +119,6 @@
                                             </div>
                                             <div class="col-sm-2 btn btn-success ml-3 mr-3">
                                                 <a href="/add-cart?id=${product.id}&shop=none&location=search">
-                                                        <%--                                                <a href="<c:url value="/eshop?command=add-cart&id=${product.id}&shop=none&location=search"/>">--%>
                                                     <div class="text-center text-light text-decoration-none p-1">
                                                         <i class="bi bi-cart-plus"></i>
                                                     </div>
@@ -134,7 +126,6 @@
                                             </div>
                                             <div class="col-sm-2 btn btn-success ml-3 mr-3">
                                                 <a href="/add-favorite?id=${product.id}&shop=none&location=search">
-                                                        <%--                                                <a href="<c:url value="/eshop?command=add-favorite&id=${product.id}&shop=none&location=search"/>">--%>
                                                     <div class="text-center text-light text-decoration-none p-1">
                                                         <i class="bi bi-heart"></i>
                                                     </div>
@@ -147,7 +138,6 @@
                             <div class="row g-0">
                                 <div class="col-md-3">
                                     <img src="${pageContext.request.contextPath}/images/${fn:toLowerCase(product.type)}/${product.name}.jpg"
-                                        <%--                                    <img src="<c:url value="/img/${fn:toLowerCase(product.type)}/${product.name}.jpg"/>"--%>
                                          class="img-fluid rounded-start w-100 p-3"
                                          alt="${product.name}">
                                 </div>

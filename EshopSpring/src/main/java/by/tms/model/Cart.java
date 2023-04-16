@@ -4,10 +4,8 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
-//@AllArgsConstructor
 @Getter
 @EqualsAndHashCode
-//@NoArgsConstructor
 @Builder
 public class Cart {
 

@@ -15,7 +15,6 @@ import java.util.List;
 @Lazy
 public class OrderServiceImpl implements OrderService {
 
-
     private final JdbcOrderRepository jdbcOrderRepository;
 
     @Override

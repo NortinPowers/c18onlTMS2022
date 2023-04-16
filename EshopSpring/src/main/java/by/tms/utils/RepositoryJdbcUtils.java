@@ -15,15 +15,6 @@ import static by.tms.utils.Constants.ALL;
 @UtilityClass
 public class RepositoryJdbcUtils {
 
-//    public static void fillsCollectionValues(Collection<ProductDto> products, PreparedStatement statement) throws SQLException {
-//        ResultSet resultSet = statement.executeQuery();
-//        while (resultSet.next()) {
-//            Product product = getProduct(resultSet);
-//            ProductDto productDto = makeProductDtoModelTransfer(product);
-//            products.add(productDto);
-//        }
-//    }
-
     public static ProductDto getProductSimpleBuild(ResultSet resultSet) throws SQLException {
         Product product = Product.builder()
                 .name(resultSet.getString("name"))
@@ -41,15 +32,6 @@ public class RepositoryJdbcUtils {
         return productDto;
     }
 
-    //
-//    public static Order getOrderBuild(ResultSet resultSet) throws SQLException {
-//        return Order.builder()
-//                    .id(resultSet.getString("id"))
-//                    .date(LocalDate.parse(resultSet.getString("date")))
-//                    .product(getProductSimpleBuild(resultSet))
-//                    .build();
-//    }
-//
     public static Integer getModifyCount(boolean up, Integer productCount) {
         return up ? ++productCount : --productCount;
     }
@@ -70,13 +52,4 @@ public class RepositoryJdbcUtils {
         }
         return fullQuery;
     }
-//
-//    public static void fillsSet(String searchCondition, Set<Product> products, PreparedStatement statement) throws SQLException {
-//        statement.setString(1, "%" + searchCondition + "%");
-//        ResultSet resultSetByName = statement.executeQuery();
-//        while (resultSetByName.next()) {
-//            Product product = getProduct(resultSetByName);
-//            products.add(product);
-//        }
-//    }
 }

@@ -19,8 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static by.tms.utils.Constants.Attributes.*;
-import static by.tms.utils.Constants.Mapping.ESHOP;
-import static by.tms.utils.Constants.Mapping.LOGIN;
+import static by.tms.utils.Constants.MappingPath.*;
 import static by.tms.utils.ControllerUtils.isVerifyUser;
 import static by.tms.utils.ControllerUtils.saveUserSession;
 import static by.tms.utils.DtoUtils.makeUserDtoModelTransfer;
@@ -50,8 +49,6 @@ public class LoginController {
     public String loginVerify(HttpServletRequest request,
                               @RequestParam String login,
                               @RequestParam String password) {
-//        String login = request.getParameter(NAME);
-//        String password = request.getParameter(PASSWORD);
         String path;
         User user = userService.getUserByLogin(login);
         if (user != null && isVerifyUser(user, password)) {
@@ -78,29 +75,19 @@ public class LoginController {
 
     @GetMapping("/create-user")
     public String create() {
-        return "login/create-user";
+        return CREATE_USER;
     }
 
     @PostMapping("/create-user")
     public String createUser(HttpServletRequest request,
-//                         @RequestParam String login,
-//                         @RequestParam String password,
                              @RequestParam String verifyPassword,
-//                         @RequestParam String name,
-//                         @RequestParam String surname,
-//                         @RequestParam String email,
-//                         @RequestParam String birthday,
                              @ModelAttribute("user") User user) {
-//        String login = request.getParameter(Constants.RequestParameters.LOGIN);
-//        String verifyPassword = request.getParameter(VERIFY_PASSWORD);
-//        User user = getUser(request, login);
         List<String> errorMessages = validateService.getValidationErrorMessage(user, verifyPassword);
         String path;
         if (errorMessages.isEmpty()) {
             userService.addUser(user);
             UserDto userDto = makeUserDtoModelTransfer(user);
             saveUserSession(request, userDto);
-//            saveUserSession(request, login);
             path = "success-register";
         } else {
             request.setAttribute(INVALID, errorMessages.stream()
@@ -113,11 +100,11 @@ public class LoginController {
 
     @GetMapping("/success-register")
     public String successRegister() {
-        return "login/success-register";
+        return SUCCESS_REGISTER;
     }
 
     @PostMapping("/fail-register")
     public String failRegister() {
-        return "login/fail-register";
+        return FAIL_REGISTER;
     }
 }

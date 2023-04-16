@@ -28,7 +28,7 @@ public class TestAspect {
     public void AroundAspectDo(ProceedingJoinPoint proceedingJoinPoint) {
         System.out.println("AroundAspectDo do something BEFORE printName()");
         try {
-            proceedingJoinPoint.proceed(); //выполнение метода by.tms.model.User.printName(), требует try-catch
+            proceedingJoinPoint.proceed();
             System.out.println("AroundAspectDo do something AFTER printName()");
         } catch (Throwable throwable) {
             System.out.println("AroundAspectDo do something IF EXCEPTION printName()");

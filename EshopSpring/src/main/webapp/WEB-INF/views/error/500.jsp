@@ -11,7 +11,6 @@
 <h5 class="text-center text-danger-emphasis">${errorMessage}</h5>
 <div class="text-center">
     <img class="card-img-top w-75" src="${pageContext.request.contextPath}/images/error/500.png" alt="error-500">
-    <%--    <img class="card-img-top w-75" src="<c:url value="/img/error/500.png"/>" alt="error-500">--%>
 </div>
 </body>
 </html>

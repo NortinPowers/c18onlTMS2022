@@ -16,6 +16,4 @@ public class Order {
     private String id;
     private LocalDate date;
     private Long userId;
-//    private Product product;
-//    private Integer productsCount;
 }

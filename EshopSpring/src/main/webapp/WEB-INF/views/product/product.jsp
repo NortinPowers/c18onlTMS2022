@@ -11,7 +11,6 @@
 <div class="card mr-5 ml-5 mt-5 shadow bg-body-tertiary rounded" style="max-width: 14rem">
     <img class="card-img-top" style="max-height: 20rem"
          src="${pageContext.request.contextPath}/images/${fn:toLowerCase(product.type)}/${product.name}.jpg"
-    <%--         src="/img/${fn:toLowerCase(product.type)}/${product.name}.jpg"--%>
          alt="${product.name}">
     <div class="card-body">
         <h5 class="card-title text-nowrap" style="text-align: -webkit-center">${product.name}</h5>
@@ -21,11 +20,7 @@
         <small class="text-muted" style="font-size: 20px">${product.price}$</small>
     </div>
     <c:set var="access" value="${sessionScope.get('userAccessPermission')}"/>
-    <%--    <c:set var="buyPath" value="/add-cart?id=${product.id}&shop=true&location=none"/>--%>
-    <%--    <c:set var="lazyBuyPath" value="/add-cart?id=${product.id}&shop=none&location=product-page"/>--%>
-    <%--    <c:set var="favoriteMarkPath" value="/add-favorite?id=${product.id}&shop=none&location=product-page"/>--%>
     <c:if test="${access != null}">
-        <%--        <jsp:include page="../include/buy-button-group.jsp"/>--%>
         <div class="btn-group btn-group-sm">
             <a href="/add-cart?id=${product.id}&shop=true&location=none"
                class="btn btn-success active w-75"

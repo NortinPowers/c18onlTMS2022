@@ -8,11 +8,9 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-//@AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
-//@ToString
 @Builder
 public class ProductDto implements Serializable {
 

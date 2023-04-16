@@ -13,8 +13,6 @@ public class JdbcTemplateExceptionHandler {
 
     @AfterThrowing(pointcut = "execution(* by.tms.repository.*.*(..))", throwing = "ex")
     public void handleException(JoinPoint joinPoint, Exception ex) {
-//        System.out.println("-------JdbcTemplateExceptionHandler Work!------");
         log.error("Exception occurred in method: " + joinPoint.getSignature().getName() + ", exception message: " + ex.getMessage());
     }
 }
-

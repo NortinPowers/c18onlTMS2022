@@ -22,7 +22,6 @@
         </div>
     </form>
     <a href="/create-user" class="button">Register</a>
-    <%--    <a href="<c:url value="create-user.jsp"/>" class="button">Register</a>--%>
     <a href="/eshop" class="button">Back</a>
 </div>
 </body>

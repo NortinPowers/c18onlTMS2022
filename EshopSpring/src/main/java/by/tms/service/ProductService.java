@@ -15,8 +15,6 @@ public interface ProductService {
     String getProductTypeValue(Long productId);
 
     Set<ProductDto> getFoundProducts(String searchCondition);
-//
-//    Product getOneProduct(Long id);
 
     Set<ProductDto> selectAllProductsByFilter(String type, BigDecimal minPrice, BigDecimal maxPrice);
 }

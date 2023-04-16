@@ -13,15 +13,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.MDC;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static by.tms.utils.Constants.ALL;
 import static by.tms.utils.Constants.Attributes.*;
 import static by.tms.utils.Constants.CONVERSATION;
+import static by.tms.utils.Constants.MappingPath.*;
+import static by.tms.utils.Constants.RequestParameters.PRODUCT_PAGE;
+import static by.tms.utils.Constants.RequestParameters.SEARCH;
 import static java.util.UUID.randomUUID;
 
 @Slf4j
@@ -37,13 +37,11 @@ public class ControllerUtils {
         HttpSession session = req.getSession();
         session.setAttribute(USER_ACCESS_PERMISSION, userDto);
         log.info("The user with a login " + userDto.getLogin() + " is logged in");
-//        session.setAttribute(USER_NAME, userDto);
         String userUUID = randomUUID().toString();
         MDC.put(CONVERSATION, userUUID);
         session.setAttribute(USER_UUID, userUUID);
         log.info("User with the login " + userDto.getLogin() + " has been assigned a UUID");
     }
-
 
     public static String getLogin(HttpServletRequest req) {
         if (req.getSession().getAttribute(USER_NAME) != null) {
@@ -90,11 +88,6 @@ public class ControllerUtils {
         return ((UserDto) session.getAttribute(USER_ACCESS_PERMISSION)).getId();
     }
 
-//    public static void forwardToAddress(HttpServletRequest request, HttpServletResponse response, String address) throws ServletException, IOException {
-//        RequestDispatcher dispatcher = request.getRequestDispatcher(address);
-//        dispatcher.forward(request, response);
-//    }
-
     public static BigDecimal getPrice(HttpServletRequest request, String param, BigDecimal defaultValue) {
         String value = request.getParameter(param);
         return StringUtils.isNotBlank(value) ? new BigDecimal(value) : defaultValue;
@@ -114,5 +107,17 @@ public class ControllerUtils {
                     .collect(Collectors.toCollection(LinkedHashSet::new));
         }
         return products;
+    }
+
+    public static String getPathFromAddFavoriteByParameters(Long productId, String location, String productType) {
+        String path;
+        if (Objects.equals(location, SEARCH)) {
+            path = REDIRECT_TO_SEARCH_RESULT_SAVE;
+        } else if (Objects.equals(location, PRODUCT_PAGE)) {
+            path = REDIRECT_TO_PRODUCT_WITH_PARAM + productId;
+        } else {
+            path = REDIRECT_TO_PRODUCTS_PAGE_TYPE_WITH_PARAM + productType;
+        }
+        return path;
     }
 }

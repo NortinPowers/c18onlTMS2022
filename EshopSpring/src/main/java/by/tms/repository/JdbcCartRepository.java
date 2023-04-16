@@ -5,7 +5,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.List;
 
-public interface JdbcCartRepository extends BaseRepository {
+public interface JdbcCartRepository {
 
     void addProductToCart(Long userId, Long productId, boolean cart, boolean favorite);
 

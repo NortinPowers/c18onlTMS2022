@@ -25,11 +25,6 @@ public class SpringConfig implements WebMvcConfigurer {
 
     private final Environment environment;
 
-//    @Autowired
-//    public SpringConfig(Environment environment) {
-//        this.environment = environment;
-//    }
-
     @Bean
     public InternalResourceViewResolver resolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -64,20 +59,6 @@ public class SpringConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/js/");
     }
 
-    //to connectionPoll
-//    @Bean
-//    public Connection connection() {
-//        String dbURl = environment.getProperty("db.url");
-//        String dbUser = environment.getProperty("db.login");
-//        String dbPassword = environment.getProperty("db.password");
-//        String dbDriver = environment.getProperty("db.driver");
-//        try {
-//            Class.forName(dbDriver);
-//            return DriverManager.getConnection(dbURl, dbUser, dbPassword);
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
     @Bean
     public JdbcTemplateExceptionHandler jdbcTemplateExceptionHandler() {
         return new JdbcTemplateExceptionHandler();

@@ -19,6 +19,7 @@ import java.util.Objects;
 
 import static by.tms.utils.Constants.Attributes.CART_PRODUCTS;
 import static by.tms.utils.Constants.Attributes.FULL_PRICE;
+import static by.tms.utils.Constants.MappingPath.*;
 import static by.tms.utils.Constants.RequestParameters.*;
 import static by.tms.utils.ControllerUtils.createOrderNumber;
 import static by.tms.utils.ControllerUtils.getUserId;
@@ -35,28 +36,18 @@ public class CartController {
 
     @GetMapping("/cart")
     public String card(HttpServletRequest request) {
-//        String login = request.getSession().getAttribute(USER_NAME).toString();
-//        Long userId = userService.getUserId(login);
-//        HttpSession session = request.getSession(false);
-//        Long userId = ((UserDto) session.getAttribute(USER_ACCESS_PERMISSION)).getId();
         Long userId = getUserId(request);
         List<ImmutablePair<ProductDto, Integer>> cartProducts = cartService.getProductsFromCart(userId, true, false);
         request.getServletContext().setAttribute(CART_PRODUCTS, cartProducts);
         request.getServletContext().setAttribute(FULL_PRICE, cartService.getProductsPrice(cartProducts));
-        return "cart/shopping-cart";
-//        return SHOPPING_CART_JSP_PAGE;
+        return SHOPPING_CART;
     }
 
     @PostMapping("/cart-processing")
     public String cardProcessing(HttpServletRequest request,
-                                 @RequestParam String buy) { //value?! not name
-//        String login = getLogin(request);
-//        Long userId = userService.getUserId(login);
-//        HttpSession session = request.getSession(false);
-//        Long userId = ((UserDto) session.getAttribute(USER_ACCESS_PERMISSION)).getId();
+                                 @RequestParam String buy) {
         Long userId = getUserId(request);
         String path;
-//        String buyButton = request.getParameter(BUY);
         if (buy.equalsIgnoreCase(Constants.BUY)) {
             List<ProductDto> productsDto = cartService.getPurchasedProducts(userId, true, false);
             String orderNumber = "";
@@ -68,65 +59,45 @@ public class CartController {
             String finalOrderNumber = orderNumber;
             products.forEach(product -> orderService.saveProductInOrderConfigurations(finalOrderNumber, product));
             cartService.deleteCartProductsAfterBuy(userId);
-            path = "cart/success-buy";
-//            path = SUCCESS_BUY_JSP_PAGE;
+            path = SUCCESS_BUY;
         } else {
-            path = "redirect:/cart";
-//            path = SHOPPING_CART_PAGE;
+            path = REDIRECT_TO_CART;
         }
         return path;
     }
 
-
     @GetMapping("/add-cart")
     public String addCart(
             HttpServletRequest request,
-            @RequestParam(name = "id") Long productId,
-            @RequestParam(name = "shop") String shopFlag,
-            @RequestParam(name = "location") String location) {
-//        String path;
-//        Long id = Long.parseLong(request.getParameter(ID));
-//        String shopFlag = request.getParameter(SHOP);
-//        String location = request.getParameter(LOCATION);
-//        String login = getLogin(request);
-//        HttpSession session = request.getSession(false);
-//        Long userId = ((UserDto) session.getAttribute(USER_ACCESS_PERMISSION)).getId();
+            @RequestParam(name = ID) Long productId,
+            @RequestParam(name = SHOP) String shopFlag,
+            @RequestParam(name = LOCATION) String location) {
         Long userId = getUserId(request);
         cartService.addProductToCart(userId, productId, true, false);
-//        cartService.addProductToCart(userService.getUserId(login), id, true, false);
         return getPathFromAddCartByParameters(productId, shopFlag, location);
     }
 
     private String getPathFromAddCartByParameters(Long productId, String shopFlag, String location) {
         String path;
         if (Objects.equals(shopFlag, TRUE)) {
-            path = "redirect:/cart";
-//            path = SHOPPING_CART_PAGE;
+            path = REDIRECT_TO_CART;
         } else if (Objects.equals(location, FAVORITE)) {
-            path = "redirect:/favorites";
-//            path = FAVORITES_PAGE;
+            path = REDIRECT_TO_FAVORITES;
         } else if (Objects.equals(location, SEARCH)) {
-            path = "redirect:/search?result=save";
-//            path = SEARCH_SAVED_RESULT_PAGE;
+            path = REDIRECT_TO_SEARCH_RESULT_SAVE;
         } else if (Objects.equals(location, PRODUCT_PAGE)) {
-            path = "redirect:/product/" + productId;
-//            path = PRODUCT_JSP_PAGE;
+            path = REDIRECT_TO_PRODUCT_WITH_PARAM + productId;
         } else {
             String productType = productService.getProductTypeValue(productId);
-//            path = getPagePathByType(productType);
-            path = "redirect:/products-page?type=" + productType;
+            path = REDIRECT_TO_PRODUCTS_PAGE_TYPE_WITH_PARAM + productType;
         }
         return path;
     }
 
     @GetMapping("/delete-cart")
     public String deleteCart(HttpServletRequest request,
-                             @RequestParam(name = "id") Long productId) {
-//        String login = getLogin(request);
-//        Long id = Long.parseLong(request.getParameter(ID));
-//        cartService.deleteProduct(userService.getUserId(login), id, true, false);
+                             @RequestParam(name = ID) Long productId) {
         cartService.deleteProduct(getUserId(request), productId, true, false);
-//        return SHOPPING_CART_PAGE;
-        return "redirect:/cart";
+        return REDIRECT_TO_CART;
     }
 }

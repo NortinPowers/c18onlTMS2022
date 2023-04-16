@@ -12,15 +12,11 @@ public interface CartService {
 
     List<ImmutablePair<ProductDto, Integer>> getProductsFromCart(Long userId, boolean cart, boolean favorite);
 
-    //
     void deleteProduct(Long userId, Long productId, boolean cart, boolean favorite);
 
-    //
     void deleteCartProductsAfterBuy(Long userId);
 
-    //
     BigDecimal getProductsPrice(List<ImmutablePair<ProductDto, Integer>> productWithCount);
 
-    //
     List<ProductDto> getPurchasedProducts(Long userId, boolean cart, boolean favorite);
 }

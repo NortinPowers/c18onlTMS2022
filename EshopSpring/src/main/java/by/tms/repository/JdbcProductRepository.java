@@ -6,15 +6,11 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 
-public interface JdbcProductRepository extends BaseRepository {
-
-//    List<Product> getProducts();
+public interface JdbcProductRepository {
 
     List<ProductDto> getProductsByType(String type);
 
-    //
     String getProductTypeValue(Long id);
-
 
     Set<ProductDto> getFoundProducts(String searchCondition);
 

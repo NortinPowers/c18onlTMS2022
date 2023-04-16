@@ -17,11 +17,6 @@ public class ProductServiceImpl implements ProductService {
 
     private final JdbcProductRepository jdbcProductRepository;
 
-//    @Autowired
-//    public ProductServiceImpl(JdbcProductRepository jdbcProductRepository) {
-//        this.jdbcProductRepository = jdbcProductRepository;
-//    }
-
     @Override
     public List<ProductDto> getProductsByType(String type) {
         return jdbcProductRepository.getProductsByType(type);
@@ -31,27 +26,6 @@ public class ProductServiceImpl implements ProductService {
     public ProductDto getProduct(Long id) {
         return jdbcProductRepository.getProduct(id);
     }
-
-//    public List<ProductDto> getProductsByType(String type) {
-//        return List.of(ProductDto.builder()
-//                                 .id(1L)
-//                                 .name("Test")
-//                                 .type("tv")
-//                                 .info("some info text")
-//                                 .price(new BigDecimal("800"))
-//                                 .build());
-//    }
-
-//    @Override
-//    public ProductDto getProduct(Long id) {
-//        return ProductDto.builder()
-//                         .id(1L)
-//                         .name("Test")
-//                         .type("tv")
-//                         .info("some info text")
-//                         .price(new BigDecimal("800"))
-//                         .build();
-//    }
 
     @Override
     public String getProductTypeValue(Long id) {
@@ -63,12 +37,6 @@ public class ProductServiceImpl implements ProductService {
         return jdbcProductRepository.getFoundProducts(searchCondition);
     }
 
-    //
-//    @Override
-//    public Product getOneProduct(Long id) {
-//        return jdbcProductRepository.getOneProduct(id);
-//    }
-//
     @Override
     public Set<ProductDto> selectAllProductsByFilter(String type, BigDecimal minPrice, BigDecimal maxPrice) {
         return jdbcProductRepository.selectAllProductsByFilter(type, minPrice, maxPrice);

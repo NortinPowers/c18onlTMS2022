@@ -10,8 +10,6 @@ public class CartCountMapper implements RowMapper<Cart> {
     @Override
     public Cart mapRow(ResultSet rs, int rowNum) throws SQLException {
         return Cart.builder()
-//                .userId(rs.getLong("userid"))
-//                .productId(rs.getLong("productId"))
                 .count(rs.getInt("count"))
                 .build();
     }
