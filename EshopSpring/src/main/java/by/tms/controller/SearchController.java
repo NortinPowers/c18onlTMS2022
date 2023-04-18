@@ -5,7 +5,6 @@ import by.tms.service.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +23,7 @@ import static by.tms.utils.ControllerUtils.*;
 
 @Controller
 @RequiredArgsConstructor
-@Lazy
+//@Lazy
 public class SearchController {
 
     private final ProductService productService;

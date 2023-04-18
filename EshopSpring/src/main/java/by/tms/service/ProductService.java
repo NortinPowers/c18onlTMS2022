@@ -1,16 +1,18 @@
 package by.tms.service;
 
 import by.tms.dto.ProductDto;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Set;
 
 public interface ProductService {
 
-    List<ProductDto> getProductsByType(String type);
+    ModelAndView getProductsByType(String type);
+//    List<ProductDto> getProductsByType(String type);
 
-    ProductDto getProduct(Long id);
+    //    ProductDto getProduct(Long id);
+    ModelAndView getProduct(Long id);
 
     String getProductTypeValue(Long productId);
 

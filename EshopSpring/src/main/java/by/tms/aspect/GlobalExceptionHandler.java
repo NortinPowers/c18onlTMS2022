@@ -16,17 +16,18 @@ public class GlobalExceptionHandler {
     public ModelAndView handleDataAccessException(DataAccessException ex) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName(ERROR_500);
-        log.error(ex.getMessage());
+        log.error("Unexpected exception", ex);
+//        log.error(ex.getMessage());
         mav.addObject("errorMessage", "Request execution error");
         return mav;
     }
 
-    @ExceptionHandler(NullPointerException.class)
-    public ModelAndView handleNullPointerException(NullPointerException ex) {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName(ERROR_500);
-        log.error(ex.getMessage());
-        mav.addObject("errorMessage", "An error has occurred in the application");
-        return mav;
-    }
+//    @ExceptionHandler(NullPointerException.class)
+//    public ModelAndView handleNullPointerException(NullPointerException ex) {
+//        ModelAndView mav = new ModelAndView();
+//        mav.setViewName(ERROR_500);
+//        log.error(ex.getMessage());
+//        mav.addObject("errorMessage", "An error has occurred in the application");
+//        return mav;
+//    }
 }

@@ -5,7 +5,6 @@ import by.tms.repository.JdbcCartRepository;
 import by.tms.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -13,7 +12,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Lazy
+//@Lazy
 public class CartServiceImpl implements CartService {
 
     private final JdbcCartRepository jdbcCartRepository;

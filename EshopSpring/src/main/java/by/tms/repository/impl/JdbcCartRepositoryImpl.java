@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +20,7 @@ import static by.tms.utils.RepositoryJdbcUtils.*;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-@Lazy
+//@Lazy
 public class JdbcCartRepositoryImpl implements JdbcCartRepository {
 
     private final JdbcTemplate jdbcTemplate;

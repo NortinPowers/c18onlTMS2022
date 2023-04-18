@@ -1,6 +1,5 @@
 package by.tms.config;
 
-import by.tms.aspect.JdbcTemplateExceptionHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
@@ -29,7 +28,7 @@ public class SpringConfig implements WebMvcConfigurer {
     public InternalResourceViewResolver resolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setViewClass(JstlView.class);
-        resolver.setPrefix("/WEB-INF/views/");
+        resolver.setPrefix("/WEB-INF/view/");
         resolver.setSuffix(".jsp");
         return resolver;
     }
@@ -52,15 +51,15 @@ public class SpringConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/images/**")
-                .addResourceLocations("classpath:/images/");
+                .addResourceLocations("classpath:/static/images/");
         registry.addResourceHandler("/css/**")
-                .addResourceLocations("classpath:/css/");
+                .addResourceLocations("classpath:/static/css/");
         registry.addResourceHandler("/js/**")
-                .addResourceLocations("classpath:/js/");
+                .addResourceLocations("classpath:/static/js/");
     }
-
-    @Bean
-    public JdbcTemplateExceptionHandler jdbcTemplateExceptionHandler() {
-        return new JdbcTemplateExceptionHandler();
-    }
+//
+//    @Bean
+//    public JdbcTemplateExceptionHandler jdbcTemplateExceptionHandler() {
+//        return new JdbcTemplateExceptionHandler();
+//    }
 }

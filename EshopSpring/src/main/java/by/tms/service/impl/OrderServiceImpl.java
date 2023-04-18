@@ -5,14 +5,13 @@ import by.tms.model.Product;
 import by.tms.repository.JdbcOrderRepository;
 import by.tms.service.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Lazy
+//@Lazy
 public class OrderServiceImpl implements OrderService {
 
     private final JdbcOrderRepository jdbcOrderRepository;

@@ -4,7 +4,6 @@ import by.tms.model.User;
 import by.tms.service.UserService;
 import by.tms.service.ValidatorService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ import static by.tms.utils.ValidatorUtils.*;
 
 @Service
 @RequiredArgsConstructor
-@Lazy
+//@Lazy
 public class ValidatorServiceImpl implements ValidatorService {
 
     private final UserService userService;

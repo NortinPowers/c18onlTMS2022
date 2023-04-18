@@ -5,7 +5,6 @@ import by.tms.dto.UserDto;
 import by.tms.service.OrderService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,7 +19,6 @@ import static by.tms.utils.ControllerUtils.getOrders;
 
 @Controller
 @RequiredArgsConstructor
-@Lazy
 public class AccountController {
 
     private final OrderService orderService;

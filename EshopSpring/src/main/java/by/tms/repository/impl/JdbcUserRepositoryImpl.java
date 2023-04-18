@@ -5,14 +5,13 @@ import by.tms.model.User;
 import by.tms.repository.JdbcUserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-@Lazy
+//@Lazy
 public class JdbcUserRepositoryImpl implements JdbcUserRepository {
 
     private final JdbcTemplate jdbcTemplate;
