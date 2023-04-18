@@ -1,5 +1,6 @@
 package by.tms.model;
 
+import by.tms.aspect.TestAspectAnnotation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,5 +23,11 @@ public class User {
         } else {
             throw new Exception("the name is shorter than three characters");
         }
+    }
+
+    @TestAspectAnnotation
+    public void changeName(String name) {
+        this.name = name;
+        System.out.println("New user name is " + name + "!");
     }
 }

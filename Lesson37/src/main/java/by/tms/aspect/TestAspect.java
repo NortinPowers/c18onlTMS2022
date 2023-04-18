@@ -1,9 +1,7 @@
 package by.tms.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,18 +12,23 @@ public class TestAspect {
     public void doAspect() {
     }
 
-/*    @Before("doAspect()")
-    public void beforeAspectDo() {
-        System.out.println("Aspect do something BEFORE printName()");
+    @Pointcut("@annotation(TestAspectAnnotation)")
+    public void doAspectAnnotationPointcut() {
     }
 
-    @After("doAspect()")
+    @Before("doAspectAnnotationPointcut()")
+    public void beforeAspectDo() {
+        System.out.println("AspectAnnotationPointcut do something BEFORE method() with annotation");
+    }
+
+    @After("doAspectAnnotationPointcut()")
     public void afterAspectDo() {
-        System.out.println("Aspect do something AFTER printName()");
-    }*/
+        System.out.println("AspectAnnotationPointcut do something AFTER method() with annotation");
+    }
 
     @Around("doAspect()")
     public void aroundAspectDo(ProceedingJoinPoint proceedingJoinPoint) {
+
         System.out.println("AroundAspectDo do something BEFORE printName()");
         try {
             proceedingJoinPoint.proceed();
