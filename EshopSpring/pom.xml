@@ -18,6 +18,7 @@
         <jakarta.servlet-api-version>6.0.0</jakarta.servlet-api-version>
         <jakarta.servlet.jsp.jstl-api-version>3.0.0</jakarta.servlet.jsp.jstl-api-version>
         <jakarta.servlet.jsp.jstl-version>3.0.1</jakarta.servlet.jsp.jstl-version>
+        <hibernate-validator-version>8.0.0.Final</hibernate-validator-version>
     </properties>
     <dependencies>
         <dependency>
@@ -65,6 +66,11 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-aspects</artifactId>
             <version>${spring-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate-validator-version}</version>
         </dependency>
     </dependencies>
 

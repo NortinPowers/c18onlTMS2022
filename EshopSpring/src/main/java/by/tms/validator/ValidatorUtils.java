@@ -1,13 +1,10 @@
-//package by.tms.utils;
-//
-//import lombok.experimental.UtilityClass;
-//
-//import java.time.LocalDate;
-//import java.time.Period;
-//
-//@UtilityClass
-//public class ValidatorUtils {
-//
+package by.tms.validator;
+
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
+public class ValidatorUtils {
+
 //    public static boolean isAgeVerify(LocalDate birthday) {
 //        return Period.between(birthday, LocalDate.now()).getYears() > 17;
 //    }
@@ -31,8 +28,8 @@
 //    public static boolean isPasswordVerify(String password) {
 //        return password.matches("[a-zA-Z0-9]{4,30}");
 //    }
-//
-//    public boolean isPasswordInputVerify(String password, String verifyPassword) {
-//        return password.equals(verifyPassword);
-//    }
-//}
+
+    public boolean isPasswordInputVerify(String password, String verifyPassword) {
+        return password.equals(verifyPassword);
+    }
+}
