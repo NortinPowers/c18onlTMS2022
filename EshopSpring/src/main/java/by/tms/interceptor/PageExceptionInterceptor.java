@@ -11,9 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Slf4j
 public class PageExceptionInterceptor implements HandlerInterceptor {
 
-    //NOT WORKING
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        //NOT WORKING
         int status = response.getStatus();
         if (status >= 400) {
             if (response.getStatus() == 404) {

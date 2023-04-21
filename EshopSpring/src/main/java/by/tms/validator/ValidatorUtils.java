@@ -29,7 +29,7 @@ public class ValidatorUtils {
 //        return password.matches("[a-zA-Z0-9]{4,30}");
 //    }
 
-    public boolean isPasswordInputVerify(String password, String verifyPassword) {
+    public static boolean isPasswordInputVerify(String password, String verifyPassword) {
         return password.equals(verifyPassword);
     }
 }

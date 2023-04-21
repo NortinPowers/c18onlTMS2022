@@ -11,6 +11,8 @@ import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.MDC;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -83,10 +85,15 @@ public class ControllerUtils {
         return "#" + id + "-" + uuid;
     }
 
-    public static Long getUserId(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
+//    public static Long getUserId(HttpServletRequest request) {
+//        HttpSession session = request.getSession(false);
+//        return ((UserDto) session.getAttribute(USER_ACCESS_PERMISSION)).getId();
+//    }
+
+    public static Long getUserId(HttpSession session) {
         return ((UserDto) session.getAttribute(USER_ACCESS_PERMISSION)).getId();
     }
+
 
     public static BigDecimal getPrice(HttpServletRequest request, String param, BigDecimal defaultValue) {
         String value = request.getParameter(param);
@@ -119,5 +126,12 @@ public class ControllerUtils {
             path = REDIRECT_TO_PRODUCTS_PAGE_TYPE_WITH_PARAM + productType;
         }
         return path;
+    }
+
+    public static void fillError(String field, ModelAndView modelAndView, BindingResult bindingResult) {
+        if (bindingResult.hasFieldErrors(field)) {
+            modelAndView.addObject(field + "Error", Objects.requireNonNull(bindingResult.getFieldError(field))
+                    .getDefaultMessage());
+        }
     }
 }

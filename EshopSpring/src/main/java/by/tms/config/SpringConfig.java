@@ -1,6 +1,7 @@
 package by.tms.config;
 
 import by.tms.interceptor.PageExceptionInterceptor;
+import by.tms.interceptor.TimeLoggerInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
@@ -26,6 +27,22 @@ public class SpringConfig implements WebMvcConfigurer {
 
     private final Environment environment;
 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/images/**")
+                .addResourceLocations("classpath:/static/images/");
+        registry.addResourceHandler("/css/**")
+                .addResourceLocations("classpath:/static/css/");
+        registry.addResourceHandler("/js/**")
+                .addResourceLocations("classpath:/static/js/");
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new PageExceptionInterceptor());
+        registry.addInterceptor(new TimeLoggerInterceptor());
+    }
+
     @Bean
     public InternalResourceViewResolver resolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -48,20 +65,5 @@ public class SpringConfig implements WebMvcConfigurer {
     @Bean
     public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(dataSource());
-    }
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/images/**")
-                .addResourceLocations("classpath:/static/images/");
-        registry.addResourceHandler("/css/**")
-                .addResourceLocations("classpath:/static/css/");
-        registry.addResourceHandler("/js/**")
-                .addResourceLocations("classpath:/static/js/");
-    }
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new PageExceptionInterceptor());
     }
 }
