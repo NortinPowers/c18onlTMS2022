@@ -18,18 +18,12 @@ public class ProductsController {
     private final ProductService productService;
 
     @GetMapping("/products-page")
-//    public String products(@RequestParam(TYPE) String type, Model model) {
-    public ModelAndView products(@RequestParam(TYPE) String type) {
-//        model.addAttribute(Constants.Attributes.PRODUCTS, productService.getProductsByType(type));
-//        return PRODUCTS;
+    public ModelAndView showProductsPage(@RequestParam(TYPE) String type) {
         return productService.getProductsByType(type);
     }
 
     @GetMapping("/product/{id}")
-    public ModelAndView product(@PathVariable(ID) Long id) {
-//    public String product(@PathVariable(ID) Long id, Model model) {
-//        model.addAttribute(Constants.Attributes.PRODUCT, productService.getProduct(id));
+    public ModelAndView showProductPage(@PathVariable(ID) Long id) {
         return productService.getProduct(id);
-//        return PRODUCT;
     }
 }

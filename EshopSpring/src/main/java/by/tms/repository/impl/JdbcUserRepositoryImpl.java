@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-//@Lazy
 public class JdbcUserRepositoryImpl implements JdbcUserRepository {
 
     private final JdbcTemplate jdbcTemplate;

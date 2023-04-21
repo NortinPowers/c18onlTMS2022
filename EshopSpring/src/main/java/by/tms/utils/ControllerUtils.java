@@ -15,13 +15,20 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static by.tms.utils.Constants.ALL;
-import static by.tms.utils.Constants.Attributes.*;
+import static by.tms.utils.Constants.Attributes.USER_ACCESS_PERMISSION;
+import static by.tms.utils.Constants.Attributes.USER_UUID;
 import static by.tms.utils.Constants.CONVERSATION;
-import static by.tms.utils.Constants.MappingPath.*;
+import static by.tms.utils.Constants.MappingPath.REDIRECT_TO_PRODUCTS_PAGE_TYPE_WITH_PARAM;
+import static by.tms.utils.Constants.MappingPath.REDIRECT_TO_PRODUCT_WITH_PARAM;
+import static by.tms.utils.Constants.MappingPath.REDIRECT_TO_SEARCH_RESULT_SAVE;
 import static by.tms.utils.Constants.RequestParameters.PRODUCT_PAGE;
 import static by.tms.utils.Constants.RequestParameters.SEARCH;
 import static java.util.UUID.randomUUID;
@@ -29,7 +36,6 @@ import static java.util.UUID.randomUUID;
 @Slf4j
 @UtilityClass
 public class ControllerUtils {
-
 
     public static boolean isVerifyUser(User user, String password) {
         return user.getPassword().equals(password);
@@ -43,14 +49,6 @@ public class ControllerUtils {
         MDC.put(CONVERSATION, userUUID);
         session.setAttribute(USER_UUID, userUUID);
         log.info("User with the login " + userDto.getLogin() + " has been assigned a UUID");
-    }
-
-    public static String getLogin(HttpServletRequest req) {
-        if (req.getSession().getAttribute(USER_NAME) != null) {
-            return req.getSession().getAttribute(USER_NAME).toString();
-        } else {
-            return null;
-        }
     }
 
     public static List<OrderWithListDto> getOrders(List<OrderFullParamDto> orders) {
@@ -85,15 +83,9 @@ public class ControllerUtils {
         return "#" + id + "-" + uuid;
     }
 
-//    public static Long getUserId(HttpServletRequest request) {
-//        HttpSession session = request.getSession(false);
-//        return ((UserDto) session.getAttribute(USER_ACCESS_PERMISSION)).getId();
-//    }
-
     public static Long getUserId(HttpSession session) {
         return ((UserDto) session.getAttribute(USER_ACCESS_PERMISSION)).getId();
     }
-
 
     public static BigDecimal getPrice(HttpServletRequest request, String param, BigDecimal defaultValue) {
         String value = request.getParameter(param);

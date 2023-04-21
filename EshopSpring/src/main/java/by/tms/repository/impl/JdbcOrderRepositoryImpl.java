@@ -17,7 +17,6 @@ import java.util.List;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-//@Lazy
 public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
 
     private final JdbcTemplate jdbcTemplate;

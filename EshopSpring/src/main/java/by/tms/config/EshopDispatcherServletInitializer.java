@@ -14,7 +14,7 @@ public class EshopDispatcherServletInitializer extends AbstractAnnotationConfigD
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class[]{
-                SpringConfig.class
+            SpringConfig.class
         };
     }
 
@@ -28,6 +28,8 @@ public class EshopDispatcherServletInitializer extends AbstractAnnotationConfigD
     @Override
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
         boolean done = registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
-        if (!done) throw new RuntimeException();
+        if (!done) {
+            throw new RuntimeException();
+        }
     }
 }

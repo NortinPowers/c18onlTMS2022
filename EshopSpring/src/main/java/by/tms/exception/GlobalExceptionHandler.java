@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
-import static by.tms.utils.Constants.MappingPath.*;
+import static by.tms.utils.Constants.MappingPath.ERROR_404;
+import static by.tms.utils.Constants.MappingPath.ERROR_500;
+import static by.tms.utils.Constants.MappingPath.SOME_ERROR;
 
 @ControllerAdvice
 @Slf4j

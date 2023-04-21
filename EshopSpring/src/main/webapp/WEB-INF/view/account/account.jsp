@@ -19,22 +19,14 @@
         <div class="row g-3" style="text-shadow: 1px 1px 2px #0a0a33;">
             <div class="col-md-5">
                 <p class="form-control border-success rounded-pill form-control form-control-lg">${models.userDto.name}</p>
-                <%--                <p class="form-control border-success rounded-pill form-control form-control-lg">${userDto.name}</p>--%>
-                <%--                <p class="form-control border-success rounded-pill form-control form-control-lg">${applicationScope.userDto.name}</p>--%>
             </div>
             <div class="col-md-5">
                 <p class="form-control border-success rounded-pill form-control form-control-lg">${models.userDto.email}</p>
-                <%--                <p class="form-control border-success rounded-pill form-control form-control-lg">${userDto.email}</p>--%>
-                <%--                <p class="form-control border-success rounded-pill form-control form-control-lg">${applicationScope.userDto.email}</p>--%>
             </div>
             <div class="col-md-5">
                 <p class="form-control border-success rounded-pill form-control form-control-lg">${models.userDto.surname}</p>
-                <%--                <p class="form-control border-success rounded-pill form-control form-control-lg">${userDto.surname}</p>--%>
-                <%--                <p class="form-control border-success rounded-pill form-control form-control-lg">${applicationScope.userDto.surname}</p>--%>
             </div>
             <div class="col-md-5">
-                <%--                <fmt:parseDate value="${applicationScope.userDto.birthday}" type="date" pattern="yyyy-MM-dd" var="parsedDate"/>--%>
-                <%--                <fmt:parseDate value="${userDto.birthday}" type="date" pattern="yyyy-MM-dd" var="parsedDate"/>--%>
                 <fmt:parseDate value="${models.userDto.birthday}" type="date" pattern="yyyy-MM-dd" var="parsedDate"/>
                 <fmt:formatDate value="${parsedDate}" type="date" pattern="dd MMMM yyyy" var="date"/>
                 <p class="form-control border-success rounded-pill form-control form-control-lg">${date}</p>
@@ -49,8 +41,6 @@
 </div>
 <c:choose>
     <c:when test="${models.userOrder == null}">
-        <%--    <c:when test="${userOrder == null}">--%>
-        <%--    <c:when test="${applicationScope.userOrder == null}">--%>
         <div class="card text-center" style="background: #2a415e">
             <div class="card-header text-center">
                 <h4 style="color: #e3e1da; text-shadow: #FC0 1px 0 10px;">The order history is empty</h4>
@@ -60,8 +50,6 @@
     <c:otherwise>
         <div class="accordion" id="accordionPanelsStayOpenExample">
             <c:forEach var="order" items="${models.userOrder}">
-                <%--            <c:forEach var="order" items="${userOrder}">--%>
-                <%--            <c:forEach var="order" items="${applicationScope.userOrder}">--%>
                 <div class="accordion-item" style="background: #314b6c">
                     <h2 class="accordion-header" id="panelsStayOpen-heading" style="background: #406491">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"

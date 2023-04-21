@@ -5,24 +5,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import static by.tms.utils.Constants.MappingPath.*;
+import static by.tms.utils.Constants.MappingPath.ERROR_404;
+import static by.tms.utils.Constants.MappingPath.ERROR_500;
+import static by.tms.utils.Constants.MappingPath.SOME_ERROR;
 
 @Controller
 public class ExceptionController {
 
-    @GetMapping("/500")
-    public String error500() {
+    @GetMapping("/error-500")
+    public String showError500Page() {
         return ERROR_500;
     }
 
-    @GetMapping("/404")
+    @GetMapping("/error-404")
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String error404() {
+    public String showError404Page() {
         return ERROR_404;
     }
 
     @GetMapping("/some-error")
-    public String someError() {
+    public String showSomeErrorPage() {
         return SOME_ERROR;
     }
 }

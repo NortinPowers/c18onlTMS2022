@@ -10,18 +10,12 @@ import static by.tms.utils.Constants.MappingPath.ESHOP;
 public class HomeController {
 
     @GetMapping(value = "/", produces = "text/html")
-//    public String home() {
-//        return ESHOP;
-//    }
-    public ModelAndView home() {
+    public ModelAndView redirectToEshopPage() {
         return new ModelAndView(ESHOP);
     }
 
     @GetMapping("/eshop")
-//    public String eshop() {
-//        return ESHOP;
-//    }
-    public ModelAndView eshop() {
+    public ModelAndView showEshopPage() {
         return new ModelAndView(ESHOP);
     }
 }

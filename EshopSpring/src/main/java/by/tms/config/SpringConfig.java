@@ -1,9 +1,12 @@
 package by.tms.config;
 
-import by.tms.interceptor.PageExceptionInterceptor;
 import by.tms.interceptor.TimeLoggerInterceptor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -39,7 +42,6 @@ public class SpringConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new PageExceptionInterceptor());
         registry.addInterceptor(new TimeLoggerInterceptor());
     }
 

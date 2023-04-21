@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-//@Lazy
 public class UserServiceImpl implements UserService {
-
 
     private final JdbcUserRepository jdbcUserRepository;
 

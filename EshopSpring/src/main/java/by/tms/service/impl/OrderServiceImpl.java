@@ -11,7 +11,6 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-//@Lazy
 public class OrderServiceImpl implements OrderService {
 
     private final JdbcOrderRepository jdbcOrderRepository;

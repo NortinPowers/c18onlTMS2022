@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class JdbcTemplateExceptionHandler {
 
     @AfterThrowing(pointcut = "execution(* by.tms.repository.*.*(..))", throwing = "ex")
-    public void handleException(JoinPoint joinPoint, Exception ex) {
+    public void logJdbcException(JoinPoint joinPoint, Exception ex) {
         log.error("Exception occurred in method: " + joinPoint.getSignature().getName() + ", exception message: " + ex.getMessage());
     }
 }

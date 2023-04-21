@@ -15,12 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static by.tms.utils.RepositoryJdbcUtils.*;
+import static by.tms.utils.RepositoryJdbcUtils.getModifyCount;
+import static by.tms.utils.RepositoryJdbcUtils.getProductDto;
+import static by.tms.utils.RepositoryJdbcUtils.isProductNotIncluded;
 
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-//@Lazy
 public class JdbcCartRepositoryImpl implements JdbcCartRepository {
 
     private final JdbcTemplate jdbcTemplate;

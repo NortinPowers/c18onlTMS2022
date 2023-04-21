@@ -1,6 +1,5 @@
 package by.tms.service.impl;
 
-
 import by.tms.dto.ProductDto;
 import by.tms.repository.JdbcProductRepository;
 import by.tms.service.ProductService;
@@ -19,10 +18,6 @@ public class ProductServiceImpl implements ProductService {
 
     private final JdbcProductRepository jdbcProductRepository;
 
-    //    @Override
-//    public List<ProductDto> getProductsByType(String type) {
-//        return jdbcProductRepository.getProductsByType(type);
-//    }
     @Override
     public ModelAndView getProductsByType(String type) {
         ModelMap modelMap = new ModelMap();
@@ -30,15 +25,10 @@ public class ProductServiceImpl implements ProductService {
         return new ModelAndView(Constants.MappingPath.PRODUCTS, modelMap);
     }
 
-    //    @Override
-//    public ProductDto getProduct(Long id) {
-//        return jdbcProductRepository.getProduct(id);
-//    }
     @Override
     public ModelAndView getProduct(Long id) {
         ModelMap modelMap = new ModelMap(Constants.Attributes.PRODUCT, jdbcProductRepository.getProduct(id));
         return new ModelAndView(Constants.MappingPath.PRODUCT, modelMap);
-//        return jdbcProductRepository.getProduct(id);
     }
 
     @Override

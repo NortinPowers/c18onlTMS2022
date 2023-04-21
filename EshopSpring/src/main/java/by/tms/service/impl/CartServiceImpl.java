@@ -12,7 +12,6 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-//@Lazy
 public class CartServiceImpl implements CartService {
 
     private final JdbcCartRepository jdbcCartRepository;

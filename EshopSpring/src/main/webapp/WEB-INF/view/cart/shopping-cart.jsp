@@ -21,7 +21,6 @@
     </thead>
     <tbody>
     <c:forEach var="product" items="${cartProducts}">
-        <%--    <c:forEach var="product" items="${applicationScope.cartProducts}">--%>
         <tr>
             <th scope="row">-</th>
             <td class="font-italic">${product.left.name}</td>
@@ -38,13 +37,11 @@
     <tr style="border-top: chartreuse solid 2px">
         <td colspan="5" style="text-align: right; font-weight: bold">Full price:</td>
         <td class="font-weight-bold" style="text-align: center">${fullPrice}</td>
-        <%--        <td class="font-weight-bold" style="text-align: center">${applicationScope.fullPrice}</td>--%>
     </tr>
     </tbody>
 </table>
 <c:set var="access" value="${sessionScope.get('userAccessPermission')}"/>
 <c:set var="price" value="${fullPrice}"/>
-<%--<c:set var="price" value="${applicationScope.fullPrice}"/>--%>
 <c:if test="${(access != null) and (price > 0)}">
     <form method="post" action="/cart-processing">
         <input type="submit" name="buy" value="Buy" class="btn btn-lg btn-success btn-block w-75 ml-5 mt-5"/>
