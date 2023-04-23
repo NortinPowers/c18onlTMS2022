@@ -1,16 +1,16 @@
 package by.tms.controller;
 
-import by.tms.dto.ProductDto;
 import by.tms.service.CartService;
 import by.tms.service.ProductService;
-import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 import static by.tms.utils.Constants.Attributes.FAVORITE_PRODUCTS;
@@ -29,28 +29,27 @@ public class FavoriteController {
     private final ProductService productService;
 
     @GetMapping("/favorites")
-    public String favorites(HttpServletRequest request) {
-        Long userId = getUserId(request);
-        List<ProductDto> favoriteProducts = cartService.getProductsFromCart(userId, false, true).stream()
+    public ModelAndView showFavoritesPage(HttpSession session) {
+        Long userId = getUserId(session);
+        ModelMap modelMap = new ModelMap(FAVORITE_PRODUCTS, cartService.getProductsFromCart(userId, false, true).stream()
                 .map(Pair::getLeft)
-                .collect(Collectors.toList());
-        request.getServletContext().setAttribute(FAVORITE_PRODUCTS, favoriteProducts);
-        return FAVORITES;
+                .collect(Collectors.toList()));
+        return new ModelAndView(FAVORITES, modelMap);
     }
 
     @GetMapping("/add-favorite")
-    public String addFavorite(HttpServletRequest request,
-                              @RequestParam(name = ID) Long productId,
-                              @RequestParam(name = LOCATION) String location) {
-        cartService.addProductToCart(getUserId(request), productId, false, true);
-        String productType = productService.getProductTypeValue(productId);
-        return getPathFromAddFavoriteByParameters(productId, location, productType);
+    public ModelAndView addProductToFavorite(HttpSession session,
+                                             @RequestParam(name = ID) Long productId,
+                                             @RequestParam(name = LOCATION) String location) {
+        Long userId = getUserId(session);
+        cartService.addProductToCart(userId, productId, false, true);
+        return new ModelAndView(getPathFromAddFavoriteByParameters(productId, location, productService.getProductTypeValue(productId)));
     }
 
     @GetMapping("/delete-favorite")
-    public String deleteFavorite(HttpServletRequest request,
-                                 @RequestParam(name = ID) Long productId) {
-        cartService.deleteProduct(getUserId(request), productId, false, true);
-        return REDIRECT_TO_FAVORITES;
+    public ModelAndView deleteProductFromFavorite(HttpSession session,
+                                                  @RequestParam(name = ID) Long productId) {
+        cartService.deleteProduct(getUserId(session), productId, false, true);
+        return new ModelAndView(REDIRECT_TO_FAVORITES);
     }
 }

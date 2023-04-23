@@ -2,6 +2,7 @@ package by.tms.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import static by.tms.utils.Constants.MappingPath.ESHOP;
 
@@ -9,12 +10,12 @@ import static by.tms.utils.Constants.MappingPath.ESHOP;
 public class HomeController {
 
     @GetMapping(value = "/", produces = "text/html")
-    public String home() {
-        return ESHOP;
+    public ModelAndView redirectToEshopPage() {
+        return new ModelAndView(ESHOP);
     }
 
     @GetMapping("/eshop")
-    public String eshop() {
-        return ESHOP;
+    public ModelAndView showEshopPage() {
+        return new ModelAndView(ESHOP);
     }
 }

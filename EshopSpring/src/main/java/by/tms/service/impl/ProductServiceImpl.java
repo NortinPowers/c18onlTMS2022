@@ -1,14 +1,15 @@
 package by.tms.service.impl;
 
-
 import by.tms.dto.ProductDto;
 import by.tms.repository.JdbcProductRepository;
 import by.tms.service.ProductService;
+import by.tms.utils.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -18,13 +19,16 @@ public class ProductServiceImpl implements ProductService {
     private final JdbcProductRepository jdbcProductRepository;
 
     @Override
-    public List<ProductDto> getProductsByType(String type) {
-        return jdbcProductRepository.getProductsByType(type);
+    public ModelAndView getProductsByType(String type) {
+        ModelMap modelMap = new ModelMap();
+        modelMap.addAttribute(Constants.Attributes.PRODUCTS, jdbcProductRepository.getProductsByType(type));
+        return new ModelAndView(Constants.MappingPath.PRODUCTS, modelMap);
     }
 
     @Override
-    public ProductDto getProduct(Long id) {
-        return jdbcProductRepository.getProduct(id);
+    public ModelAndView getProduct(Long id) {
+        ModelMap modelMap = new ModelMap(Constants.Attributes.PRODUCT, jdbcProductRepository.getProduct(id));
+        return new ModelAndView(Constants.MappingPath.PRODUCT, modelMap);
     }
 
     @Override

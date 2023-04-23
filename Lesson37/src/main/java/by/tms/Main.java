@@ -18,6 +18,8 @@ public class Main {
             } catch (Exception e) {
                 System.out.println("Exception in main");
             }
+            System.out.println("______________TestAspectAnnotation_____________");
+            user.changeName("Virgil");
         }
     }
 }

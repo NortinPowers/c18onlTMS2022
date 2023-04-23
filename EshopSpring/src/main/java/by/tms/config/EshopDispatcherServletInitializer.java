@@ -1,5 +1,6 @@
 package by.tms.config;
 
+import jakarta.servlet.ServletRegistration;
 import lombok.NonNull;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -13,7 +14,7 @@ public class EshopDispatcherServletInitializer extends AbstractAnnotationConfigD
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class[]{
-                SpringConfig.class
+            SpringConfig.class
         };
     }
 
@@ -22,5 +23,13 @@ public class EshopDispatcherServletInitializer extends AbstractAnnotationConfigD
         return new String[]{
                 "/"
         };
+    }
+
+    @Override
+    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+        boolean done = registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
+        if (!done) {
+            throw new RuntimeException();
+        }
     }
 }

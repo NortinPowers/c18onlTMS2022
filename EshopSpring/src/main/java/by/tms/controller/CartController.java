@@ -6,21 +6,34 @@ import by.tms.service.CartService;
 import by.tms.service.OrderService;
 import by.tms.service.ProductService;
 import by.tms.utils.Constants;
-import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Objects;
 
 import static by.tms.utils.Constants.Attributes.CART_PRODUCTS;
 import static by.tms.utils.Constants.Attributes.FULL_PRICE;
-import static by.tms.utils.Constants.MappingPath.*;
-import static by.tms.utils.Constants.RequestParameters.*;
+import static by.tms.utils.Constants.MappingPath.REDIRECT_TO_CART;
+import static by.tms.utils.Constants.MappingPath.REDIRECT_TO_FAVORITES;
+import static by.tms.utils.Constants.MappingPath.REDIRECT_TO_PRODUCTS_PAGE_TYPE_WITH_PARAM;
+import static by.tms.utils.Constants.MappingPath.REDIRECT_TO_PRODUCT_WITH_PARAM;
+import static by.tms.utils.Constants.MappingPath.REDIRECT_TO_SEARCH_RESULT_SAVE;
+import static by.tms.utils.Constants.MappingPath.SHOPPING_CART;
+import static by.tms.utils.Constants.MappingPath.SUCCESS_BUY;
+import static by.tms.utils.Constants.RequestParameters.FAVORITE;
+import static by.tms.utils.Constants.RequestParameters.ID;
+import static by.tms.utils.Constants.RequestParameters.LOCATION;
+import static by.tms.utils.Constants.RequestParameters.PRODUCT_PAGE;
+import static by.tms.utils.Constants.RequestParameters.SEARCH;
+import static by.tms.utils.Constants.RequestParameters.SHOP;
+import static by.tms.utils.Constants.RequestParameters.TRUE;
 import static by.tms.utils.ControllerUtils.createOrderNumber;
 import static by.tms.utils.ControllerUtils.getUserId;
 import static by.tms.utils.DtoUtils.getProductsFromDto;
@@ -33,21 +46,21 @@ public class CartController {
     private final CartService cartService;
     private final OrderService orderService;
 
-
     @GetMapping("/cart")
-    public String card(HttpServletRequest request) {
-        Long userId = getUserId(request);
+    public ModelAndView showCardPage(HttpSession session, ModelAndView modelAndView) {
+        Long userId = getUserId(session);
         List<ImmutablePair<ProductDto, Integer>> cartProducts = cartService.getProductsFromCart(userId, true, false);
-        request.getServletContext().setAttribute(CART_PRODUCTS, cartProducts);
-        request.getServletContext().setAttribute(FULL_PRICE, cartService.getProductsPrice(cartProducts));
-        return SHOPPING_CART;
+        modelAndView.addObject(CART_PRODUCTS, cartService.getProductsFromCart(userId, true, false));
+        modelAndView.addObject(FULL_PRICE, cartService.getProductsPrice(cartProducts));
+        modelAndView.setViewName(SHOPPING_CART);
+        return modelAndView;
     }
 
     @PostMapping("/cart-processing")
-    public String cardProcessing(HttpServletRequest request,
-                                 @RequestParam String buy) {
-        Long userId = getUserId(request);
-        String path;
+    public ModelAndView showCardProcessingPage(HttpSession session,
+                                               @RequestParam String buy,
+                                               ModelAndView modelAndView) {
+        Long userId = getUserId(session);
         if (buy.equalsIgnoreCase(Constants.BUY)) {
             List<ProductDto> productsDto = cartService.getPurchasedProducts(userId, true, false);
             String orderNumber = "";
@@ -59,22 +72,28 @@ public class CartController {
             String finalOrderNumber = orderNumber;
             products.forEach(product -> orderService.saveProductInOrderConfigurations(finalOrderNumber, product));
             cartService.deleteCartProductsAfterBuy(userId);
-            path = SUCCESS_BUY;
+            modelAndView.setViewName(SUCCESS_BUY);
         } else {
-            path = REDIRECT_TO_CART;
+            modelAndView.setViewName(REDIRECT_TO_CART);
         }
-        return path;
+        return modelAndView;
     }
 
     @GetMapping("/add-cart")
-    public String addCart(
-            HttpServletRequest request,
-            @RequestParam(name = ID) Long productId,
-            @RequestParam(name = SHOP) String shopFlag,
-            @RequestParam(name = LOCATION) String location) {
-        Long userId = getUserId(request);
+    public ModelAndView AddProductToCart(HttpSession session,
+                                         @RequestParam(name = ID) Long productId,
+                                         @RequestParam(name = SHOP) String shopFlag,
+                                         @RequestParam(name = LOCATION) String location) {
+        Long userId = getUserId(session);
         cartService.addProductToCart(userId, productId, true, false);
-        return getPathFromAddCartByParameters(productId, shopFlag, location);
+        return new ModelAndView(getPathFromAddCartByParameters(productId, shopFlag, location));
+    }
+
+    @GetMapping("/delete-cart")
+    public ModelAndView deleteProductFromCart(HttpSession session,
+                                              @RequestParam(name = ID) Long productId) {
+        cartService.deleteProduct(getUserId(session), productId, true, false);
+        return new ModelAndView(REDIRECT_TO_CART);
     }
 
     private String getPathFromAddCartByParameters(Long productId, String shopFlag, String location) {
@@ -92,12 +111,5 @@ public class CartController {
             path = REDIRECT_TO_PRODUCTS_PAGE_TYPE_WITH_PARAM + productType;
         }
         return path;
-    }
-
-    @GetMapping("/delete-cart")
-    public String deleteCart(HttpServletRequest request,
-                             @RequestParam(name = ID) Long productId) {
-        cartService.deleteProduct(getUserId(request), productId, true, false);
-        return REDIRECT_TO_CART;
     }
 }

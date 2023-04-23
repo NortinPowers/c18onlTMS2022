@@ -7,7 +7,6 @@ import by.tms.model.Product;
 import by.tms.repository.JdbcOrderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -18,7 +17,6 @@ import java.util.List;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-@Lazy
 public class JdbcOrderRepositoryImpl implements JdbcOrderRepository {
 
     private final JdbcTemplate jdbcTemplate;

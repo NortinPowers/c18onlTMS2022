@@ -5,34 +5,41 @@ import by.tms.service.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
 import java.util.Set;
 
 import static by.tms.utils.Constants.Attributes.FILTER_FOUND_PRODUCTS;
 import static by.tms.utils.Constants.Attributes.FOUND_PRODUCTS;
-import static by.tms.utils.Constants.MappingPath.*;
-import static by.tms.utils.Constants.RequestParameters.*;
+import static by.tms.utils.Constants.MappingPath.REDIRECT_TO_SEARCH_FILTER_TRUE_RESULT_SAVE;
+import static by.tms.utils.Constants.MappingPath.REDIRECT_TO_SEARCH_RESULT_SAVE;
+import static by.tms.utils.Constants.MappingPath.SEARCH_PATH;
+import static by.tms.utils.Constants.RequestParameters.FILTER;
+import static by.tms.utils.Constants.RequestParameters.MAX_PRICE;
+import static by.tms.utils.Constants.RequestParameters.MIN_PRICE;
+import static by.tms.utils.Constants.RequestParameters.SEARCH_CONDITION;
+import static by.tms.utils.Constants.RequestParameters.SELECT;
 import static by.tms.utils.Constants.SAVE;
 import static by.tms.utils.Constants.TRUE;
-import static by.tms.utils.ControllerUtils.*;
+import static by.tms.utils.ControllerUtils.applyPriceFilterOnProducts;
+import static by.tms.utils.ControllerUtils.applyTypeFilterOnProducts;
+import static by.tms.utils.ControllerUtils.getPrice;
 
 @Controller
 @RequiredArgsConstructor
-@Lazy
 public class SearchController {
 
     private final ProductService productService;
 
     @GetMapping("/search")
-    public String search(HttpServletRequest request,
-                         @RequestParam(required = false) String result,
-                         @RequestParam(required = false) String filter) {
+    public ModelAndView showSearchPage(HttpServletRequest request,
+                                       @RequestParam(required = false) String result,
+                                       @RequestParam(required = false) String filter) {
         HttpSession session = request.getSession();
         if (!SAVE.equals(result)) {
             session.removeAttribute(FOUND_PRODUCTS);
@@ -42,27 +49,27 @@ public class SearchController {
         if (TRUE.equals(filter)) {
             request.getServletContext().setAttribute(FILTER, new Object());
         }
-        return SEARCH_PATH;
+        return new ModelAndView(SEARCH_PATH);
     }
 
     @PostMapping("/search-param")
-    public String searchParam(HttpServletRequest request,
-                              @RequestParam(name = SEARCH_CONDITION) String searchCondition) {
+    public ModelAndView showSearchPageByParam(HttpServletRequest request,
+                                              @RequestParam(name = SEARCH_CONDITION) String searchCondition) {
         request.getServletContext().removeAttribute(FILTER);
         if (!searchCondition.isEmpty()) {
             Set<ProductDto> products = productService.getFoundProducts(searchCondition);
             HttpSession session = request.getSession();
             session.setAttribute(FOUND_PRODUCTS, products);
         }
-        return REDIRECT_TO_SEARCH_RESULT_SAVE;
+        return new ModelAndView(REDIRECT_TO_SEARCH_RESULT_SAVE);
     }
 
     @PostMapping("/search-filter")
-    public String searchFilter(HttpServletRequest request,
-                               @RequestParam(required = false, name = SELECT) String type) {
+    public ModelAndView showSearchPageByFilter(HttpServletRequest request,
+                                               @RequestParam(required = false, name = SELECT) String type) {
         BigDecimal minPrice = getPrice(request, MIN_PRICE, BigDecimal.ZERO);
         BigDecimal maxPrice = getPrice(request, MAX_PRICE, new BigDecimal(Long.MAX_VALUE));
-        return getSearchFilterResultPagePath(request, minPrice, maxPrice, type);
+        return new ModelAndView(getSearchFilterResultPagePath(request, minPrice, maxPrice, type));
     }
 
     private String getSearchFilterResultPagePath(HttpServletRequest request, BigDecimal minPrice, BigDecimal maxPrice, String type) {

@@ -4,14 +4,11 @@ import by.tms.model.User;
 import by.tms.repository.JdbcUserRepository;
 import by.tms.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-@Lazy
 public class UserServiceImpl implements UserService {
-
 
     private final JdbcUserRepository jdbcUserRepository;
 
