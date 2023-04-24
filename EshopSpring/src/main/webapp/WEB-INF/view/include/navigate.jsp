@@ -14,7 +14,8 @@
                 </div>
             </a>
         </li>
-        <c:set var="access" value="${userAccessPermission}"/>
+        <c:set var="access" value="${sessionScope.get('userAccessPermission')}"/>
+        <%--        <c:set var="access" value="${userAccessPermission}"/>--%>
         <c:if test="${access != null}">
             <li class="nav-item">
                 <a class="btn btn-outline-info ml-2" href="/favorites">Favorites</a>
@@ -24,7 +25,7 @@
             </li>
         </c:if>
     </ul>
-    <c:set var="access" value="${sessionScope.get('userAccessPermission')}"/>
+    <%--    <c:set var="access" value="${sessionScope.get('userAccessPermission')}"/>--%>
     <c:choose>
         <c:when test="${access == null}">
             <a id="loginButton" class="form-inline my-2 my-lg-0" style="text-decoration: none"
@@ -34,7 +35,8 @@
         </c:when>
         <c:otherwise>
             <h2 style="text-align: center; color: #e5a0a4; margin-right: 11%; text-shadow: 1px 1px 2px red, 0 0 1em #ff004d, 0 0 0.2em #ff0062;">
-                Welcome ${userAccessPermission.name}</h2>
+                Welcome ${access.name}</h2>
+            <%--                Welcome ${userAccessPermission.name}</h2>--%>
             <ul class="nav nav-pills ">
                 <li class="nav-item">
                     <a id="accountButton"

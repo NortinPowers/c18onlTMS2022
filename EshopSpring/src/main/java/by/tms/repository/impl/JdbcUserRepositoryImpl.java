@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Slf4j
 @Repository
 @RequiredArgsConstructor
@@ -20,10 +22,11 @@ public class JdbcUserRepositoryImpl implements JdbcUserRepository {
     private static final String ADD_USER = "insert into users (login, password, name, surname, email, birthday) values (?, ?, ?, ?, ?, ?)";
 
     @Override
-    public User getUserByLogin(String login) {
+    public Optional<User> getUserByLogin(String login) {
+//    public User getUserByLogin(String login) {
         return jdbcTemplate.query(GET_USER_BY_LOGIN, new UserMapper(), login).stream()
-                .findAny()
-                .orElse(null);
+                .findAny();
+//                .orElse(null);
     }
 
     @Override
@@ -33,9 +36,10 @@ public class JdbcUserRepositoryImpl implements JdbcUserRepository {
     }
 
     @Override
-    public User getUserByEmail(String email) {
+    public Optional<User> getUserByEmail(String email) {
+//    public User getUserByEmail(String email) {
         return jdbcTemplate.query(GET_USER_BY_EMAIL, new UserMapper(), email).stream()
-                .findAny()
-                .orElse(null);
+                .findAny();
+//                .orElse(null);
     }
 }

@@ -7,15 +7,16 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import static by.tms.utils.Constants.ErrorMessage.AGE_LIMIT;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Documented
-@Constraint(validatedBy = BirthdayValidator.class)
+@Constraint(validatedBy = UserBirthdayValidator.class)
 @Target(FIELD)
 @Retention(RUNTIME)
-public @interface BirthdayConstraint {
-    String message() default "Registration is available from the age of 18";
+public @interface UserBirthdayConstraint {
+    String message() default AGE_LIMIT;
 
     Class<?>[] groups() default {};
 

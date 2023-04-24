@@ -6,6 +6,8 @@ import by.tms.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -13,7 +15,8 @@ public class UserServiceImpl implements UserService {
     private final JdbcUserRepository jdbcUserRepository;
 
     @Override
-    public User getUserByLogin(String login) {
+    public Optional<User> getUserByLogin(String login) {
+//    public User getUserByLogin(String login) {
         return jdbcUserRepository.getUserByLogin(login);
     }
 
@@ -23,7 +26,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByEmail(String email) {
+    public Optional<User> getUserByEmail(String email) {
+//    public User getUserByEmail(String email) {
         return jdbcUserRepository.getUserByEmail(email);
     }
 }

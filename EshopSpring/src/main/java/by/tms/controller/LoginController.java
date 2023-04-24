@@ -5,6 +5,7 @@ import by.tms.model.User;
 import by.tms.service.UserService;
 import by.tms.service.ValidatorService;
 import by.tms.validator.ExcludeLogValidation;
+import by.tms.validator.UserValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.groups.Default;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static by.tms.utils.Constants.Attributes.INVALID;
@@ -43,8 +45,10 @@ public class LoginController {
 
     private final UserService userService;
     private final ValidatorService validateService;
+    private final UserValidator userValidator;
 
     @GetMapping("/login")
+
     public ModelAndView showLoginPage(HttpSession session) {
         ModelAndView modelAndView;
         if (session.getAttribute(USER_ACCESS_PERMISSION) != null) {
@@ -65,9 +69,12 @@ public class LoginController {
             fillError("password", modelAndView, bindingResult);
             modelAndView.setViewName(LOGIN);
         } else {
-            User incomingUser = userService.getUserByLogin(user.getLogin());
-            if (incomingUser != null && isVerifyUser(incomingUser, user.getPassword())) {
-                UserDto userDto = makeUserDtoModelTransfer(incomingUser);
+            Optional<User> incomingUser = userService.getUserByLogin(user.getLogin());
+//            User incomingUser = userService.getUserByLogin(user.getLogin());
+            if (incomingUser.isPresent() && isVerifyUser(incomingUser.get(), user.getPassword())) {
+//            if (incomingUser != null && isVerifyUser(incomingUser, user.getPassword())) {
+                UserDto userDto = makeUserDtoModelTransfer(incomingUser.get());
+//                UserDto userDto = makeUserDtoModelTransfer(incomingUser);
                 saveUserSession(request, userDto);
                 modelAndView.setViewName(ESHOP);
             } else {
@@ -99,6 +106,7 @@ public class LoginController {
                                    @Validated({Default.class, ExcludeLogValidation.class}) @ModelAttribute("user") User user,
                                    BindingResult bindingResult,
                                    ModelAndView modelAndView) {
+        userValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors()) {
             fillError("login", modelAndView, bindingResult);
             fillError("password", modelAndView, bindingResult);

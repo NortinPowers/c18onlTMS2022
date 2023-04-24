@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.Period;
 
 @Component
-public class BirthdayValidator implements ConstraintValidator<BirthdayConstraint, LocalDate> {
+public class UserBirthdayValidator implements ConstraintValidator<UserBirthdayConstraint, LocalDate> {
     @Override
     public boolean isValid(LocalDate contactField, ConstraintValidatorContext constraintValidatorContext) {
         if (contactField != null) {
