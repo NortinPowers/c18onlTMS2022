@@ -13,8 +13,13 @@ import lombok.experimental.SuperBuilder;
 import java.time.LocalDate;
 
 @SuperBuilder
+//@Builder
 @NoArgsConstructor
 @Data
+//@Getter
+//@Setter
+//@AllArgsConstructor
+//@EqualsAndHashCode
 public class User {
 
     private Long id;

@@ -26,13 +26,21 @@ public class UserValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         User user = (User) target;
-        Optional<User> userByLogin = userService.getUserByLogin(user.getLogin());
-        if (userByLogin.isPresent()) {
-            errors.rejectValue("login", "", EXISTING_USER);
-        }
+        checkUserByLogin(errors, user);
+        checkUserByEmail(errors, user);
+    }
+
+    private void checkUserByEmail(Errors errors, User user) {
         Optional<User> userByEmail = userService.getUserByEmail(user.getEmail());
         if (userByEmail.isPresent()) {
             errors.rejectValue("email", "", EXISTING_EMAIL);
+        }
+    }
+
+    private void checkUserByLogin(Errors errors, User user) {
+        Optional<User> userByLogin = userService.getUserByLogin(user.getLogin());
+        if (userByLogin.isPresent()) {
+            errors.rejectValue("login", "", EXISTING_USER);
         }
     }
 }

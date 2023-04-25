@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import static by.tms.utils.Constants.RequestParameters.ID;
-import static by.tms.utils.Constants.RequestParameters.TYPE;
 
 @Controller
 @RequiredArgsConstructor
@@ -18,7 +17,8 @@ public class ProductsController {
     private final ProductService productService;
 
     @GetMapping("/products-page")
-    public ModelAndView showProductsPage(@RequestParam(TYPE) String type) {
+    public ModelAndView showProductsPage(@RequestParam String type) {
+//    public ModelAndView showProductsPage(@RequestParam(TYPE) String type) {
         return productService.getProductsByType(type);
     }
 
