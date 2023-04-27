@@ -7,10 +7,8 @@ import java.util.Optional;
 public interface JdbcUserRepository {
 
     Optional<User> getUserByLogin(String login);
-//    User getUserByLogin(String login);
 
     void addUser(User user);
 
     Optional<User> getUserByEmail(String email);
-//    User getUserByEmail(String email);
 }

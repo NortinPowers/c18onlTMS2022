@@ -12,14 +12,9 @@ import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 
-@SuperBuilder
-//@Builder
 @NoArgsConstructor
+@SuperBuilder
 @Data
-//@Getter
-//@Setter
-//@AllArgsConstructor
-//@EqualsAndHashCode
 public class User {
 
     private Long id;
@@ -39,4 +34,5 @@ public class User {
     private String email;
     @UserBirthdayConstraint(groups = ExcludeLogValidation.class)
     private LocalDate birthday;
+    private String verifyPassword;
 }

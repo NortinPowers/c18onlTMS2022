@@ -16,7 +16,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> getUserByLogin(String login) {
-//    public User getUserByLogin(String login) {
         return jdbcUserRepository.getUserByLogin(login);
     }
 
@@ -27,7 +26,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> getUserByEmail(String email) {
-//    public User getUserByEmail(String email) {
         return jdbcUserRepository.getUserByEmail(email);
     }
 }

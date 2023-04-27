@@ -9,8 +9,7 @@ import org.springframework.validation.Validator;
 
 import java.util.Optional;
 
-import static by.tms.utils.Constants.ErrorMessage.EXISTING_EMAIL;
-import static by.tms.utils.Constants.ErrorMessage.EXISTING_USER;
+import static by.tms.utils.Constants.ErrorMessage.*;
 
 @Component
 @RequiredArgsConstructor
@@ -28,6 +27,7 @@ public class UserValidator implements Validator {
         User user = (User) target;
         checkUserByLogin(errors, user);
         checkUserByEmail(errors, user);
+        checkPasswordInputVerify(errors, user);
     }
 
     private void checkUserByEmail(Errors errors, User user) {
@@ -41,6 +41,12 @@ public class UserValidator implements Validator {
         Optional<User> userByLogin = userService.getUserByLogin(user.getLogin());
         if (userByLogin.isPresent()) {
             errors.rejectValue("login", "", EXISTING_USER);
+        }
+    }
+
+    private void checkPasswordInputVerify(Errors errors, User user) {
+        if (!user.getPassword().equals(user.getVerifyPassword())) {
+            errors.rejectValue("verifyPassword", "", PASSWORDS_MATCHING);
         }
     }
 }

@@ -19,8 +19,8 @@
     <div class="card-footer text-center">
         <small class="text-muted" style="font-size: 20px">${product.price}$</small>
     </div>
-    <c:set var="access" value="${sessionScope.get('userAccessPermission')}"/>
-    <c:if test="${access != null}">
+    <c:set var="authorizedUser" value="${sessionScope.get('userAccessPermission')}"/>
+    <c:if test="${authorizedUser != null}">
         <div class="btn-group btn-group-sm">
             <a href="/add-cart?id=${product.id}&shop=true&location=none"
                class="btn btn-success active w-75"

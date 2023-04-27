@@ -7,9 +7,9 @@
                href="<c:url value="/"/>">Home</a>
         </li>
     </ul>
-    <c:set var="access" value="${sessionScope.get('accessPermission')}"/>
+    <c:set var="authorizedUser" value="${sessionScope.get('accessPermission')}"/>
     <c:choose>
-        <c:when test="${access == null}">
+        <c:when test="${authorizedUser == null}">
             <a id="loginButton" class="form-inline my-2 my-lg-0" style="text-decoration: none"
                href="<c:url value="/login"/>">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>

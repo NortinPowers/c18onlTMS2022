@@ -23,10 +23,8 @@ public class JdbcUserRepositoryImpl implements JdbcUserRepository {
 
     @Override
     public Optional<User> getUserByLogin(String login) {
-//    public User getUserByLogin(String login) {
         return jdbcTemplate.query(GET_USER_BY_LOGIN, new UserMapper(), login).stream()
                 .findAny();
-//                .orElse(null);
     }
 
     @Override
@@ -37,9 +35,7 @@ public class JdbcUserRepositoryImpl implements JdbcUserRepository {
 
     @Override
     public Optional<User> getUserByEmail(String email) {
-//    public User getUserByEmail(String email) {
         return jdbcTemplate.query(GET_USER_BY_EMAIL, new UserMapper(), email).stream()
                 .findAny();
-//                .orElse(null);
     }
 }

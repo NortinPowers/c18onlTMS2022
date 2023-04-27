@@ -42,6 +42,7 @@
             <label for="password_repeat">
                 <span>Confirm password</span>
                 <input type="password" name="verifyPassword" required="" id="password_repeat">
+                <span class="error">${verifyPasswordError}</span>
                 <ul class="input-requirements">
                     <li>Must repeat the password</li>
                 </ul>

@@ -3,7 +3,6 @@ package by.tms.controller;
 import by.tms.dto.UserDto;
 import by.tms.model.User;
 import by.tms.service.UserService;
-import by.tms.service.ValidatorService;
 import by.tms.validator.ExcludeLogValidation;
 import by.tms.validator.UserValidator;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,30 +11,20 @@ import jakarta.validation.groups.Default;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-import static by.tms.utils.Constants.Attributes.INVALID;
 import static by.tms.utils.Constants.Attributes.USER_ACCESS_PERMISSION;
 import static by.tms.utils.Constants.Attributes.USER_UUID;
-import static by.tms.utils.Constants.MappingPath.CREATE_USER;
-import static by.tms.utils.Constants.MappingPath.ESHOP;
-import static by.tms.utils.Constants.MappingPath.FAIL_REGISTER;
-import static by.tms.utils.Constants.MappingPath.LOGIN;
-import static by.tms.utils.Constants.MappingPath.SUCCESS_REGISTER;
-import static by.tms.utils.ControllerUtils.fillError;
-import static by.tms.utils.ControllerUtils.isVerifyUser;
-import static by.tms.utils.ControllerUtils.saveUserSession;
+import static by.tms.utils.Constants.ErrorMessage.RECHECK_DATA;
+import static by.tms.utils.Constants.MappingPath.*;
+import static by.tms.utils.ControllerUtils.*;
 import static by.tms.utils.DtoUtils.makeUserDtoModelTransfer;
 
 @Controller
@@ -44,7 +33,6 @@ import static by.tms.utils.DtoUtils.makeUserDtoModelTransfer;
 public class LoginController {
 
     private final UserService userService;
-    private final ValidatorService validateService;
     private final UserValidator userValidator;
 
     @GetMapping("/login")
@@ -70,14 +58,12 @@ public class LoginController {
             modelAndView.setViewName(LOGIN);
         } else {
             Optional<User> incomingUser = userService.getUserByLogin(user.getLogin());
-//            User incomingUser = userService.getUserByLogin(user.getLogin());
             if (incomingUser.isPresent() && isVerifyUser(incomingUser.get(), user.getPassword())) {
-//            if (incomingUser != null && isVerifyUser(incomingUser, user.getPassword())) {
                 UserDto userDto = makeUserDtoModelTransfer(incomingUser.get());
-//                UserDto userDto = makeUserDtoModelTransfer(incomingUser);
                 saveUserSession(request, userDto);
                 modelAndView.setViewName(ESHOP);
             } else {
+                modelAndView.addObject("loginError", RECHECK_DATA);
                 modelAndView.setViewName(LOGIN);
             }
         }
@@ -102,7 +88,6 @@ public class LoginController {
 
     @PostMapping("/create-user")
     public ModelAndView createUser(HttpServletRequest request,
-                                   @RequestParam String verifyPassword,
                                    @Validated({Default.class, ExcludeLogValidation.class}) @ModelAttribute("user") User user,
                                    BindingResult bindingResult,
                                    ModelAndView modelAndView) {
@@ -110,24 +95,17 @@ public class LoginController {
         if (bindingResult.hasErrors()) {
             fillError("login", modelAndView, bindingResult);
             fillError("password", modelAndView, bindingResult);
+            fillError("verifyPassword", modelAndView, bindingResult);
             fillError("name", modelAndView, bindingResult);
             fillError("surname", modelAndView, bindingResult);
             fillError("email", modelAndView, bindingResult);
             fillError("birthday", modelAndView, bindingResult);
             modelAndView.setViewName(CREATE_USER);
         } else {
-            List<String> errorMessages = validateService.getValidationErrorMessage(user, verifyPassword);
-            if (errorMessages.isEmpty()) {
-                userService.addUser(user);
-                UserDto userDto = makeUserDtoModelTransfer(user);
-                saveUserSession(request, userDto);
-                modelAndView.setViewName(SUCCESS_REGISTER);
-            } else {
-                ModelMap modelMap = new ModelMap(INVALID, errorMessages.stream()
-                        .map(Object::toString)
-                        .collect(Collectors.joining(". ")));
-                modelAndView.addObject(FAIL_REGISTER, modelMap);
-            }
+            userService.addUser(user);
+            UserDto userDto = makeUserDtoModelTransfer(user);
+            saveUserSession(request, userDto);
+            modelAndView.setViewName(SUCCESS_REGISTER);
         }
         return modelAndView;
     }
