@@ -19,6 +19,8 @@
         <jakarta.servlet.jsp.jstl-api-version>3.0.0</jakarta.servlet.jsp.jstl-api-version>
         <jakarta.servlet.jsp.jstl-version>3.0.1</jakarta.servlet.jsp.jstl-version>
         <hibernate-validator-version>8.0.0.Final</hibernate-validator-version>
+        <aspectjrt.version>1.9.19</aspectjrt.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
     </properties>
     <dependencies>
         <dependency>
@@ -71,6 +73,21 @@
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate-validator-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectjrt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>${aspectjrt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
         </dependency>
     </dependencies>
 
