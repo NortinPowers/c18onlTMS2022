@@ -45,13 +45,13 @@
     </tbody>
 </table>
 <c:if test="${applicationScope.full_price != 0}">
-    <c:set var="access" value="${sessionScope.get('accessPermission')}"/>
-    <c:if test="${access == null}">
+    <c:set var="authorizedUser" value="${sessionScope.get('accessPermission')}"/>
+    <c:if test="${authorizedUser == null}">
         <a href="<c:url value="/login"/>" style="text-decoration: none">
             <button type="button" class="btn btn-lg btn-success btn-block w-75 ml-5 mt-5">Login</button>
         </a>
     </c:if>
-    <c:if test="${access != null}">
+    <c:if test="${authorizedUser != null}">
         <form method="post" action="<c:url value="/view/shopping-cart"/>">
             <input type="hidden" name="buy" value="buy">
             <input type="submit" value="Buy" class="btn btn-lg btn-success btn-block w-75 ml-5 mt-5"/>

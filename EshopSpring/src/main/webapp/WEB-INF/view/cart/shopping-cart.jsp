@@ -40,9 +40,9 @@
     </tr>
     </tbody>
 </table>
-<c:set var="access" value="${sessionScope.get('userAccessPermission')}"/>
+<c:set var="authorizedUser" value="${sessionScope.get('userAccessPermission')}"/>
 <c:set var="price" value="${fullPrice}"/>
-<c:if test="${(access != null) and (price > 0)}">
+<c:if test="${(authorizedUser != null) and (price > 0)}">
     <form method="post" action="/cart-processing">
         <input type="submit" name="buy" value="Buy" class="btn btn-lg btn-success btn-block w-75 ml-5 mt-5"/>
     </form>

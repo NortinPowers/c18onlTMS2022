@@ -91,9 +91,9 @@
                         <div class="card mb-3 ml-1 border border-secondary rounded rounded-5 shadow-sm p-2 bg-body-tertiary rounded mr-1">
                             <div class="container text-center mb-2">
                                 <div class="row">
-                                    <c:set var="access" value="${sessionScope.get('accessPermission')}"/>
+                                    <c:set var="authorizedUser" value="${sessionScope.get('accessPermission')}"/>
                                     <c:choose>
-                                        <c:when test="${access == null}">
+                                        <c:when test="${authorizedUser == null}">
                                             <div class="col-sm-12">
                                                 <a href="<c:url value="/eshop?command=product&id=${product.id}"/>"
                                                    class="text-light text-decoration-none btn btn-success btn-block w-auto"

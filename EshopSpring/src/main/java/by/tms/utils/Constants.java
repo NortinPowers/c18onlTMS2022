@@ -20,7 +20,6 @@ public class Constants {
         public static final String LOGIN = "login/login";
         public static final String CREATE_USER = "login/create-user";
         public static final String SUCCESS_REGISTER = "login/success-register";
-        public static final String FAIL_REGISTER = "login/fail-register";
         public static final String ACCOUNT = "account/account";
         public static final String SEARCH_PATH = "search/search";
         public static final String SHOPPING_CART = "cart/shopping-cart";
@@ -41,10 +40,8 @@ public class Constants {
     public class Attributes {
 
         public static final String USER_DTO = "userDto";
-        public static final String USER_NAME = "userName";
         public static final String USER_UUID = "userUUID";
         public static final String USER_ORDER = "userOrder";
-        public static final String INVALID = "invalid";
         public static final String FAVORITE_PRODUCTS = "favoriteProducts";
         public static final String USER_ACCESS_PERMISSION = "userAccessPermission";
         public static final String PRODUCTS = "products";
@@ -58,7 +55,6 @@ public class Constants {
     @UtilityClass
     public class RequestParameters {
 
-        public static final String TYPE = "type";
         public static final String FAVORITE = "favorite";
         public static final String SEARCH = "search";
         public static final String PRODUCT_PAGE = "product-page";
@@ -71,5 +67,14 @@ public class Constants {
         public static final String MIN_PRICE = "min-price";
         public static final String MAX_PRICE = "max-price";
         public static final String SELECT = "select";
+    }
+
+    @UtilityClass
+    public class ErrorMessage {
+        public static final String EXISTING_USER = "User with such a login has already been registered";
+        public static final String EXISTING_EMAIL = "User with such an email has already been registered";
+        public static final String AGE_LIMIT = "Registration is available from the age of 18";
+        public static final String PASSWORDS_MATCHING = "The entered passwords do not match";
+        public static final String RECHECK_DATA = "Recheck the entered data";
     }
 }
