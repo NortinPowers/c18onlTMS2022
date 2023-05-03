@@ -9,7 +9,9 @@ import org.springframework.validation.Validator;
 
 import java.util.Optional;
 
-import static by.tms.utils.Constants.ErrorMessage.*;
+import static by.tms.utils.Constants.ErrorMessage.EXISTING_EMAIL;
+import static by.tms.utils.Constants.ErrorMessage.EXISTING_USER;
+import static by.tms.utils.Constants.ErrorMessage.PASSWORDS_MATCHING;
 
 @Component
 @RequiredArgsConstructor

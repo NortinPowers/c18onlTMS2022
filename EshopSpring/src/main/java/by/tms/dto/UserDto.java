@@ -3,14 +3,12 @@ package by.tms.dto;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import org.springframework.context.annotation.Scope;
 
 import java.time.LocalDate;
 
 @Getter
 @EqualsAndHashCode
 @Builder
-@Scope("session")
 public class UserDto {
 
     private Long id;
