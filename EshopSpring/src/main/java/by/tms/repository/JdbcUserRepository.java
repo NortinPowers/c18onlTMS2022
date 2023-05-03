@@ -10,5 +10,5 @@ public interface JdbcUserRepository {
 
     void addUser(User user);
 
-    Optional<User> getUserByEmail(String email);
+    Optional<User> getVerifyUser(String login, String email);
 }
