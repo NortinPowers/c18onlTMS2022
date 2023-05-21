@@ -18,7 +18,7 @@ public class JdbcUserRepositoryImpl implements JdbcUserRepository {
     private final JdbcTemplate jdbcTemplate;
 
     private static final String GET_USER_BY_LOGIN = "select * from users where login=?";
-    private static final String GET_USER_BY_EMAIL = "select * from users where email=?";
+    private static final String GET_USER_BY_LOGIN_OR_EMAIL = "select * from users where login=? or email=?";
     private static final String ADD_USER = "insert into users (login, password, name, surname, email, birthday) values (?, ?, ?, ?, ?, ?)";
 
     @Override
@@ -34,8 +34,8 @@ public class JdbcUserRepositoryImpl implements JdbcUserRepository {
     }
 
     @Override
-    public Optional<User> getUserByEmail(String email) {
-        return jdbcTemplate.query(GET_USER_BY_EMAIL, new UserMapper(), email).stream()
+    public Optional<User> getVerifyUser(String login, String email) {
+        return jdbcTemplate.query(GET_USER_BY_LOGIN_OR_EMAIL, new UserMapper(), login, email).stream()
                 .findAny();
     }
 }

@@ -21,7 +21,7 @@ public class EshopDispatcherServletInitializer extends AbstractAnnotationConfigD
     @Override
     protected String @NonNull [] getServletMappings() {
         return new String[]{
-                "/"
+            "/"
         };
     }
 

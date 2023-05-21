@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.context.annotation.Scope;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -13,7 +12,6 @@ import java.math.BigDecimal;
 @Setter
 @EqualsAndHashCode
 @Builder
-@Scope("session")
 public class ProductDto implements Serializable {
 
     private Long id;
